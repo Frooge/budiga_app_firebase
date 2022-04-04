@@ -24,5 +24,39 @@ namespace budiga_app
         {
             InitializeComponent();
         }
+
+        private void usernameBlock_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            usernameBox.Focus();
+        }
+
+        private void usernameBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if(!string.IsNullOrEmpty(usernameBox.Text) && usernameBox.Text.Length > 0)
+            {
+                usernameBlock.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                usernameBlock.Visibility = Visibility.Visible;
+            }
+        }
+
+        private void passwordBlock_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            passwordBox.Focus();
+        }
+
+        private void passwordBox_PasswordChanged(object sender, RoutedEventArgs e)
+        {
+            if (!string.IsNullOrEmpty(passwordBox.Password) && passwordBox.Password.Length > 0)
+            {
+                passwordBlock.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                passwordBlock.Visibility = Visibility.Visible;
+            }
+        }
     }
 }
