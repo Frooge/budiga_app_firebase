@@ -23,11 +23,11 @@
         <Image Margin="10,10,1220,660" Source="/Resources/Images/logo.png" Stretch="Fill" Width="50"/>
         <Image Margin="65,17,1112,667" Source="/Resources/Images/logo text.png" Stretch="Fill"/>
         <Image Margin="234,24,1024,674" Source="/Resources/Images/RadioButtonChecked.png" Stretch="Fill"/>
-        
+
         <Button x:Name="DashboardBtn" Content="Dashboard" HorizontalAlignment="Left" Margin="10,80,0,0" VerticalAlignment="Top" Width="246" Click="DashboardBtn_Click" BorderBrush="{x:Null}" Background="#FFECEDF3">
             <Button.Resources>
                 <Style TargetType="Border">
-                    <Setter Property="CornerRadius" Value="8"/>
+                    <Setter Property="CornerRadius" Value="0"/>
                 </Style>
             </Button.Resources>
             <Button.Foreground>
@@ -61,6 +61,15 @@
             </Button.Foreground>
         </Button>
         <Image Source="/Resources/Images/RoundAlt.png" Margin="18,242,1240,466"/>
+        <materialDesign:Card Content="" HorizontalAlignment="Left" Margin="293,80,0,0" VerticalAlignment="Top" Height="107" Width="675"/>
+        <materialDesign:Card Content="" HorizontalAlignment="Left" Margin="983,80,0,0" VerticalAlignment="Top" Height="107" Width="262"/>
+        <materialDesign:Card Content="" HorizontalAlignment="Left" Margin="293,207,0,0" VerticalAlignment="Top" Height="113" Width="310"/>
+        <materialDesign:Card Content="" HorizontalAlignment="Left" Margin="614,207,0,0" VerticalAlignment="Top" Height="113" Width="310"/>
+        <materialDesign:Card Content="" HorizontalAlignment="Left" Margin="935,207,0,0" VerticalAlignment="Top" Height="113" Width="310"/>
+        <materialDesign:Card HorizontalAlignment="Left" Margin="474,341,0,0" VerticalAlignment="Top" Height="113" Width="167"/>
+        <materialDesign:Card HorizontalAlignment="Left" Margin="294,341,0,0" VerticalAlignment="Top" Height="113" Width="167"/>
+        <materialDesign:Card HorizontalAlignment="Left" Margin="652,341,0,0" VerticalAlignment="Top" Height="113" Width="167"/>
+        <materialDesign:Card HorizontalAlignment="Left" Margin="829,341,0,0" VerticalAlignment="Top" Height="113" Width="167"/>
 
 
     </Grid>
