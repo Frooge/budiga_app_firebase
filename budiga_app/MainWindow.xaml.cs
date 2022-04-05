@@ -64,10 +64,8 @@ namespace budiga_app
             this.Hide();
 
             Home home = new Home();
-            home.WindowState = WindowState.Normal;
-            home.WindowStyle = WindowStyle.None;
             home.WindowStartupLocation = WindowStartupLocation.CenterScreen;
-            home.ShowDialog();
+            home.Show();
 
             this.Close();
             
