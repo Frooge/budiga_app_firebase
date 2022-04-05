@@ -1,0 +1,13 @@
+﻿<Window x:Class="budiga_app.Home"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:budiga_app"
+        mc:Ignorable="d"
+        Title="Home" Height="1080" Width="1920">
+    <Grid Width="1900" Background="White" UseLayoutRounding="False" ShowGridLines="True">
+        <Menu Margin="0,0,1644,0"/>
+
+    </Grid>
+</Window>

@@ -58,5 +58,19 @@ namespace budiga_app
                 passwordBlock.Visibility = Visibility.Visible;
             }
         }
+
+        private void loginBtn_Click(object sender, RoutedEventArgs e)
+        {
+            this.Hide();
+
+            Home home = new Home();
+            home.WindowState = WindowState.Normal;
+            home.WindowStyle = WindowStyle.None;
+            home.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+            home.ShowDialog();
+
+            this.Close();
+            
+        }
     }
 }
