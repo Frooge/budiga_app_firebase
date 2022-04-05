@@ -17,11 +17,21 @@ namespace budiga_app
     /// <summary>
     /// Interaction logic for Home.xaml
     /// </summary>
-    public partial class Home : Window
+    public partial class HomeAdmin : Window
     {
-        public Home()
+        public HomeAdmin()
         {
             InitializeComponent();
+        }
+
+        private void DashboardBtn_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void StatisticBtn_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

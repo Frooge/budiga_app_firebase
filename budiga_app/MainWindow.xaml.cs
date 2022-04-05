@@ -63,7 +63,7 @@ namespace budiga_app
         {
             this.Hide();
 
-            Home home = new Home();
+            HomeAdmin home = new HomeAdmin();
             home.WindowStartupLocation = WindowStartupLocation.CenterScreen;
             home.Show();
 

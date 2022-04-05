@@ -67,7 +67,6 @@
                         <DropShadowEffect/>
                     </Button.Effect>
                 </Button>
-                <TextBlock Grid.Row="3" Text="Forgot password ? " Foreground="White" FontSize="14" Margin="687,91,0,0" FontFamily="Bahnschrift SemiLight" />
             </Grid>
             <Image Margin="515,54,515,322" Source="/Resources/Images/darklogo 1.png" Stretch="Fill" Grid.RowSpan="2"/>
             <Image Margin="466,66,0,0" Source="/Resources/Images/user.png" Stretch="Fill" Grid.Row="1" VerticalAlignment="Top" Width="40" Height="40" HorizontalAlignment="Left"/>
