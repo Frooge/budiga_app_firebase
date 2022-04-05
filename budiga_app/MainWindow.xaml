@@ -14,7 +14,7 @@
         Background="{DynamicResource MaterialDesignPaper}"
         FontFamily="{DynamicResource MaterialDesignFont}"
         SizeToContent="WidthAndHeight"
-        ResizeMode="NoResize"
+        ResizeMode="CanMinimize"
         Title="MainWindow" WindowStartupLocation="CenterScreen">
     <Grid Background="#FF2148C0" Height="720" Width="1280">
         <Image />
@@ -72,6 +72,8 @@
             <Image Margin="515,54,515,322" Source="/Resources/Images/darklogo 1.png" Stretch="Fill" Grid.RowSpan="2"/>
             <Image Margin="466,66,0,0" Source="/Resources/Images/user.png" Stretch="Fill" Grid.Row="1" VerticalAlignment="Top" Width="40" Height="40" HorizontalAlignment="Left"/>
             <Image Margin="466,146,0,0" Grid.Row="1" Source="/Resources/Images/lock.png" Stretch="Fill" Width="40" Height="40" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+            <Button x:Name="employeePage" Content="To Employee page (temporary)" HorizontalAlignment="Left" Margin="466,294,0,0" Grid.Row="1" VerticalAlignment="Top" Click="employeePage_Click"/>
+
 
         </Grid>
     </Grid>
