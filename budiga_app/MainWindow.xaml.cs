@@ -70,5 +70,16 @@ namespace budiga_app
             this.Close();
             
         }
+
+        private void employeePage_Click(object sender, RoutedEventArgs e)
+        {
+            this.Hide();
+
+            EmployeeDashboard employeeDashboard = new EmployeeDashboard();
+            employeeDashboard.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+            employeeDashboard.Show();
+
+            this.Close();
+        }
     }
 }
