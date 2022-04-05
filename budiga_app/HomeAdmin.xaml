@@ -14,7 +14,7 @@
         Background="{DynamicResource MaterialDesignPaper}"
         FontFamily="{DynamicResource MaterialDesignFont}"
         SizeToContent="WidthAndHeight"
-        ResizeMode="NoResize"
+        ResizeMode="CanMinimize"
         Title="Home">
     <Grid Width="1280" Height="720" Background="#FFF4F5FA" >
         <Grid.ColumnDefinitions>
