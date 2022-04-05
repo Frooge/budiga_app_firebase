@@ -123,16 +123,16 @@
     <Resource Include="Resources\Images\placeholder.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="BG.png" />
+    <Resource Include="Resources\Images\BG.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="darklogo 1.png" />
+    <Resource Include="Resources\Images\darklogo 1.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="user.png" />
+    <Resource Include="Resources\Images\user.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="lock.png" />
+    <Resource Include="Resources\Images\lock.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\MaterialDesignThemes.4.4.0\build\MaterialDesignThemes.targets" Condition="Exists('..\packages\MaterialDesignThemes.4.4.0\build\MaterialDesignThemes.targets')" />

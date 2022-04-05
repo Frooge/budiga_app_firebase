@@ -5,8 +5,18 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:budiga_app"
         mc:Ignorable="d"
-        Title="Home" Height="1080" Width="1920">
-    <Grid Width="1900" Background="White" UseLayoutRounding="False" ShowGridLines="True">
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}"
+        SizeToContent="WidthAndHeight"
+        ResizeMode="NoResize"
+        Title="Home">
+    <Grid Width="1900" Height="1080" Background="White" UseLayoutRounding="False" ShowGridLines="True">
         <Menu Margin="0,0,1644,0"/>
 
     </Grid>
