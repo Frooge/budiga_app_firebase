@@ -13,7 +13,7 @@
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Lime.xaml" />
             </ResourceDictionary.MergedDictionaries>
 
-            <Style x:Key="textBlockInput" TargetType="TextBlock">
+            <Style TargetType="TextBlock" x:Key="LoginBlock">
                 <Setter Property="Grid.Column" Value="1" />
                 <Setter Property="Panel.ZIndex" Value="1" />
                 <Setter Property="Foreground" Value="White" />
@@ -21,7 +21,7 @@
                 <Setter Property="Margin" Value="40 0 0 0" />
             </Style>
 
-            <Style x:Key="textBoxInput" TargetType="Control">
+            <Style TargetType="Control" x:Key="LoginBox">
                 <Setter Property="Grid.Column" Value="1" />
                 <Setter Property="Margin" Value="20 0 0 0" />
                 <Setter Property="VerticalAlignment" Value="Center" />
@@ -30,10 +30,8 @@
                 <Setter Property="BorderThickness" Value="0" />
             </Style>
 
-            
         </ResourceDictionary>
 
-        
         
     </Application.Resources>
 </Application>

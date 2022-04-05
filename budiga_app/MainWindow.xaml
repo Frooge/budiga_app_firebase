@@ -14,6 +14,7 @@
         Background="{DynamicResource MaterialDesignPaper}"
         FontFamily="{DynamicResource MaterialDesignFont}"
         SizeToContent="WidthAndHeight"
+        ResizeMode="NoResize"
         Title="MainWindow" WindowStartupLocation="CenterScreen">
     <Grid Background="#FF2148C0" Height="720" Width="1280">
         <Image />
@@ -22,7 +23,7 @@
                 <RowDefinition />
                 <RowDefinition />
             </Grid.RowDefinitions>
-            <Image Source="/Resources/placeholder.png" Grid.Row="0" Margin="468,56,468,56"/>
+            <Image Source="/Resources/Images/placeholder.png" Grid.Row="0" Margin="468,56,468,56"/>
             <TextBlock Text="TITLE" FontSize="18" HorizontalAlignment="Center" Margin="0,300,0,36" Foreground="White"/>
 
             <Grid Grid.Row="1" Margin="0 20 0 0">
@@ -40,9 +41,9 @@
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
 
-                        <Image Height="40" Source="/Resources/placeholder.png" Grid.Column="0"/>
-                        <TextBlock x:Name="usernameBlock" Text="USERNAME" Style="{StaticResource textBlockInput}" FontSize="14" MouseDown="usernameBlock_MouseDown" />
-                        <TextBox x:Name="usernameBox"  Style="{StaticResource textBoxInput}" FontSize="18" TextChanged="usernameBox_TextChanged" />
+                        <Image Height="40" Source="/Resources/Images/placeholder.png" Grid.Column="0"/>
+                        <TextBlock x:Name="usernameBlock" Text="USERNAME" Style="{StaticResource LoginBlock}" FontSize="14" MouseDown="usernameBlock_MouseDown" />
+                        <TextBox x:Name="usernameBox"  Style="{StaticResource LoginBox}" FontSize="18" TextChanged="usernameBox_TextChanged" />
 
                     </Grid>
                 </Border>
@@ -54,9 +55,9 @@
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
 
-                        <Image Height="40" Source="/Resources/placeholder.png" Grid.Column="0"/>
-                        <TextBlock x:Name="passwordBlock" Text="PASSWORD" Style="{StaticResource textBlockInput}" FontSize="14" MouseDown="passwordBlock_MouseDown"/>
-                        <PasswordBox x:Name="passwordBox"  Style="{StaticResource textBoxInput}" FontSize="18" PasswordChanged="passwordBox_PasswordChanged"  />
+                        <Image Height="40" Source="/Resources/Images/placeholder.png" Grid.Column="0"/>
+                        <TextBlock x:Name="passwordBlock" Text="PASSWORD" Style="{StaticResource LoginBlock}" FontSize="14" MouseDown="passwordBlock_MouseDown"/>
+                        <PasswordBox x:Name="passwordBox"  Style="{StaticResource LoginBox}" FontSize="18" PasswordChanged="passwordBox_PasswordChanged"  />
 
                     </Grid>
                 </Border>
