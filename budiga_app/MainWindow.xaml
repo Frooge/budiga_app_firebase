@@ -33,7 +33,7 @@
                     <RowDefinition />
                 </Grid.RowDefinitions>
 
-                <Border Grid.Row="0" BorderThickness="1" BorderBrush="White" CornerRadius="4,4,4,4" Margin="450 10">
+                <Border Grid.Row="0" BorderThickness="1" BorderBrush="White" CornerRadius="4,4,4,4" Margin="450,36,450,64" Grid.RowSpan="2">
                     <Grid Margin="7 9">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="40" />
@@ -45,7 +45,7 @@
                     </Grid>
                 </Border>
 
-                <Border Grid.Row="1" BorderThickness="1" BorderBrush="White" CornerRadius="4,4,4,4" Margin="450 10">
+                <Border Grid.Row="1" BorderThickness="1" BorderBrush="White" CornerRadius="4,4,4,4" Margin="450,36,450,164" Grid.RowSpan="3">
                     <Grid Margin="7 9">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="40" />
@@ -57,7 +57,7 @@
                     </Grid>
                 </Border>
 
-                <Button x:Name="loginBtn" Grid.Row="2" Content="LOGIN" HorizontalAlignment="Center" Margin="0 10 0 0" VerticalAlignment="Top" Width="350" Height="50" FontSize="16" Foreground="#FF2148C0" Click="loginBtn_Click" FontFamily="Bahnschrift SemiLight" FontStyle="Normal" FontStretch="ExtraCondensed" Background="White" BorderBrush="#00000000" BorderThickness="0.5,0.5,0.5,0.5" ClipToBounds="True">
+                <Button x:Name="loginBtn" Grid.Row="2" Content="LOGIN" HorizontalAlignment="Center" Margin="0,36,0,0" VerticalAlignment="Top" Width="350" Height="50" FontSize="16" Foreground="#FF2148C0" Click="loginBtn_Click" FontFamily="Bahnschrift SemiLight" FontStyle="Normal" FontStretch="ExtraCondensed" Background="White" BorderBrush="#00000000" BorderThickness="0.5,0.5,0.5,0.5" ClipToBounds="True" Grid.RowSpan="2">
                     <Button.Resources>
                         <Style TargetType="{x:Type Border}">
                             <Setter Property="CornerRadius" Value="5"/>
@@ -67,11 +67,11 @@
                         <DropShadowEffect/>
                     </Button.Effect>
                 </Button>
-                <TextBlock Grid.Row="3" Text="Forgot password ? " Foreground="White" FontSize="14" Margin="687,5,0,-5" FontFamily="Bahnschrift SemiLight" />
+                <TextBlock Grid.Row="3" Text="Forgot password ? " Foreground="White" FontSize="14" Margin="687,91,0,0" FontFamily="Bahnschrift SemiLight" />
             </Grid>
-            <Image Margin="515,16,515,0" Source="/darklogo 1.png" Stretch="Fill"/>
-            <Image Margin="467,42,775,280" Source="/user.png" Stretch="Fill" Grid.Row="1" VerticalAlignment="Center" Width="40" Height="40" HorizontalAlignment="Center"/>
-            <Image Margin="466,120,774,200" Grid.Row="1" Source="/lock.png" Stretch="Fill" Width="40" Height="40" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            <Image Margin="515,54,515,322" Source="/darklogo 1.png" Stretch="Fill" Grid.RowSpan="2"/>
+            <Image Margin="466,66,0,0" Source="/user.png" Stretch="Fill" Grid.Row="1" VerticalAlignment="Top" Width="40" Height="40" HorizontalAlignment="Left"/>
+            <Image Margin="466,146,0,0" Grid.Row="1" Source="/lock.png" Stretch="Fill" Width="40" Height="40" VerticalAlignment="Top" HorizontalAlignment="Left"/>
 
         </Grid>
     </Grid>
