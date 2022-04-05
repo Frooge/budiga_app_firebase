@@ -4,7 +4,7 @@ using System.Runtime.CompilerServices;
 
 namespace budiga_app.Core
 {
-    class ObeservableObject : INotifyPropertyChanged
+    class ObservableObject : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
