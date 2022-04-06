@@ -55,6 +55,7 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -64,9 +65,11 @@
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
+    <Reference Include="UIAutomationProvider" />
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="WindowsFormsIntegration" />
     <Reference Include="zxing, Version=0.16.8.0, Culture=neutral, PublicKeyToken=4e88037ac681fe60, processorArchitecture=MSIL">
       <HintPath>..\packages\ZXing.Net.0.16.8\lib\net47\zxing.dll</HintPath>
     </Reference>
@@ -83,7 +86,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="HomeAdmin.xaml">
+    <Page Include="HomeAdminStatistics.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -100,8 +103,8 @@
     <Compile Include="EmployeeDashboard.xaml.cs">
       <DependentUpon>EmployeeDashboard.xaml</DependentUpon>
     </Compile>
-    <Compile Include="HomeAdmin.xaml.cs">
-      <DependentUpon>HomeAdmin.xaml</DependentUpon>
+    <Compile Include="HomeAdminStatistics.xaml.cs">
+      <DependentUpon>HomeAdminStatistics.xaml</DependentUpon>
     </Compile>
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
@@ -180,6 +183,17 @@
   <ItemGroup>
     <Resource Include="Resources\Images\Arrow.png" />
     <Resource Include="Resources\Images\Home.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Customers.png" />
+    <Resource Include="Resources\Images\Products.png" />
+    <Resource Include="Resources\Images\Revenue.png" />
+    <Resource Include="Resources\Images\Sales.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Growth Chart.png" />
+    <Resource Include="Resources\Images\Profit Chart.png" />
+    <Resource Include="Resources\Images\Revenue Chart.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\MaterialDesignThemes.4.4.0\build\MaterialDesignThemes.targets" Condition="Exists('..\packages\MaterialDesignThemes.4.4.0\build\MaterialDesignThemes.targets')" />

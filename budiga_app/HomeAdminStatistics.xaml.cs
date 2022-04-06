@@ -17,9 +17,9 @@ namespace budiga_app
     /// <summary>
     /// Interaction logic for Home.xaml
     /// </summary>
-    public partial class HomeAdmin : Window
+    public partial class HomeAdminStatistics : Window
     {
-        public HomeAdmin()
+        public HomeAdminStatistics()
         {
             InitializeComponent();
         }
@@ -32,6 +32,17 @@ namespace budiga_app
         private void StatisticBtn_Click(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void LogoutBtn_Click(object sender, RoutedEventArgs e)
+        {
+            this.Hide();
+
+            MainWindow main = new MainWindow();
+            main.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+            main.Show();
+
+            this.Close();
         }
     }
 }
