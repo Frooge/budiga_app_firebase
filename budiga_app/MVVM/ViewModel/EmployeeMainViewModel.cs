@@ -10,7 +10,11 @@ namespace budiga_app.MVVM.ViewModel
 {
     class EmployeeMainViewModel : ObservableObject
     {
+        public RelayCommand ScannerViewCommand { get; set; }
+        public RelayCommand InvoiceViewCommand { get; set; }
+
         public ScannerViewModel ScanVM { get; set; }
+        public InvoiceViewModel InvoiceVM { get; set; }
 
         private object _currentView;
 
@@ -29,7 +33,20 @@ namespace budiga_app.MVVM.ViewModel
             try
             {
                 ScanVM = new ScannerViewModel();
-                CurrentView = ScanVM;
+                InvoiceVM = new InvoiceViewModel();
+
+                CurrentView = InvoiceVM;
+
+                ScannerViewCommand = new RelayCommand(o =>
+                {
+                    CurrentView = ScanVM;
+                });
+
+                InvoiceViewCommand = new RelayCommand(o =>
+                {
+                    CurrentView = InvoiceVM;
+                });
+
             } catch (Exception ex)
             {
                 Debug.WriteLine(ex.StackTrace);

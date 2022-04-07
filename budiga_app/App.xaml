@@ -13,27 +13,18 @@
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.DeepPurple.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Lime.xaml" />
+                <ResourceDictionary Source="/Themes/LoginTheme.xaml" />
+                <ResourceDictionary Source="/Themes/MenuTheme.xaml" />
             </ResourceDictionary.MergedDictionaries>
 
-            <Style TargetType="TextBlock" x:Key="LoginBlock">
-                <Setter Property="Grid.Column" Value="1" />
-                <Setter Property="Panel.ZIndex" Value="1" />
-                <Setter Property="Foreground" Value="White" />
-                <Setter Property="Height" Value="auto" />
-                <Setter Property="Margin" Value="40 0 0 0" />
-            </Style>
-
-            <Style TargetType="Control" x:Key="LoginBox">
-                <Setter Property="Grid.Column" Value="1" />
-                <Setter Property="Margin" Value="20 0 0 0" />
-                <Setter Property="VerticalAlignment" Value="Center" />
-                <Setter Property="Foreground" Value="White" />
-                <Setter Property="Background" Value="Transparent" />
-                <Setter Property="BorderThickness" Value="0" />
-            </Style>
+            
             
             <DataTemplate DataType="{x:Type viewModel:ScannerViewModel}">
                 <view:ScannerView />
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewModel:InvoiceViewModel}">
+                <view:InvoiceView />
             </DataTemplate>
         </ResourceDictionary>
         

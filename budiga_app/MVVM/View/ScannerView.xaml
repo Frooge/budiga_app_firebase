@@ -33,7 +33,7 @@
                 <Label HorizontalAlignment="Center">Barcode Scanner</Label>
                 <ComboBox x:Name="deviceCmbBox" Width="200" Margin="0 0 0 10"></ComboBox>
                 <Image x:Name="scannerCamera" Width="640" Height="360"/>
-                <TextBlock x:Name="outputBlock" Text="Scanning result (debug)" />
+                <TextBlock x:Name="outputBlock" Text="Scanning result (debug)" HorizontalAlignment="Center"/>
                 <ToggleButton x:Name="scanBtn" HorizontalAlignment="Right" Content="Start Scan" Style="{x:Null}" Checked="scanBtn_Checked" Unchecked="scanBtn_Unchecked">
                     <ToggleButton.Resources>
                         <Style TargetType="{x:Type Border}">

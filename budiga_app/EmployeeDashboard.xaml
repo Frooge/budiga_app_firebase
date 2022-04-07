@@ -37,8 +37,6 @@
                     <RowDefinition Height="75" />
                     <RowDefinition Height="40" />
                     <RowDefinition Height="40" />
-                    <RowDefinition Height="40" />
-                    <RowDefinition Height="40" />
                 </Grid.RowDefinitions>
 
                 <StackPanel Orientation="Horizontal">
@@ -46,45 +44,14 @@
                     <Image Source="/Resources/Images/logo text.png" Width="125" />
                     <Image Source="/Resources/Images/RadioButtonChecked.png" Width="25" HorizontalAlignment="Right" Margin="80 0 0 0"/>
                 </StackPanel>
-                <Button x:Name="POSBtn" Grid.Row="1" Width="280" BorderBrush="{x:Null}" Background="#FFF4F5FA">
-                    <Button.ContentTemplate>
-                        <DataTemplate>
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*" />
-                                    <ColumnDefinition Width="225" />
-                                </Grid.ColumnDefinitions>
-                                <Image Source="/Resources/Images/RoundAlt.png" Width="15" HorizontalAlignment="Left"/>
-                                <TextBlock Text="Budiga POS" Grid.Column="1" HorizontalAlignment="Center"/>
-                            </Grid>
-                        </DataTemplate>
-                    </Button.ContentTemplate>
-                    <Button.Foreground>
-                        <SolidColorBrush Color="#FF3A3541" Opacity="0.87"/>
-                    </Button.Foreground>
-                </Button>
-                <Button x:Name="ScanBtn" Grid.Row="2" Width="280" BorderBrush="{x:Null}" Background="#FFF4F5FA">
-                    <Button.ContentTemplate>
-                        <DataTemplate>
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*" />
-                                    <ColumnDefinition Width="225" />
-                                </Grid.ColumnDefinitions>
-                                <Image Source="/Resources/Images/RoundAlt.png" Width="15" HorizontalAlignment="Left"/>
-                                <TextBlock Text="Settings" Grid.Column="1" HorizontalAlignment="Center"/>
-                            </Grid>
-                        </DataTemplate>
-                    </Button.ContentTemplate>
-                    <Button.Foreground>
-                        <SolidColorBrush Color="#FF3A3541" Opacity="0.87"/>
-                    </Button.Foreground>
-                </Button>
+                <RadioButton Grid.Row="1" Content="Budiga POS" Style="{StaticResource MenuButton}" IsChecked="True" Command="{Binding InvoiceViewCommand}" />
+                <RadioButton Grid.Row="2" Content="Settings" Style="{StaticResource MenuButton}" Command="{Binding ScannerViewCommand}" />
             </Grid>
         </StackPanel>
-        <Image Source="/Resources/Images/Placeholder.png" Grid.Column="1" HorizontalAlignment="Right" Margin="20 10"/>
+        <Border CornerRadius="100" Background="Gray" Grid.Column="1" HorizontalAlignment="Right" Margin="20 10">
+            <Image Source="/Resources/Images/User.png"/>
+        </Border>
 
         <ContentControl Grid.Column="1" Grid.Row="1" Content="{Binding CurrentView}" Margin="20 0"/>
-        
     </Grid>
 </Window>
