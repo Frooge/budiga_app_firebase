@@ -195,6 +195,24 @@
     <Resource Include="Resources\Images\Profit Chart.png" />
     <Resource Include="Resources\Images\Revenue Chart.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Profit Chart Alt.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Growth Chart Alt.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Total Profit.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Reports.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Transactions.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Revenue Chart Alt.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\MaterialDesignThemes.4.4.0\build\MaterialDesignThemes.targets" Condition="Exists('..\packages\MaterialDesignThemes.4.4.0\build\MaterialDesignThemes.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
