@@ -15,7 +15,7 @@
         FontFamily="{DynamicResource MaterialDesignFont}"
         SizeToContent="WidthAndHeight"
         ResizeMode="CanMinimize"
-        Title="MainWindow" WindowStartupLocation="CenterScreen">
+        Title="Budiga" WindowStartupLocation="CenterScreen">
     <Grid Background="#FF2148C0" Height="720" Width="1280">
         <Image />
         <Grid>

@@ -88,5 +88,10 @@ namespace budiga_app
         {
 
         }
+
+        private void TotalProfitReportBtn_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
