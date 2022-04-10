@@ -17,9 +17,9 @@ namespace budiga_app
     /// <summary>
     /// Interaction logic for Home.xaml
     /// </summary>
-    public partial class HomeAdminStatistics : Window
+    public partial class HomeAdminEmployee : Window
     {
-        public HomeAdminStatistics()
+        public HomeAdminEmployee()
         {
             InitializeComponent();
         }
@@ -31,13 +31,13 @@ namespace budiga_app
 
         private void StatisticBtn_Click(object sender, RoutedEventArgs e)
         {
-            //this.Hide();
+            this.Hide();
 
-            //HomeAdminStatistics stats = new HomeAdminStatistics();
-            //stats.WindowStartupLocation = WindowStartupLocation.CenterScreen;
-            //stats.Show();
+            HomeAdminStatistics stats = new HomeAdminStatistics();
+            stats.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+            stats.Show();
 
-            //this.Close(); 
+            this.Close();
         }
 
         private void AnalyticBtn_Click(object sender, RoutedEventArgs e)
@@ -45,7 +45,7 @@ namespace budiga_app
             this.Hide();
 
             HomeAdminAnalytics ana = new HomeAdminAnalytics();
-            ana.WindowStartupLocation= WindowStartupLocation.CenterScreen;
+            ana.WindowStartupLocation = WindowStartupLocation.CenterScreen;
             ana.Show();
 
             this.Close();
@@ -64,13 +64,13 @@ namespace budiga_app
 
         private void EmployeeBtn_Click(object sender, RoutedEventArgs e)
         {
-            this.Hide();
+            //this.Hide();
 
-            HomeAdminEmployee emp = new HomeAdminEmployee();
-            emp.WindowStartupLocation = WindowStartupLocation.CenterScreen;
-            emp.Show();
+            //HomeAdminEmployee emp = new HomeAdminEmployee();
+            //emp.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+            //emp.Show();
 
-            this.Hide();
+            //this.Hide();
         }
 
         private void LogoutBtn_Click(object sender, RoutedEventArgs e)

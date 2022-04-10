@@ -17,9 +17,9 @@ namespace budiga_app
     /// <summary>
     /// Interaction logic for Home.xaml
     /// </summary>
-    public partial class HomeAdminStatistics : Window
+    public partial class HomeAdminAnalytics : Window
     {
-        public HomeAdminStatistics()
+        public HomeAdminAnalytics()
         {
             InitializeComponent();
         }
@@ -31,24 +31,24 @@ namespace budiga_app
 
         private void StatisticBtn_Click(object sender, RoutedEventArgs e)
         {
-            //this.Hide();
+            this.Hide();
 
-            //HomeAdminStatistics stats = new HomeAdminStatistics();
-            //stats.WindowStartupLocation = WindowStartupLocation.CenterScreen;
-            //stats.Show();
+            HomeAdminStatistics stats = new HomeAdminStatistics();
+            stats.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+            stats.Show();
 
-            //this.Close(); 
+            this.Close();
         }
 
         private void AnalyticBtn_Click(object sender, RoutedEventArgs e)
         {
-            this.Hide();
+            //this.Hide();
 
-            HomeAdminAnalytics ana = new HomeAdminAnalytics();
-            ana.WindowStartupLocation= WindowStartupLocation.CenterScreen;
-            ana.Show();
+            //HomeAdminAnalytics ana = new HomeAdminAnalytics();
+            //ana.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+            //ana.Show();
 
-            this.Close();
+            //this.Close();
         }
 
         private void InventoryBtn_Click(object sender, RoutedEventArgs e)
