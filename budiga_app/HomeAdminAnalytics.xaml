@@ -15,7 +15,7 @@
         FontFamily="{DynamicResource MaterialDesignFont}"
         SizeToContent="WidthAndHeight"
         ResizeMode="CanMinimize"
-        Title="Home">
+        Title="Budiga - Analytics">
     <Grid Width="1280" Height="720" Background="#FFF4F5FA" MaxWidth="1920" MaxHeight="1080" MinWidth="1280" MinHeight="720" >
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
@@ -40,7 +40,7 @@
         <Image Source="/Resources/Images/Home.png" Margin="16,86,1238,614" RenderTransformOrigin="1.014,0.502"/>
         <Image Source="/Resources/Images/Arrow.png" Margin="226,81,1024,609"/>
 
-        <Button x:Name="StatisticBtn" Content="Statistics" HorizontalAlignment="Left" Margin="10,117,0,0" VerticalAlignment="Top" Width="246" Click="StatisticBtn_Click" BorderBrush="{x:Null}" Background="White">
+        <Button x:Name="StatisticBtn" Content="Statistics" HorizontalAlignment="Left" Margin="10,117,0,0" VerticalAlignment="Top" Width="246" Click="StatisticBtn_Click" BorderBrush="{x:Null}" Background="#FFF4F5FA">
             <Button.Foreground>
                 <SolidColorBrush Color="#DD000000" Opacity="0.87"/>
             </Button.Foreground>
@@ -65,121 +65,57 @@
         </Button>
         <Image Source="/Resources/Images/RoundAlt.png" Margin="18,242,1240,466"/>
 
-        <!-- Transactions -->
-        <materialDesign:Card HorizontalAlignment="Left" Margin="293,80,0,0" VerticalAlignment="Top" Height="107" Width="675">
-            <Label Content="Transactions" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.063,0.478" FontWeight="Bold" FontSize="16"/>
+        <!-- Weekly Sales -->
+        <materialDesign:Card HorizontalAlignment="Left" Margin="293,80,0,0" VerticalAlignment="Top" Height="233" Width="465">
+            <Label Content="Weekly Sales" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.063,0.478" FontWeight="Bold" FontSize="16"/>
         </materialDesign:Card>
-        <materialDesign:PopupBox Content="PopupBox" Margin="934,86,0,0" VerticalAlignment="Top"/>
-        <!-- Sales -->
-        <Image Source="/Resources/Images/Sales.png" Margin="308,127,927,549"/>
-        <Label Content="Sales" HorizontalAlignment="Left" Margin="352,127,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="SalesValueLabel" Content="display value" HorizontalAlignment="Left" Margin="352,142,0,0" VerticalAlignment="Top" FontSize="16"/>
-        <!-- Customers -->
-        <Image Source="/Resources/Images/Customers.png" Margin="470,127,765,549"/>
-        <Label Content="Customers" HorizontalAlignment="Left" Margin="514,127,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="CustomerCountLabel" Content="display value" HorizontalAlignment="Left" Margin="514,142,0,0" VerticalAlignment="Top" FontSize="16"/>
-        <!-- Products -->
-        <Image Source="/Resources/Images/Products.png" Margin="635,127,601,549"/>
-        <Label Content="Products" HorizontalAlignment="Left" Margin="679,127,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="ProductSoldLabel" Content="display value" HorizontalAlignment="Left" Margin="679,142,0,0" VerticalAlignment="Top" FontSize="16"/>
-        <!-- Revenue -->
-        <Image Source="/Resources/Images/Revenue.png" Margin="798,127,437,549"/>
-        <Label Content="Revenue" HorizontalAlignment="Left" Margin="842,127,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="RevenueAmountLabel" Content="display value" HorizontalAlignment="Left" Margin="842,142,0,0" VerticalAlignment="Top" FontSize="16"/>
+        <Rectangle x:Name="WeeklySalesContainer" Margin="310,119,540,466" Fill="{DynamicResource MaterialDesignDataGridRowHoverBackground}"/>
+        <Grid Margin="408,265,626,419">
+            <!-- Sales -->
+            <Image Source="/Resources/Images/SalesAnalytics.png" Margin="0,0,210,0"/>
+            <Label x:Name="SalesValueLabel" Margin="41,0,125,0" Content="Default Value" VerticalAlignment="Top"/>
+            <Label x:Name="Sales" Margin="41,15,125,0" Content="Sales" VerticalAlignment="Top" FontSize="10"/>
+            <!-- Profit -->
+            <Image Source="/Resources/Images/ProfitAnalytics.png" Margin="126,0,86,0"/>
+            <Label x:Name="ProfitValueLabel" Margin="166,0,0,0" Content="Default Value" VerticalAlignment="Top"/>
+            <Label x:Name="Profit" Margin="166,15,0,0" Content="Total Profit" VerticalAlignment="Top" FontSize="10"/>
+        </Grid>
 
-        <!-- Total Sales -->
-        <materialDesign:Card HorizontalAlignment="Left" Margin="983,80,0,0" VerticalAlignment="Top" Height="107" Width="262">
-            <Label Content="Total Sales" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontSize="16" FontWeight="Bold"/>
+        <!-- Monthly Overview -->
+        <materialDesign:Card HorizontalAlignment="Left" Margin="777,80,0,0" VerticalAlignment="Top" Height="233" Width="465">
+            <Label Content="Monthly Overview" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.063,0.478" FontWeight="Bold" FontSize="16"/>
         </materialDesign:Card>
-        <!-- Calculations -->
-        <Label Content="Calculated in last 7 days" HorizontalAlignment="Left" Margin="996,127,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="TotalSalesLabel" Content="display value" HorizontalAlignment="Left" Margin="996,142,0,0" VerticalAlignment="Top" FontSize="16"/>
+        <Button x:Name="MonthlyOverviewBtn" Content="DETAILS" HorizontalAlignment="Left" Margin="788,269,0,0" VerticalAlignment="Top" Width="443" Click="MonthlyOverviewBtn_Click" BorderBrush="{x:Null}" Background="#FF355ACC" FontStretch="Normal" FontStyle="Normal">
+            <Button.Foreground>
+                <SolidColorBrush Color="White" Opacity="0.87"/>
+            </Button.Foreground>
+        </Button>
+        <Rectangle x:Name="MonthlyGraphContainer" Margin="810,119,72,493" Fill="{DynamicResource MaterialDesignDataGridRowHoverBackground}"/>
+        <Grid Margin="788,227,49,459">
+            <Label x:Name="MonthlyPercentLabel" Margin="0,0,408,0" Content="V%" FontSize="20"/>
+            <Label x:Name="MonthlyTextLabel" Margin="50,0,0,0" Content="Your sales performance is V% better compared to last month" VerticalAlignment="Center"/>
+        </Grid>
 
         <!-- Total Profit -->
-        <materialDesign:Card HorizontalAlignment="Left" Margin="293,207,0,0" VerticalAlignment="Top" Height="113" Width="310" Background="#FF355ACC" Foreground="White">
-            <Label Content="Total Profit" HorizontalAlignment="Left" Margin="202,10,0,0" VerticalAlignment="Top" Foreground="#DDFFFFFF" FontSize="18" FontWeight="Bold"/>
+        <materialDesign:Card HorizontalAlignment="Left" Margin="293,331,0,0" VerticalAlignment="Top" Height="233" Width="580">
+            <Label Content="Total Profit" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.063,0.478" FontWeight="Bold" FontSize="16"/>
         </materialDesign:Card>
-        <Image Source="/Resources/Images/Total Profit.png" Margin="300,215,918,442"/>
-        <Label x:Name="TotalProfitLabel" Content="display value" HorizontalAlignment="Left" Margin="308,277,0,0" VerticalAlignment="Top" FontSize="16" Foreground="#DDFFFFFF"/>
-        <Label x:Name="TotalProfitPercentLabel" Content="display value" HorizontalAlignment="Left" Margin="410,279,0,0" VerticalAlignment="Top" Foreground="#DD35EC40"/>
 
-        <!-- Reports -->
-        <materialDesign:Card HorizontalAlignment="Left" Margin="614,207,0,0" VerticalAlignment="Top" Height="113" Width="310" Background="#FF355ACC" Foreground="White">
-            <Label Content="Reports" HorizontalAlignment="Left" Margin="235,10,0,0" VerticalAlignment="Top" Foreground="#DDFFFFFF" FontSize="16" FontWeight="Bold"/>
+        <!-- Sales Overview -->
+        <materialDesign:Card HorizontalAlignment="Left" Margin="892,331,0,0" VerticalAlignment="Top" Height="233" Width="350">
+            <Label Content="Sales Overview" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.063,0.478" FontWeight="Bold" FontSize="16"/>
         </materialDesign:Card>
-        <Image Source="/Resources/Images/Reports.png" Margin="621,215,597,442"/>
-        <Label x:Name="ReportsLabel" Content="display value" HorizontalAlignment="Left" Margin="629,277,0,0" VerticalAlignment="Top" FontSize="16" Foreground="#DDFFFFFF"/>
-        <Label x:Name="ReportsPercentLabel" Content="display value" HorizontalAlignment="Left" Margin="731,279,0,0" VerticalAlignment="Top" Foreground="#DD35EC40"/>
-
-        <!-- Transaction Growth -->
-        <materialDesign:Card HorizontalAlignment="Left" Margin="935,207,0,0" VerticalAlignment="Top" Height="113" Width="310" Background="#FF355ACC" Foreground="White">
-            <Label Content="Daily Transactions" HorizontalAlignment="Left" Margin="159,10,0,0" VerticalAlignment="Top" Foreground="#DDFFFFFF" FontSize="16" FontWeight="Bold"/>
-        </materialDesign:Card>
-        <Image Source="/Resources/Images/Transactions.png" Margin="943,216,273,443"/>
-        <Label x:Name="DailyTransactionsLabel" Content="display value" HorizontalAlignment="Left" Margin="950,277,0,0" VerticalAlignment="Top" FontSize="16" Foreground="#DDFFFFFF"/>
-        <Label x:Name="DailyTransactionsPercentLabel" Content="display value" HorizontalAlignment="Left" Margin="1052,279,0,0" VerticalAlignment="Top" Foreground="#DD35EC40"/>
-
-        <!-- Total Revenue -->
-        <materialDesign:Card HorizontalAlignment="Left" Margin="294,341,0,0" VerticalAlignment="Top" Height="113" Width="167">
-            <Label Content="Total Revenue" HorizontalAlignment="Center" Margin="0,81,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
-        </materialDesign:Card>
-        <Label x:Name="TotalRevenueValueLabel" Content="Value" HorizontalAlignment="Left" Margin="299,345,0,0" VerticalAlignment="Top"/>
-        <Image Source="/Resources/Images/Revenue Chart.png" Margin="328,373,852,290"/>
-        <!-- Display When Revenue Turns Negative -->
-        <Image Source="/Resources/Images/Revenue Chart Alt.png" Margin="336,459,860,204" RenderTransformOrigin="0.5,0.5">
-            <Image.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform ScaleY="-1"/>
-                    <SkewTransform/>
-                    <RotateTransform/>
-                    <TranslateTransform/>
-                </TransformGroup>
-            </Image.RenderTransform>
-        </Image>
-
-        <!-- Total Growth -->
-        <materialDesign:Card HorizontalAlignment="Left" Margin="474,341,0,0" VerticalAlignment="Top" Height="113" Width="167">
-            <Label Content="Total Growth" HorizontalAlignment="Center" Margin="0,81,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
-        </materialDesign:Card>
-        <Label x:Name="TotalGrowthValueLabel" Content="Value" HorizontalAlignment="Left" Margin="478,345,0,0" VerticalAlignment="Top"/>
-        <Image Source="/Resources/Images/Growth Chart.png" Margin="507,369,672,294"/>
-        <!-- Display When Growth Turns Negative -->
-        <Image Source="/Resources/Images/Growth Chart Alt.png" Margin="507,456,672,206" />
-
-        <!-- Total Sales -->
-        <materialDesign:Card HorizontalAlignment="Left" Margin="652,341,0,0" VerticalAlignment="Top" Height="113" Width="167">
-            <Label Content="Total Sales" HorizontalAlignment="Center" Margin="0,81,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
-        </materialDesign:Card>
-        <ProgressBar HorizontalAlignment="Left" Height="10" VerticalAlignment="Top" Width="100" Value="87" Foreground="#FF264ECA" BorderBrush="{x:Null}" Margin="686,408,0,0">
-            <ProgressBar.Background>
-                <SolidColorBrush Color="#FF264ECA" Opacity="0.5"/>
-            </ProgressBar.Background>
-        </ProgressBar>
-        <Label x:Name="TotalSalesPercentLabel" Content="Value" HorizontalAlignment="Left" Margin="718,375,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="TotalSalesValueLabel" Content="Value" HorizontalAlignment="Left" Margin="657,345,0,0" VerticalAlignment="Top"/>
-
-
-        <!-- Total Profit -->
-        <materialDesign:Card HorizontalAlignment="Left" Margin="829,341,0,0" VerticalAlignment="Top" Height="113" Width="167">
-            <Label Content="Total Profit" HorizontalAlignment="Center" Margin="0,81,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
-        </materialDesign:Card>
-        <Image Source="/Resources/Images/Profit Chart.png" Margin="869,373,324,298"/>
-        <!-- Display When Profit Turns Negative -->
-        <Image Source="/Resources/Images/Profit Chart Alt.png" Margin="866,459,321,209" RenderTransformOrigin="0.5,0.5">
-            <Image.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform ScaleX="-1"/>
-                    <SkewTransform/>
-                    <RotateTransform/>
-                    <TranslateTransform/>
-                </TransformGroup>
-            </Image.RenderTransform>
-        </Image>
-        <Label x:Name="TotalProfitValueLabel" Content="Value" HorizontalAlignment="Left" Margin="833,345,0,0" VerticalAlignment="Top"/>
-
 
         <Button x:Name="LogoutBtn" Content="Logout" HorizontalAlignment="Left" Margin="10,678,0,0" VerticalAlignment="Top" Width="123" Background="#FFB73A3A" BorderBrush="#FF6D0F0F" Click="LogoutBtn_Click"/>
-        
+
+
+
+
+
+
+
+
+
 
 
 

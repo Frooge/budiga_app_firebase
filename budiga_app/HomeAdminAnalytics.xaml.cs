@@ -84,5 +84,9 @@ namespace budiga_app
             this.Close();
         }
 
+        private void MonthlyOverviewBtn_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

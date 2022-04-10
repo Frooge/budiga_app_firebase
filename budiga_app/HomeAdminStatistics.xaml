@@ -15,7 +15,7 @@
         FontFamily="{DynamicResource MaterialDesignFont}"
         SizeToContent="WidthAndHeight"
         ResizeMode="CanMinimize"
-        Title="Home">
+        Title="Budiga - Statistics">
     <Grid Width="1280" Height="720" Background="#FFF4F5FA" MaxWidth="1920" MaxHeight="1080" MinWidth="1280" MinHeight="720" >
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
@@ -70,22 +70,24 @@
             <Label Content="Transactions" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.063,0.478" FontWeight="Bold" FontSize="16"/>
         </materialDesign:Card>
         <materialDesign:PopupBox Content="PopupBox" Margin="934,86,0,0" VerticalAlignment="Top"/>
-        <!-- Sales -->
-        <Image Source="/Resources/Images/Sales.png" Margin="308,127,927,549"/>
-        <Label Content="Sales" HorizontalAlignment="Left" Margin="352,127,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="SalesValueLabel" Content="display value" HorizontalAlignment="Left" Margin="352,142,0,0" VerticalAlignment="Top" FontSize="16"/>
-        <!-- Customers -->
-        <Image Source="/Resources/Images/Customers.png" Margin="470,127,765,549"/>
-        <Label Content="Customers" HorizontalAlignment="Left" Margin="514,127,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="CustomerCountLabel" Content="display value" HorizontalAlignment="Left" Margin="514,142,0,0" VerticalAlignment="Top" FontSize="16"/>
-        <!-- Products -->
-        <Image Source="/Resources/Images/Products.png" Margin="635,127,601,549"/>
-        <Label Content="Products" HorizontalAlignment="Left" Margin="679,127,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="ProductSoldLabel" Content="display value" HorizontalAlignment="Left" Margin="679,142,0,0" VerticalAlignment="Top" FontSize="16"/>
-        <!-- Revenue -->
-        <Image Source="/Resources/Images/Revenue.png" Margin="798,127,437,549"/>
-        <Label Content="Revenue" HorizontalAlignment="Left" Margin="842,127,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="RevenueAmountLabel" Content="display value" HorizontalAlignment="Left" Margin="842,142,0,0" VerticalAlignment="Top" FontSize="16"/>
+        <Grid Margin="314,127,332,549">
+            <!-- Sales -->
+            <Image Source="/Resources/Images/Sales.png" Margin="0,0,589,0"/>
+            <Label Content="Sales" HorizontalAlignment="Left" Margin="44,0,0,0" VerticalAlignment="Top"/>
+            <Label x:Name="SalesValueLabel" Content="display value" HorizontalAlignment="Left" Margin="44,15,0,0" VerticalAlignment="Top" FontSize="16"/>
+            <!-- Customers -->
+            <Image Source="/Resources/Images/Customers.png" Margin="162,0,427,0"/>
+            <Label Content="Customers" HorizontalAlignment="Left" Margin="206,0,0,0" VerticalAlignment="Top"/>
+            <Label x:Name="CustomerCountLabel" Content="display value" HorizontalAlignment="Left" Margin="206,15,0,0" VerticalAlignment="Top" FontSize="16"/>
+            <!-- Products -->
+            <Image Source="/Resources/Images/Products.png" Margin="327,0,263,0"/>
+            <Label Content="Products" HorizontalAlignment="Left" Margin="371,0,0,0" VerticalAlignment="Top"/>
+            <Label x:Name="ProductSoldLabel" Content="display value" HorizontalAlignment="Left" Margin="371,15,0,0" VerticalAlignment="Top" FontSize="16"/>
+            <!-- Revenue -->
+            <Image Source="/Resources/Images/Revenue.png" Margin="490,0,99,0"/>
+            <Label Content="Revenue" HorizontalAlignment="Left" Margin="534,0,0,0" VerticalAlignment="Top"/>
+            <Label x:Name="RevenueAmountLabel" Content="display value" HorizontalAlignment="Left" Margin="534,15,0,0" VerticalAlignment="Top" FontSize="16"/>
+        </Grid>
 
         <!-- Total Sales -->
         <materialDesign:Card HorizontalAlignment="Left" Margin="983,80,0,0" VerticalAlignment="Top" Height="107" Width="262">
@@ -179,7 +181,7 @@
 
 
         <Button x:Name="LogoutBtn" Content="Logout" HorizontalAlignment="Left" Margin="10,678,0,0" VerticalAlignment="Top" Width="123" Background="#FFB73A3A" BorderBrush="#FF6D0F0F" Click="LogoutBtn_Click"/>
-        
+
 
 
 
