@@ -25,50 +25,45 @@
         <Image Source="/Resources/Images/logo.png" Stretch="Fill" Margin="10,10,1205,645"/>
         <Image Source="/Resources/Images/logo text.png" Stretch="Fill" Margin="80,20,1070,655"/>
         <Image Source="/Resources/Images/RadioButtonChecked.png" Stretch="Fill" Margin="230,32,1028,666"/>
-        <Grid HorizontalAlignment="Center" Height="184" VerticalAlignment="Top" Margin="0,80,0,0">
-
-            <Button x:Name="DashboardBtn" Content="Dashboard" HorizontalAlignment="Left" VerticalAlignment="Top" Width="246" Click="DashboardBtn_Click" BorderBrush="{x:Null}" ClickMode="Press" RenderTransformOrigin="0.5,0.5">
-                <Button.Resources>
-                    <Style TargetType="{x:Type Border}">
-                        <Setter Property="CornerRadius" Value="0"/>
-                    </Style>
-                </Button.Resources>
-                <Button.Background>
-                    <SolidColorBrush Color="#FFECEDF3" Opacity="0"/>
-                </Button.Background>
-                <Button.Foreground>
-                    <SolidColorBrush Color="#FF605C66" Opacity="0.87"/>
-                </Button.Foreground>
-            </Button>
-            <Image Source="/Resources/Images/Home.png" Margin="6,6,1226,158" RenderTransformOrigin="1.014,0.502"/>
-            <Image Source="/Resources/Images/Arrow.png" Margin="216,1,1012,153"/>
-
-            <Button x:Name="StatisticBtn" Content="Statistics" HorizontalAlignment="Left" Margin="0,37,0,0" VerticalAlignment="Top" Width="246" Click="StatisticBtn_Click" BorderBrush="{x:Null}" Background="#FFF4F5FA">
-                <Button.Foreground>
-                    <SolidColorBrush Color="#FF605C66" Opacity="1"/>
-                </Button.Foreground>
-            </Button>
-            <Image Source="/Resources/Images/RoundAlt.png" Margin="8,47,1228,125"/>
-            <Button x:Name="AnalyticBtn" Content="Analytics" HorizontalAlignment="Left" VerticalAlignment="Center" Width="246" Click="AnalyticBtn_Click" BorderBrush="{x:Null}" Background="#FF355ACC">
-                <Button.Foreground>
-                    <SolidColorBrush Color="White" Opacity="0.87"/>
-                </Button.Foreground>
-            </Button>
-            <Image Source="/Resources/Images/Round.png" Margin="8,85,1228,87"/>
-            <Button x:Name="InventoryBtn" Content="Inventory" HorizontalAlignment="Left" Margin="0,113,0,0" VerticalAlignment="Top" Width="246" Click="InventoryBtn_Click" BorderBrush="{x:Null}" Background="#FFF4F5FA">
-                <Button.Foreground>
-                    <SolidColorBrush Color="#FF3A3541" Opacity="0.87"/>
-                </Button.Foreground>
-            </Button>
-            <Image Source="/Resources/Images/RoundAlt.png" Margin="8,123,1228,49"/>
-            <Button x:Name="EmployeeBtn" Content="Employee" HorizontalAlignment="Left" Margin="0,152,0,0" VerticalAlignment="Top" Width="246" Click="EmployeeBtn_Click" BorderBrush="{x:Null}" Background="#FFF4F5FA">
-                <Button.Foreground>
-                    <SolidColorBrush Color="#FF3A3541" Opacity="0.87"/>
-                </Button.Foreground>
-            </Button>
-            <Image Source="/Resources/Images/RoundAlt.png" Margin="8,162,1228,10"/>
-
-        </Grid>
+        <Button x:Name="DashboardBtn" Content="Dashboard" Width="246" Click="DashboardBtn_Click" BorderBrush="{x:Null}" ClickMode="Press" RenderTransformOrigin="0.5,0.5" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="11,80,0,0">
+            <Button.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="0"/>
+                </Style>
+            </Button.Resources>
+            <Button.Background>
+                <SolidColorBrush Color="#FFECEDF3" Opacity="0"/>
+            </Button.Background>
+            <Button.Foreground>
+                <SolidColorBrush Color="#FF605C66" Opacity="0.87"/>
+            </Button.Foreground>
+        </Button>
+        <Image Source="/Resources/Images/Home.png" RenderTransformOrigin="1.014,0.502" Margin="17,86,1237,614"/>
+        <Image Source="/Resources/Images/Arrow.png" Margin="227,81,1023,609"/>
+        <Button x:Name="StatisticBtn" Content="Statistics" Width="246" Click="StatisticBtn_Click" BorderBrush="{x:Null}" Background="#FFF4F5FA" VerticalAlignment="Top" Margin="11,117,0,0" HorizontalAlignment="Left">
+            <Button.Foreground>
+                <SolidColorBrush Color="#FF605C66" Opacity="1"/>
+            </Button.Foreground>
+        </Button>
+        <Image Source="/Resources/Images/RoundAlt.png" Margin="19,127,1239,581"/>
+        <Button x:Name="AnalyticBtn" Content="Analytics" Width="246" Click="AnalyticBtn_Click" BorderBrush="{x:Null}" Background="#FF355ACC" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="11,156,0,0">
+            <Button.Foreground>
+                <SolidColorBrush Color="White" Opacity="0.87"/>
+            </Button.Foreground>
+        </Button>
+        <Image Source="/Resources/Images/Round.png" Margin="19,165,1239,543"/>
+        <Button x:Name="InventoryBtn" Content="Inventory" HorizontalAlignment="Left" Margin="11,193,0,0" VerticalAlignment="Top" Width="246" Click="InventoryBtn_Click" BorderBrush="{x:Null}" Background="#FFF4F5FA">
+            <Button.Foreground>
+                <SolidColorBrush Color="#FF3A3541" Opacity="0.87"/>
+            </Button.Foreground>
+        </Button>
+        <Image Source="/Resources/Images/RoundAlt.png" Margin="19,203,1239,505"/>
+        <Button x:Name="EmployeeBtn" Content="Employee" HorizontalAlignment="Left" Margin="11,232,0,0" VerticalAlignment="Top" Width="246" Click="EmployeeBtn_Click" BorderBrush="{x:Null}" Background="#FFF4F5FA">
+            <Button.Foreground>
+                <SolidColorBrush Color="#FF3A3541" Opacity="0.87"/>
+            </Button.Foreground>
+        </Button>
+        <Image Source="/Resources/Images/RoundAlt.png" Margin="19,242,1239,466"/>
 
         <!-- Weekly Sales -->
         <materialDesign:Card HorizontalAlignment="Left" Margin="293,80,0,0" VerticalAlignment="Top" Height="233" Width="465">
