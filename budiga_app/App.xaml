@@ -16,19 +16,15 @@
                 <ResourceDictionary Source="/Themes/LoginTheme.xaml" />
                 <ResourceDictionary Source="/Themes/MenuTheme.xaml" />
             </ResourceDictionary.MergedDictionaries>
-
-            
-            
             <DataTemplate DataType="{x:Type viewModel:ScannerViewModel}">
                 <view:ScannerView />
             </DataTemplate>
-
             <DataTemplate DataType="{x:Type viewModel:InvoiceViewModel}">
                 <view:InvoiceView />
             </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModel:AnalyticsViewModel}">
+                <view:AnalyticsView />
+            </DataTemplate>
         </ResourceDictionary>
-        
-        
-        
     </Application.Resources>
 </Application>

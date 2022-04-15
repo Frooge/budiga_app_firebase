@@ -9,11 +9,12 @@
                         <Border CornerRadius="0,10,10,0" Background="{TemplateBinding Background}">
                             <Grid VerticalAlignment="Stretch"
                               HorizontalAlignment="Stretch">
-
-                                <TextBlock Text="{TemplateBinding Content}" Foreground="{TemplateBinding Foreground}" VerticalAlignment="Center" Margin="20 0 0 0" Panel.ZIndex="1"/>
+                                <StackPanel Orientation="Horizontal">
+                                    <Image Source="/Resources/Images/RoundAlt.png" Width="15" Margin="20 0 0 0"/>
+                                    <TextBlock Text="{TemplateBinding Content}" Foreground="{TemplateBinding Foreground}" VerticalAlignment="Center" Margin="20 0 0 0" Panel.ZIndex="1" Opacity="0.87"/>
+                                </StackPanel>
                             </Grid>
                         </Border>
-
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
@@ -23,6 +24,21 @@
             <Trigger Property="IsChecked" Value="True">
                 <Setter Property="Background" Value="#264ECA"/>
                 <Setter Property="Foreground" Value="White"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="RadioButton">
+                            <Border CornerRadius="0,10,10,0" Background="{TemplateBinding Background}">
+                                <Grid VerticalAlignment="Stretch"
+                              HorizontalAlignment="Stretch">
+                                    <StackPanel Orientation="Horizontal">
+                                        <Image Source="/Resources/Images/RadioButtonCheckedAlt.png" Width="15" Margin="20 0 0 0"/>
+                                        <TextBlock Text="{TemplateBinding Content}" Foreground="{TemplateBinding Foreground}" VerticalAlignment="Center" Margin="20 0 0 0" Panel.ZIndex="1" Opacity="0.87"/>
+                                    </StackPanel>
+                                </Grid>
+                            </Border>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
             </Trigger>
         </Style.Triggers>
     </Style>

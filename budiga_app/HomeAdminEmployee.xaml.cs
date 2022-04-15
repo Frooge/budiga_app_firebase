@@ -33,7 +33,7 @@ namespace budiga_app
         {
             this.Hide();
 
-            HomeAdminStatistics stats = new HomeAdminStatistics();
+            AdminDashboard stats = new AdminDashboard();
             stats.WindowStartupLocation = WindowStartupLocation.CenterScreen;
             stats.Show();
 

@@ -1,11 +1,13 @@
-﻿<Window x:Name="employeeWin" x:Class="budiga_app.EmployeeDashboard"
+﻿<Window x:Class="budiga_app.AdminDashboard"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:viewModel="clr-namespace:budiga_app.MVVM.ViewModel"
         xmlns:local="clr-namespace:budiga_app"
+        xmlns:viewModel="clr-namespace:budiga_app.MVVM.ViewModel"        
         mc:Ignorable="d"
+        Icon="/Resources/Images/logo.png"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         TextElement.FontWeight="Regular"
         TextElement.FontSize="13"
@@ -15,13 +17,12 @@
         FontFamily="{DynamicResource MaterialDesignFont}"
         SizeToContent="WidthAndHeight"
         ResizeMode="CanMinimize"
-        Title="Home">
-    
+        Title="Budiga - Statistics">
     <Window.DataContext>
-        <viewModel:EmployeeMainViewModel />
+        <viewModel:AdminMainViewModel />
     </Window.DataContext>
-
-    <Grid Width="1280" Height="720" >
+    
+    <Grid Width="1280" Height="720" Background="#FFF4F5FA" MaxWidth="1920" MaxHeight="1080" MinWidth="1280" MinHeight="720" >
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="4*" />
@@ -30,22 +31,31 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="9*" />
         </Grid.RowDefinitions>
-        
+
         <StackPanel Grid.RowSpan="2">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="75" />
                     <RowDefinition Height="40" />
                     <RowDefinition Height="40" />
+                    <RowDefinition Height="40" />
+                    <RowDefinition Height="40" />
+                    <RowDefinition Height="40" />
                 </Grid.RowDefinitions>
 
                 <StackPanel Orientation="Horizontal">
-                    <Image Source="/Resources/Images/logo.png" Width="60" Margin="10 0"/>
+                    <Image Source="/Resources/Images/logo.png" Width="70" Margin="10 0"/>
                     <Image Source="/Resources/Images/logo text.png" Width="140" />
                     <Image Source="/Resources/Images/RadioButtonChecked.png" Width="30" HorizontalAlignment="Right" Margin="50 0 0 0"/>
                 </StackPanel>
-                <RadioButton Grid.Row="1" Content="Budiga POS" Style="{StaticResource MenuButton}" IsChecked="True" Command="{Binding InvoiceViewCommand}" FontSize="18"/>
-                <RadioButton Grid.Row="2" Content="Settings" Style="{StaticResource MenuButton}" Command="{Binding ScannerViewCommand}" FontSize="18"/>
+                <StackPanel Grid.Row="1" Orientation="Horizontal">
+                    <Image Source="/Resources/Images/Home.png" Width="50" Margin="5 0 0 0"/>
+                    <TextBlock Text="Dashboard" VerticalAlignment="Center" Margin="30 0 0 0" FontSize="18" Opacity="0.87"/>
+                </StackPanel>
+                <RadioButton Grid.Row="2" Content="Statistics" Style="{StaticResource MenuButton}" IsChecked="True" Command="{Binding AnalyticsViewCommand}" FontSize="18"/>
+                <RadioButton Grid.Row="3" Content="Analytics" Style="{StaticResource MenuButton}" Command="" FontSize="18"/>
+                <RadioButton Grid.Row="4" Content="Inventory" Style="{StaticResource MenuButton}" Command="" FontSize="18"/>
+                <RadioButton Grid.Row="5" Content="Employee" Style="{StaticResource MenuButton}" Command="" FontSize="18"/>
             </Grid>
         </StackPanel>
         <Border CornerRadius="100" Background="Gray" Grid.Column="1" HorizontalAlignment="Right" Margin="20 10">
@@ -53,5 +63,18 @@
         </Border>
 
         <ContentControl Grid.Column="1" Grid.Row="1" Content="{Binding CurrentView}" Margin="20 0"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
     </Grid>
 </Window>

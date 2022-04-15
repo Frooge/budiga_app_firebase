@@ -98,7 +98,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="HomeAdminStatistics.xaml">
+    <Page Include="AdminDashboard.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -124,13 +124,17 @@
     <Compile Include="HomeAdminAnalytics.xaml.cs">
       <DependentUpon>HomeAdminAnalytics.xaml</DependentUpon>
     </Compile>
-    <Compile Include="HomeAdminStatistics.xaml.cs">
-      <DependentUpon>HomeAdminStatistics.xaml</DependentUpon>
+    <Compile Include="AdminDashboard.xaml.cs">
+      <DependentUpon>AdminDashboard.xaml</DependentUpon>
     </Compile>
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="MVVM\View\AnalyticsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MVVM\View\InvoiceView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -149,9 +153,14 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MVVM\ViewModel\AdminMainViewModel.cs" />
+    <Compile Include="MVVM\ViewModel\AnalyticsViewModel.cs" />
     <Compile Include="MVVM\ViewModel\EmployeeMainViewModel.cs" />
     <Compile Include="MVVM\ViewModel\InvoiceViewModel.cs" />
     <Compile Include="MVVM\ViewModel\ScannerViewModel.cs" />
+    <Compile Include="MVVM\View\AnalyticsView.xaml.cs">
+      <DependentUpon>AnalyticsView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MVVM\View\InvoiceView.xaml.cs">
       <DependentUpon>InvoiceView.xaml</DependentUpon>
     </Compile>
@@ -259,6 +268,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Images\SalesOverview.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\RadioButtonCheckedAlt.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\MaterialDesignThemes.4.4.0\build\MaterialDesignThemes.targets" Condition="Exists('..\packages\MaterialDesignThemes.4.4.0\build\MaterialDesignThemes.targets')" />
