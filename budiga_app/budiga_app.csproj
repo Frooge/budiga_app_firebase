@@ -131,14 +131,30 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="MVVM\View\InvoiceView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MVVM\View\ScannerView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\LoginTheme.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\MenuTheme.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MVVM\ViewModel\EmployeeMainViewModel.cs" />
+    <Compile Include="MVVM\ViewModel\InvoiceViewModel.cs" />
     <Compile Include="MVVM\ViewModel\ScannerViewModel.cs" />
+    <Compile Include="MVVM\View\InvoiceView.xaml.cs">
+      <DependentUpon>InvoiceView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MVVM\View\ScannerView.xaml.cs">
       <DependentUpon>ScannerView.xaml</DependentUpon>
     </Compile>
@@ -171,7 +187,6 @@
   <ItemGroup>
     <Folder Include="MVVM\Model\" />
     <Folder Include="Resources\Fonts\" />
-    <Folder Include="Themes\" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Images\placeholder.png" />
