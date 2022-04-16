@@ -22,8 +22,17 @@
             <DataTemplate DataType="{x:Type viewModel:InvoiceViewModel}">
                 <view:InvoiceView />
             </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModel:StatisticsViewModel}">
+                <view:StatisticsView />
+            </DataTemplate>
             <DataTemplate DataType="{x:Type viewModel:AnalyticsViewModel}">
                 <view:AnalyticsView />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModel:InventoryViewModel}">
+                <view:InventoryView />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModel:EmployeeViewModel}">
+                <view:EmployeeView />
             </DataTemplate>
         </ResourceDictionary>
     </Application.Resources>
