@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using MySql.Data.MySqlClient;
 
 namespace budiga_app
 {
@@ -61,25 +62,71 @@ namespace budiga_app
 
         private void loginBtn_Click(object sender, RoutedEventArgs e)
         {
-            this.Hide();
-
-            AdminDashboard home = new AdminDashboard();
-            home.WindowStartupLocation = WindowStartupLocation.CenterScreen;
-            home.Show();
-
-            this.Close();
-            
+            runQueryLogin();
         }
 
-        private void employeePage_Click(object sender, RoutedEventArgs e)
+        private void runQueryLogin()
         {
-            this.Hide();
+            string connectionString = "datasource=127.0.0.1;port=3306;username=root;password=;database=budiga_app;";
+            string query = "SELECT * FROM users WHERE username = '" +usernameBox.Text.Trim()+ "' AND password = '" +passwordBox.Password.Trim().ToString() +"'";
+            
 
-            EmployeeDashboard employeeDashboard = new EmployeeDashboard();
-            employeeDashboard.WindowStartupLocation = WindowStartupLocation.CenterScreen;
-            employeeDashboard.Show();
-
-            this.Close();
+            MySqlConnection dbconn = new MySqlConnection(connectionString);
+            MySqlCommand commandDatabase = new MySqlCommand(query, dbconn);
+            commandDatabase.CommandTimeout = 60;
+            MySqlDataReader reader;
+           
+            try
+            {
+                dbconn.Open();
+                reader = commandDatabase.ExecuteReader();
+                if (reader.HasRows)
+                { 
+                    var results = new object[reader.FieldCount];
+                    while (reader.Read())
+                    {
+                        reader.GetValues(results);
+                    }
+                    results.ToArray();
+                    if(results.Length > 0)
+                    {
+                        if(results[6].ToString() == "Admin")
+                        {
+                            this.Hide();
+                            AdminDashboard home = new AdminDashboard();
+                            home.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+                            home.Show();
+                            this.Close();
+                        }
+                        else
+                        {
+                            this.Hide();
+                            EmployeeDashboard employeeDashboard = new EmployeeDashboard();
+                            employeeDashboard.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+                            employeeDashboard.Show();
+                            this.Close();
+                        }
+                    }
+                }
+                else
+                {
+                    if(usernameBox.Text.Trim() == "" || passwordBox.Password.Trim().ToString() == "")
+                    {
+                        MessageBox.Show("Incomplete Credentials", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Incorrect Credentials", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
+                    
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
+
+
     }
 }
