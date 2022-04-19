@@ -67,18 +67,17 @@ namespace budiga_app
 
         private void runQueryLogin()
         {
-            string connectionString = "datasource=127.0.0.1;port=3306;username=root;password=;database=budiga_app;";
             string query = "SELECT * FROM users WHERE username = '" +usernameBox.Text.Trim()+ "' AND password = '" +passwordBox.Password.Trim().ToString() +"'";
-            
+            dbConn database = new dbConn();
+            database.connection();
+            MySqlConnection db = dbConn.conn;
 
-            MySqlConnection dbconn = new MySqlConnection(connectionString);
-            MySqlCommand commandDatabase = new MySqlCommand(query, dbconn);
+            MySqlCommand commandDatabase = new MySqlCommand(query, db);
             commandDatabase.CommandTimeout = 60;
             MySqlDataReader reader;
            
             try
             {
-                dbconn.Open();
                 reader = commandDatabase.ExecuteReader();
                 if (reader.HasRows)
                 { 
@@ -90,7 +89,9 @@ namespace budiga_app
                     results.ToArray();
                     if(results.Length > 0)
                     {
-                        if(results[6].ToString() == "Admin")
+                        //Redirect
+                        #region
+                        if (results[6].ToString() == "Admin")
                         {
                             this.Hide();
                             AdminDashboard home = new AdminDashboard();
@@ -106,11 +107,14 @@ namespace budiga_app
                             employeeDashboard.Show();
                             this.Close();
                         }
+                        #endregion
                     }
                 }
                 else
                 {
-                    if(usernameBox.Text.Trim() == "" || passwordBox.Password.Trim().ToString() == "")
+                    //Validation
+                    #region
+                    if (usernameBox.Text.Trim() == "" || passwordBox.Password.Trim().ToString() == "")
                     {
                         MessageBox.Show("Incomplete Credentials", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                     }
@@ -118,15 +122,16 @@ namespace budiga_app
                     {
                         MessageBox.Show("Incorrect Credentials", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                     }
-                    
+                    #endregion 
+
                 }
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+            database.dispose();
         }
-
 
     }
 }
