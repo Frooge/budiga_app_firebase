@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using MySql.Data.MySqlClient;
+using budiga_app.Core;
 
 namespace budiga_app
 {
@@ -69,10 +70,8 @@ namespace budiga_app
         {
             string query = "SELECT * FROM users WHERE username = '" +usernameBox.Text.Trim()+ "' AND password = '" +passwordBox.Password.Trim().ToString() +"'";
             dbConn database = new dbConn();
-            database.connection();
-            MySqlConnection db = dbConn.conn;
 
-            MySqlCommand commandDatabase = new MySqlCommand(query, db);
+            MySqlCommand commandDatabase = new MySqlCommand(query, database.conn);
             commandDatabase.CommandTimeout = 60;
             MySqlDataReader reader;
            

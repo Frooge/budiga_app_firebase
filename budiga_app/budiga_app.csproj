@@ -101,7 +101,7 @@
     </Compile>
     <Compile Include="Core\ObservableObject.cs" />
     <Compile Include="Core\RelayCommand.cs" />
-    <Compile Include="dbConn.cs" />
+    <Compile Include="Core\dbConn.cs" />
     <Compile Include="EmployeeDashboard.xaml.cs">
       <DependentUpon>EmployeeDashboard.xaml</DependentUpon>
     </Compile>
@@ -276,6 +276,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Images\RadioButtonCheckedAlt.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="budiga_app.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\MaterialDesignThemes.4.4.0\build\MaterialDesignThemes.targets" Condition="Exists('..\packages\MaterialDesignThemes.4.4.0\build\MaterialDesignThemes.targets')" />
