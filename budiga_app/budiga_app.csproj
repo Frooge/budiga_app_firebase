@@ -102,6 +102,7 @@
     <Compile Include="Core\ObservableObject.cs" />
     <Compile Include="Core\RelayCommand.cs" />
     <Compile Include="Core\dbConn.cs" />
+    <Compile Include="DataAccess\UserRepository.cs" />
     <Compile Include="EmployeeDashboard.xaml.cs">
       <DependentUpon>EmployeeDashboard.xaml</DependentUpon>
     </Compile>
@@ -146,6 +147,7 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MVVM\Model\UserModel.cs" />
     <Compile Include="MVVM\ViewModel\AdminMainViewModel.cs" />
     <Compile Include="MVVM\ViewModel\AnalyticsViewModel.cs" />
     <Compile Include="MVVM\ViewModel\EmployeeViewModel.cs" />
@@ -199,7 +201,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="MVVM\Model\" />
     <Folder Include="Resources\Fonts\" />
   </ItemGroup>
   <ItemGroup>

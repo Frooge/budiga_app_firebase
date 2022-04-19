@@ -13,7 +13,7 @@ namespace budiga_app
         private string connectionString = "datasource=127.0.0.1;port=3306;username=root;password=;database=budiga_app;";
         public MySqlConnection conn { get; set; }
 
-        public dbConn()
+        public void Connection()
         {
             conn = new MySqlConnection(connectionString);            
             try
@@ -25,7 +25,7 @@ namespace budiga_app
             }
         }
         
-        public void dispose()
+        public void Dispose()
         {
             conn.Close();
         }

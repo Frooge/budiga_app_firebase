@@ -14,6 +14,8 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using MySql.Data.MySqlClient;
 using budiga_app.Core;
+using budiga_app.DataAccess;
+using budiga_app.MVVM.Model;
 
 namespace budiga_app
 {
@@ -34,7 +36,7 @@ namespace budiga_app
 
         private void usernameBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if(!string.IsNullOrEmpty(usernameBox.Text) && usernameBox.Text.Length > 0)
+            if (!string.IsNullOrEmpty(usernameBox.Text) && usernameBox.Text.Length > 0)
             {
                 usernameBlock.Visibility = Visibility.Collapsed;
             }
@@ -68,69 +70,46 @@ namespace budiga_app
 
         private void runQueryLogin()
         {
-            string query = "SELECT * FROM users WHERE username = '" +usernameBox.Text.Trim()+ "' AND password = '" +passwordBox.Password.Trim().ToString() +"'";
-            dbConn database = new dbConn();
+            UserRepository userRepository = new UserRepository();
+            UserModel user = userRepository.GetUser(usernameBox.Text.Trim(), passwordBox.Password.Trim().ToString());
 
-            MySqlCommand commandDatabase = new MySqlCommand(query, database.conn);
-            commandDatabase.CommandTimeout = 60;
-            MySqlDataReader reader;
-           
-            try
+            if (user is object && user.UserRole != null)
             {
-                reader = commandDatabase.ExecuteReader();
-                if (reader.HasRows)
-                { 
-                    var results = new object[reader.FieldCount];
-                    while (reader.Read())
-                    {
-                        reader.GetValues(results);
-                    }
-                    results.ToArray();
-                    if(results.Length > 0)
-                    {
-                        //Redirect
-                        #region
-                        if (results[6].ToString() == "Admin")
-                        {
-                            this.Hide();
-                            AdminDashboard home = new AdminDashboard();
-                            home.WindowStartupLocation = WindowStartupLocation.CenterScreen;
-                            home.Show();
-                            this.Close();
-                        }
-                        else
-                        {
-                            this.Hide();
-                            EmployeeDashboard employeeDashboard = new EmployeeDashboard();
-                            employeeDashboard.WindowStartupLocation = WindowStartupLocation.CenterScreen;
-                            employeeDashboard.Show();
-                            this.Close();
-                        }
-                        #endregion
-                    }
+                //Redirect
+                #region
+                if (user.UserRole == "Admin")
+                {
+                    this.Hide();
+                    AdminDashboard home = new AdminDashboard();
+                    home.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+                    home.Show();
+                    this.Close();
+                }
+                else if (user.UserRole == "Employee")
+                {
+                    this.Hide();
+                    EmployeeDashboard employeeDashboard = new EmployeeDashboard();
+                    employeeDashboard.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+                    employeeDashboard.Show();
+                    this.Close();
+                }
+                #endregion
+            }
+            else
+            {
+                //Validation
+                #region
+                if (usernameBox.Text.Trim() == "" || passwordBox.Password.Trim().ToString() == "")
+                {
+                    MessageBox.Show("Incomplete Credentials", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
                 else
                 {
-                    //Validation
-                    #region
-                    if (usernameBox.Text.Trim() == "" || passwordBox.Password.Trim().ToString() == "")
-                    {
-                        MessageBox.Show("Incomplete Credentials", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                    }
-                    else
-                    {
-                        MessageBox.Show("Incorrect Credentials", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                    }
-                    #endregion 
-
+                    MessageBox.Show("Incorrect Credentials", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-            database.dispose();
-        }
+                #endregion
 
+            }
+        }
     }
 }
