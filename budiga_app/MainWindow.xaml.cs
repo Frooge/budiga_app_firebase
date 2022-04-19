@@ -93,6 +93,7 @@ namespace budiga_app
                         if (results[6].ToString() == "Admin")
                         {
                             this.Hide();
+                            Sessions.session = results;
                             AdminDashboard home = new AdminDashboard();
                             home.WindowStartupLocation = WindowStartupLocation.CenterScreen;
                             home.Show();
@@ -101,6 +102,7 @@ namespace budiga_app
                         else
                         {
                             this.Hide();
+                            Sessions.session = results;
                             EmployeeDashboard employeeDashboard = new EmployeeDashboard();
                             employeeDashboard.WindowStartupLocation = WindowStartupLocation.CenterScreen;
                             employeeDashboard.Show();
