@@ -9,6 +9,8 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Shapes;
+using budiga_app.Core;
+
 
 namespace budiga_app
 {
