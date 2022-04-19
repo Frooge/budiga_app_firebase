@@ -79,6 +79,7 @@ namespace budiga_app
                 #region
                 if (user.UserRole == "Admin")
                 {
+                    Sessions.session = user;
                     this.Hide();
                     AdminDashboard home = new AdminDashboard();
                     home.WindowStartupLocation = WindowStartupLocation.CenterScreen;
@@ -87,6 +88,7 @@ namespace budiga_app
                 }
                 else if (user.UserRole == "Employee")
                 {
+                    Sessions.session = user;
                     this.Hide();
                     EmployeeDashboard employeeDashboard = new EmployeeDashboard();
                     employeeDashboard.WindowStartupLocation = WindowStartupLocation.CenterScreen;

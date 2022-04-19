@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using budiga_app.Core;
 
 namespace budiga_app
 {
@@ -22,7 +23,17 @@ namespace budiga_app
         public AdminDashboard()
         {
             InitializeComponent();
+            userName.Text = Sessions.session.UserName;
         }
 
+        private void LogoutBtn_Click(object sender, RoutedEventArgs e)
+        {
+            Sessions.Dispose();
+            this.Hide();
+            MainWindow main = new MainWindow();
+            main.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+            main.Show();
+            this.Close();
+        }
     }
 }

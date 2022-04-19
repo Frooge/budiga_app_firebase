@@ -22,7 +22,17 @@ namespace budiga_app
         public EmployeeDashboard()
         {
             InitializeComponent();
+            userName.Text = Sessions.session.UserName;
         }
 
+        private void LogoutBtn_Click(object sender, RoutedEventArgs e)
+        {
+            Sessions.Dispose();
+            this.Hide();
+            MainWindow main = new MainWindow();
+            main.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+            main.Show();
+            this.Close();
+        }
     }
 }

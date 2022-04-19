@@ -9,7 +9,7 @@ using budiga_app.Core;
 
 namespace budiga_app.MVVM.Model
 {
-    class UserModel : ObservableObject
+    public class UserModel : ObservableObject
     {
         private int _id;
         public int Id 
