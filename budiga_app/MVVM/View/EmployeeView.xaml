@@ -9,9 +9,21 @@
              d:DesignHeight="720" d:DesignWidth="1000">
     <Grid>
         <StackPanel>
-            <materialDesign:Card HorizontalAlignment="Left" Margin="0 0 10 0" VerticalAlignment="Top" Height="599" Width="952">
-                <DataGrid d:ItemsSource="{d:SampleData ItemCount=10}"/>
-            </materialDesign:Card>
+            <StackPanel Orientation="Horizontal" Margin="10,10,10,10">
+                <Button Grid.Row="3" Content="Add" HorizontalAlignment="Center" VerticalAlignment="Top" Width="120" BorderBrush="{x:Null}" Background="#FF355ACC" FontStretch="Normal" FontStyle="Normal">
+                    <Button.Foreground>
+                        <SolidColorBrush Color="White" Opacity="0.87"/>
+                    </Button.Foreground>
+                </Button>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="10,10,10,10" Width="967">
+                <materialDesign:Card HorizontalAlignment="Left" Margin="0 0 10 0" VerticalAlignment="Top" Height="500" Width="495">
+                    <DataGrid d:ItemsSource="{d:SampleData ItemCount=10}" x:Name="TeamMembers"/>
+                </materialDesign:Card>
+                <materialDesign:Card HorizontalAlignment="Right" Margin="0 0 10 0" VerticalAlignment="Top" Height="500" Width="460">
+                    <DataGrid d:ItemsSource="{d:SampleData ItemCount=5}" x:Name="AttendanceHistory"/>
+                </materialDesign:Card>
+            </StackPanel>
         </StackPanel>
     </Grid>
 </UserControl>
