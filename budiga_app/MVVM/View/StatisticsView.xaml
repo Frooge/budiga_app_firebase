@@ -77,7 +77,7 @@
                         </Grid>
                     </Grid>
                 </materialDesign:Card>
-                <materialDesign:Card HorizontalAlignment="Left" Margin="0 0 10 0" VerticalAlignment="Top" Height="107" Width="262">
+                <materialDesign:Card Margin="0 0 10 0" VerticalAlignment="Top" Height="107" Width="295">
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="20*" />
@@ -95,7 +95,7 @@
                     </Grid>
                 </materialDesign:Card>
             </StackPanel>
-            <StackPanel Orientation="Horizontal" Margin="10">
+            <!--<StackPanel Orientation="Horizontal" Margin="10">
                 <materialDesign:Card HorizontalAlignment="Left" VerticalAlignment="Top" Height="113" Width="310" Background="#FF355ACC" Foreground="White" Margin="0 0 10 0">
                     <Grid Margin="10">
                         <Grid.ColumnDefinitions>
@@ -150,9 +150,9 @@
                         <TextBlock Grid.Row="1" Grid.Column="2" Text="value" VerticalAlignment="Center" Foreground="#DD35EC40" Margin="20 0"/>
                     </Grid>
                 </materialDesign:Card>
-            </StackPanel>
-            <StackPanel Orientation="Horizontal" Margin="10">
-                <materialDesign:Card HorizontalAlignment="Left" VerticalAlignment="Top" Height="113" Width="167" Margin="0 0 10 0">
+            </StackPanel>-->
+            <StackPanel Orientation="Horizontal" Margin="10" Width="670" HorizontalAlignment="Left">
+                <!--<materialDesign:Card HorizontalAlignment="Left" VerticalAlignment="Top" Height="113" Width="167" Margin="0 0 10 0">
                     <Grid Margin="10">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="20*" />
@@ -172,7 +172,7 @@
                             <Label Grid.Row="1" Content="Total Revenue" HorizontalAlignment="Center" VerticalAlignment="Top" FontWeight="Bold"/>
                         </Grid>
                     </Grid>
-                </materialDesign:Card>
+                </materialDesign:Card>-->
                 <materialDesign:Card HorizontalAlignment="Left" VerticalAlignment="Top" Height="113" Width="167" Margin="0 0 10 0">
                     <Grid Margin="10">
                         <Grid.ColumnDefinitions>
@@ -218,7 +218,7 @@
                                     </ProgressBar.Background>
                                 </ProgressBar>
                             </StackPanel>
-                            
+
                             <Label Grid.Row="1" Content="Total Sales" HorizontalAlignment="Center" VerticalAlignment="Top" FontWeight="Bold"/>
                         </Grid>
                     </Grid>
@@ -245,6 +245,12 @@
                     </Grid>
                 </materialDesign:Card>
             </StackPanel>
-        </StackPanel>        
+            <StackPanel MinHeight="120"></StackPanel>
+            <StackPanel Height="340">
+                <materialDesign:Card Height="305" Margin="10">
+                    <DataGrid d:ItemsSource="{d:SampleData ItemCount=5}" d:Name=""/>
+                </materialDesign:Card>
+            </StackPanel>
+        </StackPanel>
     </Grid>
 </UserControl>
