@@ -10,7 +10,7 @@
 
     <Grid>
         <StackPanel>
-            <StackPanel Orientation="Horizontal" Margin="10" MinHeight="220">
+            <StackPanel Orientation="Horizontal" Margin="10" HorizontalAlignment="Left">
                 <materialDesign:Card HorizontalAlignment="Left" VerticalAlignment="Top" Height="107" Width="675" Margin="0 0 10 0">
                     <Grid>
                         <Grid.ColumnDefinitions>
@@ -77,24 +77,9 @@
                         </Grid>
                     </Grid>
                 </materialDesign:Card>
-                <materialDesign:Card Margin="0 0 10 0" VerticalAlignment="Top" MinHeight="220" Width="295">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="20*" />
-                            <ColumnDefinition Width="*" />
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="*" />
-                            <RowDefinition Height="2*" />
-                        </Grid.RowDefinitions>
-                        <Label Content="Total Sales" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontSize="16" FontWeight="Bold"/>
-                        <StackPanel Grid.Row="1" Margin="20 0" VerticalAlignment="Center">
-                            <Label Content="Calculated in last 7 days" HorizontalAlignment="Left" />
-                            <TextBlock Text="PHP value" FontSize="16" FontWeight="Bold"/>
-                        </StackPanel>
-                    </Grid>
-                </materialDesign:Card>
+
             </StackPanel>
+
             <!--<StackPanel Orientation="Horizontal" Margin="10">
                 <materialDesign:Card HorizontalAlignment="Left" VerticalAlignment="Top" Height="113" Width="310" Background="#FF355ACC" Foreground="White" Margin="0 0 10 0">
                     <Grid Margin="10">
@@ -151,7 +136,7 @@
                     </Grid>
                 </materialDesign:Card>
             </StackPanel>-->
-            <StackPanel Orientation="Horizontal" Margin="10" Width="670" HorizontalAlignment="Left">
+            <StackPanel Orientation="Horizontal" Margin="10" Width="673" HorizontalAlignment="Left">
                 <!--<materialDesign:Card HorizontalAlignment="Left" VerticalAlignment="Top" Height="113" Width="167" Margin="0 0 10 0">
                     <Grid Margin="10">
                         <Grid.ColumnDefinitions>
@@ -173,7 +158,7 @@
                         </Grid>
                     </Grid>
                 </materialDesign:Card>-->
-                <materialDesign:Card HorizontalAlignment="Left" VerticalAlignment="Top" Height="113" Width="167" Margin="0 0 10 0">
+                <materialDesign:Card VerticalAlignment="Top" Height="113" Width="218" Margin="0 0 10 0">
                     <Grid Margin="10">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="20*" />
@@ -194,7 +179,7 @@
                         </Grid>
                     </Grid>
                 </materialDesign:Card>
-                <materialDesign:Card HorizontalAlignment="Left" VerticalAlignment="Top" Height="113" Width="167" Margin="0 0 10 0">
+                <materialDesign:Card VerticalAlignment="Top" Height="113" Width="218" Margin="0 0 10 0">
                     <Grid Margin="10">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="20*" />
@@ -223,7 +208,7 @@
                         </Grid>
                     </Grid>
                 </materialDesign:Card>
-                <materialDesign:Card HorizontalAlignment="Left" VerticalAlignment="Top" Height="113" Width="167" Margin="0 0 10 0">
+                <materialDesign:Card HorizontalAlignment="Left" VerticalAlignment="Top" Height="113" Width="218" Margin="0 0 10 0">
                     <Grid Margin="10">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="20*" />
@@ -245,12 +230,29 @@
                     </Grid>
                 </materialDesign:Card>
             </StackPanel>
-            
+
             <StackPanel Height="340">
                 <materialDesign:Card Height="305" Margin="10">
                     <DataGrid d:ItemsSource="{d:SampleData ItemCount=5}" d:Name=""/>
                 </materialDesign:Card>
             </StackPanel>
         </StackPanel>
+        <materialDesign:Card Margin="695,10,0,0" VerticalAlignment="Top" MinHeight="220" Width="295" HorizontalAlignment="Left" Height="240">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="20*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="2*" />
+                </Grid.RowDefinitions>
+                <Label Content="Total Sales" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontSize="16" FontWeight="Bold"/>
+                <StackPanel Grid.Row="1" Margin="10,105,133,0" VerticalAlignment="Top">
+                    <Label Content="Calculated in last 7 days" HorizontalAlignment="Left" />
+                    <TextBlock Text="PHP value" FontSize="16" FontWeight="Bold"/>
+                </StackPanel>
+            </Grid>
+        </materialDesign:Card>
     </Grid>
 </UserControl>
