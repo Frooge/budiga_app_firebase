@@ -6,12 +6,12 @@
              xmlns:local="clr-namespace:budiga_app.MVVM.View"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"             
              mc:Ignorable="d" 
-             d:DesignHeight="720" d:DesignWidth="1000">
+             d:DesignHeight="720" Width="1020">
 
     <Grid>
         <StackPanel>
-            <StackPanel Orientation="Horizontal" Margin="10" HorizontalAlignment="Left">
-                <materialDesign:Card HorizontalAlignment="Left" VerticalAlignment="Top" Height="107" Width="675" Margin="0 0 10 0">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Width="691">
+                <materialDesign:Card HorizontalAlignment="Left" VerticalAlignment="Top" Height="107" Width="675" Margin="10">
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="20*" />
@@ -22,7 +22,7 @@
                             <RowDefinition Height="2*" />
                         </Grid.RowDefinitions>
                         <Label Content="Transactions" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.063,0.478" FontWeight="Bold" FontSize="16"/>
-                        <materialDesign:PopupBox Grid.Column="1" Content="PopupBox" VerticalAlignment="Top" HorizontalAlignment="Right"/>
+                        <materialDesign:PopupBox Grid.Column="1" Content="PopupBox" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,7,0,0"/>
                         <Grid Grid.Row="1">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*" />
@@ -136,7 +136,7 @@
                     </Grid>
                 </materialDesign:Card>
             </StackPanel>-->
-            <StackPanel Orientation="Horizontal" Margin="10" Width="673" HorizontalAlignment="Left">
+            <StackPanel Orientation="Horizontal" Width="690" HorizontalAlignment="Left">
                 <!--<materialDesign:Card HorizontalAlignment="Left" VerticalAlignment="Top" Height="113" Width="167" Margin="0 0 10 0">
                     <Grid Margin="10">
                         <Grid.ColumnDefinitions>
@@ -158,7 +158,7 @@
                         </Grid>
                     </Grid>
                 </materialDesign:Card>-->
-                <materialDesign:Card VerticalAlignment="Top" Height="113" Width="218" Margin="0 0 10 0">
+                <materialDesign:Card VerticalAlignment="Top" Height="113" Width="210" Margin="10" BorderThickness="1">
                     <Grid Margin="10">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="20*" />
@@ -179,7 +179,7 @@
                         </Grid>
                     </Grid>
                 </materialDesign:Card>
-                <materialDesign:Card VerticalAlignment="Top" Height="113" Width="218" Margin="0 0 10 0">
+                <materialDesign:Card VerticalAlignment="Top" Height="113" Width="210" Margin="10">
                     <Grid Margin="10">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="20*" />
@@ -208,7 +208,7 @@
                         </Grid>
                     </Grid>
                 </materialDesign:Card>
-                <materialDesign:Card HorizontalAlignment="Left" VerticalAlignment="Top" Height="113" Width="218" Margin="0 0 10 0">
+                <materialDesign:Card VerticalAlignment="Top" Height="113" Width="213" Margin="10">
                     <Grid Margin="10">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="20*" />
@@ -232,13 +232,13 @@
             </StackPanel>
 
             <StackPanel Height="340">
-                <materialDesign:Card Height="305" Margin="10">
-                    <DataGrid d:ItemsSource="{d:SampleData ItemCount=5}" d:Name=""/>
+                <materialDesign:Card Height="305" Margin="10" HorizontalAlignment="Left" Width="991">
+                    <DataGrid d:ItemsSource="{d:SampleData ItemCount=5}" d:Name="" Margin="0,0,10,0"/>
                 </materialDesign:Card>
             </StackPanel>
         </StackPanel>
-        <materialDesign:Card Margin="695,10,0,0" VerticalAlignment="Top" MinHeight="220" Width="295" HorizontalAlignment="Left" Height="240">
-            <Grid>
+        <materialDesign:Card Margin="0,10,20,0" VerticalAlignment="Top" MinHeight="220" Height="240" BorderThickness="2" HorizontalAlignment="Right" Width="295">
+            <Grid HorizontalAlignment="Center" Width="297">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="20*" />
                     <ColumnDefinition Width="*" />
