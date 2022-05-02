@@ -1,0 +1,21 @@
+﻿<Page
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:budiga_app.MVVM.View"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" x:Class="budiga_app.MVVM.View.SalesInventoryView"
+      mc:Ignorable="d" 
+      d:DesignHeight="720" Width="1020"
+      Title="SalesInventoryView">
+
+    <Grid>
+
+        <StackPanel Height="460" Margin="0,260,0,0">
+            <materialDesign:Card Height="305" Margin="10" HorizontalAlignment="Left" Width="991">
+                <DataGrid d:ItemsSource="{d:SampleData ItemCount=5}" Margin="0,0,10,0" d:Name="InventoryTable"/>
+            </materialDesign:Card>
+        </StackPanel>
+
+    </Grid>
+</Page>

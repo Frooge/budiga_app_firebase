@@ -16,14 +16,13 @@ using System.Windows.Shapes;
 namespace budiga_app.MVVM.View
 {
     /// <summary>
-    /// Interaction logic for AnalyticsView.xaml
+    /// Interaction logic for SalesInventoryView.xaml
     /// </summary>
-    public partial class StatisticsView : UserControl
+    public partial class SalesInventoryView : Page
     {
-        public StatisticsView()
+        public SalesInventoryView()
         {
             InitializeComponent();
         }
-
     }
 }

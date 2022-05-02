@@ -231,27 +231,29 @@
                 </materialDesign:Card>
             </StackPanel>
 
-            <StackPanel Height="340">
+            <StackPanel Height="460">
                 <materialDesign:Card Height="305" Margin="10" HorizontalAlignment="Left" Width="991">
                     <DataGrid d:ItemsSource="{d:SampleData ItemCount=5}" d:Name="" Margin="0,0,10,0"/>
                 </materialDesign:Card>
             </StackPanel>
         </StackPanel>
         <materialDesign:Card Margin="0,10,20,0" VerticalAlignment="Top" MinHeight="220" Height="240" BorderThickness="2" HorizontalAlignment="Right" Width="295">
-            <Grid HorizontalAlignment="Center" Width="297">
+            <Grid HorizontalAlignment="Center" Width="295">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="20*" />
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="2*" />
+                    <RowDefinition Height="13*" />
+                    <RowDefinition Height="67*" />
                 </Grid.RowDefinitions>
-                <Label Content="Total Sales" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontSize="16" FontWeight="Bold"/>
-                <StackPanel Grid.Row="1" Margin="10,105,133,0" VerticalAlignment="Top">
-                    <Label Content="Calculated in last 7 days" HorizontalAlignment="Left" />
-                    <TextBlock Text="PHP value" FontSize="16" FontWeight="Bold"/>
+                <Label Content="Total Sales" HorizontalAlignment="Left" Margin="10,0,0,0" FontSize="16" FontWeight="Bold" Width="87" Height="30" VerticalAlignment="Center"/>
+                <StackPanel Grid.Row="1" Margin="10,1,133,0" VerticalAlignment="Top" Height="47">
+                    <Label Content="Calculated in last 7 days" />
+                    <TextBlock Text=" PHP value" FontSize="16" FontWeight="Bold"/>
                 </StackPanel>
+                <RadioButton Content="Overview" HorizontalAlignment="Left" Margin="10,173,0,0" Grid.Row="1" VerticalAlignment="Top" Checked="RadioButton_Checked"/>
+                <RadioButton Content="Inventory" HorizontalAlignment="Left" Margin="104,173,0,0" Grid.Row="1" VerticalAlignment="Top"/>
             </Grid>
         </materialDesign:Card>
     </Grid>
