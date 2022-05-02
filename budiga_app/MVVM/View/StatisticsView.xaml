@@ -252,8 +252,19 @@
                     <Label Content="Calculated in last 7 days" />
                     <TextBlock Text=" PHP value" FontSize="16" FontWeight="Bold"/>
                 </StackPanel>
-                <RadioButton Content="Overview" HorizontalAlignment="Left" Margin="10,173,0,0" Grid.Row="1" VerticalAlignment="Top" Checked="RadioButton_Checked"/>
-                <RadioButton Content="Inventory" HorizontalAlignment="Left" Margin="104,173,0,0" Grid.Row="1" VerticalAlignment="Top"/>
+                <StackPanel HorizontalAlignment="Left" Orientation="Vertical" Grid.Row="1" VerticalAlignment="Top" Height="102" Margin="10,53,0,0" Width="170">
+                    <RadioButton Content="Accumulated" IsChecked="True" Command="{Binding AccumulatedViewCommand}" FontSize="14" Checked="RadioButton_Checked"/>
+                    <RadioButton Content="Daily" Command="{Binding DailyViewCommand}" FontSize="14" Checked="RadioButton_Checked"/>
+                    <RadioButton Content="Monthly" Command="{Binding MonthlyViewCommand}" FontSize="14" Checked="RadioButton_Checked"/>
+                    <RadioButton Content="Yearly" Command="{Binding YearlyViewCommand}" FontSize="14" Checked="RadioButton_Checked"/>
+
+                </StackPanel>
+
+                <Grid HorizontalAlignment="Left" Height="31" Grid.Row="1" VerticalAlignment="Top" Width="170" Margin="10,160,0,0">
+                    <RadioButton Content="Overview" IsChecked="True" Command="{Binding OverviewViewCommand}" FontSize="14" HorizontalAlignment="Left" VerticalAlignment="Center" Checked="RadioButton_Checked"/>
+                    <RadioButton Content="Inventory" Command="{Binding InventoryViewCommand}" FontSize="14" HorizontalAlignment="Left" Margin="84,0,0,0" VerticalAlignment="Center"/>
+                </Grid>
+
             </Grid>
         </materialDesign:Card>
     </Grid>
