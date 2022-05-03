@@ -9,6 +9,8 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Shapes;
+using budiga_app.Core;
+
 
 namespace budiga_app
 {
@@ -20,7 +22,17 @@ namespace budiga_app
         public EmployeeDashboard()
         {
             InitializeComponent();
+            userName.Text = Sessions.session.UserName;
         }
 
+        private void LogoutBtn_Click(object sender, RoutedEventArgs e)
+        {
+            Sessions.Dispose();
+            this.Hide();
+            MainWindow main = new MainWindow();
+            main.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+            main.Show();
+            this.Close();
+        }
     }
 }

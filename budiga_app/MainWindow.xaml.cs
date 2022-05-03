@@ -12,6 +12,10 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using MySql.Data.MySqlClient;
+using budiga_app.Core;
+using budiga_app.DataAccess;
+using budiga_app.MVVM.Model;
 
 namespace budiga_app
 {
@@ -32,7 +36,7 @@ namespace budiga_app
 
         private void usernameBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if(!string.IsNullOrEmpty(usernameBox.Text) && usernameBox.Text.Length > 0)
+            if (!string.IsNullOrEmpty(usernameBox.Text) && usernameBox.Text.Length > 0)
             {
                 usernameBlock.Visibility = Visibility.Collapsed;
             }
@@ -61,25 +65,53 @@ namespace budiga_app
 
         private void loginBtn_Click(object sender, RoutedEventArgs e)
         {
-            this.Hide();
-
-            AdminDashboard home = new AdminDashboard();
-            home.WindowStartupLocation = WindowStartupLocation.CenterScreen;
-            home.Show();
-
-            this.Close();
-            
+            runQueryLogin();
         }
 
-        private void employeePage_Click(object sender, RoutedEventArgs e)
+        private void runQueryLogin()
         {
-            this.Hide();
+            UserRepository userRepository = new UserRepository();
+            UserModel user = userRepository.GetUser(usernameBox.Text.Trim(), passwordBox.Password.Trim().ToString());
 
-            EmployeeDashboard employeeDashboard = new EmployeeDashboard();
-            employeeDashboard.WindowStartupLocation = WindowStartupLocation.CenterScreen;
-            employeeDashboard.Show();
+            if (user is object && user.UserRole != null)
+            {
+                //Redirect
+                #region
+                if (user.UserRole == "Admin")
+                {
+                    Sessions.session = user;
+                    this.Hide();
+                    AdminDashboard home = new AdminDashboard();
+                    home.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+                    home.Show();
+                    this.Close();
+                }
+                else if (user.UserRole == "Employee")
+                {
+                    Sessions.session = user;
+                    this.Hide();
+                    EmployeeDashboard employeeDashboard = new EmployeeDashboard();
+                    employeeDashboard.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+                    employeeDashboard.Show();
+                    this.Close();
+                }
+                #endregion
+            }
+            else
+            {
+                //Validation
+                #region
+                if (usernameBox.Text.Trim() == "" || passwordBox.Password.Trim().ToString() == "")
+                {
+                    MessageBox.Show("Incomplete Credentials", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+                else
+                {
+                    MessageBox.Show("Incorrect Credentials", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+                #endregion
 
-            this.Close();
+            }
         }
     }
 }
