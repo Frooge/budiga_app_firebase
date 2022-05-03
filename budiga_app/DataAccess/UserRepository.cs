@@ -23,9 +23,8 @@ namespace budiga_app.DataAccess
 
         public UserModel GetUser(string username, string password)
         {
-            string query = "SELECT * FROM users WHERE username = '" + username + "' AND password = '" + password + "'"; 
+            string query = "SELECT * FROM users WHERE username = '" + username + "' AND password = '" + password + "'";
             MySqlDataReader reader;
-
             try
             {
                 database.Connection();
