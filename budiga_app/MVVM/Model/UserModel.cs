@@ -162,7 +162,7 @@ namespace budiga_app.MVVM.Model
             } 
         }
 
-        private void StudentModels_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        private void UserModels_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
             OnPropertyChanged("UserModel");
         }

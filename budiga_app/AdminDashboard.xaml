@@ -45,7 +45,7 @@
                 </Grid.RowDefinitions>
 
                 <StackPanel Orientation="Horizontal">
-                    <Image Source="/Resources/Images/logo.png" Width="70" Margin="10 0"/>
+                    <Image Source="/Resource/Images/logo.png" Width="70" Margin="10 0"/>
                     <Image Source="/Resources/Images/logo text.png" Width="140" />
                     <Image Source="/Resources/Images/RadioButtonChecked.png" Width="30" HorizontalAlignment="Right" Margin="50 0 0 0"/>
                 </StackPanel>

@@ -86,7 +86,7 @@ namespace budiga_app.DataAccess
 
         }
 
-        public void delete(int id)
+        public void Delete(int id)
         {
 
         }
