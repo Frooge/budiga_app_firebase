@@ -18,9 +18,9 @@ namespace budiga_app.MVVM.View
     /// <summary>
     /// Interaction logic for AnalyticsView.xaml
     /// </summary>
-    public partial class StatisticsView : UserControl
+    public partial class SalesView : UserControl
     {
-        public StatisticsView()
+        public SalesView()
         {
             InitializeComponent();
         }

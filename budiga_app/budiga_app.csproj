@@ -114,10 +114,6 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="MVVM\View\AnalyticsView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="MVVM\View\EmployeeView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -126,15 +122,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="MVVM\View\OverviewView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="MVVM\View\SalesInventoryView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="MVVM\View\StatisticsView.xaml">
+    <Page Include="MVVM\View\SalesOverviewView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MVVM\View\SalesView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -158,32 +154,28 @@
   <ItemGroup>
     <Compile Include="MVVM\Model\UserModel.cs" />
     <Compile Include="MVVM\ViewModel\AdminMainViewModel.cs" />
-    <Compile Include="MVVM\ViewModel\AnalyticsViewModel.cs" />
     <Compile Include="MVVM\ViewModel\EmployeeViewModel.cs" />
     <Compile Include="MVVM\ViewModel\InventoryViewModel.cs" />
-    <Compile Include="MVVM\ViewModel\OverviewViewModel.cs" />
+    <Compile Include="MVVM\ViewModel\SalesOverviewViewModel.cs" />
     <Compile Include="MVVM\ViewModel\SalesInventoryViewModel.cs" />
-    <Compile Include="MVVM\ViewModel\StatisticsViewModel.cs" />
+    <Compile Include="MVVM\ViewModel\SalesViewModel.cs" />
     <Compile Include="MVVM\ViewModel\EmployeeMainViewModel.cs" />
     <Compile Include="MVVM\ViewModel\InvoiceViewModel.cs" />
     <Compile Include="MVVM\ViewModel\ScannerViewModel.cs" />
-    <Compile Include="MVVM\View\AnalyticsView.xaml.cs">
-      <DependentUpon>AnalyticsView.xaml</DependentUpon>
-    </Compile>
     <Compile Include="MVVM\View\EmployeeView.xaml.cs">
       <DependentUpon>EmployeeView.xaml</DependentUpon>
     </Compile>
     <Compile Include="MVVM\View\InventoryView.xaml.cs">
       <DependentUpon>InventoryView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MVVM\View\OverviewView.xaml.cs">
-      <DependentUpon>OverviewView.xaml</DependentUpon>
-    </Compile>
     <Compile Include="MVVM\View\SalesInventoryView.xaml.cs">
       <DependentUpon>SalesInventoryView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MVVM\View\StatisticsView.xaml.cs">
-      <DependentUpon>StatisticsView.xaml</DependentUpon>
+    <Compile Include="MVVM\View\SalesOverviewView.xaml.cs">
+      <DependentUpon>SalesOverviewView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MVVM\View\SalesView.xaml.cs">
+      <DependentUpon>SalesView.xaml</DependentUpon>
     </Compile>
     <Compile Include="MVVM\View\InvoiceView.xaml.cs">
       <DependentUpon>InvoiceView.xaml</DependentUpon>

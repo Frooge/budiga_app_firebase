@@ -9,11 +9,11 @@ using System.Diagnostics;
 
 namespace budiga_app.MVVM.ViewModel
 {
-    class StatisticsViewModel : ObservableObject
+    class SalesViewModel : ObservableObject
     {
         public RelayCommand OverviewViewCommand { get; set; }
         public RelayCommand InventoryViewCommand { get; set; }
-        public OverviewViewModel OverviewVM { get; set; }
+        public SalesOverviewViewModel SalesOverviewVM { get; set; }
         public SalesInventoryViewModel SalesInventoryVM { get; set; }
 
         private object _currentView;
@@ -28,18 +28,18 @@ namespace budiga_app.MVVM.ViewModel
             }
         }
 
-        public StatisticsViewModel()
+        public SalesViewModel()
         {
             try
             {
-                OverviewVM = new OverviewViewModel();
+                SalesOverviewVM = new SalesOverviewViewModel();
                 SalesInventoryVM = new SalesInventoryViewModel();
 
-                CurrentView = OverviewVM;
+                CurrentView = SalesOverviewVM;
 
                 OverviewViewCommand = new RelayCommand(o =>
                 {
-                    CurrentView = OverviewVM;
+                    CurrentView = SalesOverviewVM;
                 });
 
                 InventoryViewCommand = new RelayCommand(o =>

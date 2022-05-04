@@ -10,13 +10,14 @@ namespace budiga_app.MVVM.ViewModel
 {
     class AdminMainViewModel : ObservableObject
     {
-        public RelayCommand StatisticsViewCommand { get; set; }
-        public RelayCommand AnalyticsViewCommand { get; set; }
-        public RelayCommand InventoryViewCommand { get; set; }
+        
+        public RelayCommand InventoryViewCommand { get; set; }        
+        public RelayCommand InvoiceViewCommand { get; set; }
+        public RelayCommand SalesViewCommand { get; set; }
         public RelayCommand EmployeeViewCommand { get; set; }
-        public StatisticsViewModel StatisticsVM { get; set; }
-        public AnalyticsViewModel AnalyticsVM { get; set; }
         public InventoryViewModel InventoryVM { get; set; }
+        public InvoiceViewModel InvoiceVM { get; set; }
+        public SalesViewModel SalesVM { get; set; }     
         public EmployeeViewModel EmployeeVM { get; set; }
 
         private object _currentView;
@@ -35,26 +36,26 @@ namespace budiga_app.MVVM.ViewModel
         {
             try
             {
-                StatisticsVM = new StatisticsViewModel();
-                AnalyticsVM = new AnalyticsViewModel();
                 InventoryVM = new InventoryViewModel();
+                InvoiceVM = new InvoiceViewModel();
+                SalesVM = new SalesViewModel();                                
                 EmployeeVM = new EmployeeViewModel();
 
-                CurrentView = StatisticsVM;
-
-                StatisticsViewCommand = new RelayCommand(o =>
-                {
-                    CurrentView = StatisticsVM;
-                });
-
-                AnalyticsViewCommand = new RelayCommand(o =>
-                {
-                    CurrentView = AnalyticsVM;
-                });
+                CurrentView = InventoryVM;
 
                 InventoryViewCommand = new RelayCommand(o =>
                 {
                     CurrentView = InventoryVM;
+                });
+
+                SalesViewCommand = new RelayCommand(o =>
+                {
+                    CurrentView = SalesVM;
+                });
+
+                InvoiceViewCommand = new RelayCommand(o =>
+                {
+                    CurrentView = InvoiceVM;
                 });
 
                 EmployeeViewCommand = new RelayCommand(o =>

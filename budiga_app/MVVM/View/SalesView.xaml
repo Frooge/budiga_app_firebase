@@ -1,16 +1,20 @@
-﻿<UserControl x:Class="budiga_app.MVVM.View.StatisticsView"
+﻿<UserControl x:Class="budiga_app.MVVM.View.SalesView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:budiga_app.MVVM.View"
+             xmlns:viewModel="clr-namespace:budiga_app.MVVM.ViewModel"        
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"             
              mc:Ignorable="d" 
-             d:DesignHeight="720" Width="1020">
+             d:DesignHeight="720" Width="1000">
+    <UserControl.DataContext>
+        <viewModel:SalesViewModel/>
+    </UserControl.DataContext>
 
     <Grid>
         <StackPanel>
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Width="691">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Width="690">
                 <materialDesign:Card HorizontalAlignment="Left" VerticalAlignment="Top" Height="107" Width="675" Margin="10">
                     <Grid>
                         <Grid.ColumnDefinitions>
@@ -77,87 +81,8 @@
                         </Grid>
                     </Grid>
                 </materialDesign:Card>
-
             </StackPanel>
-
-            <!--<StackPanel Orientation="Horizontal" Margin="10">
-                <materialDesign:Card HorizontalAlignment="Left" VerticalAlignment="Top" Height="113" Width="310" Background="#FF355ACC" Foreground="White" Margin="0 0 10 0">
-                    <Grid Margin="10">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="3*" />
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="2*" />
-                            <RowDefinition Height="*" />
-                        </Grid.RowDefinitions>
-                        <StackPanel Grid.RowSpan="2" VerticalAlignment="Center" HorizontalAlignment="Center">
-                            <Image Source="/Resources/Images/Total Profit.png" Stretch="Fill" Margin="0 0 0 -15"/>
-                            <Label Content="value" FontSize="16" HorizontalAlignment="Center" Foreground="#DDFFFFFF" FontWeight="Bold"/>
-                        </StackPanel>
-                        <Label Grid.Column="1" Content="Total Profit" HorizontalAlignment="Right" VerticalAlignment="Top" Foreground="#DDFFFFFF" FontSize="18" FontWeight="Bold"/>
-                        <TextBlock Grid.Row="1" Grid.Column="2" Text="value" VerticalAlignment="Center" Foreground="#DD35EC40" Margin="20 0"/>
-                    </Grid>
-                </materialDesign:Card>
-                <materialDesign:Card HorizontalAlignment="Left" VerticalAlignment="Top" Height="113" Width="310" Background="#FF355ACC" Foreground="White" Margin="0 0 10 0">
-                    <Grid Margin="10">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="3*" />
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="2*" />
-                            <RowDefinition Height="*" />
-                        </Grid.RowDefinitions>
-                        <StackPanel Grid.RowSpan="2" VerticalAlignment="Center" HorizontalAlignment="Center">
-                            <Image Source="/Resources/Images/Reports.png" Stretch="Fill" Margin="0 0 0 -15"/>
-                            <Label Content="value" FontSize="16" HorizontalAlignment="Center" Foreground="#DDFFFFFF" FontWeight="Bold"/>
-                        </StackPanel>
-                        <Label Grid.Column="1" Content="Reports" HorizontalAlignment="Right" VerticalAlignment="Top" Foreground="#DDFFFFFF" FontSize="18" FontWeight="Bold"/>
-                        <TextBlock Grid.Row="1" Grid.Column="2" Text="value" VerticalAlignment="Center" Foreground="#DD35EC40" Margin="20 0"/>
-                    </Grid>
-                </materialDesign:Card>
-                <materialDesign:Card HorizontalAlignment="Left" VerticalAlignment="Top" Height="113" Width="310" Background="#FF355ACC" Foreground="White" Margin="0 0 10 0">
-                    <Grid Margin="10">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="3*" />
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="2*" />
-                            <RowDefinition Height="*" />
-                        </Grid.RowDefinitions>
-                        <StackPanel Grid.RowSpan="2" VerticalAlignment="Center" HorizontalAlignment="Center">
-                            <Image Source="/Resources/Images/Transactions.png" Stretch="Fill" Margin="0 0 0 -15"/>
-                            <Label Content="value" FontSize="16" HorizontalAlignment="Center" Foreground="#DDFFFFFF" FontWeight="Bold"/>
-                        </StackPanel>
-                        <Label Grid.Column="1" Content="Daily Transactions" HorizontalAlignment="Right" VerticalAlignment="Top" Foreground="#DDFFFFFF" FontSize="18" FontWeight="Bold"/>
-                        <TextBlock Grid.Row="1" Grid.Column="2" Text="value" VerticalAlignment="Center" Foreground="#DD35EC40" Margin="20 0"/>
-                    </Grid>
-                </materialDesign:Card>
-            </StackPanel>-->
             <StackPanel Orientation="Horizontal" Width="690" HorizontalAlignment="Left">
-                <!--<materialDesign:Card HorizontalAlignment="Left" VerticalAlignment="Top" Height="113" Width="167" Margin="0 0 10 0">
-                    <Grid Margin="10">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="20*" />
-                            <ColumnDefinition Width="*" />
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="*" />
-                            <RowDefinition Height="3*" />
-                        </Grid.RowDefinitions>
-                        <TextBlock Text="PHP value" HorizontalAlignment="Left" Margin="10 0 0 0" VerticalAlignment="Top" FontSize="16" FontWeight="Bold"/>
-                        <Grid Grid.Row="1">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="2*"/>
-                                <RowDefinition Height="*"/>
-                            </Grid.RowDefinitions>
-                            <Image Source="/Resources/Images/Revenue Chart.png" Width="60"/>
-                            <Label Grid.Row="1" Content="Total Revenue" HorizontalAlignment="Center" VerticalAlignment="Top" FontWeight="Bold"/>
-                        </Grid>
-                    </Grid>
-                </materialDesign:Card>-->
                 <materialDesign:Card VerticalAlignment="Top" Height="113" Width="210" Margin="10" BorderThickness="1">
                     <Grid Margin="10">
                         <Grid.ColumnDefinitions>
@@ -230,13 +155,9 @@
                     </Grid>
                 </materialDesign:Card>
             </StackPanel>
-
-            <StackPanel Height="460">
-                <materialDesign:Card Height="305" Margin="10" HorizontalAlignment="Left" Width="991">
-                    <DataGrid d:ItemsSource="{d:SampleData ItemCount=5}" d:Name="" Margin="0,0,10,0"/>
-                </materialDesign:Card>
-            </StackPanel>
+            <ContentControl Content="{Binding CurrentView}"/>
         </StackPanel>
+        
         <materialDesign:Card Margin="0,10,20,0" VerticalAlignment="Top" MinHeight="220" Height="240" BorderThickness="2" HorizontalAlignment="Right" Width="295">
             <Grid HorizontalAlignment="Center" Width="295">
                 <Grid.ColumnDefinitions>
@@ -253,15 +174,13 @@
                     <TextBlock Text=" PHP value" FontSize="16" FontWeight="Bold"/>
                 </StackPanel>
                 <StackPanel HorizontalAlignment="Left" Orientation="Vertical" Grid.Row="1" VerticalAlignment="Top" Height="102" Margin="10,53,0,0" Width="170">
-                    <RadioButton Content="Accumulated" IsChecked="True" Command="{Binding AccumulatedViewCommand}" FontSize="14" Checked="RadioButton_Checked"/>
-                    <RadioButton Content="Daily" Command="{Binding DailyViewCommand}" FontSize="14" Checked="RadioButton_Checked"/>
-                    <RadioButton Content="Monthly" Command="{Binding MonthlyViewCommand}" FontSize="14" Checked="RadioButton_Checked"/>
-                    <RadioButton Content="Yearly" Command="{Binding YearlyViewCommand}" FontSize="14" Checked="RadioButton_Checked"/>
-
+                    <RadioButton Content="Accumulated" IsChecked="True" FontSize="14"/>
+                    <RadioButton Content="Daily" FontSize="14"/>
+                    <RadioButton Content="Monthly" FontSize="14"/>
+                    <RadioButton Content="Yearly" FontSize="14"/>
                 </StackPanel>
-
                 <Grid HorizontalAlignment="Left" Height="31" Grid.Row="1" VerticalAlignment="Top" Width="170" Margin="10,160,0,0">
-                    <RadioButton Content="Overview" IsChecked="True" Command="{Binding OverviewViewCommand}" FontSize="14" HorizontalAlignment="Left" VerticalAlignment="Center" Checked="RadioButton_Checked"/>
+                    <RadioButton Content="Overview" IsChecked="True" Command="{Binding OverviewViewCommand}" FontSize="14" HorizontalAlignment="Left" VerticalAlignment="Center"/>
                     <RadioButton Content="Inventory" Command="{Binding InventoryViewCommand}" FontSize="14" HorizontalAlignment="Left" Margin="84,0,0,0" VerticalAlignment="Center"/>
                 </Grid>
 

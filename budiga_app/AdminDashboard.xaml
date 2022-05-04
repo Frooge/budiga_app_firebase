@@ -19,7 +19,7 @@
         ResizeMode="CanMinimize"
         Title="Budiga - Statistics">
     <Window.DataContext>
-        <viewModel:AdminMainViewModel />
+        <viewModel:AdminMainViewModel/>
     </Window.DataContext>
     
     <Grid Width="1280" Height="720" Background="#FFF4F5FA" MaxWidth="1920" MaxHeight="1080" MinWidth="1280" MinHeight="720" >
@@ -53,9 +53,9 @@
                     <Image Source="/Resources/Images/Home.png" Width="50" Margin="5 0 0 0"/>
                     <TextBlock Text="Dashboard" VerticalAlignment="Center" Margin="30 0 0 0" FontSize="18" Opacity="0.87"/>
                 </StackPanel>
-                <RadioButton Grid.Row="2" Content="Statistics" Style="{StaticResource MenuButton}" IsChecked="True" Command="{Binding StatisticsViewCommand}" FontSize="18"/>
-                <RadioButton Grid.Row="3" Content="Analytics" Style="{StaticResource MenuButton}" Command="{Binding AnalyticsViewCommand}" FontSize="18"/>
-                <RadioButton Grid.Row="4" Content="Inventory" Style="{StaticResource MenuButton}" Command="{Binding InventoryViewCommand}" FontSize="18"/>
+                <RadioButton Grid.Row="2" Content="Inventory" Style="{StaticResource MenuButton}" IsChecked="True" Command="{Binding InventoryViewCommand}" FontSize="18"/>
+                <RadioButton Grid.Row="3" Content="Invoice" Style="{StaticResource MenuButton}" Command="{Binding InvoiceViewCommand}" FontSize="18"/>
+                <RadioButton Grid.Row="4" Content="Sales" Style="{StaticResource MenuButton}" Command="{Binding SalesViewCommand}" FontSize="18"/>
                 <RadioButton Grid.Row="5" Content="Employee" Style="{StaticResource MenuButton}" Command="{Binding EmployeeViewCommand}" FontSize="18"/>
                 <Button x:Name="LogoutBtn" Grid.Row="6" Content="Logout" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0 20" Width="200" Background="#FFB73A3A" BorderBrush="#FF6D0F0F" Click="LogoutBtn_Click"/>
             </Grid>
@@ -66,21 +66,6 @@
                 <Image Source="/Resources/Images/User.png"/>
             </Border>
         </StackPanel>
-        
-
         <ContentControl Grid.Column="1" Grid.Row="1" Content="{Binding CurrentView}" Margin="20 0"/>
-
-
-
-
-
-
-
-
-
-
-
-
-
     </Grid>
 </Window>

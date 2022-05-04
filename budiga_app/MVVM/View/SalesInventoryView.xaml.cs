@@ -18,7 +18,7 @@ namespace budiga_app.MVVM.View
     /// <summary>
     /// Interaction logic for SalesInventoryView.xaml
     /// </summary>
-    public partial class SalesInventoryView : Page
+    public partial class SalesInventoryView : UserControl
     {
         public SalesInventoryView()
         {

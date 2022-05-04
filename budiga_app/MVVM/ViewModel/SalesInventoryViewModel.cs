@@ -6,7 +6,7 @@ using System.Text;
 
 namespace budiga_app.MVVM.ViewModel
 {
-    public class SalesInventoryViewModel
+    class SalesInventoryViewModel
     {
     }
 }

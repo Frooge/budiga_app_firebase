@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace budiga_app.MVVM.View
 {
     /// <summary>
-    /// Interaction logic for OverviewView.xaml
+    /// Interaction logic for SalesOverviewView.xaml
     /// </summary>
-    public partial class OverviewView : Page
+    public partial class SalesOverviewView : UserControl
     {
-        public OverviewView()
+        public SalesOverviewView()
         {
             InitializeComponent();
         }
