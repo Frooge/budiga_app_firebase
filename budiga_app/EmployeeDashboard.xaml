@@ -37,17 +37,24 @@
                     <RowDefinition Height="75" />
                     <RowDefinition Height="40" />
                     <RowDefinition Height="40" />
-                    <RowDefinition Height="565" />
+                    <RowDefinition Height="40" />
+                    <RowDefinition Height="40" />
+                    <RowDefinition Height="40" />
+                    <RowDefinition Height="445" />
                 </Grid.RowDefinitions>
 
                 <StackPanel Orientation="Horizontal">
-                    <Image Source="/Resources/Images/logo.png" Width="60" Margin="10 0"/>
+                    <Image Source="/Resource/Images/logo.png" Width="70" Margin="10 0"/>
                     <Image Source="/Resources/Images/logo text.png" Width="140" />
                     <Image Source="/Resources/Images/RadioButtonChecked.png" Width="30" HorizontalAlignment="Right" Margin="50 0 0 0"/>
                 </StackPanel>
-                <RadioButton Grid.Row="1" Content="Budiga POS" Style="{StaticResource MenuButton}" IsChecked="True" Command="{Binding InvoiceViewCommand}" FontSize="18"/>
-                <RadioButton Grid.Row="2" Content="Settings" Style="{StaticResource MenuButton}" Command="{Binding ScannerViewCommand}" FontSize="18"/>
-                <Button x:Name="LogoutBtn" Grid.Row="3" Content="Logout" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0 20" Width="200" Background="#FFB73A3A" BorderBrush="#FF6D0F0F" Click="LogoutBtn_Click"/>
+                <StackPanel Grid.Row="1" Orientation="Horizontal">
+                    <Image Source="/Resources/Images/Home.png" Width="50" Margin="5 0 0 0"/>
+                    <TextBlock Text="Dashboard" VerticalAlignment="Center" Margin="30 0 0 0" FontSize="18" Opacity="0.87"/>
+                </StackPanel>
+                <RadioButton Grid.Row="2" Content="Inventory" Style="{StaticResource MenuButton}" IsChecked="True" Command="{Binding InventoryViewCommand}" FontSize="18"/>
+                <RadioButton Grid.Row="3" Content="Invoice" Style="{StaticResource MenuButton}" Command="{Binding InvoiceViewCommand}" FontSize="18"/>
+                <Button x:Name="LogoutBtn" Grid.Row="6" Content="Logout" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0 20" Width="200" Background="#FFB73A3A" BorderBrush="#FF6D0F0F" Click="LogoutBtn_Click"/>
             </Grid>
         </StackPanel>
         <StackPanel Orientation="Horizontal" Grid.Column="1" HorizontalAlignment="Right">
