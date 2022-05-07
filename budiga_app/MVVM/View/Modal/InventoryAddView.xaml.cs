@@ -10,25 +10,18 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace budiga_app.MVVM.View
 {
     /// <summary>
-    /// Interaction logic for InventoryView.xaml
+    /// Interaction logic for InventoryAddView.xaml
     /// </summary>
-    public partial class InventoryView : UserControl
+    public partial class InventoryAddView : Window
     {
-        public InventoryView()
+        public InventoryAddView()
         {
             InitializeComponent();
-        }
-
-        private void Add_Click(object sender, RoutedEventArgs e)
-        {
-            InventoryAddView inventoryAddView = new InventoryAddView();
-            inventoryAddView.Show();
         }
     }
 }

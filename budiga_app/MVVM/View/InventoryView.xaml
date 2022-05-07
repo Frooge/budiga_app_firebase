@@ -10,7 +10,7 @@
     <Grid>
         <StackPanel>
             <StackPanel Orientation="Horizontal" Margin="10">
-                <Button Grid.Row="3" Content="Add" HorizontalAlignment="Center" VerticalAlignment="Top" Width="120" BorderBrush="{x:Null}" Background="#FF355ACC" FontStretch="Normal" FontStyle="Normal">
+                <Button Click="Add_Click"  Grid.Row="3" Content="Add" HorizontalAlignment="Center" VerticalAlignment="Top" Width="120" BorderBrush="{x:Null}" Background="#FF355ACC" FontStretch="Normal" FontStyle="Normal">
                     <Button.Foreground>
                         <SolidColorBrush Color="White" Opacity="0.87"/>
                     </Button.Foreground>

@@ -122,6 +122,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="MVVM\View\Modal\InventoryAddView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MVVM\View\SalesInventoryView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -168,6 +172,9 @@
     </Compile>
     <Compile Include="MVVM\View\InventoryView.xaml.cs">
       <DependentUpon>InventoryView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MVVM\View\Modal\InventoryAddView.xaml.cs">
+      <DependentUpon>InventoryAddView.xaml</DependentUpon>
     </Compile>
     <Compile Include="MVVM\View\SalesInventoryView.xaml.cs">
       <DependentUpon>SalesInventoryView.xaml</DependentUpon>
