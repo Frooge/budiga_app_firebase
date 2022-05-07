@@ -9,19 +9,23 @@
              d:DesignHeight="720" d:DesignWidth="1000">
     <Grid>
         <StackPanel>
-            <StackPanel Orientation="Horizontal" Margin="10,10,10,10">
+            <StackPanel Orientation="Horizontal" Margin="10">
                 <Button Grid.Row="3" Content="Add" HorizontalAlignment="Center" VerticalAlignment="Top" Width="120" BorderBrush="{x:Null}" Background="#FF355ACC" FontStretch="Normal" FontStyle="Normal">
                     <Button.Foreground>
                         <SolidColorBrush Color="White" Opacity="0.87"/>
                     </Button.Foreground>
                 </Button>
             </StackPanel>
-            <StackPanel Orientation="Horizontal" Margin="10,10,10,10" Width="969">
-                <materialDesign:Card Margin="0 0 10 0" VerticalAlignment="Top" Height="314" Width="573">
-                    <DataGrid d:ItemsSource="{d:SampleData ItemCount=20}"/>
-                </materialDesign:Card>
-                <materialDesign:Card HorizontalAlignment="Right" Margin="0 0 10 0" VerticalAlignment="Top" Height="313" Width="370">
-                    <DataGrid d:ItemsSource="{d:SampleData ItemCount=5}"/>
+            <StackPanel Margin="10">
+                <materialDesign:Card Margin="0 0 10 0" HorizontalContentAlignment="Stretch">
+                    <DataGrid x:Name="inventoryTable" ItemsSource="{Binding}" AutoGenerateColumns="False" CanUserResizeColumns="False" CanUserResizeRows="False" Padding="10,0">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Product" Binding="{Binding Product}" Width="*"/>
+                            <DataGridTextColumn Header="Brand" Binding="{Binding Brand}" Width="*"/>
+                            <DataGridTextColumn Header="Price" Binding="{Binding Price}" Width="*"/>
+                            <DataGridTextColumn Header="Quantity" Binding="{Binding Quantity}" Width="*"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
                 </materialDesign:Card>
             </StackPanel>
         </StackPanel>        
