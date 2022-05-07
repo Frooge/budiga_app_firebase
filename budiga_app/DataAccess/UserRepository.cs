@@ -75,17 +75,17 @@ namespace budiga_app.DataAccess
             return new UserModel();
         }
 
-        public void Add(UserModel user)
+        public void AddUser(UserModel user)
         {
 
         }
 
-        public void Update(UserModel user)
+        public void UpdateUser(UserModel user)
         {
 
         }
 
-        public void Delete(int id)
+        public void DeleteUser(int id)
         {
 
         }

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using budiga_app.DataAccess;
+using budiga_app.MVVM.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,6 +24,27 @@ namespace budiga_app.MVVM.View
         public InventoryAddView()
         {
             InitializeComponent();
+        }
+
+        private void AddClick(object sender, RoutedEventArgs e)
+        {
+            ItemModel itemModel = new ItemModel()
+            {
+                Name = productTextBox.Text,
+                Brand = brandTextBox.Text,
+                Price = int.Parse(priceTextBox.Text),
+                Quantity = int.Parse(qtyTextBox.Text)
+            };
+            ItemRepository itemRepository = new ItemRepository(itemModel);
+            if (itemRepository.AddItem())
+            {
+                this.Close();
+            }
+        }
+
+        private void CancelClick(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }

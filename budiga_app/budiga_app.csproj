@@ -102,6 +102,7 @@
     <Compile Include="Core\ObservableObject.cs" />
     <Compile Include="Core\RelayCommand.cs" />
     <Compile Include="Core\dbConn.cs" />
+    <Compile Include="DataAccess\ItemRepository.cs" />
     <Compile Include="DataAccess\UserRepository.cs" />
     <Compile Include="Core\Sessions.cs" />
     <Compile Include="EmployeeDashboard.xaml.cs">
