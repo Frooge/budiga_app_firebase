@@ -4,9 +4,13 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:budiga_app.MVVM.View"
+             xmlns:viewModel="clr-namespace:budiga_app.MVVM.ViewModel"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"                          
-             mc:Ignorable="d" 
+             mc:Ignorable="d"
              d:DesignHeight="720" d:DesignWidth="1000">
+    <UserControl.DataContext>
+        <viewModel:InventoryViewModel/>
+    </UserControl.DataContext>
     <Grid>
         <StackPanel>
             <StackPanel Orientation="Horizontal" Margin="10">
@@ -18,12 +22,12 @@
             </StackPanel>
             <StackPanel Margin="10">
                 <materialDesign:Card Margin="0 0 10 0" HorizontalContentAlignment="Stretch">
-                    <DataGrid x:Name="inventoryTable" ItemsSource="{Binding}" AutoGenerateColumns="False" CanUserResizeColumns="False" CanUserResizeRows="False" Padding="10,0">
+                    <DataGrid x:Name="inventoryTable" ItemsSource="{Binding itemModel.ItemRecords}" AutoGenerateColumns="False" CanUserResizeColumns="False" CanUserResizeRows="False" Padding="10,0">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="Product" Binding="{Binding Product}" Width="*"/>
-                            <DataGridTextColumn Header="Brand" Binding="{Binding Brand}" Width="*"/>
-                            <DataGridTextColumn Header="Price" Binding="{Binding Price}" Width="*"/>
-                            <DataGridTextColumn Header="Quantity" Binding="{Binding Quantity}" Width="*"/>
+                            <DataGridTextColumn Header="Product" Binding="{Binding Path=Name}" Width="*"/>
+                            <DataGridTextColumn Header="Brand" Binding="{Binding Path=Brand}" Width="*"/>
+                            <DataGridTextColumn Header="Price" Binding="{Binding Path=Price}" Width="*"/>
+                            <DataGridTextColumn Header="Quantity" Binding="{Binding Path=Quantity}" Width="*"/>
                         </DataGrid.Columns>
                     </DataGrid>
                 </materialDesign:Card>

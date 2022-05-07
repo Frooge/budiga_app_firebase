@@ -28,15 +28,15 @@ namespace budiga_app.MVVM.View
 
         private void AddClick(object sender, RoutedEventArgs e)
         {
-            ItemModel itemModel = new ItemModel()
+            ItemModel item = new ItemModel()
             {
                 Name = productTextBox.Text,
                 Brand = brandTextBox.Text,
                 Price = int.Parse(priceTextBox.Text),
                 Quantity = int.Parse(qtyTextBox.Text)
             };
-            ItemRepository itemRepository = new ItemRepository(itemModel);
-            if (itemRepository.AddItem())
+            ItemRepository itemRepository = new ItemRepository();
+            if (itemRepository.AddItem(item))
             {
                 this.Close();
             }

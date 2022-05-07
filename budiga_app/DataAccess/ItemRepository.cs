@@ -2,6 +2,7 @@
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,29 +13,47 @@ namespace budiga_app.DataAccess
     class ItemRepository
     {
         private dbConn database;
-        private ItemModel _item;
 
         public ItemRepository()
         {
             database = new dbConn();
-            _item = new ItemModel();
         }
 
-        public ItemRepository(ItemModel item)
+        public ObservableCollection<ItemModel> GetAllItems()
         {
-            database = new dbConn();
-            _item = item;
+            ObservableCollection<ItemModel> items = new ObservableCollection<ItemModel>();
+            string query ="SELECT * FROM item";
+            MySqlDataReader reader;
+            try
+            {
+                database.Connection();
+                MySqlCommand commandDatabase = new MySqlCommand(query, database.conn);
+                commandDatabase.CommandTimeout = 60;
+                reader = commandDatabase.ExecuteReader();
+                while (reader.Read())
+                {
+                    items.Add(new ItemModel()
+                    {
+                        Id = reader.GetInt32("id"),
+                        Name = reader.GetString("name"),
+                        Brand = reader.GetString("brand"),
+                        Price = reader.GetInt32("price"),
+                        Quantity = reader.GetInt32("quantity")
+                    });
+                }
+                
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            return items;
         }
 
-        public ItemModel GetItem()
-        {
-            return _item;
-        }
-
-        public bool AddItem()
+        public bool AddItem(ItemModel item)
         {
             bool result = false;
-            string query = string.Format("INSERT INTO item (name, brand, price, quantity) VALUES ('{0}', '{1}', '{2}', '{3}')", _item.Name, _item.Brand, _item.Price, _item.Quantity);
+            string query = string.Format("INSERT INTO item (name, brand, price, quantity) VALUES ('{0}', '{1}', '{2}', '{3}')", item.Name, item.Brand, item.Price, item.Quantity);
             try
             {
                 database.Connection();
