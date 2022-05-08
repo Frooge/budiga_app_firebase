@@ -11,16 +11,16 @@ namespace budiga_app.MVVM.Model
 {
     public class UserModel : ObservableObject
     {
-        int _id;
-        string _fname;
-        string _lname;
-        string _username;
-        string _password;
-        string _contact;
-        string _userRole;
-        DateTime _created;
-        DateTime? _updated;
-        int _deleted;
+        private int _id;
+        private string _fname;
+        private string _lname;
+        private string _username;
+        private string _password;
+        private string _contact;
+        private string _userRole;
+        private DateTime _created;
+        private DateTime? _updated;
+        private int _deleted;
 
         public int Id { get { return _id; } set { _id = value; OnPropertyChanged("Id"); } }
         public string FName { get { return _fname; } set { _fname = value; OnPropertyChanged("FName"); } }

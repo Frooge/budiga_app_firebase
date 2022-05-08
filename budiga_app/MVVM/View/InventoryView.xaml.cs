@@ -25,10 +25,5 @@ namespace budiga_app.MVVM.View
         {
             InitializeComponent();
         }
-
-        private void Row_MouseDoubleClick(object sender, RoutedEventArgs e)
-        {
-            
-        }
     }
 }

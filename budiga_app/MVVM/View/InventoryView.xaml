@@ -24,8 +24,7 @@
             <StackPanel Margin="10">
                 <materialDesign:Card HorizontalContentAlignment="Stretch">
                     <DataGrid x:Name="inventoryTable"                              
-                              ItemsSource="{Binding ItemRecords}"
-                              SelectedItem="{Binding Item}"
+                              ItemsSource="{Binding ItemModel.ItemRecords}"
                               IsReadOnly="True" AutoGenerateColumns="False"
                               CanUserResizeColumns="False"
                               CanUserAddRows="False"
@@ -45,7 +44,8 @@
                         </DataGrid.CellStyle>
                         <b:Interaction.Triggers>
                             <b:EventTrigger EventName="MouseDoubleClick">
-                                <b:InvokeCommandAction Command="{Binding EditItemCommand}"/>
+                                <b:InvokeCommandAction Command="{Binding EditItemCommand}"
+                                                       CommandParameter="{Binding Path=SelectedItem, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=DataGrid}}"/>
                             </b:EventTrigger>
                         </b:Interaction.Triggers>
                     </DataGrid>

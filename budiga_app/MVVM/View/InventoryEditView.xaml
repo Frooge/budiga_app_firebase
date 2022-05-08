@@ -51,7 +51,7 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Button Content="Add" Click="UpdateBtn_Click" HorizontalAlignment="Left"/>
+            <Button Content="Update" Click="UpdateBtn_Click" HorizontalAlignment="Left"/>
             <Button Content="Cancel" Click="CancelBtn_Click" HorizontalAlignment="Right" Grid.Column="1"/>
         </Grid>
     </StackPanel>

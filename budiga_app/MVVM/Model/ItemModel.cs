@@ -11,11 +11,12 @@ namespace budiga_app.MVVM.Model
 {
     public class ItemModel : ObservableObject
     {
-        int _id;
-        string _name;
-        string _brand;
-        int _price;
-        int _quantity;
+        private int _id;
+        private string _name;
+        private string _brand;
+        private int _price;
+        private int _quantity;
+        private ObservableCollection<ItemModel> _itemRecords;
 
 
         public int Id { get { return _id; } set { _id = value; OnPropertyChanged("Id"); } }
@@ -23,5 +24,11 @@ namespace budiga_app.MVVM.Model
         public string Brand { get { return _brand; } set { _brand = value; OnPropertyChanged("Brand"); } }
         public int Price { get { return _price; } set { _price = value; OnPropertyChanged("Price"); } }
         public int Quantity { get { return _quantity; } set { _quantity = value; OnPropertyChanged("Quantity"); } }
+        public ObservableCollection<ItemModel> ItemRecords { get { return _itemRecords; } set { _itemRecords = value; OnPropertyChanged("ItemRecords"); } }
+        private void ItemRecords_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            OnPropertyChanged("ItemRecords");
+        }
+
     }
 }

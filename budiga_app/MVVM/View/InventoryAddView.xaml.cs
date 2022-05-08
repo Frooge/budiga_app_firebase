@@ -1,5 +1,6 @@
 ﻿using budiga_app.DataAccess;
 using budiga_app.MVVM.Model;
+using budiga_app.MVVM.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,10 +23,13 @@ namespace budiga_app.MVVM.View
     /// </summary>
     public partial class InventoryAddView : Window
     {
-        public InventoryAddView()
+        private InventoryViewModel _vm;
+        public InventoryAddView(InventoryViewModel vm)
         {
             InitializeComponent();
+            _vm = vm;
         }
+
         private void NumberValidationTextBox(object sender, TextCompositionEventArgs e)
         {
             Regex regex = new Regex("[^0-9]+");
@@ -44,6 +48,7 @@ namespace budiga_app.MVVM.View
             ItemRepository itemRepository = new ItemRepository();
             if (itemRepository.AddItem(item))
             {
+                _vm.GetAll();
                 this.Close();
             }
         }

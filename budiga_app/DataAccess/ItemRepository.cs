@@ -69,5 +69,25 @@ namespace budiga_app.DataAccess
             }
             return result;
         }
+
+        public bool UpdateItem(ItemModel item)
+        {
+            bool result = false;
+            string query = string.Format("UPDATE item SET name='{0}', brand='{1}', price='{2}',quantity='{3}' WHERE id={4}", item.Name, item.Brand, item.Price, item.Quantity, item.Id);
+            try
+            {
+                database.Connection();
+                MySqlCommand commandDatabase = new MySqlCommand(query, database.conn);
+                commandDatabase.CommandTimeout = 60;
+                commandDatabase.ExecuteReader();
+                MessageBox.Show("Successfully updated data", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+                result = true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            return result;
+        }
     }
 }

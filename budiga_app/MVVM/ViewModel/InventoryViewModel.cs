@@ -11,34 +11,36 @@ using System.Threading.Tasks;
 
 namespace budiga_app.MVVM.ViewModel
 {
-    public class InventoryViewModel
+    public class InventoryViewModel : ObservableObject
     {
         private ItemRepository itemRepository;
-        public ItemModel Item { get; set; }
-        public ObservableCollection<ItemModel> ItemRecords { get; set; }
+        public ItemModel ItemModel { get; set; }
         public RelayCommand AddItemCommand { get; set; }
         public RelayCommand EditItemCommand { get; set; }
-
 
         public InventoryViewModel()
         {
             itemRepository = new ItemRepository();
-            ItemRecords = itemRepository.GetAllItems();
-
+            ItemModel = new ItemModel();
             AddItemCommand = new RelayCommand(o => AddItem());
+            EditItemCommand = new RelayCommand(o => EditItem((ItemModel)o));
+            GetAll();
+        }
 
-            EditItemCommand = new RelayCommand(o => EditItem());
+        public void GetAll()
+        {
+            ItemModel.ItemRecords = itemRepository.GetAllItems();
         }
 
         private void AddItem()
         {
-            InventoryAddView inventoryAddView = new InventoryAddView();
+            InventoryAddView inventoryAddView = new InventoryAddView(this);
             inventoryAddView.Show();
         }
 
-        private void EditItem()
+        private void EditItem(ItemModel item)
         {
-            InventoryEditView inventoryEditView = new InventoryEditView(Item);
+            InventoryEditView inventoryEditView = new InventoryEditView(this, item);
             inventoryEditView.Show();
         }
     }

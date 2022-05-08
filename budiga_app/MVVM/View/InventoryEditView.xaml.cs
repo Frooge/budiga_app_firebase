@@ -1,4 +1,6 @@
-﻿using budiga_app.MVVM.Model;
+﻿using budiga_app.DataAccess;
+using budiga_app.MVVM.Model;
+using budiga_app.MVVM.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,9 +23,14 @@ namespace budiga_app.MVVM.View
     /// </summary>
     public partial class InventoryEditView : Window
     {
-        public InventoryEditView(ItemModel item)
+        private InventoryViewModel _vm;
+        private int id;
+
+        public InventoryEditView(InventoryViewModel vm, ItemModel item)
         {
             InitializeComponent();
+            _vm = vm;
+            id = item.Id;
             productTextBox.Text = item.Name;
             brandTextBox.Text = item.Brand;
             priceTextBox.Text = item.Price.ToString();
@@ -38,11 +45,24 @@ namespace budiga_app.MVVM.View
 
         private void PlusBtn_Click(object sender, RoutedEventArgs e)
         {
-            qtyTextBlock.Text += qtyTextBox.Text;
+            qtyTextBlock.Text = (int.Parse(qtyTextBlock.Text)+int.Parse(qtyTextBox.Text)).ToString();
         }
         private void UpdateBtn_Click(object sender, RoutedEventArgs e)
         {
-           
+            ItemModel item = new ItemModel()
+            {
+                Id = id,
+                Name = productTextBox.Text,
+                Brand = brandTextBox.Text,
+                Price = int.Parse(priceTextBox.Text),
+                Quantity = int.Parse(qtyTextBlock.Text)
+            };
+            ItemRepository itemRepository = new ItemRepository();
+            if (itemRepository.UpdateItem(item))
+            {
+                _vm.GetAll();
+                this.Close();
+            }
         }
         private void CancelBtn_Click(object sender, RoutedEventArgs e)
         {
