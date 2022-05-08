@@ -21,7 +21,6 @@ namespace budiga_app.MVVM.Model
         DateTime _created;
         DateTime? _updated;
         int _deleted;
-        ObservableCollection<UserModel> _userRecords;
 
         public int Id { get { return _id; } set { _id = value; OnPropertyChanged("Id"); } }
         public string FName { get { return _fname; } set { _fname = value; OnPropertyChanged("FName"); } }
@@ -33,11 +32,5 @@ namespace budiga_app.MVVM.Model
         public DateTime Created { get { return _created; } set { _created = value; OnPropertyChanged("Created"); } }
         public DateTime? Updated { get { return _updated; } set { _updated = value; OnPropertyChanged("Update"); } }
         public int Deleted { get { return _deleted; } set { _deleted = value; OnPropertyChanged("Deleted"); } }
-        public ObservableCollection<UserModel> UserRecords { get { return _userRecords; } set { _userRecords = value; OnPropertyChanged("UserRecords"); } }
-
-        private void UserModels_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
-        {
-            OnPropertyChanged("UserModel");
-        }
     }
 }

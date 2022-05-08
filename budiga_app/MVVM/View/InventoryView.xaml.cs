@@ -26,10 +26,9 @@ namespace budiga_app.MVVM.View
             InitializeComponent();
         }
 
-        private void Add_Click(object sender, RoutedEventArgs e)
+        private void Row_MouseDoubleClick(object sender, RoutedEventArgs e)
         {
-            InventoryAddView inventoryAddView = new InventoryAddView();
-            inventoryAddView.Show();
+            
         }
     }
 }

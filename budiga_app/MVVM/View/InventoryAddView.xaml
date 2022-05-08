@@ -1,0 +1,46 @@
+﻿<Window x:Class="budiga_app.MVVM.View.InventoryAddView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:budiga_app.MVVM.View"
+        mc:Ignorable="d"
+        MinHeight="200"
+        MinWidth="300"
+        SizeToContent="WidthAndHeight"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen"
+        Title="InventoryAddView">
+    <StackPanel Margin="10">
+        <Label Content="Inventory Add" HorizontalAlignment="Center" FontSize="18"/>
+        <Grid Width="360">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="3*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+
+            <Label Content="Product:" FontSize="14" Grid.Column="0" Grid.Row="0"/>
+            <TextBox x:Name="productTextBox" FontSize="14" Grid.Column="1" Grid.Row="0"/>
+            <Label Content="Brand:" FontSize="14" Grid.Column="0" Grid.Row="1"/>
+            <TextBox x:Name="brandTextBox" FontSize="14" Grid.Column="1" Grid.Row="1"/>
+            <Label Content="Price:" FontSize="14" Grid.Column="0" Grid.Row="2"/>
+            <TextBox x:Name="priceTextBox" PreviewTextInput="NumberValidationTextBox" FontSize="14" Grid.Column="1" Grid.Row="2"/>
+            <Label Content="Qty:" FontSize="14" Grid.Column="0" Grid.Row="3"/>
+            <TextBox x:Name="qtyTextBox" PreviewTextInput="NumberValidationTextBox" FontSize="14" Grid.Column="1" Grid.Row="3"/>
+        </Grid>
+        <Grid Margin="0,20,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Button Content="Add" Click="AddBtn_Click" HorizontalAlignment="Left"/>
+            <Button Content="Cancel" Click="CancelBtn_Click" HorizontalAlignment="Right" Grid.Column="1"/>
+        </Grid>
+    </StackPanel>
+</Window>

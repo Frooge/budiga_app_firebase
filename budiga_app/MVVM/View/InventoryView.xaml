@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:budiga_app.MVVM.View"
+             xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
              xmlns:viewModel="clr-namespace:budiga_app.MVVM.ViewModel"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"                          
              mc:Ignorable="d"
@@ -14,21 +15,39 @@
     <Grid>
         <StackPanel>
             <StackPanel Orientation="Horizontal" Margin="10">
-                <Button Click="Add_Click"  Grid.Row="3" Content="Add" HorizontalAlignment="Center" VerticalAlignment="Top" Width="120" BorderBrush="{x:Null}" Background="#FF355ACC" FontStretch="Normal" FontStyle="Normal">
+                <Button Command="{Binding AddItemCommand}" Grid.Row="3" Content="Add" HorizontalAlignment="Center" VerticalAlignment="Top" Width="120" BorderBrush="{x:Null}" Background="#FF355ACC" FontStretch="Normal" FontStyle="Normal">
                     <Button.Foreground>
                         <SolidColorBrush Color="White" Opacity="0.87"/>
                     </Button.Foreground>
                 </Button>
             </StackPanel>
             <StackPanel Margin="10">
-                <materialDesign:Card Margin="0 0 10 0" HorizontalContentAlignment="Stretch">
-                    <DataGrid x:Name="inventoryTable" ItemsSource="{Binding itemModel.ItemRecords}" AutoGenerateColumns="False" CanUserResizeColumns="False" CanUserResizeRows="False" Padding="10,0">
+                <materialDesign:Card HorizontalContentAlignment="Stretch">
+                    <DataGrid x:Name="inventoryTable"                              
+                              ItemsSource="{Binding ItemRecords}"
+                              SelectedItem="{Binding Item}"
+                              IsReadOnly="True" AutoGenerateColumns="False"
+                              CanUserResizeColumns="False"
+                              CanUserAddRows="False"
+                              CanUserResizeRows="False"
+                              Padding="0,0">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Product" Binding="{Binding Path=Name}" Width="*"/>
                             <DataGridTextColumn Header="Brand" Binding="{Binding Path=Brand}" Width="*"/>
                             <DataGridTextColumn Header="Price" Binding="{Binding Path=Price}" Width="*"/>
                             <DataGridTextColumn Header="Quantity" Binding="{Binding Path=Quantity}" Width="*"/>
                         </DataGrid.Columns>
+                        <DataGrid.CellStyle>
+                            <Style TargetType="DataGridCell" BasedOn="{StaticResource MaterialDesignDataGridCell}">
+                                <Setter Property="BorderThickness" Value="0"/>
+                                <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+                            </Style>
+                        </DataGrid.CellStyle>
+                        <b:Interaction.Triggers>
+                            <b:EventTrigger EventName="MouseDoubleClick">
+                                <b:InvokeCommandAction Command="{Binding EditItemCommand}"/>
+                            </b:EventTrigger>
+                        </b:Interaction.Triggers>
                     </DataGrid>
                 </materialDesign:Card>
             </StackPanel>
