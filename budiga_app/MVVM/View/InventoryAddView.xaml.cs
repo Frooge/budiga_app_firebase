@@ -38,19 +38,28 @@ namespace budiga_app.MVVM.View
 
         private void AddBtn_Click(object sender, RoutedEventArgs e)
         {
-            ItemModel item = new ItemModel()
+            if(string.IsNullOrEmpty(productTextBox.Text) || string.IsNullOrEmpty(brandTextBox.Text) || string.IsNullOrEmpty(priceTextBox.Text) || string.IsNullOrEmpty(qtyTextBox.Text))
             {
-                Name = productTextBox.Text,
-                Brand = brandTextBox.Text,
-                Price = int.Parse(priceTextBox.Text),
-                Quantity = int.Parse(qtyTextBox.Text)
-            };
-            ItemRepository itemRepository = new ItemRepository();
-            if (itemRepository.AddItem(item))
-            {
-                _vm.GetAll();
-                this.Close();
+                MessageBox.Show("Fill all empty fields!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+            else
+            {
+                ItemModel item = new ItemModel()
+                {
+                    Name = productTextBox.Text,
+                    Barcode = (string.IsNullOrEmpty(barcodeTextBox.Text)) ? "N/A" : barcodeTextBox.Text,
+                    Brand = brandTextBox.Text,
+                    Price = int.Parse(priceTextBox.Text),
+                    Quantity = int.Parse(qtyTextBox.Text)
+                };
+                ItemRepository itemRepository = new ItemRepository();
+                if (itemRepository.AddItem(item))
+                {
+                    _vm.GetAll();
+                    this.Close();
+                }
+            }
+            
         }
 
         private void CancelBtn_Click(object sender, RoutedEventArgs e)

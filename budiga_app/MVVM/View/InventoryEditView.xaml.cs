@@ -32,6 +32,7 @@ namespace budiga_app.MVVM.View
             _vm = vm;
             id = item.Id;
             productTextBox.Text = item.Name;
+            barcodeTextBox.Text = (item.Barcode != null) ? item.Barcode.ToString() : "N/A";
             brandTextBox.Text = item.Brand;
             priceTextBox.Text = item.Price.ToString();
             qtyTextBlock.Text = item.Quantity.ToString();
@@ -49,20 +50,29 @@ namespace budiga_app.MVVM.View
         }
         private void UpdateBtn_Click(object sender, RoutedEventArgs e)
         {
-            ItemModel item = new ItemModel()
-            {
-                Id = id,
-                Name = productTextBox.Text,
-                Brand = brandTextBox.Text,
-                Price = int.Parse(priceTextBox.Text),
-                Quantity = int.Parse(qtyTextBlock.Text)
-            };
-            ItemRepository itemRepository = new ItemRepository();
-            if (itemRepository.UpdateItem(item))
-            {
-                _vm.GetAll();
-                this.Close();
+            if (string.IsNullOrEmpty(productTextBox.Text) || string.IsNullOrEmpty(brandTextBox.Text) || string.IsNullOrEmpty(priceTextBox.Text) || string.IsNullOrEmpty(qtyTextBox.Text))
+            {             
+                MessageBox.Show("Fill all empty fields!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+            else
+            {
+                ItemModel item = new ItemModel()
+                {
+                    Id = id,
+                    Barcode = (string.IsNullOrEmpty(barcodeTextBox.Text)) ? "N/A" : barcodeTextBox.Text,
+                    Name = productTextBox.Text,
+                    Brand = brandTextBox.Text,
+                    Price = int.Parse(priceTextBox.Text),
+                    Quantity = int.Parse(qtyTextBlock.Text)
+                };
+                ItemRepository itemRepository = new ItemRepository();
+                if (itemRepository.UpdateItem(item))
+                {
+                    _vm.GetAll();
+                    this.Close();
+                }
+            }
+            
         }
         private void CancelBtn_Click(object sender, RoutedEventArgs e)
         {

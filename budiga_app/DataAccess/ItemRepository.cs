@@ -22,7 +22,7 @@ namespace budiga_app.DataAccess
         public ObservableCollection<ItemModel> GetAllItems()
         {
             ObservableCollection<ItemModel> items = new ObservableCollection<ItemModel>();
-            string query ="SELECT * FROM item";
+            string query ="SELECT * FROM item WHERE is_deleted = 0";
             MySqlDataReader reader;
             try
             {
@@ -35,6 +35,7 @@ namespace budiga_app.DataAccess
                     items.Add(new ItemModel()
                     {
                         Id = reader.GetInt32("id"),
+                        Barcode = reader.GetString("barcode"),
                         Name = reader.GetString("name"),
                         Brand = reader.GetString("brand"),
                         Price = reader.GetInt32("price"),
@@ -53,7 +54,7 @@ namespace budiga_app.DataAccess
         public bool AddItem(ItemModel item)
         {
             bool result = false;
-            string query = string.Format("INSERT INTO item (name, brand, price, quantity) VALUES ('{0}', '{1}', '{2}', '{3}')", item.Name, item.Brand, item.Price, item.Quantity);
+            string query = string.Format("INSERT INTO item (name, barcode, brand, price, quantity) VALUES ('{0}', '{1}', '{2}', '{3}', '{4}')", item.Name, item.Barcode, item.Brand, item.Price, item.Quantity);
             try
             {
                 database.Connection();
@@ -73,7 +74,7 @@ namespace budiga_app.DataAccess
         public bool UpdateItem(ItemModel item)
         {
             bool result = false;
-            string query = string.Format("UPDATE item SET name='{0}', brand='{1}', price='{2}',quantity='{3}' WHERE id={4}", item.Name, item.Brand, item.Price, item.Quantity, item.Id);
+            string query = string.Format("UPDATE item SET name='{0}', barcode='{1}', brand='{2}', price='{3}', quantity='{4}' WHERE id={5}", item.Name, item.Barcode, item.Brand, item.Price, item.Quantity, item.Id);
             try
             {
                 database.Connection();

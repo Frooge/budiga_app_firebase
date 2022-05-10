@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 19, 2022 at 02:51 PM
+-- Generation Time: May 10, 2022 at 10:46 AM
 -- Server version: 10.4.18-MariaDB
 -- PHP Version: 7.3.27
 
@@ -60,11 +60,27 @@ CREATE TABLE `checkout` (
 
 CREATE TABLE `item` (
   `id` bigint(20) NOT NULL,
+  `barcode` varchar(12) NOT NULL DEFAULT 'N/A',
   `name` varchar(64) NOT NULL,
   `brand` varchar(64) NOT NULL,
   `price` float NOT NULL,
-  `quantity` int(11) NOT NULL
+  `quantity` int(11) NOT NULL,
+  `is_deleted` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `item`
+--
+
+INSERT INTO `item` (`id`, `barcode`, `name`, `brand`, `price`, `quantity`, `is_deleted`) VALUES
+(0, 'N/A', 'Skyflake', 'Biskwet', 11, 6, 0),
+(2, 'N/A', 'Shampoo', 'Sunsilk', 19, 2, 0),
+(3, 'N/A', 'Yakult', 'Nestle', 99, 989, 0),
+(4, 'N/A', 'Magnolia', 'Nestle', 200, 2, 0),
+(5, 'N/A', 'Iced Tea', 'Nestle', 20, 77, 0),
+(6, 'N/A', 'Orange Juice', 'XXX', 24, 1, 0),
+(7, '11111111111', 'C2', 'idk', 20, 4, 0),
+(8, '12349081231', 'Safeguard', 'idk', 20, 34, 0);
 
 -- --------------------------------------------------------
 
@@ -108,7 +124,7 @@ CREATE TABLE `users` (
   `username` varchar(32) NOT NULL,
   `password` varchar(32) NOT NULL,
   `contact` varchar(32) NOT NULL,
-  `user_role` enum('Admin','Employee','','') NOT NULL,
+  `user_role` enum('Admin','Employee') NOT NULL,
   `created_date` datetime DEFAULT NULL,
   `updated_date` datetime DEFAULT NULL,
   `isDeleted` int(1) DEFAULT NULL
@@ -187,7 +203,7 @@ ALTER TABLE `checkout`
 -- AUTO_INCREMENT for table `item`
 --
 ALTER TABLE `item`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `purchase`
