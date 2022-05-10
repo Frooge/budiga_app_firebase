@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 10, 2022 at 10:46 AM
+-- Generation Time: May 10, 2022 at 06:31 PM
 -- Server version: 10.4.18-MariaDB
--- PHP Version: 7.3.27
+-- PHP Version: 7.4.18
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -30,10 +30,9 @@ SET time_zone = "+00:00";
 CREATE TABLE `attendance` (
   `id` bigint(10) NOT NULL,
   `user_id` bigint(11) NOT NULL,
-  `time_in` time DEFAULT NULL,
-  `date` date DEFAULT NULL,
-  `time_out` time DEFAULT NULL,
-  `isDelete` int(11) DEFAULT NULL
+  `time_in` time NOT NULL,
+  `time_out` time NOT NULL,
+  `date` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -44,12 +43,10 @@ CREATE TABLE `attendance` (
 
 CREATE TABLE `checkout` (
   `id` bigint(20) NOT NULL,
-  `barcode_id` bigint(20) NOT NULL,
+  `item_id` bigint(20) NOT NULL,
   `purchase_id` bigint(20) NOT NULL,
-  `total_quantity` int(11) NOT NULL,
-  `subtotal_price` float NOT NULL,
-  `created_date` datetime DEFAULT NULL,
-  `isDelete` int(11) NOT NULL
+  `quantity` int(11) NOT NULL,
+  `subtotal_price` float NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -85,30 +82,33 @@ INSERT INTO `item` (`id`, `barcode`, `name`, `brand`, `price`, `quantity`, `is_d
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `item_history`
+--
+
+CREATE TABLE `item_history` (
+  `id` bigint(20) NOT NULL,
+  `item_id` int(11) NOT NULL,
+  `barcode` varchar(12) NOT NULL DEFAULT 'N/A',
+  `name` varchar(64) NOT NULL,
+  `brand` varchar(64) NOT NULL,
+  `price` float NOT NULL,
+  `quantity` int(11) NOT NULL,
+  `action` varchar(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `purchase`
 --
 
 CREATE TABLE `purchase` (
   `id` bigint(10) NOT NULL,
   `user_id` bigint(10) NOT NULL,
-  `tax_price` decimal(10,0) NOT NULL,
   `total_price` float NOT NULL,
   `customer_pay` float NOT NULL,
   `customer_change` float NOT NULL,
-  `isDeleted` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `transaction_history`
---
-
-CREATE TABLE `transaction_history` (
-  `id` bigint(20) NOT NULL,
-  `purchase_id` bigint(20) NOT NULL,
-  `created_date` datetime NOT NULL,
-  `isDeleted` int(11) NOT NULL
+  `created_date` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -154,7 +154,7 @@ ALTER TABLE `attendance`
 --
 ALTER TABLE `checkout`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `barcode_id` (`barcode_id`),
+  ADD KEY `barcode_id` (`item_id`),
   ADD KEY `purchase_id` (`purchase_id`);
 
 --
@@ -164,18 +164,17 @@ ALTER TABLE `item`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `item_history`
+--
+ALTER TABLE `item_history`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `purchase`
 --
 ALTER TABLE `purchase`
   ADD PRIMARY KEY (`id`),
   ADD KEY `user_id` (`user_id`);
-
---
--- Indexes for table `transaction_history`
---
-ALTER TABLE `transaction_history`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `purchase_id` (`purchase_id`);
 
 --
 -- Indexes for table `users`
@@ -206,16 +205,16 @@ ALTER TABLE `item`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
+-- AUTO_INCREMENT for table `item_history`
+--
+ALTER TABLE `item_history`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `purchase`
 --
 ALTER TABLE `purchase`
   MODIFY `id` bigint(10) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `transaction_history`
---
-ALTER TABLE `transaction_history`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `users`
@@ -237,7 +236,7 @@ ALTER TABLE `attendance`
 -- Constraints for table `checkout`
 --
 ALTER TABLE `checkout`
-  ADD CONSTRAINT `barcodeID_checkout` FOREIGN KEY (`barcode_id`) REFERENCES `item` (`id`),
+  ADD CONSTRAINT `itemID_checkout` FOREIGN KEY (`item_id`) REFERENCES `item` (`id`),
   ADD CONSTRAINT `purchaseID_checkout` FOREIGN KEY (`purchase_id`) REFERENCES `purchase` (`id`);
 
 --
@@ -245,12 +244,6 @@ ALTER TABLE `checkout`
 --
 ALTER TABLE `purchase`
   ADD CONSTRAINT `userID_purchase` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
-
---
--- Constraints for table `transaction_history`
---
-ALTER TABLE `transaction_history`
-  ADD CONSTRAINT `purchaseID_transaction` FOREIGN KEY (`purchase_id`) REFERENCES `purchase` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
