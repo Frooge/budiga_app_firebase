@@ -22,8 +22,8 @@ namespace budiga_app.MVVM.ViewModel
         {
             itemRepository = new ItemRepository();
             ItemModel = new ItemModel();
-            AddItemCommand = new RelayCommand(o => AddItem());
-            EditItemCommand = new RelayCommand(o => EditItem((ItemModel)o));
+            AddItemCommand = new RelayCommand(param => AddItem());
+            EditItemCommand = new RelayCommand(param => EditItem((ItemModel)param));
             GetAll();
         }
 

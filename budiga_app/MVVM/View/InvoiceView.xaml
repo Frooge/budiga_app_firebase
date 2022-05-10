@@ -4,9 +4,13 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:budiga_app.MVVM.View"
+             xmlns:viewModel="clr-namespace:budiga_app.MVVM.ViewModel"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
              d:DesignHeight="720" d:DesignWidth="1000">
+    <UserControl.DataContext>
+        <viewModel:InvoiceViewModel/>
+    </UserControl.DataContext>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
@@ -38,56 +42,57 @@
 
         <ScrollViewer Grid.Row="1">
             <StackPanel>
-                <!--<ItemsControl ItemsSource="{Binding }">
-                    <ItemsControl.ItemsPanel>
-                        <ItemsPanelTemplate>
-                            
-                        </ItemsPanelTemplate>
-                    </ItemsControl.ItemsPanel>
-                </ItemsControl>-->
-                <materialDesign:Card Margin="0 0 0 10" Padding="20 10">
-                    <Grid VerticalAlignment="Center">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="2*" />
-                            <ColumnDefinition Width="2*" />
-                            <ColumnDefinition Width="2*" />
-                            <ColumnDefinition Width="2*" />
-                            <ColumnDefinition Width="*" />
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="*" />
-                            <RowDefinition Height="*" />
-                        </Grid.RowDefinitions>
+                <ItemsControl ItemsSource="{Binding ItemModel.ItemRecords}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <materialDesign:Card Margin="0 0 0 10" Padding="20 10">
+                                <Grid VerticalAlignment="Center">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="2*" />
+                                        <ColumnDefinition Width="2*" />
+                                        <ColumnDefinition Width="2*" />
+                                        <ColumnDefinition Width="2*" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*" />
+                                        <RowDefinition Height="*" />
+                                    </Grid.RowDefinitions>
 
-                        <TextBlock Foreground="Blue" VerticalAlignment="Center">1</TextBlock>
-                        <TextBlock Grid.Column="1" VerticalAlignment="Center">Yakult</TextBlock>
-                        <Grid VerticalAlignment="Center"  Grid.Column="2">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="*" />
-                            </Grid.ColumnDefinitions>
-                            <Button Content="-" VerticalAlignment="Center" HorizontalAlignment="Right" BorderBrush="{x:Null}" Background="#FFF4F5FA">
-                                <Button.Foreground>
-                                    <SolidColorBrush Color="#FF3A3541" Opacity="0.87"/>
-                                </Button.Foreground>
-                            </Button>
-                            <TextBlock Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center">2</TextBlock>
-                            <Button Grid.Column="2" Content="+" VerticalAlignment="Center" HorizontalAlignment="Left" BorderBrush="{x:Null}" Background="#FFF4F5FA">
-                                <Button.Foreground>
-                                    <SolidColorBrush Color="#FF3A3541" Opacity="0.87"/>
-                                </Button.Foreground>
-                            </Button>
-                        </Grid>
-                        <TextBlock Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Center">69.69</TextBlock>
-                        <Button Grid.Column="4" Content="X" Width="50" VerticalAlignment="Center" HorizontalAlignment="Right" BorderBrush="{x:Null}" Background="Transparent">
-                            <Button.Foreground>
-                                <SolidColorBrush Color="#FF3A3541" Opacity="0.87"/>
-                            </Button.Foreground>
-                        </Button>
-                    </Grid>
-                </materialDesign:Card>
-
+                                    <TextBlock Text="{Binding Path=Barcode}" Foreground="Blue" VerticalAlignment="Center"/>
+                                    <TextBlock Text="{Binding Path=Name}" Grid.Column="1" VerticalAlignment="Center"/>
+                                    <Grid VerticalAlignment="Center"  Grid.Column="2">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="*" />
+                                        </Grid.ColumnDefinitions>
+                                        <Button Content="-" VerticalAlignment="Center" HorizontalAlignment="Right" BorderBrush="{x:Null}" Background="#FFF4F5FA"
+                                                Command="{Binding Path=DataContext.ReduceQuantityCommand, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}}" CommandParameter="{Binding Id}">
+                                            <Button.Foreground>
+                                                <SolidColorBrush Color="#FF3A3541" Opacity="0.87"/>
+                                            </Button.Foreground>
+                                        </Button>
+                                        <TextBlock Text="{Binding Path=Quantity}" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                        <Button Grid.Column="2" Content="+" VerticalAlignment="Center" HorizontalAlignment="Left" BorderBrush="{x:Null}" Background="#FFF4F5FA"
+                                                Command="{Binding Path=DataContext.AddQuantityCommand, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}}" CommandParameter="{Binding Id}">
+                                            <Button.Foreground>
+                                                <SolidColorBrush Color="#FF3A3541" Opacity="0.87"/>
+                                            </Button.Foreground>
+                                        </Button>
+                                    </Grid>
+                                    <TextBlock Text="{Binding Path=Price}" Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                    <Button Grid.Column="4" Content="X" Width="50" VerticalAlignment="Center" HorizontalAlignment="Right" BorderBrush="{x:Null}" Background="Transparent"
+                                            Command="{Binding Path=DataContext.RemoveItemCommand, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}}" CommandParameter="{Binding Id}">
+                                        <Button.Foreground>
+                                            <SolidColorBrush Color="#FF3A3541" Opacity="0.87"/>
+                                        </Button.Foreground>
+                                    </Button>
+                                </Grid>
+                            </materialDesign:Card>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
             </StackPanel>
         </ScrollViewer>
         
