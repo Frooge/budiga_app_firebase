@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 10, 2022 at 06:31 PM
+-- Generation Time: May 10, 2022 at 07:55 PM
 -- Server version: 10.4.18-MariaDB
 -- PHP Version: 7.4.18
 
@@ -106,8 +106,8 @@ CREATE TABLE `purchase` (
   `id` bigint(10) NOT NULL,
   `user_id` bigint(10) NOT NULL,
   `total_price` float NOT NULL,
-  `customer_pay` float NOT NULL,
-  `customer_change` float NOT NULL,
+  `pay` float NOT NULL,
+  `change` float NOT NULL,
   `created_date` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -127,14 +127,14 @@ CREATE TABLE `users` (
   `user_role` enum('Admin','Employee') NOT NULL,
   `created_date` datetime DEFAULT NULL,
   `updated_date` datetime DEFAULT NULL,
-  `isDeleted` int(1) DEFAULT NULL
+  `is_deleted` int(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `fname`, `lname`, `username`, `password`, `contact`, `user_role`, `created_date`, `updated_date`, `isDeleted`) VALUES
+INSERT INTO `users` (`id`, `fname`, `lname`, `username`, `password`, `contact`, `user_role`, `created_date`, `updated_date`, `is_deleted`) VALUES
 (1, 'John', 'Doe', 'admin', '1234', '09876543210', 'Admin', '2022-04-19 20:46:15', '2022-04-19 20:46:15', 0),
 (2, 'Mary', 'Sue', 'employee', '1234', '09876543210', 'Employee', '2022-04-19 20:46:15', '2022-04-19 20:46:15', 0);
 
