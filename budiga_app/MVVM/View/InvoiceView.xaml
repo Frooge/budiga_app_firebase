@@ -33,9 +33,9 @@
 
                 <Label>#</Label>
                 <Label Grid.Column="1">Product Information</Label>
-                <Label Grid.Column="2">Quanitity</Label>
-                <Label Grid.Column="3">Price</Label>
-                <Label Grid.Column="4">Subtotal Price</Label>
+                <Label Grid.Column="2" HorizontalAlignment="Center">Quanitity</Label>
+                <Label Grid.Column="3" HorizontalAlignment="Center">Price</Label>
+                <Label Grid.Column="4" HorizontalAlignment="Center">Subtotal Price</Label>
             </Grid>
         </materialDesign:Card>
 
@@ -68,14 +68,14 @@
                                             <ColumnDefinition Width="*" />
                                         </Grid.ColumnDefinitions>
                                         <Button Content="-" VerticalAlignment="Center" HorizontalAlignment="Right" BorderBrush="{x:Null}" Background="#FFF4F5FA"
-                                                Command="{Binding Path=DataContext.ReduceQuantityCommand, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}}" CommandParameter="{Binding Id}">
+                                                Command="{Binding Path=DataContext.ReduceQuantityCommand, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}}" CommandParameter="{Binding ItemId}">
                                             <Button.Foreground>
                                                 <SolidColorBrush Color="#FF3A3541" Opacity="0.87"/>
                                             </Button.Foreground>
                                         </Button>
                                         <TextBlock Text="{Binding Path=Quantity}" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                                         <Button Grid.Column="2" Content="+" VerticalAlignment="Center" HorizontalAlignment="Left" BorderBrush="{x:Null}" Background="#FFF4F5FA"
-                                                Command="{Binding Path=DataContext.AddQuantityCommand, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}}" CommandParameter="{Binding Id}">
+                                                Command="{Binding Path=DataContext.AddQuantityCommand, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}}" CommandParameter="{Binding ItemId}">
                                             <Button.Foreground>
                                                 <SolidColorBrush Color="#FF3A3541" Opacity="0.87"/>
                                             </Button.Foreground>
@@ -84,7 +84,7 @@
                                     <TextBlock Text="{Binding Path=Item.Price}" Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                                     <TextBlock Text="{Binding Path=SubtotalPrice}" Grid.Column="4" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                                     <Button Grid.Column="5" Content="X" Width="50" VerticalAlignment="Center" HorizontalAlignment="Right" BorderBrush="{x:Null}" Background="Transparent"
-                                            Command="{Binding Path=DataContext.RemoveItemCommand, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}}" CommandParameter="{Binding Id}">
+                                            Command="{Binding Path=DataContext.RemoveItemCommand, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}}" CommandParameter="{Binding ItemId}">
                                         <Button.Foreground>
                                             <SolidColorBrush Color="#FF3A3541" Opacity="0.87"/>
                                         </Button.Foreground>
@@ -98,7 +98,7 @@
         </ScrollViewer>
         
 
-        <Button Grid.Row="2" Style="{x:Null}" Background="Transparent" BorderBrush="{x:Null}">
+        <Button Grid.Row="2" Style="{x:Null}" Background="Transparent" BorderBrush="{x:Null}" Command="{Binding AddItemCommand}">
             <Button.ContentTemplate>
                 <DataTemplate>
                     <StackPanel>

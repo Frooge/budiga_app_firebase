@@ -9,7 +9,7 @@ using System.Diagnostics;
 
 namespace budiga_app.MVVM.ViewModel
 {
-    class SalesViewModel : ObservableObject
+    public class SalesViewModel : ObservableObject
     {
         public RelayCommand OverviewViewCommand { get; set; }
         public RelayCommand InventoryViewCommand { get; set; }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace budiga_app.MVVM.ViewModel
 {
-    class ScannerViewModel : ObservableObject
+    public class ScannerViewModel : ObservableObject
     {
         
     }

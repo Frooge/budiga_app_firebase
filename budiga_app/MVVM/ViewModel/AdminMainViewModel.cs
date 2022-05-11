@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace budiga_app.MVVM.ViewModel
 {
-    class AdminMainViewModel : ObservableObject
+    public class AdminMainViewModel : ObservableObject
     {
         
         public RelayCommand InventoryViewCommand { get; set; }        

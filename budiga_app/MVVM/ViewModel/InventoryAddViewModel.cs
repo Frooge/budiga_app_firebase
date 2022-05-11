@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace budiga_app.MVVM.ViewModel
 {
-    class InventoryAddViewModel
+    public class InventoryAddViewModel
     {
     }
 }

@@ -13,7 +13,7 @@ namespace budiga_app.MVVM.Model
     {
         private int _id;
         private int _itemId;
-        private int _purchaseId;
+        private int _orderId;
         private int _quantity;
         private int _subtotalPrice;
         private ItemModel _item;
@@ -21,7 +21,7 @@ namespace budiga_app.MVVM.Model
         
         public int Id { get { return _id; } set { _id = value; OnPropertyChanged("Id"); } }
         public int ItemId { get { return _itemId; } set { _itemId = value; OnPropertyChanged("ItemId"); } }
-        public int PurchaseId { get { return _purchaseId; } set { _purchaseId = value; OnPropertyChanged("PurchaseId"); } }
+        public int OrderId { get { return _orderId; } set { _orderId = value; OnPropertyChanged("PurchaseId"); } }
         public int Quantity { get { return _quantity; } set { _quantity = value; OnPropertyChanged("Quantity"); } }
         public int SubtotalPrice { get { return _subtotalPrice; } set { _subtotalPrice = value; OnPropertyChanged("SubtotalPrice"); } }
         public ItemModel Item { get { return _item; } set { _item = value; OnPropertyChanged("Item"); } }

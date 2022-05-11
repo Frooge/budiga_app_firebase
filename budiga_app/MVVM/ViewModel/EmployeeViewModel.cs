@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace budiga_app.MVVM.ViewModel
 {
-    class EmployeeViewModel
+    public class EmployeeViewModel
     {
     }
 }
