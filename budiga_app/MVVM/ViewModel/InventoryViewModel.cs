@@ -14,14 +14,14 @@ namespace budiga_app.MVVM.ViewModel
     public class InventoryViewModel : ObservableObject
     {
         private ItemRepository itemRepository;
-        public ItemModel ItemModel { get; set; }
+        public ItemModel Item { get; set; }
         public RelayCommand AddItemCommand { get; set; }
         public RelayCommand EditItemCommand { get; set; }
 
         public InventoryViewModel()
         {
             itemRepository = new ItemRepository();
-            ItemModel = new ItemModel();
+            Item = new ItemModel();
             AddItemCommand = new RelayCommand(param => AddItem());
             EditItemCommand = new RelayCommand(param => EditItem((ItemModel)param));
             GetAll();
@@ -29,7 +29,7 @@ namespace budiga_app.MVVM.ViewModel
 
         public void GetAll()
         {
-            ItemModel.ItemRecords = itemRepository.GetAllItems();
+            Item.ItemRecords = itemRepository.GetAllItems();
         }
 
         private void AddItem()

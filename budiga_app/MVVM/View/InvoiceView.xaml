@@ -23,31 +23,31 @@
         <materialDesign:Card Margin="0 0 0 30" Padding="20 0">
             <Grid VerticalAlignment="Center">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="2*" />
+                    <ColumnDefinition Width="2*" />
+                    <ColumnDefinition Width="2*" />
+                    <ColumnDefinition Width="2*" />
+                    <ColumnDefinition Width="2*" />
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="*" />
-                </Grid.RowDefinitions>
 
                 <Label>#</Label>
                 <Label Grid.Column="1">Product Information</Label>
                 <Label Grid.Column="2">Quanitity</Label>
                 <Label Grid.Column="3">Price</Label>
+                <Label Grid.Column="4">Subtotal Price</Label>
             </Grid>
         </materialDesign:Card>
 
         <ScrollViewer Grid.Row="1">
             <StackPanel>
-                <ItemsControl ItemsSource="{Binding ItemModel.ItemRecords}">
+                <ItemsControl ItemsSource="{Binding Order.OrderTransactionRecords}">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
                             <materialDesign:Card Margin="0 0 0 10" Padding="20 10">
                                 <Grid VerticalAlignment="Center">
                                     <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="2*" />
                                         <ColumnDefinition Width="2*" />
                                         <ColumnDefinition Width="2*" />
                                         <ColumnDefinition Width="2*" />
@@ -59,8 +59,8 @@
                                         <RowDefinition Height="*" />
                                     </Grid.RowDefinitions>
 
-                                    <TextBlock Text="{Binding Path=Barcode}" Foreground="Blue" VerticalAlignment="Center"/>
-                                    <TextBlock Text="{Binding Path=Name}" Grid.Column="1" VerticalAlignment="Center"/>
+                                    <TextBlock Text="{Binding Path=Item.Barcode}" Foreground="Blue" VerticalAlignment="Center"/>
+                                    <TextBlock Text="{Binding Path=Item.Name}" Grid.Column="1" VerticalAlignment="Center"/>
                                     <Grid VerticalAlignment="Center"  Grid.Column="2">
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="*" />
@@ -81,8 +81,9 @@
                                             </Button.Foreground>
                                         </Button>
                                     </Grid>
-                                    <TextBlock Text="{Binding Path=Price}" Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                                    <Button Grid.Column="4" Content="X" Width="50" VerticalAlignment="Center" HorizontalAlignment="Right" BorderBrush="{x:Null}" Background="Transparent"
+                                    <TextBlock Text="{Binding Path=Item.Price}" Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                    <TextBlock Text="{Binding Path=SubtotalPrice}" Grid.Column="4" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                    <Button Grid.Column="5" Content="X" Width="50" VerticalAlignment="Center" HorizontalAlignment="Right" BorderBrush="{x:Null}" Background="Transparent"
                                             Command="{Binding Path=DataContext.RemoveItemCommand, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}}" CommandParameter="{Binding Id}">
                                         <Button.Foreground>
                                             <SolidColorBrush Color="#FF3A3541" Opacity="0.87"/>

@@ -23,7 +23,7 @@ namespace budiga_app.DataAccess
 
         public UserModel GetUser(string username, string password)
         {
-            string query = "SELECT * FROM users WHERE username = '" + username + "' AND password = '" + password + "'";
+            string query = "SELECT * FROM users WHERE username = '" + username + "' AND password = '" + password + "' AND is_deleted = 0";
             MySqlDataReader reader;
             try
             {
@@ -50,7 +50,6 @@ namespace budiga_app.DataAccess
                         _user.UserRole = results[6].ToString();
                         _user.Created = DateTime.Parse(results[7].ToString());
                         _user.Updated = DateTime.Parse(results[8].ToString());
-                        _user.Deleted = int.Parse(results[9].ToString());
                     }
                 }
             }

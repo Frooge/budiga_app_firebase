@@ -165,6 +165,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MVVM\Model\ItemModel.cs" />
+    <Compile Include="MVVM\Model\OrderModel.cs" />
     <Compile Include="MVVM\Model\UserModel.cs" />
     <Compile Include="MVVM\ViewModel\AdminMainViewModel.cs" />
     <Compile Include="MVVM\ViewModel\EmployeeViewModel.cs" />
