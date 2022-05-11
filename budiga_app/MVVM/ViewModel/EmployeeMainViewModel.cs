@@ -13,7 +13,7 @@ namespace budiga_app.MVVM.ViewModel
         public RelayCommand InventoryViewCommand { get; set; }
         public RelayCommand InvoiceViewCommand { get; set; }
 
-        public ScannerViewModel InventoryVM { get; set; }
+        public InventoryViewModel InventoryVM { get; set; }
         public InvoiceViewModel InvoiceVM { get; set; }
 
         private object _currentView;
@@ -32,7 +32,7 @@ namespace budiga_app.MVVM.ViewModel
         {
             try
             {
-                InventoryVM = new ScannerViewModel();
+                InventoryVM = new InventoryViewModel();
                 InvoiceVM = new InvoiceViewModel();
 
                 CurrentView = InventoryVM;

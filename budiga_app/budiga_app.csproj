@@ -154,10 +154,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="MVVM\View\ScannerView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Themes\LoginTheme.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -183,7 +179,6 @@
     <Compile Include="MVVM\ViewModel\SalesViewModel.cs" />
     <Compile Include="MVVM\ViewModel\EmployeeMainViewModel.cs" />
     <Compile Include="MVVM\ViewModel\InvoiceViewModel.cs" />
-    <Compile Include="MVVM\ViewModel\ScannerViewModel.cs" />
     <Compile Include="MVVM\View\EmployeeView.xaml.cs">
       <DependentUpon>EmployeeView.xaml</DependentUpon>
     </Compile>
@@ -210,9 +205,6 @@
     </Compile>
     <Compile Include="MVVM\View\InvoiceView.xaml.cs">
       <DependentUpon>InvoiceView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="MVVM\View\ScannerView.xaml.cs">
-      <DependentUpon>ScannerView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
