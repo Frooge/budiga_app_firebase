@@ -13,24 +13,17 @@ namespace budiga_app.MVVM.ViewModel
     {
         private ItemRepository itemRepository;
         public ItemModel Item { get; set; }
-        public RelayCommand AddItemOrderCommand { get; set; }
 
         public InvoiceAddViewModel()
         {
             itemRepository = new ItemRepository();
             Item = new ItemModel();
-            AddItemOrderCommand = new RelayCommand(param => AddItemOrder());
             GetAll();
         }        
 
         public void GetAll()
         {
             Item.ItemRecords = itemRepository.GetAllItems();
-        }
-
-        private void AddItemOrder()
-        {
-            
         }
 
     }

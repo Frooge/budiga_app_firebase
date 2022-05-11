@@ -56,7 +56,7 @@ namespace budiga_app.MVVM.ViewModel
         private void AddItem()
         {
             InvoiceAddView invoiceAddView = new InvoiceAddView(this);
-            invoiceAddView.Show();
+            invoiceAddView.ShowDialog();
         }
 
         public bool GetItem(ItemModel item)

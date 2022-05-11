@@ -35,13 +35,13 @@ namespace budiga_app.MVVM.ViewModel
         private void AddItem()
         {
             InventoryAddView inventoryAddView = new InventoryAddView(this);
-            inventoryAddView.Show();
+            inventoryAddView.ShowDialog();
         }
 
         private void EditItem(ItemModel item)
         {
             InventoryEditView inventoryEditView = new InventoryEditView(this, item);
-            inventoryEditView.Show();
+            inventoryEditView.ShowDialog();
         }
     }
 }
