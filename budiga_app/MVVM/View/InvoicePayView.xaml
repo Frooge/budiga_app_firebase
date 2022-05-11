@@ -1,0 +1,31 @@
+﻿<Window x:Class="budiga_app.MVVM.View.InvoicePayView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:budiga_app.MVVM.View"
+        mc:Ignorable="d"
+        MinHeight="200"
+        MinWidth="300"
+        SizeToContent="WidthAndHeight"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen"
+        Title="InvoicePayView">
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Label Content="Customer Pay" FontSize="14"/>
+        <TextBox x:Name="payTextBox" FontSize="14" Grid.Row="1"/>
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Button Content="Confirm" Click="" HorizontalAlignment="Left"/>
+            <Button Content="Cancel" Click="" HorizontalAlignment="Right" Grid.Column="1"/>
+        </Grid>
+    </Grid>
+</Window>

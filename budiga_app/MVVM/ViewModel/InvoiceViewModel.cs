@@ -16,6 +16,8 @@ namespace budiga_app.MVVM.ViewModel
         public RelayCommand ReduceQuantityCommand { get; set; }
         public RelayCommand RemoveItemCommand { get; set; }
         public RelayCommand AddItemCommand { get; set; }
+        public RelayCommand CancelOrderCommand { get; set; }
+        public RelayCommand CheckoutCommand { get; set; }
         public InvoiceModel Invoice { get; set; }
 
         public InvoiceViewModel()
@@ -25,6 +27,8 @@ namespace budiga_app.MVVM.ViewModel
             AddQuantityCommand = new RelayCommand(param => AddQuantity((int)param));
             ReduceQuantityCommand = new RelayCommand(param => ReduceQuantity((int)param));
             RemoveItemCommand = new RelayCommand(param => RemoveItem((int)param));
+            CancelOrderCommand = new RelayCommand(param => CancelOrder());
+            CheckoutCommand = new RelayCommand(param => Checkout());
             AddItemCommand = new RelayCommand(param => AddItem());
         }
         private void AddQuantity(int id)
@@ -57,6 +61,17 @@ namespace budiga_app.MVVM.ViewModel
         {
             InvoiceAddView invoiceAddView = new InvoiceAddView(this);
             invoiceAddView.ShowDialog();
+        }
+
+        private void CancelOrder()
+        {
+            Invoice.InvoiceOrderRecords.Clear();
+        }
+
+        private void Checkout()
+        {
+            InvoicePayView invoicePayView = new InvoicePayView(Invoice);
+            invoicePayView.ShowDialog();
         }
 
         public bool GetItem(ItemModel item)
