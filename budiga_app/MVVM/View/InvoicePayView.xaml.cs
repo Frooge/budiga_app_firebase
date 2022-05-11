@@ -1,4 +1,6 @@
-﻿using budiga_app.MVVM.Model;
+﻿using budiga_app.DataAccess;
+using budiga_app.MVVM.Model;
+using budiga_app.Core;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,18 +23,22 @@ namespace budiga_app.MVVM.View
     public partial class InvoicePayView : Window
     {
         private InvoiceModel _invoice;
-
+        private InvoiceRepository invoiceRepository;
         public InvoicePayView(InvoiceModel invoice)
         {
             InitializeComponent();
             _invoice = invoice;
+            invoiceRepository = new InvoiceRepository();
         }
 
         private void Confirm_Click(object sender, RoutedEventArgs e)
         {
+            _invoice.UserId = Sessions.session.Id;
             _invoice.CustomerPay = int.Parse(payTextBox.Text);
             _invoice.CustomerChange = _invoice.CustomerPay - _invoice.TotalPrice;
-            InvoiceReceiptView invoiceReceiptView = new InvoiceReceiptView(_invoice);
+            invoiceRepository.AddInvoice(_invoice);
+            _invoice = new InvoiceModel();
+            InvoiceReceiptView invoiceReceiptView = new InvoiceReceiptView(invoiceRepository.GetLastInvoice());
             invoiceReceiptView.Show();
             this.Close();
         }

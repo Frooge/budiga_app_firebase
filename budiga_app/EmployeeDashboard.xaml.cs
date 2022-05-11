@@ -22,7 +22,7 @@ namespace budiga_app
         public EmployeeDashboard()
         {
             InitializeComponent();
-            userName.Text = Sessions.session.UserName;
+            userName.Text = Sessions.session.Username;
         }
 
         private void LogoutBtn_Click(object sender, RoutedEventArgs e)

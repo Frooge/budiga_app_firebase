@@ -23,7 +23,7 @@ namespace budiga_app
         public AdminDashboard()
         {
             InitializeComponent();
-            userName.Text = Sessions.session.UserName;
+            userName.Text = Sessions.session.Username;
         }
 
         private void LogoutBtn_Click(object sender, RoutedEventArgs e)

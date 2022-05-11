@@ -18,18 +18,18 @@ namespace budiga_app.MVVM.Model
         private string _password;
         private string _contact;
         private string _userRole;
-        private DateTime _created;
-        private DateTime? _updated;
+        private DateTime _createdDate;
+        private DateTime? _updatedDate;
 
         public int Id { get { return _id; } set { _id = value; OnPropertyChanged("Id"); } }
         public string FName { get { return _fname; } set { _fname = value; OnPropertyChanged("FName"); } }
         public string LName { get {  return _lname; } set { _lname = value; OnPropertyChanged("LName"); } }
-        public string UserName { get { return _username; } set { _username = value; OnPropertyChanged("UserName"); } }
+        public string Username { get { return _username; } set { _username = value; OnPropertyChanged("Username"); } }
         public string Password { get { return _password; } set { _password = value; OnPropertyChanged("Password"); } }
         public string Contact { get { return _contact; } set { _contact = value; OnPropertyChanged("Contact"); } }
         public string UserRole { get { return _userRole; } set {_userRole = value; OnPropertyChanged("UserRole"); } }
-        public DateTime Created { get { return _created; } set { _created = value; OnPropertyChanged("Created"); } }
-        public DateTime? Updated { get { return _updated; } set { _updated = value; OnPropertyChanged("Update"); } }
+        public DateTime CreatedDate { get { return _createdDate; } set { _createdDate = value; OnPropertyChanged("CreatedDate"); } }
+        public DateTime? UpdatedDate { get { return _updatedDate; } set { _updatedDate = value; OnPropertyChanged("UpdateDate"); } }
         private void UserRecords_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
             OnPropertyChanged("UserRecords");

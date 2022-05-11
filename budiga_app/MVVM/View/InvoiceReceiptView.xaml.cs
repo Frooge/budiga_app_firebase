@@ -23,8 +23,8 @@ namespace budiga_app.MVVM.View
         public InvoiceModel Invoice { get; set; }
         public InvoiceReceiptView(InvoiceModel invoice)
         {
-            InitializeComponent();
             Invoice = invoice;
+            InitializeComponent();            
         }
     }
 }
