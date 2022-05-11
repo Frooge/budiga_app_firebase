@@ -38,6 +38,7 @@ namespace budiga_app.MVVM.ViewModel
             {
                 order.Quantity += 1;
                 CalculateSubtotal(order);
+                CalculateTotal();
             }
         }
 
@@ -48,6 +49,7 @@ namespace budiga_app.MVVM.ViewModel
             {
                 order.Quantity -= 1;
                 CalculateSubtotal(order);
+                CalculateTotal();
             }
         }
 
@@ -55,6 +57,7 @@ namespace budiga_app.MVVM.ViewModel
         {
             OrderModel order = Invoice.InvoiceOrderRecords.Where(i => i.ItemId == id).FirstOrDefault();
             Invoice.InvoiceOrderRecords.Remove(order);
+            CalculateTotal();
         }
 
         private void AddItem()
@@ -66,10 +69,12 @@ namespace budiga_app.MVVM.ViewModel
         private void CancelOrder()
         {
             Invoice.InvoiceOrderRecords.Clear();
+            CalculateTotal();
         }
 
         private void Checkout()
         {
+            CalculateTotal();
             InvoicePayView invoicePayView = new InvoicePayView(Invoice);
             invoicePayView.ShowDialog();
         }
@@ -87,6 +92,7 @@ namespace budiga_app.MVVM.ViewModel
                     SubtotalPrice = item.Price,
                     Item = item,
                 });
+                CalculateTotal();
                 result = true;
             }            
             return result;
@@ -95,6 +101,15 @@ namespace budiga_app.MVVM.ViewModel
         private void CalculateSubtotal(OrderModel order)
         {
             order.SubtotalPrice = order.Quantity * order.Item.Price;
+        }
+
+        private void CalculateTotal()
+        {
+            Invoice.TotalPrice = 0;
+            foreach(OrderModel order in Invoice.InvoiceOrderRecords)
+            {
+                Invoice.TotalPrice += order.SubtotalPrice;
+            }
         }
     }
 }

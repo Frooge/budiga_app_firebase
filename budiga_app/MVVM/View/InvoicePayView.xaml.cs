@@ -27,5 +27,19 @@ namespace budiga_app.MVVM.View
             InitializeComponent();
             _invoice = invoice;
         }
+
+        private void Confirm_Click(object sender, RoutedEventArgs e)
+        {
+            _invoice.CustomerPay = int.Parse(payTextBox.Text);
+            _invoice.CustomerChange = _invoice.CustomerPay - _invoice.TotalPrice;
+            InvoiceReceiptView invoiceReceiptView = new InvoiceReceiptView(_invoice);
+            invoiceReceiptView.Show();
+            this.Close();
+        }
+
+        private void Cancel_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
     }
 }

@@ -14,18 +14,18 @@
     <Grid Margin="10">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <Label Content="Customer Pay" FontSize="14"/>
+        <Label Content="Customer Pay" FontSize="24" HorizontalAlignment="Center"/>
         <TextBox x:Name="payTextBox" FontSize="14" Grid.Row="1"/>
         <Grid Grid.Row="2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Button Content="Confirm" Click="" HorizontalAlignment="Left"/>
-            <Button Content="Cancel" Click="" HorizontalAlignment="Right" Grid.Column="1"/>
+            <Button Content="Confirm" Click="Confirm_Click" HorizontalAlignment="Left"/>
+            <Button Content="Cancel" Click="Cancel_Click" HorizontalAlignment="Right" Grid.Column="1"/>
         </Grid>
     </Grid>
 </Window>

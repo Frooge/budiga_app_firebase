@@ -109,23 +109,25 @@
             </Button.ContentTemplate>
         </Button>
 
-        <materialDesign:Card Grid.Row="3" Margin="0,0,0,20" Padding="20 10">
+        <materialDesign:Card Grid.Row="3" Margin="0,0,0,0" Padding="10">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="4*" />
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*" />
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
-
-                <TextBlock>TotalQuantity:</TextBlock>
-                <TextBlock Grid.Column="1">Subtotal:</TextBlock>
-                <TextBlock Grid.Column="2" Grid.RowSpan="2">Total:</TextBlock>
-
-                <TextBlock Grid.Row="1" Grid.Column="1">Tax:</TextBlock>
+                <StackPanel Orientation="Horizontal" Grid.Column="0">
+                    <Label Content="Total Quantity:"/>
+                    <Label Content="{Binding Invoice.InvoiceOrderRecords.Count}"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Grid.Column="2" Grid.RowSpan="2">
+                    <Label Content="Total"/>
+                    <TextBlock Text="{Binding Invoice.TotalPrice}" FontSize="28" FontWeight="Bold"/>
+                </StackPanel>
             </Grid>
         </materialDesign:Card>
 

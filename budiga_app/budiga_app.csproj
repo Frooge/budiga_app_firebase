@@ -144,6 +144,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="MVVM\View\InvoiceReceiptView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MVVM\View\SalesInventoryView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -203,6 +207,9 @@
     </Compile>
     <Compile Include="MVVM\View\InvoicePayView.xaml.cs">
       <DependentUpon>InvoicePayView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MVVM\View\InvoiceReceiptView.xaml.cs">
+      <DependentUpon>InvoiceReceiptView.xaml</DependentUpon>
     </Compile>
     <Compile Include="MVVM\View\SalesInventoryView.xaml.cs">
       <DependentUpon>SalesInventoryView.xaml</DependentUpon>
