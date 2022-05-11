@@ -62,7 +62,7 @@ namespace budiga_app.MVVM.View
                     Barcode = (string.IsNullOrEmpty(barcodeTextBox.Text)) ? "N/A" : barcodeTextBox.Text,
                     Name = productTextBox.Text,
                     Brand = brandTextBox.Text,
-                    Price = int.Parse(priceTextBox.Text),
+                    Price = float.Parse(priceTextBox.Text),
                     Quantity = int.Parse(qtyTextBlock.Text)
                 };
                 ItemRepository itemRepository = new ItemRepository();

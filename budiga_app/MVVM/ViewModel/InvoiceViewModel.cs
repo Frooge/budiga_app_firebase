@@ -16,12 +16,12 @@ namespace budiga_app.MVVM.ViewModel
         public RelayCommand ReduceQuantityCommand { get; set; }
         public RelayCommand RemoveItemCommand { get; set; }
         public RelayCommand AddItemCommand { get; set; }
-        public OrderModel Order { get; set; }
+        public InvoiceModel Invoice { get; set; }
 
         public InvoiceViewModel()
         {
-            Order = new OrderModel();
-            Order.OrderTransactionRecords = new ObservableCollection<OrderModel>();
+            Invoice = new InvoiceModel();
+            Invoice.InvoiceOrderRecords = new ObservableCollection<OrderModel>();
             AddQuantityCommand = new RelayCommand(param => AddQuantity((int)param));
             ReduceQuantityCommand = new RelayCommand(param => ReduceQuantity((int)param));
             RemoveItemCommand = new RelayCommand(param => RemoveItem((int)param));
@@ -29,7 +29,7 @@ namespace budiga_app.MVVM.ViewModel
         }
         private void AddQuantity(int id)
         {
-            OrderModel order = Order.OrderTransactionRecords.Where(i => i.ItemId == id).FirstOrDefault();
+            OrderModel order = Invoice.InvoiceOrderRecords.Where(i => i.ItemId == id).FirstOrDefault();
             if (order.Quantity < order.Item.Quantity)
             {
                 order.Quantity += 1;
@@ -39,7 +39,7 @@ namespace budiga_app.MVVM.ViewModel
 
         private void ReduceQuantity(int id)
         {
-            OrderModel order = Order.OrderTransactionRecords.Where(i => i.ItemId == id).FirstOrDefault();
+            OrderModel order = Invoice.InvoiceOrderRecords.Where(i => i.ItemId == id).FirstOrDefault();
             if (order.Quantity > 1)
             {
                 order.Quantity -= 1;
@@ -49,8 +49,8 @@ namespace budiga_app.MVVM.ViewModel
 
         private void RemoveItem(int id)
         {
-            OrderModel order = Order.OrderTransactionRecords.Where(i => i.ItemId == id).FirstOrDefault();
-            Order.OrderTransactionRecords.Remove(order);
+            OrderModel order = Invoice.InvoiceOrderRecords.Where(i => i.ItemId == id).FirstOrDefault();
+            Invoice.InvoiceOrderRecords.Remove(order);
         }
 
         private void AddItem()
@@ -62,9 +62,9 @@ namespace budiga_app.MVVM.ViewModel
         public bool GetItem(ItemModel item)
         {
             bool result = false;
-            if (Order.OrderTransactionRecords.Where(i => i.ItemId == item.Id).FirstOrDefault() == null)
+            if (Invoice.InvoiceOrderRecords.Where(i => i.ItemId == item.Id).FirstOrDefault() == null)
             {
-                Order.OrderTransactionRecords.Add(new OrderModel()
+                Invoice.InvoiceOrderRecords.Add(new OrderModel()
                 {
                     Id = 1,
                     ItemId = item.Id,

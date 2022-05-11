@@ -41,7 +41,7 @@
 
         <ScrollViewer Grid.Row="1">
             <StackPanel>
-                <ItemsControl ItemsSource="{Binding Order.OrderTransactionRecords}">
+                <ItemsControl ItemsSource="{Binding Invoice.InvoiceOrderRecords}">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
                             <materialDesign:Card Margin="0 0 0 10" Padding="20 10">

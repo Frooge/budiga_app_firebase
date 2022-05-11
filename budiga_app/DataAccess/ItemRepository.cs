@@ -38,7 +38,7 @@ namespace budiga_app.DataAccess
                         Barcode = reader.GetString("barcode"),
                         Name = reader.GetString("name"),
                         Brand = reader.GetString("brand"),
-                        Price = reader.GetInt32("price"),
+                        Price = reader.GetFloat("price"),
                         Quantity = reader.GetInt32("quantity")
                     });
                 }
