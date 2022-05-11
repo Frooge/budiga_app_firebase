@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 11, 2022 at 10:52 AM
+-- Generation Time: May 11, 2022 at 03:40 PM
 -- Server version: 10.4.18-MariaDB
--- PHP Version: 7.4.18
+-- PHP Version: 7.3.27
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -47,7 +47,7 @@ CREATE TABLE `invoice` (
   `total_price` float NOT NULL,
   `pay` float NOT NULL,
   `change` float NOT NULL,
-  `created_date` datetime NOT NULL
+  `created_date` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -106,7 +106,7 @@ CREATE TABLE `item_history` (
 CREATE TABLE `order` (
   `id` bigint(20) NOT NULL,
   `item_id` bigint(20) NOT NULL,
-  `purchase_id` bigint(20) NOT NULL,
+  `invoice_id` bigint(20) NOT NULL,
   `quantity` int(11) NOT NULL,
   `subtotal_price` float NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -174,7 +174,7 @@ ALTER TABLE `item_history`
 ALTER TABLE `order`
   ADD PRIMARY KEY (`id`),
   ADD KEY `barcode_id` (`item_id`),
-  ADD KEY `purchase_id` (`purchase_id`);
+  ADD KEY `purchase_id` (`invoice_id`);
 
 --
 -- Indexes for table `users`
@@ -202,7 +202,7 @@ ALTER TABLE `invoice`
 -- AUTO_INCREMENT for table `item`
 --
 ALTER TABLE `item`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `item_history`
@@ -242,8 +242,8 @@ ALTER TABLE `invoice`
 -- Constraints for table `order`
 --
 ALTER TABLE `order`
-  ADD CONSTRAINT `itemID_checkout` FOREIGN KEY (`item_id`) REFERENCES `item` (`id`),
-  ADD CONSTRAINT `purchaseID_checkout` FOREIGN KEY (`purchase_id`) REFERENCES `invoice` (`id`);
+  ADD CONSTRAINT `invoiceID_order` FOREIGN KEY (`invoice_id`) REFERENCES `invoice` (`id`),
+  ADD CONSTRAINT `itemID_order` FOREIGN KEY (`item_id`) REFERENCES `item` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
