@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace budiga_app.MVVM.ViewModel
 {
-    public class InvoiceReceipt
+    public class InvoiceReceiptViewModel
     {
     }
 }

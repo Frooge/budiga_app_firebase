@@ -7,6 +7,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace budiga_app.MVVM.ViewModel
 {
@@ -62,8 +63,15 @@ namespace budiga_app.MVVM.ViewModel
 
         private void AddItem()
         {
-            InvoiceAddView invoiceAddView = new InvoiceAddView(this);
-            invoiceAddView.ShowDialog();
+            if(Invoice.InvoiceOrderRecords.Count > 0)
+            {
+                InvoiceAddView invoiceAddView = new InvoiceAddView(this);
+                invoiceAddView.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show("Invoice list is empty!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         private void CancelOrder()

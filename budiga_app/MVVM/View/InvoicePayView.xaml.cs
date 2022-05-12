@@ -32,15 +32,23 @@ namespace budiga_app.MVVM.View
         }
 
         private void Confirm_Click(object sender, RoutedEventArgs e)
-        {
-            _invoice.UserId = Sessions.session.Id;
+        {           
             _invoice.CustomerPay = int.Parse(payTextBox.Text);
             _invoice.CustomerChange = _invoice.CustomerPay - _invoice.TotalPrice;
-            invoiceRepository.AddInvoice(_invoice);
-            _invoice = new InvoiceModel();
-            InvoiceReceiptView invoiceReceiptView = new InvoiceReceiptView(invoiceRepository.GetLastInvoice());
-            invoiceReceiptView.Show();
-            this.Close();
+            if (_invoice.CustomerChange >= 0)
+            {
+                _invoice.UserId = Sessions.session.Id;
+                invoiceRepository.AddInvoice(_invoice);
+                _invoice = new InvoiceModel();
+                InvoiceReceiptView invoiceReceiptView = new InvoiceReceiptView(invoiceRepository.GetLastInvoice());
+                invoiceReceiptView.Show();
+                this.Close();
+            }
+            else
+            {
+                MessageBox.Show("Payment is not enough!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+
         }
 
         private void Cancel_Click(object sender, RoutedEventArgs e)
