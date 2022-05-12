@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 11, 2022 at 03:40 PM
+-- Generation Time: May 12, 2022 at 11:07 AM
 -- Server version: 10.4.18-MariaDB
 -- PHP Version: 7.3.27
 
@@ -45,10 +45,20 @@ CREATE TABLE `invoice` (
   `id` bigint(10) NOT NULL,
   `user_id` bigint(10) NOT NULL,
   `total_price` float NOT NULL,
-  `pay` float NOT NULL,
-  `change` float NOT NULL,
+  `customer_pay` float NOT NULL,
+  `customer_change` float NOT NULL,
   `created_date` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `invoice`
+--
+
+INSERT INTO `invoice` (`id`, `user_id`, `total_price`, `customer_pay`, `customer_change`, `created_date`) VALUES
+(7, 1, 49, 50, 1, '2022-05-12 02:55:39'),
+(8, 1, 460, 500, 40, '2022-05-12 02:58:06'),
+(9, 1, 398, 500, 102, '2022-05-12 03:05:06'),
+(10, 1, 38, 50, 12, '2022-05-12 03:08:02');
 
 -- --------------------------------------------------------
 
@@ -71,7 +81,7 @@ CREATE TABLE `item` (
 --
 
 INSERT INTO `item` (`id`, `barcode`, `name`, `brand`, `price`, `quantity`, `is_deleted`) VALUES
-(0, 'N/A', 'Skyflake', 'Biskwet', 11, 6, 0),
+(0, 'N/A', 'Skyflakes', 'Biskwet', 11, 6, 0),
 (2, 'N/A', 'Shampoo', 'Sunsilk', 19, 2, 0),
 (3, 'N/A', 'Yakult', 'Nestle', 99, 989, 0),
 (4, 'N/A', 'Magnolia', 'Nestle', 200, 2, 0),
@@ -110,6 +120,19 @@ CREATE TABLE `order` (
   `quantity` int(11) NOT NULL,
   `subtotal_price` float NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `order`
+--
+
+INSERT INTO `order` (`id`, `item_id`, `invoice_id`, `quantity`, `subtotal_price`) VALUES
+(5, 0, 7, 1, 11),
+(6, 2, 7, 2, 38),
+(7, 4, 8, 2, 400),
+(8, 5, 8, 3, 60),
+(9, 4, 9, 1, 200),
+(10, 3, 9, 2, 198),
+(11, 2, 10, 2, 38);
 
 -- --------------------------------------------------------
 
@@ -196,7 +219,7 @@ ALTER TABLE `attendance`
 -- AUTO_INCREMENT for table `invoice`
 --
 ALTER TABLE `invoice`
-  MODIFY `id` bigint(10) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `item`
@@ -214,7 +237,7 @@ ALTER TABLE `item_history`
 -- AUTO_INCREMENT for table `order`
 --
 ALTER TABLE `order`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `users`
