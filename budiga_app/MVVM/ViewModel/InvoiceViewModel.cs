@@ -17,6 +17,7 @@ namespace budiga_app.MVVM.ViewModel
         public RelayCommand ReduceQuantityCommand { get; set; }
         public RelayCommand RemoveItemCommand { get; set; }
         public RelayCommand AddItemCommand { get; set; }
+        public RelayCommand TransactionHistoryCommand { get; set; }
         public RelayCommand CancelOrderCommand { get; set; }
         public RelayCommand CheckoutCommand { get; set; }
         public InvoiceModel Invoice { get; set; }
@@ -28,9 +29,10 @@ namespace budiga_app.MVVM.ViewModel
             AddQuantityCommand = new RelayCommand(param => AddQuantity((int)param));
             ReduceQuantityCommand = new RelayCommand(param => ReduceQuantity((int)param));
             RemoveItemCommand = new RelayCommand(param => RemoveItem((int)param));
-            CancelOrderCommand = new RelayCommand(param => CancelOrder());
-            CheckoutCommand = new RelayCommand(param => Checkout());
             AddItemCommand = new RelayCommand(param => AddItem());
+            TransactionHistoryCommand = new RelayCommand(param => TransactionHistory());
+            CancelOrderCommand = new RelayCommand(param => CancelOrder());
+            CheckoutCommand = new RelayCommand(param => Checkout());            
         }
         private void AddQuantity(int id)
         {
@@ -63,15 +65,14 @@ namespace budiga_app.MVVM.ViewModel
 
         private void AddItem()
         {
-            if(Invoice.InvoiceOrderRecords.Count > 0)
-            {
-                InvoiceAddView invoiceAddView = new InvoiceAddView(this);
-                invoiceAddView.ShowDialog();
-            }
-            else
-            {
-                MessageBox.Show("Invoice list is empty!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
+            InvoiceAddView invoiceAddView = new InvoiceAddView(this);
+            invoiceAddView.ShowDialog();            
+        }
+
+        private void TransactionHistory()
+        {
+            InvoiceHistoryView invoiceHistoryView = new InvoiceHistoryView();
+            invoiceHistoryView.ShowDialog();
         }
 
         private void CancelOrder()
@@ -82,9 +83,16 @@ namespace budiga_app.MVVM.ViewModel
 
         private void Checkout()
         {
-            CalculateTotal();
-            InvoicePayView invoicePayView = new InvoicePayView(Invoice);
-            invoicePayView.ShowDialog();
+            if (Invoice.InvoiceOrderRecords.Count > 0)
+            {
+                CalculateTotal();
+                InvoicePayView invoicePayView = new InvoicePayView(Invoice);
+                invoicePayView.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show("Invoice list is empty!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }            
         }
 
         public bool GetItem(ItemModel item)

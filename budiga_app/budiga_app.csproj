@@ -140,6 +140,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="MVVM\View\InvoiceHistoryView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MVVM\View\InvoicePayView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -184,6 +188,7 @@
     <Compile Include="MVVM\ViewModel\InventoryEditViewModel.cs" />
     <Compile Include="MVVM\ViewModel\InventoryViewModel.cs" />
     <Compile Include="MVVM\ViewModel\InvoiceAddViewModel.cs" />
+    <Compile Include="MVVM\ViewModel\InvoiceHistoryViewModel.cs" />
     <Compile Include="MVVM\ViewModel\InvoicePayViewModel.cs" />
     <Compile Include="MVVM\ViewModel\InvoiceReceiptViewModel.cs" />
     <Compile Include="MVVM\ViewModel\SalesOverviewViewModel.cs" />
@@ -205,6 +210,9 @@
     </Compile>
     <Compile Include="MVVM\View\InvoiceAddView.xaml.cs">
       <DependentUpon>InvoiceAddView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MVVM\View\InvoiceHistoryView.xaml.cs">
+      <DependentUpon>InvoiceHistoryView.xaml</DependentUpon>
     </Compile>
     <Compile Include="MVVM\View\InvoicePayView.xaml.cs">
       <DependentUpon>InvoicePayView.xaml</DependentUpon>

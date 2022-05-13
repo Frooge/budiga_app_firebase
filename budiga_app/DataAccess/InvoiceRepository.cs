@@ -23,6 +23,39 @@ namespace budiga_app.DataAccess
             userRepository = new UserRepository();
         }
 
+        public ObservableCollection<InvoiceModel> GetAllInvoice()
+        {
+            ObservableCollection<InvoiceModel> invoiceRecords = new ObservableCollection<InvoiceModel>();
+            string query = "SELECT * FROM `invoice`";
+            MySqlDataReader reader;
+            try
+            {
+                database.Connection();
+                MySqlCommand commandDatabase = new MySqlCommand(query, database.conn);
+                commandDatabase.CommandTimeout = 60;
+                reader = commandDatabase.ExecuteReader();
+                while (reader.Read())
+                {
+                    invoiceRecords.Add(new InvoiceModel()
+                    {
+                        Id = reader.GetInt32("id"),
+                        UserId = reader.GetInt32("user_id"),
+                        TotalPrice = reader.GetFloat("total_price"),
+                        CustomerPay = reader.GetFloat("customer_pay"),
+                        CustomerChange = reader.GetFloat("customer_change"),
+                        CreatedDate = reader.GetDateTime("created_date"),
+                        InvoiceOrderRecords = orderRepository.GetInvoiceOrder(reader.GetInt32("id")),
+                        User = userRepository.GetUserById(reader.GetInt32("user_id")),
+                    });
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            return invoiceRecords;
+        }
+
         public InvoiceModel GetLastInvoice()
         {
             InvoiceModel invoice = new InvoiceModel();
