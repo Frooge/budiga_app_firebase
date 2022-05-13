@@ -15,7 +15,7 @@
     <Grid>
         <StackPanel>
             <StackPanel Orientation="Horizontal" Margin="10,10,10,10">
-                <Button Grid.Row="3" Content="Add" HorizontalAlignment="Center" VerticalAlignment="Top" Width="120" BorderBrush="{x:Null}" Background="#FF355ACC" FontStretch="Normal" FontStyle="Normal">
+                <Button Grid.Row="3" Content="Add" Command="{Binding AddEmployeeCommand}" HorizontalAlignment="Center" VerticalAlignment="Top" Width="120" BorderBrush="{x:Null}" Background="#FF355ACC" FontStretch="Normal" FontStyle="Normal">
                     <Button.Foreground>
                         <SolidColorBrush Color="White" Opacity="0.87"/>
                     </Button.Foreground>
@@ -52,7 +52,7 @@
                         </DataGrid.CellStyle>
                         <b:Interaction.Triggers>
                             <b:EventTrigger EventName="MouseDoubleClick">
-                                <b:InvokeCommandAction Command="{Binding }"
+                                <b:InvokeCommandAction Command="{Binding EditEmployeeCommand}"
                                                        CommandParameter="{Binding Path=SelectedItem, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=DataGrid}}"/>
                             </b:EventTrigger>
                         </b:Interaction.Triggers>
@@ -60,17 +60,23 @@
                 </materialDesign:Card>
                 <materialDesign:Card HorizontalAlignment="Right" Margin="0 0 10 0" VerticalAlignment="Top" Height="500" Width="400">
                     <DataGrid x:Name="attendanceTable"
-                              ItemsSource="{Binding }"
+                              ItemsSource="{Binding Attendance.AttendanceRecords}"
                               IsReadOnly="True"
                               AutoGenerateColumns="False"
                               CanUserResizeColumns="False"
                               CanUserAddRows="False"
                               CanUserResizeRows="False">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="Name" Binding="{Binding }" Width="*"/>
-                            <DataGridTextColumn Header="Time In" Binding="{Binding }" Width="*"/>
-                            <DataGridTextColumn Header="Time Out" Binding="{Binding }" Width="*"/>
-                            <DataGridTextColumn Header="Date" Binding="{Binding }" Width="*"/>
+                            <DataGridTextColumn Header="Name" Width="*">
+                                <DataGridTextColumn.Binding>
+                                    <MultiBinding StringFormat="{}{0} {1}">
+                                        <Binding Path="User.FName"/>
+                                        <Binding Path="User.LName"/>
+                                    </MultiBinding>
+                                </DataGridTextColumn.Binding>
+                            </DataGridTextColumn>
+                            <DataGridTextColumn Header="Time In" Binding="{Binding TimeIn}" Width="*"/>
+                            <DataGridTextColumn Header="Time Out" Binding="{Binding TimeOut}" Width="*"/>
                         </DataGrid.Columns>
                         <DataGrid.CellStyle>
                             <Style TargetType="DataGridCell" BasedOn="{StaticResource MaterialDesignDataGridCell}">

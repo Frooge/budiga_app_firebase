@@ -120,6 +120,14 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="MVVM\View\EmployeeAddView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MVVM\View\EmployeeEditView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MVVM\View\EmployeeView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -184,6 +192,8 @@
     <Compile Include="MVVM\Model\InvoiceModel.cs" />
     <Compile Include="MVVM\Model\UserModel.cs" />
     <Compile Include="MVVM\ViewModel\AdminMainViewModel.cs" />
+    <Compile Include="MVVM\ViewModel\EmployeeAddViewModel.cs" />
+    <Compile Include="MVVM\ViewModel\EmployeeEditViewModel.cs" />
     <Compile Include="MVVM\ViewModel\EmployeeViewModel.cs" />
     <Compile Include="MVVM\ViewModel\InventoryAddViewModel.cs" />
     <Compile Include="MVVM\ViewModel\InventoryEditViewModel.cs" />
@@ -197,6 +207,12 @@
     <Compile Include="MVVM\ViewModel\SalesViewModel.cs" />
     <Compile Include="MVVM\ViewModel\EmployeeMainViewModel.cs" />
     <Compile Include="MVVM\ViewModel\InvoiceViewModel.cs" />
+    <Compile Include="MVVM\View\EmployeeAddView.xaml.cs">
+      <DependentUpon>EmployeeAddView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MVVM\View\EmployeeEditView.xaml.cs">
+      <DependentUpon>EmployeeEditView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MVVM\View\EmployeeView.xaml.cs">
       <DependentUpon>EmployeeView.xaml</DependentUpon>
     </Compile>

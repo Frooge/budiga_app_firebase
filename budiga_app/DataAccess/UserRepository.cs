@@ -127,14 +127,44 @@ namespace budiga_app.DataAccess
             return userRecords;
         }
 
-        public void AddUser(UserModel user)
+        public bool AddEmployeeUser(UserModel user)
         {
-
+            bool result = false;
+            string query = string.Format("INSERT INTO `users` (`fname`, `lname`, `username`, `password`, `contact`, `user_role`) VALUES ('{0}', '{1}', '{2}', '{3}', '{4}', '{5}')", user.FName, user.LName, user.Username, user.Password, user.Contact, user.UserRole);
+            try
+            {
+                database.Connection();
+                MySqlCommand commandDatabase = new MySqlCommand(query, database.conn);
+                commandDatabase.CommandTimeout = 60;
+                commandDatabase.ExecuteReader();
+                MessageBox.Show("Successfully added data", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+                result = true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            return result;
         }
 
-        public void UpdateUser(UserModel user)
+        public bool UpdateUser(UserModel user)
         {
-
+            bool result = false;
+            string query = string.Format("UPDATE `users` SET `fname`='{0}',`lname`='{1}',`username`='{2}',`password`='{3}',`contact`='{4}',`updated_date`='{5}' WHERE id = '{6}'", user.FName, user.LName, user.Username, user.Password, user.Contact, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), user.Id);
+            try
+            {
+                database.Connection();
+                MySqlCommand commandDatabase = new MySqlCommand(query, database.conn);
+                commandDatabase.CommandTimeout = 60;
+                commandDatabase.ExecuteReader();
+                MessageBox.Show("Successfully added data", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+                result = true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            return result;
         }
 
         public void DeleteUser(int id)
