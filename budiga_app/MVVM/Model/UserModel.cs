@@ -20,6 +20,7 @@ namespace budiga_app.MVVM.Model
         private string _userRole;
         private DateTime _createdDate;
         private DateTime? _updatedDate;
+        private ObservableCollection<UserModel> _userRecords;
 
         public int Id { get { return _id; } set { _id = value; OnPropertyChanged("Id"); } }
         public string FName { get { return _fname; } set { _fname = value; OnPropertyChanged("FName"); } }
@@ -30,6 +31,7 @@ namespace budiga_app.MVVM.Model
         public string UserRole { get { return _userRole; } set {_userRole = value; OnPropertyChanged("UserRole"); } }
         public DateTime CreatedDate { get { return _createdDate; } set { _createdDate = value; OnPropertyChanged("CreatedDate"); } }
         public DateTime? UpdatedDate { get { return _updatedDate; } set { _updatedDate = value; OnPropertyChanged("UpdateDate"); } }
+        public ObservableCollection<UserModel> UserRecords { get { return _userRecords; } set { _userRecords = value; OnPropertyChanged("UserRecords"); } }
         private void UserRecords_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
             OnPropertyChanged("UserRecords");

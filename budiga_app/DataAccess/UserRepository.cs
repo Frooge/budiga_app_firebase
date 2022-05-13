@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -92,9 +93,38 @@ namespace budiga_app.DataAccess
             return user;
         }
 
-        public UserModel GetAll()
+        public ObservableCollection<UserModel> GetAllEmployee()
         {
-            return new UserModel();
+            ObservableCollection<UserModel> userRecords = new ObservableCollection<UserModel>();
+            string query = "SELECT * FROM `users` WHERE `user_role` = 'Employee'";
+            MySqlDataReader reader;
+            try
+            {
+                database.Connection();
+                MySqlCommand commandDatabase = new MySqlCommand(query, database.conn);
+                commandDatabase.CommandTimeout = 60;
+                reader = commandDatabase.ExecuteReader();
+                while (reader.Read())
+                {
+                    userRecords.Add(new UserModel()
+                    {
+                        Id = reader.GetInt32("id"),
+                        FName = reader.GetString("fname"),
+                        LName = reader.GetString("lname"),
+                        Username = reader.GetString("username"),
+                        Password = reader.GetString("password"),
+                        Contact = reader.GetString("contact"),
+                        UserRole = reader.GetString("user_role"),
+                        CreatedDate = reader.GetDateTime("created_date"),
+                        UpdatedDate = reader.GetDateTime("updated_date")
+                    });
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            return userRecords;
         }
 
         public void AddUser(UserModel user)
