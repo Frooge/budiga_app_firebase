@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 13, 2022 at 04:50 PM
+-- Generation Time: May 13, 2022 at 06:08 PM
 -- Server version: 10.4.18-MariaDB
 -- PHP Version: 7.3.27
 
@@ -153,9 +153,9 @@ CREATE TABLE `users` (
   `password` varchar(32) NOT NULL,
   `contact` varchar(32) NOT NULL,
   `user_role` enum('Admin','Employee') NOT NULL,
-  `created_date` datetime DEFAULT NULL,
-  `updated_date` datetime DEFAULT NULL,
-  `is_deleted` int(1) DEFAULT NULL
+  `created_date` datetime DEFAULT current_timestamp(),
+  `updated_date` datetime DEFAULT current_timestamp(),
+  `is_deleted` int(1) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -163,8 +163,9 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `fname`, `lname`, `username`, `password`, `contact`, `user_role`, `created_date`, `updated_date`, `is_deleted`) VALUES
-(1, 'John', 'Doe', 'admin', '1234', '09876543210', 'Admin', '2022-04-19 20:46:15', '2022-04-19 20:46:15', 0),
-(2, 'Mary', 'Sue', 'employee', '1234', '09876543210', 'Employee', '2022-04-19 20:46:15', '2022-04-19 20:46:15', 0);
+(1, 'John', 'Doe', 'admin', '1234', '12345678901', 'Admin', '2022-04-19 20:46:15', '2022-05-13 23:54:21', 0),
+(2, 'Mary', 'Sue', 'employee', '1234', '09876543210', 'Employee', '2022-04-19 20:46:15', '2022-04-19 20:46:15', 0),
+(3, 'Jade', 'Rosales', 'JRosales', '1234', '12345678901', 'Employee', '2022-05-13 23:50:33', '2022-05-14 00:02:06', 0);
 
 --
 -- Indexes for dumped tables
@@ -248,7 +249,7 @@ ALTER TABLE `order`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Constraints for dumped tables
