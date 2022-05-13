@@ -137,7 +137,7 @@ namespace budiga_app.DataAccess
                 MySqlCommand commandDatabase = new MySqlCommand(query, database.conn);
                 commandDatabase.CommandTimeout = 60;
                 commandDatabase.ExecuteReader();
-                MessageBox.Show("Successfully added data", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show("Successfully added employee", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
                 result = true;
             }
             catch (Exception ex)
@@ -157,7 +157,7 @@ namespace budiga_app.DataAccess
                 MySqlCommand commandDatabase = new MySqlCommand(query, database.conn);
                 commandDatabase.CommandTimeout = 60;
                 commandDatabase.ExecuteReader();
-                MessageBox.Show("Successfully added data", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show("Successfully updated employee", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
                 result = true;
             }
             catch (Exception ex)

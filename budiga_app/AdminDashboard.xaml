@@ -17,7 +17,7 @@
         FontFamily="{DynamicResource MaterialDesignFont}"
         SizeToContent="WidthAndHeight"
         ResizeMode="CanMinimize"
-        Title="Budiga - Statistics">
+        Title="Budiga - Statistics" Closing="Window_Closing">
     <Window.DataContext>
         <viewModel:AdminMainViewModel/>
     </Window.DataContext>

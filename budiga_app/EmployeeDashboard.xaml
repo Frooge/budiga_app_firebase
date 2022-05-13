@@ -15,7 +15,7 @@
         FontFamily="{DynamicResource MaterialDesignFont}"
         SizeToContent="WidthAndHeight"
         ResizeMode="CanMinimize"
-        Title="Home">
+        Title="Home" Closing="Window_Closing">
     
     <Window.DataContext>
         <viewModel:EmployeeMainViewModel />

@@ -13,6 +13,7 @@ namespace budiga_app.MVVM.ViewModel
     public class EmployeeViewModel
     {
         private UserRepository userRepository;
+        private AttendanceRepository attendanceRepository;
         public AttendanceModel Attendance { get; set; }
         public UserModel User { get; set; }
         public RelayCommand AddEmployeeCommand { get; set; }
@@ -23,9 +24,11 @@ namespace budiga_app.MVVM.ViewModel
             User = new UserModel();
             Attendance = new AttendanceModel();
             userRepository = new UserRepository();
+            attendanceRepository = new AttendanceRepository();
             AddEmployeeCommand = new RelayCommand(param => AddEmployee());
             EditEmployeeCommand = new RelayCommand(param =>EditEmployee((UserModel)param));
-            GetAll();
+            GetAllEmployee();
+            GetAllAttendance();
         }
 
         private void AddEmployee()
@@ -40,9 +43,14 @@ namespace budiga_app.MVVM.ViewModel
             employeeEditView.ShowDialog();
         }
 
-        public void GetAll()
+        public void GetAllEmployee()
         {
             User.UserRecords = userRepository.GetAllEmployee();
+        }
+
+        private void GetAllAttendance()
+        {
+            Attendance.AttendanceRecords = attendanceRepository.GetAllAttendance();
         }
     }
 }

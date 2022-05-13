@@ -63,7 +63,7 @@ namespace budiga_app.MVVM.View
                 UserRepository userRepository = new UserRepository();
                 if (userRepository.UpdateUser(user))
                 {
-                    _vm.GetAll();
+                    _vm.GetAllEmployee();
                     this.Close();
                 }
             }

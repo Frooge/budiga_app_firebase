@@ -105,6 +105,7 @@
     <Compile Include="Core\ObservableObject.cs" />
     <Compile Include="Core\RelayCommand.cs" />
     <Compile Include="Core\dbConn.cs" />
+    <Compile Include="DataAccess\AttendanceRepository.cs" />
     <Compile Include="DataAccess\InvoiceRepository.cs" />
     <Compile Include="DataAccess\ItemRepository.cs" />
     <Compile Include="DataAccess\OrderRepository.cs" />

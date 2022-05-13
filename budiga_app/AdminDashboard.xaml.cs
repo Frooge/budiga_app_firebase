@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using budiga_app.Core;
+using budiga_app.DataAccess;
+using budiga_app.MVVM.Model;
 
 namespace budiga_app
 {
@@ -20,9 +22,16 @@ namespace budiga_app
     /// </summary>
     public partial class AdminDashboard : Window
     {
+        private AttendanceModel attendance;
+        private AttendanceRepository attendanceRepository;
         public AdminDashboard()
         {
             InitializeComponent();
+            attendance = new AttendanceModel()
+            {
+                UserId = Sessions.session.Id,
+                TimeIn = DateTime.Now,
+            };            
             userName.Text = Sessions.session.Username;
         }
 
@@ -34,6 +43,12 @@ namespace budiga_app
             main.WindowStartupLocation = WindowStartupLocation.CenterScreen;
             main.Show();
             this.Close();
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            attendanceRepository = new AttendanceRepository();
+            attendanceRepository.AddAttendance(attendance);
         }
     }
 }
