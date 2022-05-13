@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 12, 2022 at 11:07 AM
+-- Generation Time: May 13, 2022 at 04:50 PM
 -- Server version: 10.4.18-MariaDB
 -- PHP Version: 7.3.27
 
@@ -30,9 +30,8 @@ SET time_zone = "+00:00";
 CREATE TABLE `attendance` (
   `id` bigint(10) NOT NULL,
   `user_id` bigint(11) NOT NULL,
-  `time_in` time NOT NULL,
-  `time_out` time NOT NULL,
-  `date` date NOT NULL
+  `time_in` datetime NOT NULL,
+  `time_out` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -58,7 +57,8 @@ INSERT INTO `invoice` (`id`, `user_id`, `total_price`, `customer_pay`, `customer
 (7, 1, 49, 50, 1, '2022-05-12 02:55:39'),
 (8, 1, 460, 500, 40, '2022-05-12 02:58:06'),
 (9, 1, 398, 500, 102, '2022-05-12 03:05:06'),
-(10, 1, 38, 50, 12, '2022-05-12 03:08:02');
+(10, 1, 38, 50, 12, '2022-05-12 03:08:02'),
+(11, 1, 404, 500, 96, '2022-05-13 16:20:13');
 
 -- --------------------------------------------------------
 
@@ -132,7 +132,12 @@ INSERT INTO `order` (`id`, `item_id`, `invoice_id`, `quantity`, `subtotal_price`
 (8, 5, 8, 3, 60),
 (9, 4, 9, 1, 200),
 (10, 3, 9, 2, 198),
-(11, 2, 10, 2, 38);
+(11, 2, 10, 2, 38),
+(12, 5, 11, 6, 120),
+(13, 6, 11, 1, 24),
+(14, 7, 11, 1, 20),
+(15, 8, 11, 2, 40),
+(16, 4, 11, 1, 200);
 
 -- --------------------------------------------------------
 
@@ -219,7 +224,7 @@ ALTER TABLE `attendance`
 -- AUTO_INCREMENT for table `invoice`
 --
 ALTER TABLE `invoice`
-  MODIFY `id` bigint(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` bigint(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `item`
@@ -237,7 +242,7 @@ ALTER TABLE `item_history`
 -- AUTO_INCREMENT for table `order`
 --
 ALTER TABLE `order`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `users`
