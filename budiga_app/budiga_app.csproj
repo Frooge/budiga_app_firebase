@@ -178,6 +178,7 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MVVM\Model\AttendanceModel.cs" />
     <Compile Include="MVVM\Model\ItemModel.cs" />
     <Compile Include="MVVM\Model\OrderModel.cs" />
     <Compile Include="MVVM\Model\InvoiceModel.cs" />
