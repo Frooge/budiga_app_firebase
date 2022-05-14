@@ -19,62 +19,7 @@
             <ColumnDefinition Width="377*"/>
         </Grid.ColumnDefinitions>
         <StackPanel Grid.ColumnSpan="3">
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Width="632">
-                <materialDesign:Card VerticalAlignment="Top" Height="120" Width="609" Margin="10">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="20*" />
-                            <ColumnDefinition Width="*" />
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="*" />
-                            <RowDefinition Height="2*" />
-                        </Grid.RowDefinitions>
-                        <Label Content="Transactions" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.063,0.478" FontWeight="Bold" FontSize="16"/>
-                        <materialDesign:PopupBox Grid.Column="1" Content="PopupBox" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,7,0,0"/>
-                        <Grid Grid.Row="1">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="*" />
-                            </Grid.ColumnDefinitions>
-                            <Grid Grid.Column="0" Margin="5 10">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*" />
-                                    <ColumnDefinition Width="*" />
-                                </Grid.ColumnDefinitions>
-                                <Image Source="/Resources/Images/Revenue.png" Margin="0,0,16,0" />
-                                <StackPanel Grid.ColumnSpan="2" Margin="73,0,0,0">
-                                    <Label Content="Sales" HorizontalAlignment="Left"/>
-                                    <TextBlock Text="PHP value" FontSize="16" FontWeight="Bold"/>
-                                </StackPanel>
-                            </Grid>
-                            <Grid Grid.Column="1" Margin="5 10">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*" />
-                                    <ColumnDefinition Width="*" />
-                                </Grid.ColumnDefinitions>
-                                <Image Source="/Resources/Images/Products.png" Margin="0,0,16,0" />
-                                <StackPanel Grid.ColumnSpan="2" Margin="73,0,0,0">
-                                    <Label Content="Products" HorizontalAlignment="Left"/>
-                                    <TextBlock Text="value" FontSize="16" FontWeight="Bold"/>
-                                </StackPanel>
-                            </Grid>
-                            <Grid Grid.Column="3" Margin="5 10">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*" />
-                                    <ColumnDefinition Width="*" />
-                                </Grid.ColumnDefinitions>
-                                <Image Source="/Resources/Images/Sales.png" Margin="0,0,17,0" />
-                                <StackPanel Grid.ColumnSpan="2" Margin="72,0,0,0">
-                                    <Label Content="Transactions" HorizontalAlignment="Left"/>
-                                    <TextBlock Text="value" FontSize="16" FontWeight="Bold"/>
-                                </StackPanel>
-                            </Grid>
-                        </Grid>
-                    </Grid>
-                </materialDesign:Card>
-            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Width="632"/>
             <StackPanel Orientation="Horizontal" Width="632" HorizontalAlignment="Left">
                 <materialDesign:Card VerticalAlignment="Top" Height="120" Width="189" Margin="10" BorderThickness="1">
                     <Grid Margin="10">
@@ -86,14 +31,14 @@
                             <RowDefinition Height="*" />
                             <RowDefinition Height="3*" />
                         </Grid.RowDefinitions>
-                        <TextBlock Text="value" HorizontalAlignment="Left" Margin="10 0 0 0" VerticalAlignment="Top" FontSize="16" FontWeight="Bold"/>
+                        <TextBlock Text="Total Growth" HorizontalAlignment="Left" Margin="10 0 0 0" VerticalAlignment="Top" FontSize="16" FontWeight="Bold"/>
                         <Grid Grid.Row="1">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="2*"/>
                                 <RowDefinition Height="*"/>
                             </Grid.RowDefinitions>
-                            <Image Source="/Resources/Images/Growth Chart.png" Margin="10,0,10,0"/>
-                            <Label Grid.Row="1" Content="Total Growth" HorizontalAlignment="Center" VerticalAlignment="Top" FontWeight="Bold"/>
+                            
+                            <Label Grid.Row="1" Content="Php " HorizontalAlignment="Center" VerticalAlignment="Top" FontWeight="Bold"/>
                         </Grid>
                     </Grid>
                 </materialDesign:Card>
@@ -107,22 +52,15 @@
                             <RowDefinition Height="*" />
                             <RowDefinition Height="3*" />
                         </Grid.RowDefinitions>
-                        <TextBlock Text="PHP value" HorizontalAlignment="Left" Margin="10 0 0 0" VerticalAlignment="Top" FontSize="16" FontWeight="Bold"/>
+                        <TextBlock Text="Total Sales" HorizontalAlignment="Left" Margin="10 0 0 0" VerticalAlignment="Top" FontSize="16" FontWeight="Bold"/>
                         <Grid Grid.Row="1">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="2*"/>
                                 <RowDefinition Height="*"/>
                             </Grid.RowDefinitions>
-                            <StackPanel VerticalAlignment="Bottom">
-                                <TextBlock  HorizontalAlignment="Center" Text="Value" />
-                                <ProgressBar HorizontalAlignment="Center" Height="15" Width="100" Value="87" Foreground="#FF264ECA" BorderBrush="{x:Null}">
-                                    <ProgressBar.Background>
-                                        <SolidColorBrush Color="#FF264ECA" Opacity="0.5"/>
-                                    </ProgressBar.Background>
-                                </ProgressBar>
-                            </StackPanel>
+                                
 
-                            <Label Grid.Row="1" Content="Total Sales" HorizontalAlignment="Center" VerticalAlignment="Top" FontWeight="Bold"/>
+                            <Label Grid.Row="1" Content="Php" HorizontalAlignment="Center" VerticalAlignment="Top" FontWeight="Bold"/>
                         </Grid>
                     </Grid>
                 </materialDesign:Card>
@@ -136,19 +74,19 @@
                             <RowDefinition Height="*" />
                             <RowDefinition Height="3*" />
                         </Grid.RowDefinitions>
-                        <TextBlock Text="value" HorizontalAlignment="Left" Margin="10 0 0 0" VerticalAlignment="Top" FontSize="16" FontWeight="Bold"/>
+                        <TextBlock Text="Total Transactions" HorizontalAlignment="Left" Margin="10 0 0 0" VerticalAlignment="Top" FontSize="16" FontWeight="Bold"/>
                         <Grid Grid.Row="1">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="2*"/>
                                 <RowDefinition Height="*"/>
                             </Grid.RowDefinitions>
-                            <Image Source="/Resources/Images/Profit Chart.png" Margin="10,0,10,0"/>
-                            <Label Grid.Row="1" Content="Total Transactions" HorizontalAlignment="Center" VerticalAlignment="Top" FontWeight="Bold"/>
+                            
+                            <Label Grid.Row="1" Content="Php" HorizontalAlignment="Center" VerticalAlignment="Top" FontWeight="Bold"/>
                         </Grid>
                     </Grid>
                 </materialDesign:Card>
             </StackPanel>
-            <ContentControl Content="{Binding CurrentView}"/>
+            <ContentControl Content="{Binding CurrentView}" RenderTransformOrigin="0.602,0.506" Width="1000" Height="386"/>
         </StackPanel>
 
         <materialDesign:Card Margin="0,10,19,0" VerticalAlignment="Top" MinHeight="220" Height="260" BorderThickness="2" HorizontalAlignment="Right" Width="345" Grid.Column="2">

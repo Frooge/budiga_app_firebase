@@ -7,8 +7,8 @@
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
              d:DesignHeight="720" Width="1000">
-    
-    <materialDesign:Card Height="305" Margin="10" Width="auto" HorizontalAlignment="Left" VerticalAlignment="Top">
-        <DataGrid d:ItemsSource="{d:SampleData ItemCount=5}" d:Name="OverviewTable"/>
+
+    <materialDesign:Card Height="305" Margin="10,10,0,0" Width="601" HorizontalAlignment="Left" VerticalAlignment="Top" >
+        <DataGrid d:ItemsSource="{d:SampleData ItemCount=5}" d:Name="OverviewTable" Width="600" SelectionChanged="DataGrid_SelectionChanged"/>
     </materialDesign:Card>
 </UserControl>
