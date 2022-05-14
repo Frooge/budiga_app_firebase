@@ -33,7 +33,8 @@
                               AutoGenerateColumns="False"
                               CanUserResizeColumns="False"
                               CanUserAddRows="False"
-                              CanUserResizeRows="False">
+                              CanUserResizeRows="False"
+                              AlternatingRowBackground="GhostWhite">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Name" Width="*">
                                 <DataGridTextColumn.Binding>

@@ -24,9 +24,9 @@
         <StackPanel Margin="10">
             <Label HorizontalAlignment="Center">Barcode Scanner</Label>
             <ComboBox x:Name="deviceCmbBox" Width="200" Margin="0 0 0 10"></ComboBox>
-            <Image x:Name="scannerCamera" Width="640" Height="360"/>
+            <Image x:Name="scannerCamera" Width="640" Height="329"/>
             <TextBlock x:Name="outputBlock" Text="Scanning result (debug)" HorizontalAlignment="Center"/>
-            <ToggleButton x:Name="scanBtn" HorizontalAlignment="Right" Content="Start Scan" Style="{x:Null}" Checked="scanBtn_Checked" Unchecked="scanBtn_Unchecked">
+            <ToggleButton x:Name="scanBtn" HorizontalAlignment="Right" Content="Start Scan" Style="{x:Null}" Checked="scanBtn_Checked" Unchecked="scanBtn_Unchecked" Width="158" Height="37" Background="#FF264ECA" Foreground="White" BorderBrush="Gainsboro">
                 <ToggleButton.Resources>
                     <Style TargetType="{x:Type Border}">
                         <Setter Property="CornerRadius" Value="5"/>
@@ -47,7 +47,8 @@
                               CanUserResizeRows="False" 
                               Width="480" 
                               Height="450"
-                              Padding="0,0">
+                              Padding="0,0"
+                              AlternatingRowBackground="White">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Product" Binding="{Binding Path=Name}" Width="2*"/>
                     <DataGridTextColumn Header="Barcode" Binding="{Binding Path=Barcode}" Width="*"/>

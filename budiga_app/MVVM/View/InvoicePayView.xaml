@@ -10,7 +10,7 @@
         SizeToContent="WidthAndHeight"
         ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen"
-        Title="InvoicePayView">
+        Title="InvoicePayView" Background="#FFF0F1F5">
     <Grid Margin="10">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
@@ -18,14 +18,14 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Label Content="Customer Pay" FontSize="24" HorizontalAlignment="Center"/>
-        <TextBox x:Name="payTextBox" FontSize="14" Grid.Row="1"/>
-        <Grid Grid.Row="2">
+        <TextBox x:Name="payTextBox" FontSize="14" CaretBrush="#FF264ECA" SelectionBrush="#FF264ECA" Margin="10,68,10,68" Grid.RowSpan="3" />
+        <Grid Grid.Row="2" Margin="0,15,0,0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Button Content="Confirm" Click="Confirm_Click" HorizontalAlignment="Left" Background="#FF264ECA" BorderBrush="#FF264ECA"/>
-            <Button Content="Cancel" Click="Cancel_Click" HorizontalAlignment="Right" Grid.Column="1" BorderBrush="#FF264ECA" Background="#FF264ECA"/>
+            <Button Content="Confirm" Click="Confirm_Click" HorizontalAlignment="Left" Background="White" BorderBrush="#FF264ECA" Foreground="#FF264ECA"/>
+            <Button Content="Cancel" Click="Cancel_Click" HorizontalAlignment="Right" Grid.Column="1" BorderBrush="#FF264ECA" Background="White" Foreground="#FF264ECA"/>
         </Grid>
     </Grid>
 </Window>

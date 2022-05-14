@@ -27,15 +27,15 @@
             </Grid.RowDefinitions>
 
             <Label Content="Product:" FontSize="14" Grid.Column="0" Grid.Row="0"/>
-            <TextBox x:Name="productTextBox" FontSize="14" Grid.Column="1" Grid.Row="0"/>
+            <TextBox x:Name="productTextBox" FontSize="14" Grid.Column="1" Grid.Row="0" CaretBrush="#FF264ECA" SelectionBrush="#FF264ECA"/>
             <Label Content="Barcode:" FontSize="14" Grid.Column="0" Grid.Row="1"/>
-            <TextBox x:Name="barcodeTextBox" PreviewTextInput="NumberValidationTextBox" FontSize="14" Grid.Column="1" Grid.Row="1"/>
+            <TextBox x:Name="barcodeTextBox" PreviewTextInput="NumberValidationTextBox" FontSize="14" Grid.Column="1" Grid.Row="1" SelectionBrush="#FF264ECA" CaretBrush="#FF264ECA"/>
             <Label Content="Brand:" FontSize="14" Grid.Column="0" Grid.Row="2"/>
-            <TextBox x:Name="brandTextBox" FontSize="14" Grid.Column="1" Grid.Row="2"/>
+            <TextBox x:Name="brandTextBox" FontSize="14" Grid.Column="1" Grid.Row="2" CaretBrush="#FF264ECA" SelectionBrush="#FF264ECA"/>
             <Label Content="Price:" FontSize="14" Grid.Column="0" Grid.Row="3"/>
-            <TextBox x:Name="priceTextBox" PreviewTextInput="NumberValidationTextBox" FontSize="14" Grid.Column="1" Grid.Row="3"/>
+            <TextBox x:Name="priceTextBox" PreviewTextInput="NumberValidationTextBox" FontSize="14" Grid.Column="1" Grid.Row="3" SelectionBrush="#FF264ECA" CaretBrush="#FF264ECA"/>
             <Label Content="Qty:" FontSize="14" Grid.Column="0" Grid.Row="4"/>
-            <TextBox x:Name="qtyTextBox" PreviewTextInput="NumberValidationTextBox" FontSize="14" Grid.Column="1" Grid.Row="4"/>
+            <TextBox x:Name="qtyTextBox" PreviewTextInput="NumberValidationTextBox" FontSize="14" Grid.Column="1" Grid.Row="4" CaretBrush="#FF264ECA" SelectionBrush="#FF264ECA"/>
         </Grid>
         <Grid Margin="0,20,0,0">
             <Grid.ColumnDefinitions>
