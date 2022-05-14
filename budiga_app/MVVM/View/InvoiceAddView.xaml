@@ -12,7 +12,7 @@
         SizeToContent="WidthAndHeight"
         ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen"
-        Title="InvoiceAddView">
+        Title="InvoiceAddView" Closing="window_Closing" Loaded="ScannerControl_Loaded">
     <Window.DataContext>
         <viewModel:InvoiceAddViewModel/>
     </Window.DataContext>
