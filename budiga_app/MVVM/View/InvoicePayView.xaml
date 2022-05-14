@@ -24,8 +24,8 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Button Content="Confirm" Click="Confirm_Click" HorizontalAlignment="Left"/>
-            <Button Content="Cancel" Click="Cancel_Click" HorizontalAlignment="Right" Grid.Column="1"/>
+            <Button Content="Confirm" Click="Confirm_Click" HorizontalAlignment="Left" Background="#FF264ECA" BorderBrush="#FF264ECA"/>
+            <Button Content="Cancel" Click="Cancel_Click" HorizontalAlignment="Right" Grid.Column="1" BorderBrush="#FF264ECA" Background="#FF264ECA"/>
         </Grid>
     </Grid>
 </Window>

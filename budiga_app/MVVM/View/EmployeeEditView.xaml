@@ -41,8 +41,8 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Button Content="Update" Click="UpdateBtn_Click" HorizontalAlignment="Left"/>
-            <Button Content="Cancel" Click="CancelBtn_Click" HorizontalAlignment="Right" Grid.Column="1"/>
+            <Button Content="Update" Click="UpdateBtn_Click" HorizontalAlignment="Left" Background="#FF264ECA" BorderBrush="#FF264ECA"/>
+            <Button Content="Cancel" Click="CancelBtn_Click" HorizontalAlignment="Right" Grid.Column="1" BorderBrush="#FF264ECA" Background="#FF264ECA"/>
         </Grid>
     </StackPanel>
 </Window>

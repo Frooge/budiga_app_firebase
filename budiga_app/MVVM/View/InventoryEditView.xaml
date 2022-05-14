@@ -45,7 +45,7 @@
                 <materialDesign:Card Grid.Column="0" Margin="10,0">
                     <TextBlock x:Name="qtyTextBlock" Text="1" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                 </materialDesign:Card>
-                <Button Content="+" Grid.Column="1" Padding="0" Click="PlusBtn_Click"/>
+                <Button Content="+" Grid.Column="1" Padding="0" Click="PlusBtn_Click" Background="#FF264ECA" BorderBrush="#FF264ECA"/>
                 <TextBox x:Name="qtyTextBox" PreviewTextInput="NumberValidationTextBox" Grid.Column="2" Text="0" FontSize="14" Margin="10,0,0,0" HorizontalAlignment="Stretch"/>
             </Grid>
         </Grid>
@@ -54,8 +54,8 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Button Content="Update" Click="UpdateBtn_Click" HorizontalAlignment="Left"/>
-            <Button Content="Cancel" Click="CancelBtn_Click" HorizontalAlignment="Right" Grid.Column="1"/>
+            <Button Content="Update" Click="UpdateBtn_Click" HorizontalAlignment="Left" Background="#FF264ECA" BorderBrush="#FF264ECA"/>
+            <Button Content="Cancel" Click="CancelBtn_Click" HorizontalAlignment="Right" Grid.Column="1" BorderBrush="#FF264ECA" Background="#FF264ECA"/>
         </Grid>
     </StackPanel>
 </Window>
