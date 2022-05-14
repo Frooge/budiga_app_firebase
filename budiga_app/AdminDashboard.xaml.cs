@@ -32,7 +32,7 @@ namespace budiga_app
                 UserId = Sessions.session.Id,
                 TimeIn = DateTime.Now,
             };            
-            userName.Text = Sessions.session.Username;
+            userName.Text = Sessions.session.FName +" "+ Sessions.session.LName + " | " +Sessions.session.UserRole;
         }
 
         private void LogoutBtn_Click(object sender, RoutedEventArgs e)
