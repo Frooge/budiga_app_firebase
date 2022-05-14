@@ -20,6 +20,10 @@
                         <SolidColorBrush Color="White" Opacity="0.87"/>
                     </Button.Foreground>
                 </Button>
+                <Label Content="Start:" FontSize="16" Margin="500,0,0,0"></Label>
+                <DatePicker x:Name="StartDate" Width="120" HorizontalAlignment="Right" Text="Start" HorizontalContentAlignment="Center" Style="{StaticResource MaterialDesignDatePicker}"/>
+                <Label Content="End:" FontSize="16" Margin="10,0,0,0"></Label>
+                <DatePicker x:Name="EndDate" Width="120" HorizontalAlignment="Right" Text="End" HorizontalContentAlignment="Center" Style="{StaticResource MaterialDesignDatePicker}"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal" Margin="10,10,10,10" Width="967">
                 <materialDesign:Card HorizontalAlignment="Left" Margin="0 0 10 0" VerticalAlignment="Top" Height="500" Width="550">
