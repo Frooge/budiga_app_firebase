@@ -24,6 +24,7 @@ namespace budiga_app.MVVM.ViewModel
         {
             itemRepository = new ItemRepository();
             _item = new ItemModel();
+            Item = new ItemModel();
             AddItemCommand = new RelayCommand(param => AddItem());
             EditItemCommand = new RelayCommand(param => EditItem((ItemModel)param));
             SearchItemCommand = new RelayCommand(param => SearchItem((string)param));
@@ -33,13 +34,15 @@ namespace budiga_app.MVVM.ViewModel
         public void GetAll()
         {
             _item.ItemRecords = itemRepository.GetAllItems();
-            Item = _item;
+            Item.ItemRecords = _item.ItemRecords;
         }
 
         private void SearchItem(string searchTxt = "")
         {
-            Item.ItemRecords = new ObservableCollection<ItemModel> (_item.ItemRecords.Where(i => i.Name.Contains(searchTxt)));
-                                 
+            Item.ItemRecords = new ObservableCollection<ItemModel>(
+                _item.ItemRecords.Where(i => i.Name.ToLower().Contains(searchTxt.ToLower())
+                || i.Brand.ToLower().Contains(searchTxt.ToLower())
+                || i.Barcode.ToLower().Contains(searchTxt.ToLower())).ToList());               
         }
 
         private void AddItem()
