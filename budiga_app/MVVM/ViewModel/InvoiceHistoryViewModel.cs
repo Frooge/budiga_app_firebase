@@ -35,7 +35,7 @@ namespace budiga_app.MVVM.ViewModel
         private void SearchItem(string searchTxt = "")
         {
             Invoice.InvoiceRecords = new ObservableCollection<InvoiceModel>(
-                _invoice.InvoiceRecords.Where(i => i.InvoiceOrderRecords.Where(o => o.Item.Barcode.ToLower().Contains(searchTxt.ToLower())
+                _invoice.InvoiceRecords.Where(i => i.InvoiceOrderRecords.Where(o => o.InvoiceId.ToString().Equals(searchTxt.ToLower())
                 || o.Item.Name.ToLower().Contains(searchTxt.ToLower())
                 || o.Item.Brand.ToLower().Contains(searchTxt.ToLower())).Any() == true).ToList());
         }
