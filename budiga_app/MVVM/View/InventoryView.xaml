@@ -22,7 +22,7 @@
                 </Button>
                 <Border Padding="0">
                     <StackPanel Orientation="Horizontal">
-                        <TextBox Width="190" x:Name="searchField" TextChanged="TextBox_TextChanged" Margin="5">
+                        <TextBox Width="190" x:Name="searchField" Margin="5">
                             <b:Interaction.Triggers>
                                 <b:EventTrigger EventName="TextChanged">
                                     <b:InvokeCommandAction Command="{Binding SearchItemCommand}"

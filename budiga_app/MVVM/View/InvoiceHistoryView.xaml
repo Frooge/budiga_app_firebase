@@ -21,11 +21,11 @@
         <StackPanel Orientation="Horizontal">
             <Border>
                 <StackPanel Orientation="Horizontal">
-                    <TextBox Width="190" x:Name="searchField" TextChanged="TextBox_TextChanged">
+                    <TextBox Width="190" x:Name="searchField" Margin="5">
                         <b:Interaction.Triggers>
                             <b:EventTrigger EventName="TextChanged">
                                 <b:InvokeCommandAction Command="{Binding SearchItemCommand}"
-                    CommandParameter="{Binding Text, ElementName=searchField}"/>
+                                                       CommandParameter="{Binding Text, ElementName=searchField}"/>
                             </b:EventTrigger>
                         </b:Interaction.Triggers>
                     </TextBox>

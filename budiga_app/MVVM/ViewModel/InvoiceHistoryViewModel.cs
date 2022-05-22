@@ -12,16 +12,15 @@ namespace budiga_app.MVVM.ViewModel
 {
     public class InvoiceHistoryViewModel
     {
+        private InvoiceModel _invoice;
         private InvoiceRepository invoiceRepository;
         public InvoiceModel Invoice { get; set; }
-
-        private InvoiceModel _invoice;
-
         public RelayCommand SearchItemCommand { get; set; }
+
         public InvoiceHistoryViewModel()
         {
             _invoice = new InvoiceModel();
-            Invoice = _invoice;
+            Invoice = new InvoiceModel();
             invoiceRepository = new InvoiceRepository();
             SearchItemCommand = new RelayCommand(param => SearchItem((string)param));
             GetAll();
@@ -36,9 +35,9 @@ namespace budiga_app.MVVM.ViewModel
         private void SearchItem(string searchTxt = "")
         {
             Invoice.InvoiceRecords = new ObservableCollection<InvoiceModel>(
-                _invoice.InvoiceRecords.Where(i => i.InvoiceOrderRecords.Where(o => o.Item.Barcode.ToLower().Contains(searchTxt.ToLower()))
-                || i.InvoiceOrderRecords.Where(o => o.Item.Name.ToLower().Contains(searchTxt.ToLower()))
-                || i.InvoiceOrderRecords.Where(o => o.Item.Brand.ToLower().Contains(searchTxt.ToLower())));
+                _invoice.InvoiceRecords.Where(i => i.InvoiceOrderRecords.Where(o => o.Item.Barcode.ToLower().Contains(searchTxt.ToLower())
+                || o.Item.Name.ToLower().Contains(searchTxt.ToLower())
+                || o.Item.Brand.ToLower().Contains(searchTxt.ToLower())).Any() == true).ToList());
         }
     }
 }
