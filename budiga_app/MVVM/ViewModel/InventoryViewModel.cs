@@ -17,19 +17,29 @@ namespace budiga_app.MVVM.ViewModel
         public ItemModel Item { get; set; }
         public RelayCommand AddItemCommand { get; set; }
         public RelayCommand EditItemCommand { get; set; }
+        public RelayCommand SearchItemCommand { get; set; }
+        private ItemModel _item;
 
         public InventoryViewModel()
         {
             itemRepository = new ItemRepository();
-            Item = new ItemModel();
+            _item = new ItemModel();
             AddItemCommand = new RelayCommand(param => AddItem());
             EditItemCommand = new RelayCommand(param => EditItem((ItemModel)param));
+            SearchItemCommand = new RelayCommand(param => SearchItem((string)param));
             GetAll();
         }
 
         public void GetAll()
         {
-            Item.ItemRecords = itemRepository.GetAllItems();
+            _item.ItemRecords = itemRepository.GetAllItems();
+            Item = _item;
+        }
+
+        private void SearchItem(string searchTxt = "")
+        {
+            Item.ItemRecords = new ObservableCollection<ItemModel> (_item.ItemRecords.Where(i => i.Name.Contains(searchTxt)));
+                                 
         }
 
         private void AddItem()

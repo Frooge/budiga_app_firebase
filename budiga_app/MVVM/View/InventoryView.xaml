@@ -15,11 +15,27 @@
     <Grid>
         <StackPanel>
             <StackPanel Orientation="Horizontal" Margin="10">
-                <Button Command="{Binding AddItemCommand}" Grid.Row="3" Content="Add" HorizontalAlignment="Left" VerticalAlignment="Top" Width="120" BorderBrush="{x:Null}" Background="#FF355ACC" FontStretch="Normal" FontStyle="Normal">
+                <Button Command="{Binding AddItemCommand}" Grid.Row="3" Content="Add" HorizontalAlignment="Left" VerticalAlignment="Top" Width="120" BorderBrush="{x:Null}" Background="#FF355ACC" FontStretch="Normal" FontStyle="Normal" Click="Button_Click">
                     <Button.Foreground>
                         <SolidColorBrush Color="White" Opacity="0.87"/>
                     </Button.Foreground>
                 </Button>
+                <Border Padding="0">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBox Width="190" x:Name="searchField" TextChanged="TextBox_TextChanged" Margin="5">
+                            <b:Interaction.Triggers>
+                                <b:EventTrigger EventName="TextChanged">
+                                    <b:InvokeCommandAction Command="{Binding SearchItemCommand}"
+                                                       CommandParameter="{Binding ElementName=searchField,Path=Text}"/>
+                                </b:EventTrigger>
+                            </b:Interaction.Triggers>
+                        </TextBox>
+                        
+                        <Image Source="/Resources/Images/SearchIcon.png" Width="20" />
+                    </StackPanel>
+                   
+                </Border>
+               
                 <Label Content="Start:" FontSize="16" Margin="500,0,0,0"></Label>
                 <DatePicker x:Name="StartDate" Width="120" HorizontalAlignment="Right" Text="Start" HorizontalContentAlignment="Center" Style="{StaticResource MaterialDesignDatePicker}"/>
                 <Label Content="End:" FontSize="16" Margin="10,0,0,0"></Label>

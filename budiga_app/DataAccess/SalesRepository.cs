@@ -204,7 +204,5 @@ namespace budiga_app.DataAccess
             return totalTransactions;
         }
 
-        public int 
-
     }
 }

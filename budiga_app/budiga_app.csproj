@@ -358,6 +358,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="budiga_app.sql" />
+    <Resource Include="Resources\Images\SearchIcon.png" />
     <SplashScreen Include="Resources\Images\splashscreen.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </SplashScreen>
