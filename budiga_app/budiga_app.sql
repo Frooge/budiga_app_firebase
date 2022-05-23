@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 13, 2022 at 06:08 PM
+-- Generation Time: May 22, 2022 at 06:24 PM
 -- Server version: 10.4.18-MariaDB
--- PHP Version: 7.3.27
+-- PHP Version: 7.4.18
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -33,6 +33,19 @@ CREATE TABLE `attendance` (
   `time_in` datetime NOT NULL,
   `time_out` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `attendance`
+--
+
+INSERT INTO `attendance` (`id`, `user_id`, `time_in`, `time_out`) VALUES
+(1, 2, '2022-05-22 21:07:33', '2022-05-22 21:07:50'),
+(2, 2, '2022-05-22 21:39:03', '2022-05-22 21:39:13'),
+(3, 2, '2022-05-22 21:40:57', '2022-05-22 21:41:19'),
+(4, 2, '2022-05-22 22:24:51', '2022-05-22 22:27:16'),
+(5, 2, '2022-05-23 00:12:41', '2022-05-23 00:13:19'),
+(6, 2, '2022-05-23 00:14:12', '2022-05-23 00:14:36'),
+(7, 2, '2022-05-23 00:16:01', '2022-05-23 00:16:30');
 
 -- --------------------------------------------------------
 
@@ -81,7 +94,7 @@ CREATE TABLE `item` (
 --
 
 INSERT INTO `item` (`id`, `barcode`, `name`, `brand`, `price`, `quantity`, `is_deleted`) VALUES
-(0, 'N/A', 'Skyflakes', 'Biskwet', 11, 6, 0),
+(0, 'N/A', 'Skyflakes', 'Biskwet', 11, 6, 1),
 (2, 'N/A', 'Shampoo', 'Sunsilk', 19, 2, 0),
 (3, 'N/A', 'Yakult', 'Nestle', 99, 989, 0),
 (4, 'N/A', 'Magnolia', 'Nestle', 200, 2, 0),
@@ -104,7 +117,8 @@ CREATE TABLE `item_history` (
   `brand` varchar(64) NOT NULL,
   `price` float NOT NULL,
   `quantity` int(11) NOT NULL,
-  `action` varchar(10) NOT NULL
+  `action` varchar(10) NOT NULL,
+  `committed_date` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -219,7 +233,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `attendance`
 --
 ALTER TABLE `attendance`
-  MODIFY `id` bigint(10) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `invoice`
