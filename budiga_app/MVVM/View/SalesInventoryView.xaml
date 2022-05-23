@@ -4,12 +4,40 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:budiga_app.MVVM.View"
-             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
              mc:Ignorable="d" 
              d:DesignHeight="720" Width="1000">
     
-    <materialDesign:Card Height="305" Margin="10" Width="auto" HorizontalAlignment="Left" VerticalAlignment="Top">
-        <DataGrid d:ItemsSource="{d:SampleData ItemCount=5}" Margin="0,0,10,0" d:Name="InventoryTable"/>
+    <materialDesign:Card Height="305" Margin="10" Width="600" HorizontalAlignment="Left" VerticalAlignment="Top">
+        <DataGrid x:Name="SalesInventoryTable"                              
+                              ItemsSource="{Binding Item.ItemRecords}"
+                              IsReadOnly="True"
+                              AutoGenerateColumns="False"
+                              CanUserResizeColumns="False"
+                              CanUserAddRows="False"
+                              CanUserResizeRows="False"
+                              Padding="0,0" SelectionChanged="SalesInventoryTable_SelectionChanged">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Date" Binding="{Binding Path=Name}" Width="*"/>
+                <DataGridTextColumn Header="Item" Binding="{Binding Path=Barcode}" Width="*"/>
+                <DataGridTextColumn Header="Brand" Binding="{Binding Path=Brand}" Width="*"/>
+                <DataGridTextColumn Header="Price" Binding="{Binding Path=Price}" Width="*"/>
+                <DataGridTextColumn Header="Units Sold" Binding="{Binding Path=Quantity}" Width="*"/>
+                <DataGridTextColumn Header="Total Price" Binding="{Binding Path=TotalPrice}" Width="*"/>
+            </DataGrid.Columns>
+            <DataGrid.CellStyle>
+                <Style TargetType="DataGridCell" BasedOn="{StaticResource MaterialDesignDataGridCell}">
+                    <Setter Property="BorderThickness" Value="0"/>
+                    <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+                </Style>
+            </DataGrid.CellStyle>
+            <b:Interaction.Triggers>
+                <b:EventTrigger EventName="MouseDoubleClick">
+                    <b:InvokeCommandAction Command="{Binding EditItemCommand}"
+                                                       CommandParameter="{Binding Path=SelectedItem, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=DataGrid}}"/>
+                </b:EventTrigger>
+            </b:Interaction.Triggers>
+        </DataGrid>
     </materialDesign:Card>
 
 </UserControl>
