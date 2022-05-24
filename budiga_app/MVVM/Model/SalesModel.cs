@@ -24,5 +24,6 @@ namespace budiga_app.MVVM.Model
         public int UnitsSold { get { return _unitsSold; } set { _unitsSold = value; OnPropertyChanged("UnitsSold"); } }
         public float SubtotalPrice { get { return _subtotalPrice; } set { _subtotalPrice = value; OnPropertyChanged("SubtotalPrice"); } }
         public ItemModel Item { get { return _item; } set { _item = value; OnPropertyChanged("Item"); } }
+        public ObservableCollection<SalesModel> OrderTransactionRecords { get { return _orderTransactionRecords; } set { _orderTransactionRecords = value; OnPropertyChanged("OrderTransactionRecords"); } }
     }
 }
