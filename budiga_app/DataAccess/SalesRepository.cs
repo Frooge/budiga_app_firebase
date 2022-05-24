@@ -204,5 +204,28 @@ namespace budiga_app.DataAccess
             return totalTransactions;
         }
 
+        // Sales Overview Table
+        // SELECT invoice.created_date, SUM(invoice.total_price) AS TOTAL, SUM(`order.quantity`) AS UNITS_SOLD FROM `order` INNER JOIN `invoice` ON `order.invoice_id` = `invoice.id` GROUP BY `invoice.created_date`
+
+        // Sales Inventory Table
+        // SELECT `invoice.created_date`, `item.name`, `item.brand`, `item.price`, `order.quantity`, `order.subtotal_price` FROM ((`order` INNER JOIN `invoice` ON `invoice.id` = `order.invoice_id`)INNER JOIN `item.id` = `order.item_id`
+
+        // Total Sales
+        // SELECT SUM(`invoice.total_price`) FROM `invoice`
+
+        // Transactions
+        // SELECT COUNT(*) from `invoice`
+
+        // Accumulated Sales
+        // SELECT SUM(`invoice.total_price`) FROM `invoice`
+
+        // Daily Sales
+        // SELECT SUM(`total_price`) FROM `invoice` WHERE DAY(`created_date`) = DAY(now())
+
+        // Monthly Sales
+        // SELECT SUM(`total_price`) FROM `invoice` WHERE MONTH(`created_date`) = MONTH(now()) and YEAR(`created_date`) = YEAR(now())
+
+        // Yearly Sales
+        // SELECT SUM(`total_price`) FROM `invoice` WHERE YEAR(`created_date`) = YEAR(now())
     }
 }
