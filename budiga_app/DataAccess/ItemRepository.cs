@@ -121,5 +121,25 @@ namespace budiga_app.DataAccess
             }
             return result;
         }
+
+        public bool DeleteItem(int id)
+        {
+            bool result = false;
+            string query = string.Format("UPDATE `item` SET `is_deleted`='1' WHERE `id`={0}", id);
+            try
+            {
+                database.Connection();
+                MySqlCommand commandDatabase = new MySqlCommand(query, database.conn);
+                commandDatabase.CommandTimeout = 60;
+                commandDatabase.ExecuteReader();
+                MessageBox.Show("Successfully deleted data", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+                result = true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            return result;
+        }
     }
 }

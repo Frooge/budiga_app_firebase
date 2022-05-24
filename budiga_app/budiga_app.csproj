@@ -139,7 +139,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="MVVM\View\InventoryHistory.xaml">
+    <Page Include="MVVM\View\InventoryHistoryView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -229,8 +229,8 @@
     <Compile Include="MVVM\View\InventoryEditView.xaml.cs">
       <DependentUpon>InventoryEditView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MVVM\View\InventoryHistory.xaml.cs">
-      <DependentUpon>InventoryHistory.xaml</DependentUpon>
+    <Compile Include="MVVM\View\InventoryHistoryView.xaml.cs">
+      <DependentUpon>InventoryHistoryView.xaml</DependentUpon>
     </Compile>
     <Compile Include="MVVM\View\InventoryView.xaml.cs">
       <DependentUpon>InventoryView.xaml</DependentUpon>

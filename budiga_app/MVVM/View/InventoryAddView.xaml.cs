@@ -55,11 +55,12 @@ namespace budiga_app.MVVM.View
                 ItemRepository itemRepository = new ItemRepository();
                 if (itemRepository.AddItem(item))
                 {
+                    ItemHistoryRepository itemHistoryRepository = new ItemHistoryRepository();
+                    itemHistoryRepository.AddItemHistory(item, "ADDED");
                     _vm.GetAll();
                     this.Close();
                 }
-            }
-            
+            }            
         }
 
         private void CancelBtn_Click(object sender, RoutedEventArgs e)

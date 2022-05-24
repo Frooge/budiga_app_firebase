@@ -14,11 +14,12 @@ namespace budiga_app.MVVM.ViewModel
     public class InventoryViewModel : ObservableObject
     {
         private ItemRepository itemRepository;
+        private ItemModel _item;
         public ItemModel Item { get; set; }
         public RelayCommand AddItemCommand { get; set; }
         public RelayCommand EditItemCommand { get; set; }
         public RelayCommand SearchItemCommand { get; set; }
-        private ItemModel _item;
+        public RelayCommand ItemHistoryCommand { get; set; }
 
         public InventoryViewModel()
         {
@@ -28,6 +29,7 @@ namespace budiga_app.MVVM.ViewModel
             AddItemCommand = new RelayCommand(param => AddItem());
             EditItemCommand = new RelayCommand(param => EditItem((ItemModel)param));
             SearchItemCommand = new RelayCommand(param => SearchItem((string)param));
+            ItemHistoryCommand = new RelayCommand(param => ItemHistory());
             GetAll();
         }
 
@@ -55,6 +57,12 @@ namespace budiga_app.MVVM.ViewModel
         {
             InventoryEditView inventoryEditView = new InventoryEditView(this, item);
             inventoryEditView.ShowDialog();
+        }
+
+        private void ItemHistory()
+        {
+            InventoryHistoryView inventoryHistoryView = new InventoryHistoryView(this);
+            inventoryHistoryView.ShowDialog();
         }
     }
 }

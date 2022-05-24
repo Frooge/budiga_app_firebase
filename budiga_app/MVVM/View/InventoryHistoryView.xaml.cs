@@ -1,4 +1,5 @@
-﻿using System;
+﻿using budiga_app.MVVM.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,11 +18,18 @@ namespace budiga_app.MVVM.View
     /// <summary>
     /// Interaction logic for InventoryHistory.xaml
     /// </summary>
-    public partial class InventoryHistory : Window
+    public partial class InventoryHistoryView : Window
     {
-        public InventoryHistory()
+        private InventoryViewModel _vm;
+        public InventoryHistoryView(InventoryViewModel vm)
         {
             InitializeComponent();
+            _vm = vm;
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            _vm.GetAll();
         }
     }
 }
