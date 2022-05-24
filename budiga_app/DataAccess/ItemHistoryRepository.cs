@@ -22,7 +22,7 @@ namespace budiga_app.DataAccess
         public ObservableCollection<ItemHistoryModel> GetAllItemHistory()
         {
             ObservableCollection<ItemHistoryModel> ItemHistoryRecords = new ObservableCollection<ItemHistoryModel>();
-            string query = "SELECT * FROM `item_history`";
+            string query = "SELECT * FROM `item_history` ORDER BY `id` DESC";
             MySqlDataReader reader;
             try
             {
@@ -36,6 +36,7 @@ namespace budiga_app.DataAccess
                     {
                         Id = reader.GetInt32("id"),
                         ItemId = reader.GetInt32("item_id"),
+                        Barcode = reader.GetString("barcode"),
                         Name = reader.GetString("name"),
                         Brand = reader.GetString("brand"),
                         Price = reader.GetFloat("price"),
@@ -55,14 +56,13 @@ namespace budiga_app.DataAccess
         public bool AddItemHistory(ItemModel item, string action)
         {
             bool result = false;
-            string query = string.Format("INSERT INTO `item_history` (`item_id`, `name`, `barcode`, `brand`, `price`, `quantity`, `action`) VALUES ('{0}', '{1}', '{2}', '{3}', '{4}', '{5}')", item.Id, item.Name, item.Barcode, item.Brand, item.Price, item.Quantity, action);
+            string query = string.Format("INSERT INTO `item_history` (`item_id`, `barcode`, `name`, `brand`, `price`, `quantity`, `action`) VALUES ('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', '{6}')", item.Id, item.Barcode, item.Name, item.Brand, item.Price, item.Quantity, action);
             try
             {
                 database.Connection();
                 MySqlCommand commandDatabase = new MySqlCommand(query, database.conn);
                 commandDatabase.CommandTimeout = 60;
                 commandDatabase.ExecuteReader();
-                MessageBox.Show("Successfully added data", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
                 result = true;
             }
             catch (Exception ex)
@@ -97,7 +97,7 @@ namespace budiga_app.DataAccess
                 MySqlCommand commandDatabase = new MySqlCommand(query, database.conn);
                 commandDatabase.CommandTimeout = 60;
                 commandDatabase.ExecuteReader();
-                MessageBox.Show("Successfully added data", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show("Successfully undid action", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
                 result = true;
             }
             catch (Exception ex)

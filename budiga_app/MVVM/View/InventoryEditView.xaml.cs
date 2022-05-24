@@ -24,13 +24,13 @@ namespace budiga_app.MVVM.View
     public partial class InventoryEditView : Window
     {
         private InventoryViewModel _vm;
-        private int id;
+        private ItemModel _item;
 
         public InventoryEditView(InventoryViewModel vm, ItemModel item)
         {
             InitializeComponent();
             _vm = vm;
-            id = item.Id;
+            _item = item;
             productTextBox.Text = item.Name;
             barcodeTextBox.Text = (item.Barcode != null) ? item.Barcode.ToString() : "N/A";
             brandTextBox.Text = item.Brand;
@@ -58,7 +58,7 @@ namespace budiga_app.MVVM.View
             {
                 ItemModel item = new ItemModel()
                 {
-                    Id = id,
+                    Id = _item.Id,
                     Barcode = (string.IsNullOrEmpty(barcodeTextBox.Text)) ? "N/A" : barcodeTextBox.Text,
                     Name = productTextBox.Text,
                     Brand = brandTextBox.Text,
@@ -68,12 +68,31 @@ namespace budiga_app.MVVM.View
                 ItemRepository itemRepository = new ItemRepository();
                 if (itemRepository.UpdateItem(item))
                 {
+                    ItemHistoryRepository itemHistoryRepository = new ItemHistoryRepository();
+                    itemHistoryRepository.AddItemHistory(_item, "UPDATED");
                     _vm.GetAll();
                     this.Close();
                 }
             }
             
         }
+
+        private void DeleteBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if (MessageBox.Show("Continue Action?", "Warning", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
+            {
+                ItemRepository itemRepository = new ItemRepository();
+                if (itemRepository.DeleteItem(_item.Id))
+                {
+                    ItemHistoryRepository itemHistoryRepository = new ItemHistoryRepository();
+                    itemHistoryRepository.AddItemHistory(_item, "DELETED");
+                    _vm.GetAll();
+                    this.Close();
+                }
+            }
+            
+        }
+
         private void CancelBtn_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
