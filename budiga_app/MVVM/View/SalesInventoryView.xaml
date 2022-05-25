@@ -16,7 +16,7 @@
                               CanUserResizeColumns="False"
                               CanUserAddRows="False"
                               CanUserResizeRows="False"
-                              Padding="0,0">//SelectionChanged="SalesInventoryTable_SelectionChanged"
+                              Padding="0,0" SelectionChanged="SalesInventoryTable_SelectionChanged">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Date" Binding="{Binding Path=Name}" Width="*"/>
                 <DataGridTextColumn Header="Item" Binding="{Binding Path=Barcode}" Width="*"/>

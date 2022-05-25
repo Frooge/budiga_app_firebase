@@ -1,6 +1,7 @@
 ﻿using budiga_app.Core;
 using budiga_app.DataAccess;
 using budiga_app.MVVM.Model;
+using budiga_app.MVVM.View;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -15,6 +16,7 @@ namespace budiga_app.MVVM.ViewModel
         private InvoiceModel _invoice;
         private InvoiceRepository invoiceRepository;
         public InvoiceModel Invoice { get; set; }
+        public RelayCommand GetReceiptCommand { get; set; }
         public RelayCommand SearchItemCommand { get; set; }
 
         public InvoiceHistoryViewModel()
@@ -22,6 +24,7 @@ namespace budiga_app.MVVM.ViewModel
             _invoice = new InvoiceModel();
             Invoice = new InvoiceModel();
             invoiceRepository = new InvoiceRepository();
+            GetReceiptCommand = new RelayCommand(param => GetReceipt((InvoiceModel)param));
             SearchItemCommand = new RelayCommand(param => SearchItem((string)param));
             GetAll();
         }
@@ -30,6 +33,12 @@ namespace budiga_app.MVVM.ViewModel
         {
             _invoice.InvoiceRecords = invoiceRepository.GetAllInvoice();
             Invoice.InvoiceRecords = _invoice.InvoiceRecords;
+        }
+
+        private void GetReceipt(InvoiceModel invoice)
+        {
+            InvoiceReceiptView invoiceReceiptView = new InvoiceReceiptView(invoice);
+            invoiceReceiptView.ShowDialog();
         }
 
         private void SearchItem(string searchTxt = "")
