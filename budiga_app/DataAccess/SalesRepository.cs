@@ -205,10 +205,11 @@ namespace budiga_app.DataAccess
         }
 
         // Sales Overview Table
-        // SELECT invoice.created_date, SUM(invoice.total_price) AS TOTAL, SUM(`order.quantity`) AS UNITS_SOLD FROM `order` INNER JOIN `invoice` ON `order.invoice_id` = `invoice.id` GROUP BY `invoice.created_date`
+        // SELECT invoice.created_date, SUM(`order`.`subtotal_price`) AS TOTAL, SUM(`order`.quantity) AS UNITS_SOLD FROM `order` INNER JOIN invoice ON `order`.invoice_id = invoice.id GROUP BY DAY(invoice.created_date)
 
         // Sales Inventory Table
         // SELECT `invoice.created_date`, `item.name`, `item.brand`, `item.price`, `order.quantity`, `order.subtotal_price` FROM ((`order` INNER JOIN `invoice` ON `invoice.id` = `order.invoice_id`)INNER JOIN `item.id` = `order.item_id`
+        // unsure
 
         // Total Sales
         // SELECT SUM(`invoice.total_price`) FROM `invoice`
