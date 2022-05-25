@@ -23,10 +23,10 @@ namespace budiga_app.DataAccess
 
         public ObservableCollection<InventorySalesModel> GetAllSales()
         {
+            
             ObservableCollection<InventorySalesModel> AllSales = new ObservableCollection<InventorySalesModel>();
-            string query = "SELECT SUM(total_price) FROM `invoice`";
+            string query = "SELECT `invoice`.created_date, `order`.item_id, `invoice`.total_price, `order`.quantity, DATE_FORMAT(created_date, \"%Y-%m-%d\") AS Created_day FROM `invoice` INNER JOIN `order` ON `invoice`.id = `order`.invoice_id INNER JOIN item ON `order`.item_id = `item`.id GROUP BY Created_day, `order`.invoice_id;";
             MySqlDataReader reader;
-
             try
             {
                 database.Connection();
@@ -37,8 +37,10 @@ namespace budiga_app.DataAccess
                 {
                     AllSales.Add(new InventorySalesModel()
                     {
-                        Id = reader.GetInt32("id"),
-                        Date = reader.GetDateTime("date")
+                        Date = reader.GetDateTime("created_date"),
+                        Item = itemRepository.GetItem(reader.GetInt32("item_id")),
+                        totalSales = reader.GetFloat("total_price"),
+                        UnitsSold = reader.GetInt32("quantity")
                     });
                 }
             }
@@ -47,6 +49,34 @@ namespace budiga_app.DataAccess
                 MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             return AllSales;
+        }
+
+        public ObservableCollection<OverviewSalesModel> GetAllOverviewSales()
+        {
+            ObservableCollection<OverviewSalesModel> overviewSales = new ObservableCollection<OverviewSalesModel>();
+            string query = "SELECT created_date, SUM(total_price), COUNT(total_price) AS unit_sold, DATE_FORMAT(created_date,\"%Y-%m-%d\") AS Created_day FROM invoice GROUP BY Created_day;";
+            MySqlDataReader reader;
+            try
+            {
+                database.Connection();
+                MySqlCommand commandDatabase = new MySqlCommand(query, database.conn);
+                commandDatabase.CommandTimeout = 60;
+                reader = commandDatabase.ExecuteReader();
+                while (reader.Read())
+                {
+                    overviewSales.Add(new OverviewSalesModel()
+                    {
+                        Total = reader.GetFloat("SUM(total_price)"),
+                        Date = reader.GetDateTime("created_date"),
+                        UnitsSold = reader.GetInt32("unit_sold")
+                    });
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            return overviewSales;
         }
 
         public float getTotalSales()
@@ -187,50 +217,9 @@ namespace budiga_app.DataAccess
         //    return salesRecords;
         //}
 
-        //public float GetTotalSales()
-        //{
-        //    float totalSales = 0;
 
-        //    string query = "SELECT * FROM `invoice`";
-        //    MySqlDataReader reader;
 
-        //    try
-        //    {
-        //        database.Connection();
-        //        MySqlCommand commandDatabase = new MySqlCommand(query, database.conn);
-        //        commandDatabase.CommandTimeout = 60;
-        //        reader = commandDatabase.ExecuteReader();
-        //        while (reader.Read())
-        //        {
-        //            totalSales += reader.GetFloat("total_price");
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-        //    }
-        //    return totalSales;
-        //}
 
-        //public int GetTotalTransactions()
-        //{
-        //    int totalTransactions = 0;
-        //    string query = "SELECT COUNT(*) FROM 'invoice'";
-
-        //    try
-        //    {
-        //        database.Connection();
-        //        MySqlCommand commandDatabase = new MySqlCommand(query, database.conn);
-        //        commandDatabase.CommandTimeout = 60;
-        //        totalTransactions = (int)commandDatabase.ExecuteScalar();
-
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-        //    }
-        //    return totalTransactions;
-        //}
 
         // Sales Overview Table
         // SELECT invoice.created_date, SUM(`order`.`subtotal_price`) AS TOTAL, SUM(`order`.quantity) AS UNITS_SOLD FROM `order` INNER JOIN invoice ON `order`.invoice_id = invoice.id GROUP BY DAY(invoice.created_date)

@@ -199,6 +199,7 @@
     <Compile Include="MVVM\Model\ItemModel.cs" />
     <Compile Include="MVVM\Model\OrderModel.cs" />
     <Compile Include="MVVM\Model\InvoiceModel.cs" />
+    <Compile Include="MVVM\Model\OverviewSalesModel.cs" />
     <Compile Include="MVVM\Model\UserModel.cs" />
     <Compile Include="MVVM\ViewModel\AdminMainViewModel.cs" />
     <Compile Include="MVVM\ViewModel\EmployeeAddViewModel.cs" />

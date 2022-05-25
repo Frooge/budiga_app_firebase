@@ -4,13 +4,18 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:budiga_app.MVVM.View"
+             xmlns:viewModel="clr-namespace:budiga_app.MVVM.ViewModel" 
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" xmlns:b="http://schemas.microsoft.com/xaml/behaviors" xmlns:model="clr-namespace:budiga_app.MVVM.Model"
              mc:Ignorable="d" 
              d:DesignHeight="720" Width="1000">
+    
+    <UserControl.DataContext>
+        <viewModel:SalesOverviewViewModel/>
+    </UserControl.DataContext>
 
     <materialDesign:Card Height="305" Margin="10,10,0,0" Width="601" HorizontalAlignment="Left" VerticalAlignment="Top" >
         <DataGrid x:Name="SalesOverviewTable"                              
-                              ItemsSource="{Binding Item.ItemRecords}" 
+                              ItemsSource="{Binding overviewSales.overviewSales}" 
                               IsReadOnly="True"
                               AutoGenerateColumns="False"
                               CanUserResizeColumns="False"
@@ -18,9 +23,9 @@
                               CanUserResizeRows="False"
                               Padding="0,0">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Date" Binding="{Binding Path=C}" Width="*"/>
-                <DataGridTextColumn Header="Units Sold" Binding="{Binding Path=Quantity}" Width="*"/>
-                <DataGridTextColumn Header="Total" Binding="{Binding Path=Price}" Width="*"/>
+                <DataGridTextColumn Header="Date" Binding="{Binding Path=Date}" Width="*"/>
+                <DataGridTextColumn Header="Units Sold" Binding="{Binding Path=UnitsSold}" Width="*"/>
+                <DataGridTextColumn Header="Total" Binding="{Binding Path=Total}" Width="*"/>
             </DataGrid.Columns>
             <DataGrid.CellStyle>
                 <Style TargetType="DataGridCell" BasedOn="{StaticResource MaterialDesignDataGridCell}">
