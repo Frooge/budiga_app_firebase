@@ -21,28 +21,7 @@
         <StackPanel Grid.ColumnSpan="3">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Width="632"/>
             <StackPanel Orientation="Horizontal" Width="632" HorizontalAlignment="Left">
-                <materialDesign:Card VerticalAlignment="Top" Height="120" Width="189" Margin="10" BorderThickness="1">
-                    <Grid Margin="10">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="20*" />
-                            <ColumnDefinition Width="*" />
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="*" />
-                            <RowDefinition Height="3*" />
-                        </Grid.RowDefinitions>
-                        <TextBlock Text="Total Growth" HorizontalAlignment="Left" Margin="10 0 0 0" VerticalAlignment="Top" FontSize="16" FontWeight="Bold"/>
-                        <Grid Grid.Row="1">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="2*"/>
-                                <RowDefinition Height="*"/>
-                            </Grid.RowDefinitions>
-                            
-                            <Label Grid.Row="1" Content="Php " HorizontalAlignment="Center" VerticalAlignment="Top" FontWeight="Bold"/>
-                        </Grid>
-                    </Grid>
-                </materialDesign:Card>
-                <materialDesign:Card VerticalAlignment="Top" Height="120" Width="189" Margin="10">
+                <materialDesign:Card VerticalAlignment="Top" Height="120" Width="288" Margin="10">
                     <Grid Margin="10">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="20*" />
@@ -58,13 +37,12 @@
                                 <RowDefinition Height="2*"/>
                                 <RowDefinition Height="*"/>
                             </Grid.RowDefinitions>
-                                
-
+                            <Label Grid.Row="0" Content="{Binding Sales.totalSales}" HorizontalAlignment="Center" VerticalAlignment="Top" FontWeight="Bold" FontSize="28" Foreground="#264ECA"/>
                             <Label Grid.Row="1" Content="Php" HorizontalAlignment="Center" VerticalAlignment="Top" FontWeight="Bold"/>
                         </Grid>
                     </Grid>
                 </materialDesign:Card>
-                <materialDesign:Card VerticalAlignment="Top" Height="120" Width="191" Margin="10">
+                <materialDesign:Card VerticalAlignment="Top" Height="120" Width="292" Margin="10">
                     <Grid Margin="10">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="20*" />
@@ -74,14 +52,15 @@
                             <RowDefinition Height="*" />
                             <RowDefinition Height="3*" />
                         </Grid.RowDefinitions>
+                       
                         <TextBlock Text="Total Transactions" HorizontalAlignment="Left" Margin="10 0 0 0" VerticalAlignment="Top" FontSize="16" FontWeight="Bold"/>
                         <Grid Grid.Row="1">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="2*"/>
                                 <RowDefinition Height="*"/>
                             </Grid.RowDefinitions>
-                            
-                            <Label Grid.Row="1" Content="Php" HorizontalAlignment="Center" VerticalAlignment="Top" FontWeight="Bold"/>
+                             <Label Grid.Row="0" Content="{Binding Sales.totalTransaction}" HorizontalAlignment="Center" VerticalAlignment="Top" FontWeight="Bold" FontSize="28" Foreground="#264ECA"/>
+                            <Label Grid.Row="1" Content="Overall Transactions" HorizontalAlignment="Center" VerticalAlignment="Top" FontWeight="Bold"/>
                         </Grid>
                     </Grid>
                 </materialDesign:Card>

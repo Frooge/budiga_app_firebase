@@ -10,7 +10,7 @@ namespace budiga_app.MVVM.ViewModel
 {
     public class SalesInventoryViewModel
     {
-        public SalesModel Sales { get; set; }
+        public InventorySalesModel Sales { get; set; }
         public SalesInventoryViewModel(){
             //Sales = new SalesModel();
             //SalesRepository test = new SalesRepository();

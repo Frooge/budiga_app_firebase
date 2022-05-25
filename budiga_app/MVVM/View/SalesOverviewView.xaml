@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:budiga_app.MVVM.View"
-             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" xmlns:b="http://schemas.microsoft.com/xaml/behaviors" xmlns:model="clr-namespace:budiga_app.MVVM.Model" d:DataContext="{d:DesignInstance Type=model:SalesModel}"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" xmlns:b="http://schemas.microsoft.com/xaml/behaviors" xmlns:model="clr-namespace:budiga_app.MVVM.Model"
              mc:Ignorable="d" 
              d:DesignHeight="720" Width="1000">
 
