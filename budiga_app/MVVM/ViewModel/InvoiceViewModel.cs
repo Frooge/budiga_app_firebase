@@ -75,7 +75,7 @@ namespace budiga_app.MVVM.ViewModel
             invoiceHistoryView.ShowDialog();
         }
 
-        private void CancelOrder()
+        public void CancelOrder()
         {
             Invoice.InvoiceOrderRecords.Clear();
             CalculateTotal();
@@ -86,7 +86,7 @@ namespace budiga_app.MVVM.ViewModel
             if (Invoice.InvoiceOrderRecords.Count > 0)
             {
                 CalculateTotal();
-                InvoicePayView invoicePayView = new InvoicePayView(Invoice);
+                InvoicePayView invoicePayView = new InvoicePayView(this, Invoice);
                 invoicePayView.ShowDialog();
             }
             else
