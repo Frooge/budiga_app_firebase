@@ -95,7 +95,7 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Button Content="Cancel" Grid.Column="1" HorizontalAlignment="Center" Background="#FF264ECA" BorderBrush="#FF264ECA"/>
+            <Button Content="Cancel" Click="Cancel_Click" Grid.Column="1" HorizontalAlignment="Center" Background="#FF264ECA" BorderBrush="#FF264ECA"/>
             <Button Content="Print" Grid.Column="2" HorizontalAlignment="Center" BorderBrush="#FF264ECA" Background="#FF264ECA"/>
         </Grid>
     </StackPanel>
