@@ -26,7 +26,7 @@
                 <DatePicker x:Name="EndDate" Width="120" HorizontalAlignment="Right" Text="End" HorizontalContentAlignment="Center" Style="{StaticResource MaterialDesignDatePicker}"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal" Margin="10,10,10,10" Width="967">
-                <materialDesign:Card HorizontalAlignment="Left" Margin="0 0 10 0" VerticalAlignment="Top" Height="500" Width="550">
+                <materialDesign:Card HorizontalAlignment="Left" Margin="0 0 10 0" VerticalAlignment="Top" Height="500" Width="500">
                     <DataGrid x:Name="teamTable"
                               ItemsSource="{Binding User.UserRecords}"
                               IsReadOnly="True"
@@ -63,7 +63,7 @@
                         </b:Interaction.Triggers>
                     </DataGrid>
                 </materialDesign:Card>
-                <materialDesign:Card HorizontalAlignment="Right" Margin="0 0 10 0" VerticalAlignment="Top" Height="500" Width="400">
+                <materialDesign:Card HorizontalAlignment="Right" Margin="0 0 10 0" VerticalAlignment="Top" Height="500" Width="500">
                     <DataGrid x:Name="attendanceTable"
                               ItemsSource="{Binding Attendance.AttendanceRecords}"
                               IsReadOnly="True"
@@ -80,8 +80,8 @@
                                     </MultiBinding>
                                 </DataGridTextColumn.Binding>
                             </DataGridTextColumn>
-                            <DataGridTextColumn Header="Time In" Binding="{Binding TimeIn}" Width="*"/>
-                            <DataGridTextColumn Header="Time Out" Binding="{Binding TimeOut}" Width="*"/>
+                            <DataGridTextColumn Header="Time In" Binding="{Binding TimeIn}" Width="2*"/>
+                            <DataGridTextColumn Header="Time Out" Binding="{Binding TimeOut}" Width="2*"/>
                         </DataGrid.Columns>
                         <DataGrid.CellStyle>
                             <Style TargetType="DataGridCell" BasedOn="{StaticResource MaterialDesignDataGridCell}">

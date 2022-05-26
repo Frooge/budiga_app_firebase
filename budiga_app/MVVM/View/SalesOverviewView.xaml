@@ -5,7 +5,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:budiga_app.MVVM.View"
              xmlns:viewModel="clr-namespace:budiga_app.MVVM.ViewModel" 
-             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" xmlns:b="http://schemas.microsoft.com/xaml/behaviors" xmlns:model="clr-namespace:budiga_app.MVVM.Model"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
              mc:Ignorable="d" 
              d:DesignHeight="720" Width="1000" x:Name="salesOverviewView">
 
