@@ -1,4 +1,5 @@
-﻿using System;
+﻿using budiga_app.MVVM.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,14 +21,12 @@ namespace budiga_app.MVVM.View
     /// </summary>
     public partial class SalesOverviewView : UserControl
     {
+        public SalesViewModel ViewModel { get; set; }
         public SalesOverviewView()
         {
+            ViewModel = SalesViewModel.GetInstance;
             InitializeComponent();
         }
 
-        private void DataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
     }
 }

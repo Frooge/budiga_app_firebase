@@ -6,6 +6,7 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"        
         xmlns:local="clr-namespace:budiga_app.MVVM.View"        
         xmlns:viewModel="clr-namespace:budiga_app.MVVM.ViewModel"
+        xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
         mc:Ignorable="d"
         MinHeight="200"
         MinWidth="300"
@@ -37,7 +38,9 @@
                 </ToggleButton.Effect>
             </ToggleButton>
         </StackPanel>
+        
         <materialDesign:Card Grid.Column="1" Margin="10">
+            
             <DataGrid x:Name="inventoryTable"                              
                               ItemsSource="{Binding Item.ItemRecords}" 
                               MouseDoubleClick="InventoryTable_DoubleClick"

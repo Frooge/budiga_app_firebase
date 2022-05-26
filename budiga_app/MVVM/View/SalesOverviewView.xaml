@@ -7,15 +7,11 @@
              xmlns:viewModel="clr-namespace:budiga_app.MVVM.ViewModel" 
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" xmlns:b="http://schemas.microsoft.com/xaml/behaviors" xmlns:model="clr-namespace:budiga_app.MVVM.Model"
              mc:Ignorable="d" 
-             d:DesignHeight="720" Width="1000">
-    
-    <UserControl.DataContext>
-        <viewModel:SalesOverviewViewModel/>
-    </UserControl.DataContext>
+             d:DesignHeight="720" Width="1000" x:Name="salesOverviewView">
 
     <materialDesign:Card Height="305" Margin="10,10,0,0" Width="601" HorizontalAlignment="Left" VerticalAlignment="Top" >
         <DataGrid x:Name="SalesOverviewTable"                              
-                              ItemsSource="{Binding overviewSales.overviewSales}" 
+                              ItemsSource="{Binding ElementName=salesOverviewView, Path=ViewModel.OverviewSales.OverviewSales}" 
                               IsReadOnly="True"
                               AutoGenerateColumns="False"
                               CanUserResizeColumns="False"
@@ -33,12 +29,6 @@
                     <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
                 </Style>
             </DataGrid.CellStyle>
-            <b:Interaction.Triggers>
-                <b:EventTrigger EventName="MouseDoubleClick">
-                    <b:InvokeCommandAction Command="{Binding EditItemCommand}"
-                                                       CommandParameter="{Binding Path=SelectedItem, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=DataGrid}}"/>
-                </b:EventTrigger>
-            </b:Interaction.Triggers>
         </DataGrid>
     </materialDesign:Card>
 </UserControl>

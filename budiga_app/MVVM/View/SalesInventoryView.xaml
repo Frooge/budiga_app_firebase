@@ -7,15 +7,13 @@
              xmlns:viewModel="clr-namespace:budiga_app.MVVM.ViewModel" 
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
              mc:Ignorable="d" 
-             d:DesignHeight="720" Width="1000">
+             d:DesignHeight="720" Width="1000" x:Name="salesInventoryView">
 
-    <UserControl.DataContext>
-        <viewModel:SalesInventoryViewModel/>
-    </UserControl.DataContext>
+    
 
     <materialDesign:Card Height="305" Margin="10" Width="600" HorizontalAlignment="Left" VerticalAlignment="Top">
         <DataGrid x:Name="SalesInventoryTable"                              
-                              ItemsSource="{Binding sales.InventorySales}"
+                              ItemsSource="{Binding ElementName=salesInventoryView, Path=ViewModel.Sales.InventorySales}"
                               IsReadOnly="True"
                               AutoGenerateColumns="False"
                               CanUserResizeColumns="False"
@@ -28,7 +26,7 @@
                 <DataGridTextColumn Header="Brand" Binding="{Binding Path=Item.Brand}" Width="*"/>
                 <DataGridTextColumn Header="Price" Binding="{Binding Path=Item.Price}" Width="*"/>
                 <DataGridTextColumn Header="Units Sold" Binding="{Binding Path=UnitsSold}" Width="*"/>
-                <DataGridTextColumn Header="Total Price" Binding="{Binding Path=totalSales}" Width="*"/>
+                <DataGridTextColumn Header="Total Price" Binding="{Binding Path=TotalSales}" Width="*"/>
             </DataGrid.Columns>
             <DataGrid.CellStyle>
                 <Style TargetType="DataGridCell" BasedOn="{StaticResource MaterialDesignDataGridCell}">
@@ -36,12 +34,6 @@
                     <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
                 </Style>
             </DataGrid.CellStyle>
-            <b:Interaction.Triggers>
-                <b:EventTrigger EventName="MouseDoubleClick">
-                    <b:InvokeCommandAction Command="{Binding EditItemCommand}"
-                                                       CommandParameter="{Binding Path=SelectedItem, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=DataGrid}}"/>
-                </b:EventTrigger>
-            </b:Interaction.Triggers>
         </DataGrid>
     </materialDesign:Card>
 

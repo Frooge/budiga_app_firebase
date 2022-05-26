@@ -7,10 +7,7 @@
              xmlns:viewModel="clr-namespace:budiga_app.MVVM.ViewModel"        
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"             
              mc:Ignorable="d" 
-             d:DesignHeight="720" Width="1000">
-    <UserControl.DataContext>
-        <viewModel:SalesViewModel/>
-    </UserControl.DataContext>
+             d:DesignHeight="720" Width="1000" x:Name="salesView">
 
     <Grid>
         <Grid.ColumnDefinitions>
@@ -37,7 +34,7 @@
                                 <RowDefinition Height="2*"/>
                                 <RowDefinition Height="*"/>
                             </Grid.RowDefinitions>
-                            <Label Grid.Row="0" Content="{Binding Sales.totalSales}" HorizontalAlignment="Center" VerticalAlignment="Top" FontWeight="Bold" FontSize="28" Foreground="#264ECA"/>
+                            <Label Grid.Row="0" Content="{Binding ElementName=salesView, Path=ViewModel.Sales.TotalSales}" HorizontalAlignment="Center" VerticalAlignment="Top" FontWeight="Bold" FontSize="28" Foreground="#264ECA"/>
                             <Label Grid.Row="1" Content="Php" HorizontalAlignment="Center" VerticalAlignment="Top" FontWeight="Bold"/>
                         </Grid>
                     </Grid>
@@ -59,13 +56,13 @@
                                 <RowDefinition Height="2*"/>
                                 <RowDefinition Height="*"/>
                             </Grid.RowDefinitions>
-                             <Label Grid.Row="0" Content="{Binding Sales.totalTransaction}" HorizontalAlignment="Center" VerticalAlignment="Top" FontWeight="Bold" FontSize="28" Foreground="#264ECA"/>
+                            <Label Grid.Row="0" Content="{Binding ElementName=salesView, Path=ViewModel.Sales.TotalTransaction}" HorizontalAlignment="Center" VerticalAlignment="Top" FontWeight="Bold" FontSize="28" Foreground="#264ECA"/>
                             <Label Grid.Row="1" Content="Overall Transactions" HorizontalAlignment="Center" VerticalAlignment="Top" FontWeight="Bold"/>
                         </Grid>
                     </Grid>
                 </materialDesign:Card>
             </StackPanel>
-            <ContentControl Content="{Binding CurrentView}" RenderTransformOrigin="0.602,0.506" Width="1000" Height="386"/>
+            <ContentControl Content="{Binding ElementName=salesView, Path=ViewModel.CurrentView}" RenderTransformOrigin="0.602,0.506" Width="1000" Height="386"/>
         </StackPanel>
 
         <materialDesign:Card Margin="0,10,19,0" VerticalAlignment="Top" MinHeight="220" Height="260" BorderThickness="2" HorizontalAlignment="Right" Width="345" Grid.Column="2">
@@ -84,14 +81,14 @@
                     <TextBlock Text=" PHP value" FontSize="16" FontWeight="Bold"/>
                 </StackPanel>
                 <StackPanel HorizontalAlignment="Left" Orientation="Vertical" Grid.Row="1" VerticalAlignment="Top" Height="84" Margin="10,48,0,0" Width="170">
-                    <RadioButton Content="Accumulated" IsChecked="True" FontSize="14" Background="#FF264ECA" BorderBrush="#FF264ECA" Command="{Binding getTotalSalesCommand}" CommandParameter="Accumulated"/>
-                    <RadioButton Content="Daily" FontSize="14" BorderBrush="#FF264ECA" Background="#FF264ECA"  Command="{Binding getTotalSalesCommand}" CommandParameter="Daily"/>
-                    <RadioButton Content="Monthly" FontSize="14" Background="#FF264ECA" BorderBrush="#FF264ECA"  Command="{Binding getTotalSalesCommand}" CommandParameter="Monthly"/>
-                    <RadioButton Content="Yearly" FontSize="14" BorderBrush="#FF264ECA" Background="#FF264ECA"  Command="{Binding getTotalSalesCommand}" CommandParameter="Yearly"/>
+                    <RadioButton Content="Accumulated" IsChecked="True" FontSize="14" Background="#FF264ECA" BorderBrush="#FF264ECA" Command="{Binding ElementName=salesView, Path=ViewModel.GetAllCommand}" CommandParameter="Accumulated"/>
+                    <RadioButton Content="Daily" FontSize="14" BorderBrush="#FF264ECA" Background="#FF264ECA"  Command="{Binding ElementName=salesView, Path=ViewModel.GetAllCommand}" CommandParameter="Daily"/>
+                    <RadioButton Content="Monthly" FontSize="14" Background="#FF264ECA" BorderBrush="#FF264ECA"  Command="{Binding ElementName=salesView, Path=ViewModel.GetAllCommand}" CommandParameter="Monthly"/>
+                    <RadioButton Content="Yearly" FontSize="14" BorderBrush="#FF264ECA" Background="#FF264ECA"  Command="{Binding ElementName=salesView, Path=ViewModel.GetAllCommand}" CommandParameter="Yearly"/>
                 </StackPanel>
                 <Grid HorizontalAlignment="Left" Height="31" Grid.Row="1" VerticalAlignment="Top" Width="170" Margin="10,177,0,0">
-                    <RadioButton Content="Overview" IsChecked="True" Command="{Binding OverviewViewCommand}" FontSize="14" HorizontalAlignment="Left" VerticalAlignment="Center" Background="#FF264ECA" BorderBrush="#FF264ECA"/>
-                    <RadioButton Content="Inventory" Command="{Binding InventoryViewCommand}" FontSize="14" HorizontalAlignment="Left" Margin="84,0,0,0" VerticalAlignment="Center" BorderBrush="#FF264ECA" Background="#FF264ECA"/>
+                    <RadioButton Content="Overview" IsChecked="True" Command="{Binding ElementName=salesView, Path=ViewModel.OverviewViewCommand}" FontSize="14" HorizontalAlignment="Left" VerticalAlignment="Center" Background="#FF264ECA" BorderBrush="#FF264ECA"/>
+                    <RadioButton Content="Inventory" Command="{Binding ElementName=salesView, Path=ViewModel.InventoryViewCommand}" FontSize="14" HorizontalAlignment="Left" Margin="84,0,0,0" VerticalAlignment="Center" BorderBrush="#FF264ECA" Background="#FF264ECA"/>
                 </Grid>
                 <Button Grid.Row="1" Content="Print Summary" HorizontalAlignment="Left" VerticalAlignment="Top" Width="130" BorderBrush="{x:Null}" Background="White" FontStretch="Normal" FontStyle="Normal" Margin="10,140,0,0">
                     <Button.Foreground>

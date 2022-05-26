@@ -57,7 +57,7 @@ namespace budiga_app.DataAccess
                     {
                         Date = reader.GetDateTime("created_date"),
                         Item = itemRepository.GetItem(reader.GetInt32("item_id")),
-                        totalSales = reader.GetFloat("total_price"),
+                        TotalSales = reader.GetFloat("total_price"),
                         UnitsSold = reader.GetInt32("quantity")
                     });
                 }
@@ -65,6 +65,10 @@ namespace budiga_app.DataAccess
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            finally
+            {
+                database.Dispose();
             }
             return AllSales;
         }
@@ -95,10 +99,14 @@ namespace budiga_app.DataAccess
             {
                 MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+            finally
+            {
+                database.Dispose();
+            }
             return overviewSales;
         }
 
-        public float getTotalSales()
+        public float GetTotalSales()
         {
             float totalSales = 0;
             string query = "SELECT SUM(total_price) FROM `invoice`";
@@ -113,10 +121,14 @@ namespace budiga_app.DataAccess
             {
                 MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+            finally
+            {
+                database.Dispose();
+            }
             return totalSales;
         }
 
-        public int getTotalTransactions()
+        public int GetTotalTransactions()
         {
             int totalTransactions = 0;
             string query = "SELECT COUNT(DISTINCT invoice_id) FROM `order`";
@@ -130,6 +142,10 @@ namespace budiga_app.DataAccess
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            finally
+            {
+                database.Dispose();
             }
             return totalTransactions;
         }

@@ -22,12 +22,12 @@ namespace budiga_app.MVVM.View
     /// </summary>
     public partial class SalesInventoryView : UserControl
     {
-        public InventorySalesModel Sales { get; set; }
+        public SalesViewModel ViewModel { get; set; }
         
         
-        public SalesInventoryView(InventorySalesModel sales)
+        public SalesInventoryView()
         {
-            Sales = sales;
+            ViewModel = SalesViewModel.GetInstance;
             InitializeComponent();
             
         }

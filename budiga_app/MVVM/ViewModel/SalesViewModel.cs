@@ -13,23 +13,20 @@ namespace budiga_app.MVVM.ViewModel
     public class SalesViewModel : ObservableObject
     {
         private SalesRepository salesRepository;
+        
+
+        
+        private OverviewSalesModel _overviewSales;
+        public OverviewSalesModel OverviewSales { get; set; }
+
+        private InventorySalesModel _sales;
+        public InventorySalesModel Sales { get; set; }
+
+        public RelayCommand GetAllCommand { get; set; }
         public RelayCommand OverviewViewCommand { get; set; }
         public RelayCommand InventoryViewCommand { get; set; }
         public SalesOverviewViewModel SalesOverviewVM { get; set; }
         public SalesInventoryViewModel SalesInventoryVM { get; set; }
-        
-
-        //OverviewSales
-        private OverviewSalesModel _overviewSales;
-        public OverviewSalesModel overviewSales { get; set; }
-
-        //Inventory Sales
-        private InventorySalesModel _sales;
-        public InventorySalesModel sales { get; set; }
-
-
-
-        public RelayCommand getTotalSalesCommand { get; set; }  
 
         private object _currentView;
 
@@ -44,22 +41,36 @@ namespace budiga_app.MVVM.ViewModel
             
         }
 
+        private static SalesViewModel salesVM;
+
+        public static SalesViewModel GetInstance
+        {
+            get
+            {
+                if (salesVM == null)
+                {
+                    salesVM = new SalesViewModel();
+                }
+                return salesVM;
+            }
+        }
+
+
         public SalesViewModel()
         {
             salesRepository = new SalesRepository();
 
             //Overview Sales Instantiate
             _overviewSales = new OverviewSalesModel();
-            overviewSales = new OverviewSalesModel();
+            OverviewSales = new OverviewSalesModel();
 
             //Inventory Sales Instantiate
             _sales = new InventorySalesModel();
-            sales = new InventorySalesModel();
+            Sales = new InventorySalesModel();
             try
             {
                 SalesOverviewVM = new SalesOverviewViewModel();
-                SalesInventoryVM = new SalesInventoryViewModel(sales);
-
+                SalesInventoryVM = new SalesInventoryViewModel();
 
                 CurrentView = SalesOverviewVM;
 
@@ -79,21 +90,22 @@ namespace budiga_app.MVVM.ViewModel
                 Debug.WriteLine(ex.StackTrace);
             }
 
-            getTotalSalesCommand = new RelayCommand(param => GetTotals((string)param));
-            GetTotals("Accumulated");
+            GetAllCommand = new RelayCommand(param => GetAll((string)param));
+            GetAll("Accumulated");
         }
 
         
 
-        private void GetTotals(string date)
+        private void GetAll(string date)
         {
-            sales.InventorySales = salesRepository.GetAllSales(date);
-        }
+            Sales.TotalSales = salesRepository.GetTotalSales();
+            Sales.TotalTransaction = salesRepository.GetTotalTransactions();
 
-        private void getAllOverviewItems()
-        {
-            _overviewSales.overviewSales = salesRepository.GetAllOverviewSales();
-            overviewSales.overviewSales = _overviewSales.overviewSales;
+            _sales.InventorySales = salesRepository.GetAllSales(date);
+            Sales.InventorySales = _sales.InventorySales;            
+
+            _overviewSales.OverviewSales = salesRepository.GetAllOverviewSales();
+            OverviewSales.OverviewSales = _overviewSales.OverviewSales;
         }
 
     }

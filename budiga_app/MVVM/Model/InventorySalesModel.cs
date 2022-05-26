@@ -12,16 +12,16 @@ namespace budiga_app.MVVM.Model
     {
         private int _id;
         private int _unitsSold;
-        private float _TotalSales;
-        private int _TotalTransactions;
+        private float _totalSales;
+        private int _totalTransactions;
         private DateTime _date;
         private ItemModel _item;
         private ObservableCollection<InventorySalesModel> _inventorySales;
 
         public int Id { get { return _id; } set { _id = value; OnPropertyChanged("Id"); } }
         public int UnitsSold { get { return _unitsSold; } set { _unitsSold = value; OnPropertyChanged("UnitsSold"); } }
-        public float totalSales { get { return _TotalSales; } set { _TotalSales = value; OnPropertyChanged("TotalSales"); } }
-        public int totalTransaction { get { return _TotalTransactions; } set { _TotalTransactions = value; OnPropertyChanged("TotalTransactions"); } }
+        public float TotalSales { get { return _totalSales; } set { _totalSales = value; OnPropertyChanged("TotalSales"); } }
+        public int TotalTransaction { get { return _totalTransactions; } set { _totalTransactions = value; OnPropertyChanged("TotalTransactions"); } }
         public DateTime Date { get { return _date; } set { _date = value; OnPropertyChanged("Date"); } }
         public ItemModel Item { get { return _item; } set { _item = value; OnPropertyChanged("Item"); } }
         public ObservableCollection<InventorySalesModel> InventorySales { get { return _inventorySales; } set { _inventorySales = value; OnPropertyChanged("InventorySales"); } }

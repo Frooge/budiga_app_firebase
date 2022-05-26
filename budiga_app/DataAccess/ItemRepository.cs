@@ -47,6 +47,10 @@ namespace budiga_app.DataAccess
             {
                 MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+            finally
+            {
+                database.Dispose();
+            }
             return item;
         }
 
@@ -79,6 +83,10 @@ namespace budiga_app.DataAccess
             {
                 MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+            finally
+            {
+                database.Dispose();
+            }
             return items;
         }
 
@@ -98,6 +106,10 @@ namespace budiga_app.DataAccess
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            finally
+            {
+                database.Dispose();
             }
             return result;
         }
@@ -119,6 +131,10 @@ namespace budiga_app.DataAccess
             {
                 MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+            finally
+            {
+                database.Dispose();
+            }
             return result;
         }
 
@@ -138,6 +154,10 @@ namespace budiga_app.DataAccess
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            finally
+            {
+                database.Dispose();
             }
             return result;
         }

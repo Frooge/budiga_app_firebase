@@ -48,6 +48,10 @@ namespace budiga_app.DataAccess
             {
                 MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+            finally
+            {
+                database.Dispose();
+            }
             return attendanceRecords;
         }
 
@@ -66,6 +70,10 @@ namespace budiga_app.DataAccess
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            finally
+            {
+                database.Dispose();
             }
             return result;
         }

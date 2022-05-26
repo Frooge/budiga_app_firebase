@@ -10,10 +10,9 @@ namespace budiga_app.MVVM.ViewModel
 {
     public class SalesInventoryViewModel
     {
-        public InventorySalesModel Sales { get; set; }
-        public SalesInventoryViewModel(InventorySalesModel sales)
+        public SalesInventoryViewModel()
         {
-            Sales = sales;
+            
         }
     }
 
