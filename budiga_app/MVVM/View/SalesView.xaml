@@ -84,10 +84,10 @@
                     <TextBlock Text=" PHP value" FontSize="16" FontWeight="Bold"/>
                 </StackPanel>
                 <StackPanel HorizontalAlignment="Left" Orientation="Vertical" Grid.Row="1" VerticalAlignment="Top" Height="84" Margin="10,48,0,0" Width="170">
-                    <RadioButton Content="Accumulated" IsChecked="True" FontSize="14" Background="#FF264ECA" BorderBrush="#FF264ECA"/>
-                    <RadioButton Content="Daily" FontSize="14" BorderBrush="#FF264ECA" Background="#FF264ECA"/>
-                    <RadioButton Content="Monthly" FontSize="14" Background="#FF264ECA" BorderBrush="#FF264ECA"/>
-                    <RadioButton Content="Yearly" FontSize="14" BorderBrush="#FF264ECA" Background="#FF264ECA"/>
+                    <RadioButton Content="Accumulated" IsChecked="True" FontSize="14" Background="#FF264ECA" BorderBrush="#FF264ECA" Command="{Binding getTotalSalesCommand}" CommandParameter="Accumulated"/>
+                    <RadioButton Content="Daily" FontSize="14" BorderBrush="#FF264ECA" Background="#FF264ECA"  Command="{Binding getTotalSalesCommand}" CommandParameter="Daily"/>
+                    <RadioButton Content="Monthly" FontSize="14" Background="#FF264ECA" BorderBrush="#FF264ECA"  Command="{Binding getTotalSalesCommand}" CommandParameter="Monthly"/>
+                    <RadioButton Content="Yearly" FontSize="14" BorderBrush="#FF264ECA" Background="#FF264ECA"  Command="{Binding getTotalSalesCommand}" CommandParameter="Yearly"/>
                 </StackPanel>
                 <Grid HorizontalAlignment="Left" Height="31" Grid.Row="1" VerticalAlignment="Top" Width="170" Margin="10,177,0,0">
                     <RadioButton Content="Overview" IsChecked="True" Command="{Binding OverviewViewCommand}" FontSize="14" HorizontalAlignment="Left" VerticalAlignment="Center" Background="#FF264ECA" BorderBrush="#FF264ECA"/>

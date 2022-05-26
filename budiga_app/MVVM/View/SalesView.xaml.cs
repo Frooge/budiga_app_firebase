@@ -22,8 +22,8 @@ namespace budiga_app.MVVM.View
     {
         public SalesView()
         {
+
             InitializeComponent();
         }
-
     }
 }

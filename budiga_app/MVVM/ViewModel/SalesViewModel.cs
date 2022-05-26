@@ -17,7 +17,19 @@ namespace budiga_app.MVVM.ViewModel
         public RelayCommand InventoryViewCommand { get; set; }
         public SalesOverviewViewModel SalesOverviewVM { get; set; }
         public SalesInventoryViewModel SalesInventoryVM { get; set; }
-        public InventorySalesModel Sales { get; set; }
+        
+
+        //OverviewSales
+        private OverviewSalesModel _overviewSales;
+        public OverviewSalesModel overviewSales { get; set; }
+
+        //Inventory Sales
+        private InventorySalesModel _sales;
+        public InventorySalesModel sales { get; set; }
+
+
+
+        public RelayCommand getTotalSalesCommand { get; set; }  
 
         private object _currentView;
 
@@ -34,10 +46,20 @@ namespace budiga_app.MVVM.ViewModel
 
         public SalesViewModel()
         {
+            salesRepository = new SalesRepository();
+
+            //Overview Sales Instantiate
+            _overviewSales = new OverviewSalesModel();
+            overviewSales = new OverviewSalesModel();
+
+            //Inventory Sales Instantiate
+            _sales = new InventorySalesModel();
+            sales = new InventorySalesModel();
             try
             {
                 SalesOverviewVM = new SalesOverviewViewModel();
-                SalesInventoryVM = new SalesInventoryViewModel();
+                SalesInventoryVM = new SalesInventoryViewModel(sales);
+
 
                 CurrentView = SalesOverviewVM;
 
@@ -57,16 +79,22 @@ namespace budiga_app.MVVM.ViewModel
                 Debug.WriteLine(ex.StackTrace);
             }
 
-            Sales = new InventorySalesModel();
-            salesRepository = new SalesRepository();
-            GetTotals();
+            getTotalSalesCommand = new RelayCommand(param => GetTotals((string)param));
+            GetTotals("Accumulated");
         }
 
-        private void GetTotals()
+        
+
+        private void GetTotals(string date)
         {
-            Sales.totalSales = salesRepository.getTotalSales();
-            Sales.totalTransaction = salesRepository.getTotalTransactions();
+            sales.InventorySales = salesRepository.GetAllSales(date);
         }
-       
+
+        private void getAllOverviewItems()
+        {
+            _overviewSales.overviewSales = salesRepository.GetAllOverviewSales();
+            overviewSales.overviewSales = _overviewSales.overviewSales;
+        }
+
     }
 }

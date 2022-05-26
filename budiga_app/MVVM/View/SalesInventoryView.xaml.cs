@@ -1,4 +1,6 @@
-﻿using System;
+﻿using budiga_app.MVVM.Model;
+using budiga_app.MVVM.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +22,14 @@ namespace budiga_app.MVVM.View
     /// </summary>
     public partial class SalesInventoryView : UserControl
     {
-        public SalesInventoryView()
+        public InventorySalesModel Sales { get; set; }
+        
+        
+        public SalesInventoryView(InventorySalesModel sales)
         {
+            Sales = sales;
             InitializeComponent();
+            
         }
     }
 }

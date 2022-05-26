@@ -21,11 +21,29 @@ namespace budiga_app.DataAccess
             itemRepository = new ItemRepository();
         }
 
-        public ObservableCollection<InventorySalesModel> GetAllSales()
+        public ObservableCollection<InventorySalesModel> GetAllSales(string date)
         {
-            
+            string query;
             ObservableCollection<InventorySalesModel> AllSales = new ObservableCollection<InventorySalesModel>();
-            string query = "SELECT `invoice`.created_date, `order`.item_id, `invoice`.total_price, `order`.quantity, DATE_FORMAT(created_date, \"%Y-%m-%d\") AS Created_day FROM `invoice` INNER JOIN `order` ON `invoice`.id = `order`.invoice_id INNER JOIN item ON `order`.item_id = `item`.id GROUP BY Created_day, `order`.invoice_id;";
+            switch (date)
+            {
+                case "Daily":
+                    query = "SELECT `invoice`.created_date, `order`.item_id, `invoice`.total_price, `order`.quantity, DATE_FORMAT(created_date, \"%Y-%m-%d\") AS Created_day FROM `invoice` INNER JOIN `order` ON `invoice`.id = `order`.invoice_id INNER JOIN item ON `order`.item_id = `item`.id GROUP BY `order`.item_id, Created_day;";
+                    break;
+
+                case "Monthly":
+                    query = "SELECT `invoice`.created_date, `order`.item_id, `invoice`.total_price, `order`.quantity, DATE_FORMAT(created_date, \"%Y-%m\") AS Created_day FROM `invoice` INNER JOIN `order` ON `invoice`.id = `order`.invoice_id INNER JOIN item ON `order`.item_id = `item`.id GROUP BY Created_day, `order`.item_id;";
+                    break;
+
+                case "Yearly":
+                    query = "SELECT `invoice`.created_date, `order`.item_id, `invoice`.total_price, `order`.quantity, DATE_FORMAT(created_date, \"%Y\") AS Created_day FROM `invoice` INNER JOIN `order` ON `invoice`.id = `order`.invoice_id INNER JOIN item ON `order`.item_id = `item`.id GROUP BY `order`.item_id, Created_day;";
+                    break;
+
+                default:
+                    query = "SELECT `invoice`.created_date, `order`.item_id, `invoice`.total_price, `order`.quantity FROM `invoice` INNER JOIN `order` ON `invoice`.id = `order`.invoice_id INNER JOIN item ON `order`.item_id = `item`.id GROUP BY `order`.item_id;";
+                    break;
+            }
+             
             MySqlDataReader reader;
             try
             {
@@ -50,6 +68,7 @@ namespace budiga_app.DataAccess
             }
             return AllSales;
         }
+
 
         public ObservableCollection<OverviewSalesModel> GetAllOverviewSales()
         {
@@ -114,7 +133,6 @@ namespace budiga_app.DataAccess
             }
             return totalTransactions;
         }
-
         //public ObservableCollection<SalesModel> GetDailySales()
         //{
         //    ObservableCollection<SalesModel> salesRecords = new ObservableCollection<SalesModel>();
