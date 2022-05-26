@@ -104,7 +104,7 @@ namespace budiga_app.MVVM.ViewModel
             _sales.InventorySales = salesRepository.GetAllSales(date);
             Sales.InventorySales = _sales.InventorySales;            
 
-            _overviewSales.OverviewSales = salesRepository.GetAllOverviewSales();
+            _overviewSales.OverviewSales = salesRepository.GetAllOverviewSales(date);
             OverviewSales.OverviewSales = _overviewSales.OverviewSales;
         }
 
