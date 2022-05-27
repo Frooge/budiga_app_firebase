@@ -127,7 +127,7 @@ namespace budiga_app.DataAccess
         public float GetTotalSales(string date)
         {
             float totalSales = 0;
-            string query = "SELECT SUM(total_price) FROM `invoice`";
+            string query = "SELECT SUM(`invoice`.total_price) AS total_price FROM `invoice` INNER JOIN `order` ON `invoice`.id = `order`.invoice_id GROUP BY MONTH(CURRENT_DATE);";
             try
             {
                 database.Connection();
@@ -149,7 +149,7 @@ namespace budiga_app.DataAccess
         public int GetTotalTransactions(string date)
         {
             int totalTransactions = 0;
-            string query = "SELECT COUNT(DISTINCT invoice_id) FROM `order`";
+            string query = "SELECT COUNT(id) FROM `invoice`";
             try
             {
                 database.Connection();
