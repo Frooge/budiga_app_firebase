@@ -40,7 +40,7 @@ namespace budiga_app.DataAccess
                     break;
 
                 default:
-                    query = "SELECT `invoice`.created_date, `order`.item_id, `invoice`.total_price, `order`.quantity FROM `invoice` INNER JOIN `order` ON `invoice`.id = `order`.invoice_id INNER JOIN item ON `order`.item_id = `item`.id GROUP BY `order`.item_id;";
+                    query = "SELECT `invoice`.created_date, `order`.item_id, `invoice`.total_price, `order`.quantity, DATE_FORMAT(created_date, \"%Y-%m-%d %h:%s\") AS Created_day FROM `invoice` INNER JOIN `order` ON `invoice`.id = `order`.invoice_id INNER JOIN item ON `order`.item_id = `item`.id GROUP BY `order`.item_id, Created_day;";
                     break;
             }
              
@@ -74,10 +74,28 @@ namespace budiga_app.DataAccess
         }
 
 
-        public ObservableCollection<OverviewSalesModel> GetAllOverviewSales()
+        public ObservableCollection<OverviewSalesModel> GetAllOverviewSales(string date)
         {
+            string query;
             ObservableCollection<OverviewSalesModel> overviewSales = new ObservableCollection<OverviewSalesModel>();
-            string query = "SELECT created_date, SUM(total_price), COUNT(total_price) AS unit_sold, DATE_FORMAT(created_date,\"%Y-%m-%d\") AS Created_day FROM invoice GROUP BY Created_day;";
+            switch (date)
+            {
+                case "Daily":
+                    query = "SELECT created_date, SUM(total_price), COUNT(total_price) AS unit_sold, DATE_FORMAT(created_date,\"%Y-%m-%d\") AS Created_day FROM invoice GROUP BY Created_day;";
+                    break;
+
+                case "Monthly":
+                    query = "SELECT created_date, SUM(total_price), COUNT(total_price) AS unit_sold, DATE_FORMAT(created_date,\"%Y-%m\") AS Created_day FROM invoice GROUP BY Created_day;";
+                    break;
+
+                case "Yearly":
+                    query = "SELECT created_date, SUM(total_price), COUNT(total_price) AS unit_sold, DATE_FORMAT(created_date, \"%Y\") AS Created_day FROM invoice GROUP BY Created_day;";
+                    break;
+
+                default:
+                    query = "SELECT created_date, SUM(total_price), COUNT(total_price) AS unit_sold, DATE_FORMAT(created_date,\"%Y-%m-%d %h:%s\") AS Created_day FROM invoice GROUP BY Created_day;";
+                    break;
+            }
             MySqlDataReader reader;
             try
             {
