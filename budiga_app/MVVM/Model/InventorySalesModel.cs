@@ -14,7 +14,7 @@ namespace budiga_app.MVVM.Model
         private int _unitsSold;
         private float _totalSales;
         private int _totalTransactions;
-        private DateTime _date;
+        private string _date;
         private ItemModel _item;
         private ObservableCollection<InventorySalesModel> _inventorySales;
 
@@ -22,7 +22,7 @@ namespace budiga_app.MVVM.Model
         public int UnitsSold { get { return _unitsSold; } set { _unitsSold = value; OnPropertyChanged("UnitsSold"); } }
         public float TotalSales { get { return _totalSales; } set { _totalSales = value; OnPropertyChanged("TotalSales"); } }
         public int TotalTransaction { get { return _totalTransactions; } set { _totalTransactions = value; OnPropertyChanged("TotalTransactions"); } }
-        public DateTime Date { get { return _date; } set { _date = value; OnPropertyChanged("Date"); } }
+        public string Date { get { return _date; } set { _date = value; OnPropertyChanged("Date"); } }
         public ItemModel Item { get { return _item; } set { _item = value; OnPropertyChanged("Item"); } }
         public ObservableCollection<InventorySalesModel> InventorySales { get { return _inventorySales; } set { _inventorySales = value; OnPropertyChanged("InventorySales"); } }
     }

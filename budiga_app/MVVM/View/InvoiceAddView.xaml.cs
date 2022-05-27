@@ -43,6 +43,7 @@ namespace budiga_app.MVVM.View
             if (_invoiceVM.GetItem(selectedItem))
             {
                 MessageBox.Show("Successfully added item to invoice", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+                this.Close();
             }
             else
             {
@@ -158,6 +159,7 @@ namespace budiga_app.MVVM.View
                             videoCaptureDevice = null;
                         }
                     }
+                    this.Close();
                 }
                 else
                 {

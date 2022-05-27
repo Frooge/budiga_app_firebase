@@ -90,10 +90,10 @@ namespace budiga_app.DataAccess
                     query = string.Format("UPDATE `item` SET `name`='{0}', `barcode`='{1}', `brand`='{2}', `price`='{3}', `quantity`='{4}' WHERE `id`={5}", itemHistory.Name, itemHistory.Barcode, itemHistory.Brand, itemHistory.Price, itemHistory.Quantity, itemHistory.ItemId);
                     break;
                 case "ADDED":
-                    query = string.Format("UPDATE `item` SET `is_deleted`=`1` WHERE `id`={0}", itemHistory.ItemId);
+                    query = string.Format("UPDATE `item` SET `is_deleted`=1 WHERE `id`={0}", itemHistory.ItemId);
                     break;
                 case "DELETED":
-                    query = string.Format("UPDATE `item` SET `is_deleted`=`0` WHERE `id`={0}", itemHistory.ItemId);
+                    query = string.Format("UPDATE `item` SET `is_deleted`=0 WHERE `id`={0}", itemHistory.ItemId);
                     break;
                 default:
                     query = "";

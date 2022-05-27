@@ -28,19 +28,19 @@ namespace budiga_app.DataAccess
             switch (date)
             {
                 case "Daily":
-                    query = "SELECT `invoice`.created_date, `order`.item_id, `invoice`.total_price, `order`.quantity, DATE_FORMAT(created_date, \"%Y-%m-%d\") AS Created_day FROM `invoice` INNER JOIN `order` ON `invoice`.id = `order`.invoice_id INNER JOIN item ON `order`.item_id = `item`.id GROUP BY `order`.item_id, Created_day;";
+                    query = "SELECT `invoice`.created_date, `order`.item_id, `invoice`.total_price, SUM(`order`.quantity) AS quantity, DATE_FORMAT(created_date, \"%Y-%m-%d\") AS Created_day FROM `invoice` INNER JOIN `order` ON `invoice`.id = `order`.invoice_id INNER JOIN item ON `order`.item_id = `item`.id GROUP BY `order`.item_id, Created_day ORDER BY Created_day DESC;";
                     break;
 
                 case "Monthly":
-                    query = "SELECT `invoice`.created_date, `order`.item_id, `invoice`.total_price, `order`.quantity, DATE_FORMAT(created_date, \"%Y-%m\") AS Created_day FROM `invoice` INNER JOIN `order` ON `invoice`.id = `order`.invoice_id INNER JOIN item ON `order`.item_id = `item`.id GROUP BY Created_day, `order`.item_id;";
+                    query = "SELECT `invoice`.created_date, `order`.item_id, `invoice`.total_price, SUM(`order`.quantity) AS quantity, DATE_FORMAT(created_date, \"%Y-%m\") AS Created_day FROM `invoice` INNER JOIN `order` ON `invoice`.id = `order`.invoice_id INNER JOIN item ON `order`.item_id = `item`.id GROUP BY Created_day, `order`.item_id ORDER BY Created_day DESC;";
                     break;
 
                 case "Yearly":
-                    query = "SELECT `invoice`.created_date, `order`.item_id, `invoice`.total_price, `order`.quantity, DATE_FORMAT(created_date, \"%Y\") AS Created_day FROM `invoice` INNER JOIN `order` ON `invoice`.id = `order`.invoice_id INNER JOIN item ON `order`.item_id = `item`.id GROUP BY `order`.item_id, Created_day;";
+                    query = "SELECT `invoice`.created_date, `order`.item_id, `invoice`.total_price, SUM(`order`.quantity) AS quantity, DATE_FORMAT(created_date, \"%Y\") AS Created_day FROM `invoice` INNER JOIN `order` ON `invoice`.id = `order`.invoice_id INNER JOIN item ON `order`.item_id = `item`.id GROUP BY `order`.item_id, Created_day ORDER BY Created_day DESC;";
                     break;
 
                 default:
-                    query = "SELECT `invoice`.created_date, `order`.item_id, `invoice`.total_price, `order`.quantity, DATE_FORMAT(created_date, \"%Y-%m-%d %h:%s\") AS Created_day FROM `invoice` INNER JOIN `order` ON `invoice`.id = `order`.invoice_id INNER JOIN item ON `order`.item_id = `item`.id GROUP BY `order`.item_id, Created_day;";
+                    query = "SELECT `invoice`.created_date, `order`.item_id, `invoice`.total_price, SUM(`order`.quantity) AS quantity, DATE_FORMAT(created_date, \"%Y-%m-%d %h:%s\") AS Created_day FROM `invoice` INNER JOIN `order` ON `invoice`.id = `order`.invoice_id INNER JOIN item ON `order`.item_id = `item`.id GROUP BY `order`.item_id, Created_day ORDER BY Created_day DESC;";
                     break;
             }
              
@@ -55,7 +55,7 @@ namespace budiga_app.DataAccess
                 {
                     AllSales.Add(new InventorySalesModel()
                     {
-                        Date = reader.GetDateTime("created_date"),
+                        Date = reader.GetString("Created_day"),
                         Item = itemRepository.GetItem(reader.GetInt32("item_id")),
                         TotalSales = reader.GetFloat("total_price"),
                         UnitsSold = reader.GetInt32("quantity")
@@ -81,19 +81,19 @@ namespace budiga_app.DataAccess
             switch (date)
             {
                 case "Daily":
-                    query = "SELECT created_date, SUM(total_price), COUNT(total_price) AS unit_sold, DATE_FORMAT(created_date,\"%Y-%m-%d\") AS Created_day FROM invoice GROUP BY Created_day;";
+                    query = "SELECT created_date, SUM(total_price), COUNT(total_price) AS unit_sold, DATE_FORMAT(created_date,\"%Y-%m-%d\") AS Created_day FROM invoice GROUP BY Created_day ORDER BY Created_day DESC;";
                     break;
 
                 case "Monthly":
-                    query = "SELECT created_date, SUM(total_price), COUNT(total_price) AS unit_sold, DATE_FORMAT(created_date,\"%Y-%m\") AS Created_day FROM invoice GROUP BY Created_day;";
+                    query = "SELECT created_date, SUM(total_price), COUNT(total_price) AS unit_sold, DATE_FORMAT(created_date,\"%Y-%m\") AS Created_day FROM invoice GROUP BY Created_day ORDER BY Created_day DESC;";
                     break;
 
                 case "Yearly":
-                    query = "SELECT created_date, SUM(total_price), COUNT(total_price) AS unit_sold, DATE_FORMAT(created_date, \"%Y\") AS Created_day FROM invoice GROUP BY Created_day;";
+                    query = "SELECT created_date, SUM(total_price), COUNT(total_price) AS unit_sold, DATE_FORMAT(created_date, \"%Y\") AS Created_day FROM invoice GROUP BY Created_day ORDER BY Created_day DESC;";
                     break;
 
                 default:
-                    query = "SELECT created_date, SUM(total_price), COUNT(total_price) AS unit_sold, DATE_FORMAT(created_date,\"%Y-%m-%d %h:%s\") AS Created_day FROM invoice GROUP BY Created_day;";
+                    query = "SELECT created_date, SUM(total_price), COUNT(total_price) AS unit_sold, DATE_FORMAT(created_date,\"%Y-%m-%d %h:%s\") AS Created_day FROM invoice GROUP BY Created_day ORDER BY Created_day DESC;";
                     break;
             }
             MySqlDataReader reader;
@@ -108,7 +108,7 @@ namespace budiga_app.DataAccess
                     overviewSales.Add(new OverviewSalesModel()
                     {
                         Total = reader.GetFloat("SUM(total_price)"),
-                        Date = reader.GetDateTime("created_date"),
+                        Date = reader.GetString("Created_day"),
                         UnitsSold = reader.GetInt32("unit_sold")
                     });
                 }

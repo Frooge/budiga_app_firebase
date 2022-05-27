@@ -32,12 +32,7 @@
                     <Image Source="/Resources/Images/SearchIcon.png" Width="20" />
                 </StackPanel>
             </Border>
-            <StackPanel Orientation="Horizontal" Margin="500,10,0,10" HorizontalAlignment="Right">
-                <Label Content="Start:" FontSize="16"/>
-                <DatePicker x:Name="StartDate" Width="120" HorizontalAlignment="Right" Text="Start" HorizontalContentAlignment="Center" Style="{StaticResource MaterialDesignDatePicker}"/>
-                <Label Content="End:" FontSize="16" Margin="10,0,0,0"/>
-                <DatePicker x:Name="EndDate" Width="120" HorizontalAlignment="Right" Text="End" HorizontalContentAlignment="Center" Style="{StaticResource MaterialDesignDatePicker}"/>
-            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="500,10,0,10" HorizontalAlignment="Right"/>
         </StackPanel>
         
         <DataGrid x:Name="invoiceTable" 
