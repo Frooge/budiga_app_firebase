@@ -98,8 +98,8 @@ namespace budiga_app.MVVM.ViewModel
 
         private void GetAll(string date)
         {
-            Sales.TotalSales = salesRepository.GetTotalSales();
-            Sales.TotalTransaction = salesRepository.GetTotalTransactions();
+            Sales.TotalSales = salesRepository.GetTotalSales(date);
+            Sales.TotalTransaction = salesRepository.GetTotalTransactions(date);
 
             _sales.InventorySales = salesRepository.GetAllSales(date);
             Sales.InventorySales = _sales.InventorySales;            

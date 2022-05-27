@@ -28,19 +28,19 @@ namespace budiga_app.DataAccess
             switch (date)
             {
                 case "Daily":
-                    query = "SELECT `invoice`.created_date, `order`.item_id, `order`.subtotal_price AS total_price, SUM(`order`.quantity) AS quantity, DATE_FORMAT(created_date, \"%Y-%m-%d\") AS Created_day FROM `invoice` INNER JOIN `order` ON `invoice`.id = `order`.invoice_id INNER JOIN item ON `order`.item_id = `item`.id GROUP BY `order`.item_id, Created_day ORDER BY Created_day DESC;";
+                    query = "SELECT `invoice`.created_date, `order`.item_id, SUM(`order`.quantity) AS quantity, SUM(`order`.quantity) * `item`.price AS total_price, DATE_FORMAT(created_date, \"%Y-%m-%d\") AS Created_day FROM `invoice` INNER JOIN `order` ON `invoice`.id = `order`.invoice_id INNER JOIN item ON `order`.item_id = `item`.id GROUP BY `order`.item_id, Created_day ORDER BY Created_day DESC;";
                     break;
 
                 case "Monthly":
-                    query = "SELECT `invoice`.created_date, `order`.item_id, `order`.subtotal_price AS total_price, SUM(`order`.quantity) AS quantity, DATE_FORMAT(created_date, \"%Y-%m\") AS Created_day FROM `invoice` INNER JOIN `order` ON `invoice`.id = `order`.invoice_id INNER JOIN item ON `order`.item_id = `item`.id GROUP BY Created_day, `order`.item_id ORDER BY Created_day DESC;";
+                    query = "SELECT `invoice`.created_date, `order`.item_id, SUM(`order`.quantity) AS quantity, SUM(`order`.quantity) * `item`.price AS total_price, DATE_FORMAT(created_date, \"%Y-%m\") AS Created_day FROM `invoice` INNER JOIN `order` ON `invoice`.id = `order`.invoice_id INNER JOIN item ON `order`.item_id = `item`.id GROUP BY `order`.item_id, Created_day ORDER BY Created_day DESC;";
                     break;
 
                 case "Yearly":
-                    query = "SELECT `invoice`.created_date, `order`.item_id, `order`.subtotal_price AS total_price, SUM(`order`.quantity) AS quantity, DATE_FORMAT(created_date, \"%Y\") AS Created_day FROM `invoice` INNER JOIN `order` ON `invoice`.id = `order`.invoice_id INNER JOIN item ON `order`.item_id = `item`.id GROUP BY `order`.item_id, Created_day ORDER BY Created_day DESC;";
+                    query = "SELECT `invoice`.created_date, `order`.item_id, SUM(`order`.quantity) AS quantity, SUM(`order`.quantity) * `item`.price AS total_price, DATE_FORMAT(created_date, \"%Y\") AS Created_day FROM `invoice` INNER JOIN `order` ON `invoice`.id = `order`.invoice_id INNER JOIN item ON `order`.item_id = `item`.id GROUP BY `order`.item_id, Created_day ORDER BY Created_day DESC;";
                     break;
 
                 default:
-                    query = "SELECT `invoice`.created_date, `order`.item_id, `order`.subtotal_price AS total_price, SUM(`order`.quantity) AS quantity, DATE_FORMAT(created_date, \"%Y-%m-%d %h:%s\") AS Created_day FROM `invoice` INNER JOIN `order` ON `invoice`.id = `order`.invoice_id INNER JOIN item ON `order`.item_id = `item`.id GROUP BY `order`.item_id, Created_day ORDER BY Created_day DESC;";
+                    query = "SELECT `invoice`.created_date, `order`.item_id, SUM(`order`.quantity) AS quantity, SUM(`order`.quantity) * `item`.price AS total_price, DATE_FORMAT(created_date, \"%Y-%m-%d %h:%m:%s\") AS Created_day FROM `invoice` INNER JOIN `order` ON `invoice`.id = `order`.invoice_id INNER JOIN item ON `order`.item_id = `item`.id GROUP BY `order`.item_id, Created_day ORDER BY Created_day DESC;";
                     break;
             }
              
@@ -124,7 +124,7 @@ namespace budiga_app.DataAccess
             return overviewSales;
         }
 
-        public float GetTotalSales()
+        public float GetTotalSales(string date)
         {
             float totalSales = 0;
             string query = "SELECT SUM(total_price) FROM `invoice`";
@@ -146,7 +146,7 @@ namespace budiga_app.DataAccess
             return totalSales;
         }
 
-        public int GetTotalTransactions()
+        public int GetTotalTransactions(string date)
         {
             int totalTransactions = 0;
             string query = "SELECT COUNT(DISTINCT invoice_id) FROM `order`";
