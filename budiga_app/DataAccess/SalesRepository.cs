@@ -40,7 +40,7 @@ namespace budiga_app.DataAccess
                     break;
 
                 default:
-                    query = "SELECT `invoice`.created_date, `order`.item_id, SUM(`order`.quantity) AS quantity, SUM(`order`.quantity) * `item`.price AS total_price, DATE_FORMAT(created_date, \"%Y-%m-%d %h:%m:%s\") AS Created_day FROM `invoice` INNER JOIN `order` ON `invoice`.id = `order`.invoice_id INNER JOIN item ON `order`.item_id = `item`.id GROUP BY `order`.item_id, Created_day ORDER BY Created_day DESC;";
+                    query = "SELECT `invoice`.created_date, `order`.item_id, SUM(`order`.quantity) AS quantity, SUM(`order`.quantity) * `item`.price AS total_price, DATE_FORMAT(created_date, \"%Y-%m-%d\") AS Created_day FROM `invoice` INNER JOIN `order` ON `invoice`.id = `order`.invoice_id INNER JOIN item ON `order`.item_id = `item`.id GROUP BY `order`.item_id, Created_day ORDER BY Created_day DESC;";
                     break;
             }
              
@@ -93,7 +93,7 @@ namespace budiga_app.DataAccess
                     break;
 
                 default:
-                    query = "SELECT `invoice`.created_date, SUM(`invoice`.total_price) AS total_price, SUM(`order`.quantity) AS unit_sold, DATE_FORMAT(created_date,\"%Y-%m-%d %h:%m:%s\") AS Created_day FROM `invoice` INNER JOIN `order` ON `invoice`.id = `order`.invoice_id GROUP BY Created_day ORDER BY Created_day DESC;";
+                    query = "SELECT `invoice`.created_date, SUM(`invoice`.total_price) AS total_price, SUM(`order`.quantity) AS unit_sold, DATE_FORMAT(created_date,\"%Y-%m-%d\") AS Created_day FROM `invoice` INNER JOIN `order` ON `invoice`.id = `order`.invoice_id GROUP BY Created_day ORDER BY Created_day DESC;";
                     break;
             }
             MySqlDataReader reader;
@@ -126,14 +126,38 @@ namespace budiga_app.DataAccess
 
         public float GetTotalSales(string date)
         {
+            string query;
+            object result;
             float totalSales = 0;
-            string query = "SELECT SUM(`invoice`.total_price) AS total_price FROM `invoice` INNER JOIN `order` ON `invoice`.id = `order`.invoice_id GROUP BY MONTH(CURRENT_DATE);";
+            switch (date)
+            {
+                case "Daily":
+                    query = "SELECT SUM(`invoice`.total_price) AS total_price FROM `invoice` INNER JOIN `order` ON `invoice`.id = `order`.invoice_id WHERE DAY(CURRENT_DATE) = DAY(`invoice`.created_date);";
+                    break;
+
+                case "Monthly":
+                    query = "SELECT SUM(`invoice`.total_price) AS total_price FROM `invoice` INNER JOIN `order` ON `invoice`.id = `order`.invoice_id WHERE MONTH(CURRENT_DATE) = MONTH(`invoice`.created_date);";
+                    break;
+
+                case "Yearly":
+                    query = "SELECT SUM(`invoice`.total_price) AS total_price FROM `invoice` INNER JOIN `order` ON `invoice`.id = `order`.invoice_id WHERE YEAR(CURRENT_DATE) = YEAR(`invoice`.created_date);";
+                    break;
+
+                default:
+                    query = "SELECT SUM(`invoice`.total_price) AS total_price FROM `invoice` INNER JOIN `order` ON `invoice`.id = `order`.invoice_id;";
+                    break;
+            }
             try
             {
                 database.Connection();
                 MySqlCommand commandDatabase = new MySqlCommand(query, database.conn);
                 commandDatabase.CommandTimeout = 60;
-                totalSales = (float)Convert.ToDecimal(commandDatabase.ExecuteScalar());
+                result = commandDatabase.ExecuteScalar();
+                if (!result.Equals(DBNull.Value))
+                {
+
+                    totalSales = float.Parse(Convert.ToString(result));
+                }
             }
             catch (Exception ex)
             {
