@@ -81,19 +81,19 @@ namespace budiga_app.DataAccess
             switch (date)
             {
                 case "Daily":
-                    query = "SELECT created_date, SUM(total_price), COUNT(total_price) AS unit_sold, DATE_FORMAT(created_date,\"%Y-%m-%d\") AS Created_day FROM invoice GROUP BY Created_day ORDER BY Created_day DESC;";
+                    query = "SELECT `invoice`.created_date, SUM(`invoice`.total_price), COUNT(`order`.quantity) AS unit_sold, DATE_FORMAT(created_date,\"%Y-%m-%d\") AS Created_day FROM `invoice` INNER JOIN `order` ON `invoice`.id = `order`.invoice_id GROUP BY Created_day ORDER BY Created_day DESC";
                     break;
 
                 case "Monthly":
-                    query = "SELECT created_date, SUM(total_price), COUNT(total_price) AS unit_sold, DATE_FORMAT(created_date,\"%Y-%m\") AS Created_day FROM invoice GROUP BY Created_day ORDER BY Created_day DESC;";
+                    query = "SELECT `invoice`.created_date, SUM(`invoice`.total_price), COUNT(`order`.quantity) AS unit_sold, DATE_FORMAT(created_date,\"%Y-%m\") AS Created_day FROM `invoice` INNER JOIN `order` ON `invoice`.id = `order`.invoice_id GROUP BY Created_day ORDER BY Created_day DESC";
                     break;
 
                 case "Yearly":
-                    query = "SELECT created_date, SUM(total_price), COUNT(total_price) AS unit_sold, DATE_FORMAT(created_date, \"%Y\") AS Created_day FROM invoice GROUP BY Created_day ORDER BY Created_day DESC;";
+                    query = "SELECT `invoice`.created_date, SUM(`invoice`.total_price), COUNT(`order`.quantity) AS unit_sold, DATE_FORMAT(created_date,\"%Y\") AS Created_day FROM `invoice` INNER JOIN `order` ON `invoice`.id = `order`.invoice_id GROUP BY Created_day ORDER BY Created_day DESC";
                     break;
 
                 default:
-                    query = "SELECT created_date, SUM(total_price), COUNT(total_price) AS unit_sold, DATE_FORMAT(created_date,\"%Y-%m-%d %h:%s\") AS Created_day FROM invoice GROUP BY Created_day ORDER BY Created_day DESC;";
+                    query = "SELECT `invoice`.created_date, SUM(`invoice`.total_price), COUNT(`order`.quantity) AS unit_sold, DATE_FORMAT(created_date, \"%Y-%m-%d %h:%s\") AS Created_day FROM `invoice` INNER JOIN `order` ON `invoice`.id = `order`.invoice_id GROUP BY Created_day ORDER BY Created_day DESC";
                     break;
             }
             MySqlDataReader reader;
