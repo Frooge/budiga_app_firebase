@@ -34,7 +34,7 @@
             <Label Content="Brand:" FontSize="14" Grid.Column="0" Grid.Row="2"/>
             <TextBox x:Name="brandTextBox" FontSize="14" Grid.Column="1" Grid.Row="2" SelectionBrush="#FF264ECA" CaretBrush="#FF264ECA"/>
             <Label Content="Price:" FontSize="14" Grid.Column="0" Grid.Row="3"/>
-            <TextBox x:Name="priceTextBox" PreviewTextInput="NumberValidationTextBox" FontSize="14" Grid.Column="1" Grid.Row="3" CaretBrush="#FF264ECA" SelectionBrush="#FF264ECA"/>
+            <TextBox x:Name="priceTextBox" FontSize="14" Grid.Column="1" Grid.Row="3" CaretBrush="#FF264ECA" SelectionBrush="#FF264ECA"/>
             <Label Content="Qty:" FontSize="14" Grid.Column="0" Grid.Row="4"/>
             <Grid Grid.Column="1" Grid.Row="4" Margin="0,10">
                 <Grid.ColumnDefinitions>
