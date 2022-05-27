@@ -72,9 +72,9 @@
         </ScrollViewer>
         <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="4*" />
-                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="2*" />
+                <ColumnDefinition Width="5*" />
+                <ColumnDefinition Width="2*" />
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />
@@ -84,8 +84,14 @@
                 <Label Content="Total Quantity:"/>
                 <Label Content="{Binding ElementName=invoiceReceiptView, Path=Invoice.InvoiceOrderRecords.Count}"/>
             </StackPanel>
+            <StackPanel Orientation="Horizontal" Grid.Column="1">
+                <Label Content="Customer Pay:"/>
+                <Label Content="{Binding ElementName=invoiceReceiptView, Path=Invoice.CustomerPay}"/>
+                <Label Content="Customer Change:" Margin="10,0,0,0"/>
+                <Label Content="{Binding ElementName=invoiceReceiptView, Path=Invoice.CustomerChange}"/>
+            </StackPanel>
             <StackPanel Orientation="Horizontal" Grid.Column="2" Grid.RowSpan="2">
-                <Label Content="Total"/>
+                <Label Content="Total:"/>
                 <TextBlock Text="{Binding ElementName=invoiceReceiptView, Path=Invoice.TotalPrice}" FontSize="28" FontWeight="Bold"/>
             </StackPanel>
         </Grid>

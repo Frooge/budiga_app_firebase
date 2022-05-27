@@ -17,7 +17,6 @@ namespace budiga_app.MVVM.Model
         private int _quantity;
         private float _subtotalPrice;
         private ItemModel _item;
-        private ObservableCollection<OrderModel> _orderTransactionRecords;
         
         public int Id { get { return _id; } set { _id = value; OnPropertyChanged("Id"); } }
         public int ItemId { get { return _itemId; } set { _itemId = value; OnPropertyChanged("ItemId"); } }

@@ -54,6 +54,52 @@ namespace budiga_app.DataAccess
             return item;
         }
 
+        public ItemModel GetItemByBarcode(string barcode)
+        {
+            ItemModel item = new ItemModel();
+            string query = String.Format("SELECT * FROM `item` WHERE `barcode` = '{0}'", barcode);
+            MySqlDataReader reader;
+            try
+            {
+                database.Connection();
+                MySqlCommand commandDatabase = new MySqlCommand(query, database.conn);
+                commandDatabase.CommandTimeout = 60;
+                reader = commandDatabase.ExecuteReader();
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        item = new ItemModel()
+                        {
+                            Id = reader.GetInt32("id"),
+                            Barcode = reader.GetString("barcode"),
+                            Name = reader.GetString("name"),
+                            Brand = reader.GetString("brand"),
+                            Price = reader.GetFloat("price"),
+                            Quantity = reader.GetInt32("quantity")
+                        };
+                    }
+                }
+                else
+                {
+                    item = new ItemModel()
+                    {
+                        Id = -1
+                    };
+                }
+                
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);                
+            }
+            finally
+            {
+                database.Dispose();
+            }
+            return item;
+        }
+
         public ObservableCollection<ItemModel> GetAllItems()
         {
             ObservableCollection<ItemModel> items = new ObservableCollection<ItemModel>();

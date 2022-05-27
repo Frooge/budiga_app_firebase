@@ -138,8 +138,26 @@ namespace budiga_app.MVVM.View
             this.Dispatcher.Invoke(new Action(() =>
             {
                 if (result != null)
-                {
-                    outputBlock.Text = "Result: " + result.Text;
+                {                    
+                    outputBlock.Text = result.Text;
+                    if (_invoiceVM.GetItemByBarcode(result.Text))
+                    {
+                        MessageBox.Show("Successfully added item to invoice", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Item already exist in invoice or item does not exist", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
+                    if (videoCaptureDevice != null)
+                    {
+                        if (videoCaptureDevice.IsRunning)
+                        {
+                            scanBtn.Content = "Start Scanning";
+                            videoCaptureDevice.SignalToStop();
+                            videoCaptureDevice.NewFrame -= new NewFrameEventHandler(VideoCaptureDevice_NewFrame);
+                            videoCaptureDevice = null;
+                        }
+                    }
                 }
                 else
                 {

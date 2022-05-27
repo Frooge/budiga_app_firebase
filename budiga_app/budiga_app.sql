@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 22, 2022 at 06:24 PM
+-- Generation Time: May 27, 2022 at 10:07 AM
 -- Server version: 10.4.18-MariaDB
--- PHP Version: 7.4.18
+-- PHP Version: 7.3.27
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -39,13 +39,24 @@ CREATE TABLE `attendance` (
 --
 
 INSERT INTO `attendance` (`id`, `user_id`, `time_in`, `time_out`) VALUES
-(1, 2, '2022-05-22 21:07:33', '2022-05-22 21:07:50'),
-(2, 2, '2022-05-22 21:39:03', '2022-05-22 21:39:13'),
-(3, 2, '2022-05-22 21:40:57', '2022-05-22 21:41:19'),
-(4, 2, '2022-05-22 22:24:51', '2022-05-22 22:27:16'),
-(5, 2, '2022-05-23 00:12:41', '2022-05-23 00:13:19'),
-(6, 2, '2022-05-23 00:14:12', '2022-05-23 00:14:36'),
-(7, 2, '2022-05-23 00:16:01', '2022-05-23 00:16:30');
+(1, 1, '2022-05-14 00:50:44', '2022-05-14 00:50:52'),
+(2, 3, '2022-05-14 00:51:00', '2022-05-14 00:51:04'),
+(3, 1, '2022-05-14 00:53:49', '2022-05-14 00:54:11'),
+(4, 2, '2022-05-14 16:46:06', '2022-05-14 16:46:26'),
+(5, 1, '2022-05-14 16:46:30', '2022-05-14 16:47:22'),
+(6, 2, '2022-05-14 16:47:27', '2022-05-14 16:47:30'),
+(7, 1, '2022-05-14 17:44:12', '2022-05-14 17:44:29'),
+(8, 1, '2022-05-14 17:45:07', '2022-05-14 17:45:45'),
+(9, 1, '2022-05-22 21:56:20', '2022-05-22 21:57:04'),
+(10, 1, '2022-05-22 21:58:56', '2022-05-22 21:59:03'),
+(11, 1, '2022-05-22 21:59:20', '2022-05-22 21:59:36'),
+(12, 1, '2022-05-22 22:05:24', '2022-05-22 22:05:41'),
+(13, 1, '2022-05-23 00:05:58', '2022-05-23 00:06:28'),
+(14, 1, '2022-05-25 22:34:37', '2022-05-25 22:34:48'),
+(15, 1, '2022-05-27 15:06:27', '2022-05-27 15:11:28'),
+(16, 2, '2022-05-27 15:23:25', '2022-05-27 15:23:42'),
+(17, 1, '2022-05-27 15:26:02', '2022-05-27 15:27:17'),
+(18, 1, '2022-05-27 15:51:33', '2022-05-27 15:54:33');
 
 -- --------------------------------------------------------
 
@@ -71,7 +82,11 @@ INSERT INTO `invoice` (`id`, `user_id`, `total_price`, `customer_pay`, `customer
 (8, 1, 460, 500, 40, '2022-05-12 02:58:06'),
 (9, 1, 398, 500, 102, '2022-05-12 03:05:06'),
 (10, 1, 38, 50, 12, '2022-05-12 03:08:02'),
-(11, 1, 404, 500, 96, '2022-05-13 16:20:13');
+(11, 1, 404, 500, 96, '2022-05-13 16:20:13'),
+(12, 1, 104, 150, 46, '2022-05-14 16:15:50'),
+(13, 1, 60, 100, 40, '2022-05-25 23:12:27'),
+(14, 1, 40, 50, 10, '2022-05-25 23:20:45'),
+(15, 1, 396, 400, 4, '2022-05-25 23:30:06');
 
 -- --------------------------------------------------------
 
@@ -81,7 +96,7 @@ INSERT INTO `invoice` (`id`, `user_id`, `total_price`, `customer_pay`, `customer
 
 CREATE TABLE `item` (
   `id` bigint(20) NOT NULL,
-  `barcode` varchar(12) NOT NULL DEFAULT 'N/A',
+  `barcode` varchar(13) NOT NULL DEFAULT 'N/A',
   `name` varchar(64) NOT NULL,
   `brand` varchar(64) NOT NULL,
   `price` float NOT NULL,
@@ -94,14 +109,14 @@ CREATE TABLE `item` (
 --
 
 INSERT INTO `item` (`id`, `barcode`, `name`, `brand`, `price`, `quantity`, `is_deleted`) VALUES
-(0, 'N/A', 'Skyflakes', 'Biskwet', 11, 6, 1),
+(0, 'N/A', 'Skyflake', 'Biskwet', 11, 6, 0),
 (2, 'N/A', 'Shampoo', 'Sunsilk', 19, 2, 0),
-(3, 'N/A', 'Yakult', 'Nestle', 99, 989, 0),
+(3, '0123546789014', 'Yakult', 'Nestle', 99, 985, 0),
 (4, 'N/A', 'Magnolia', 'Nestle', 200, 2, 0),
-(5, 'N/A', 'Iced Tea', 'Nestle', 20, 77, 0),
+(5, 'N/A', 'Iced Tea', 'Nestle', 20, 75, 0),
 (6, 'N/A', 'Orange Juice', 'XXX', 24, 1, 0),
-(7, '11111111111', 'C2', 'idk', 20, 4, 0),
-(8, '12349081231', 'Safeguard', 'idk', 20, 34, 0);
+(7, '11111111111', 'C2', 'idk', 20, 4, 1),
+(8, '12349081231', 'Safeguard', 'idk', 20, 31, 0);
 
 -- --------------------------------------------------------
 
@@ -112,14 +127,34 @@ INSERT INTO `item` (`id`, `barcode`, `name`, `brand`, `price`, `quantity`, `is_d
 CREATE TABLE `item_history` (
   `id` bigint(20) NOT NULL,
   `item_id` int(11) NOT NULL,
-  `barcode` varchar(12) NOT NULL DEFAULT 'N/A',
+  `barcode` varchar(13) NOT NULL DEFAULT 'N/A',
   `name` varchar(64) NOT NULL,
   `brand` varchar(64) NOT NULL,
   `price` float NOT NULL,
   `quantity` int(11) NOT NULL,
   `action` varchar(10) NOT NULL,
-  `committed_date` datetime NOT NULL DEFAULT current_timestamp()
+  `comitted_date` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `item_history`
+--
+
+INSERT INTO `item_history` (`id`, `item_id`, `barcode`, `name`, `brand`, `price`, `quantity`, `action`, `comitted_date`) VALUES
+(1, 0, 'N/A', 'Skyflake', 'Biskwet', 11, 6, 'UPDATED', '2022-05-24 21:45:46'),
+(2, 0, 'N/A', 'Skyflake', 'Biskwet', 11, 6, 'UPDATED', '2022-05-24 21:50:25'),
+(3, 2, 'N/A', 'Shampoo', 'Sunsilk', 19, 2, 'UPDATED', '2022-05-24 21:51:53'),
+(4, 6, 'N/A', 'Orange Juice', 'XXX', 24, 1, 'UPDATED', '2022-05-24 22:01:50'),
+(5, 6, 'N/A', 'Orange Juice', 'XXX', 24, 1, 'UPDATED', '2022-05-24 22:02:18'),
+(6, 7, '11111111111', 'C2', 'idk', 20, 4, 'DELETED', '2022-05-24 22:08:39'),
+(7, 6, 'N/A', 'Orange Juice', 'XXX', 24, 1, 'UPDATED', '2022-05-24 22:09:00'),
+(8, 6, 'N/A', 'Orange Juice', 'XXX', 24, 1, 'UPDATED', '2022-05-24 23:12:40'),
+(9, 8, '12349081231', 'Safeguard', 'idk', 20, 31, 'UPDATED', '2022-05-25 23:12:27'),
+(10, 5, 'N/A', 'Iced Tea', 'Nestle', 20, 77, 'UPDATED', '2022-05-25 23:20:46'),
+(11, 3, 'N/A', 'Yakult', 'Nestle', 99, 989, 'UPDATED', '2022-05-25 23:30:06'),
+(12, 3, 'N/A', 'Yakult', 'Nestle', 99, 985, 'UPDATED', '2022-05-27 15:58:35'),
+(13, 3, '012345678901', 'Yakult', 'Nestle', 99, 985, 'UPDATED', '2022-05-27 15:59:07'),
+(14, 3, '012354678901', 'Yakult', 'Nestle', 99, 985, 'UPDATED', '2022-05-27 16:00:33');
 
 -- --------------------------------------------------------
 
@@ -151,7 +186,12 @@ INSERT INTO `order` (`id`, `item_id`, `invoice_id`, `quantity`, `subtotal_price`
 (13, 6, 11, 1, 24),
 (14, 7, 11, 1, 20),
 (15, 8, 11, 2, 40),
-(16, 4, 11, 1, 200);
+(16, 4, 11, 1, 200),
+(17, 0, 12, 6, 66),
+(18, 2, 12, 2, 38),
+(19, 8, 13, 3, 60),
+(20, 5, 14, 2, 40),
+(21, 3, 15, 4, 396);
 
 -- --------------------------------------------------------
 
@@ -233,13 +273,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `attendance`
 --
 ALTER TABLE `attendance`
-  MODIFY `id` bigint(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` bigint(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `invoice`
 --
 ALTER TABLE `invoice`
-  MODIFY `id` bigint(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` bigint(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `item`
@@ -251,13 +291,13 @@ ALTER TABLE `item`
 -- AUTO_INCREMENT for table `item_history`
 --
 ALTER TABLE `item_history`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `order`
 --
 ALTER TABLE `order`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `users`

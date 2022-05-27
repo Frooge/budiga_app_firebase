@@ -1,4 +1,5 @@
 ﻿using budiga_app.Core;
+using budiga_app.DataAccess;
 using budiga_app.MVVM.Model;
 using budiga_app.MVVM.View;
 using System;
@@ -111,6 +112,28 @@ namespace budiga_app.MVVM.ViewModel
                 CalculateTotal();
                 result = true;
             }            
+            return result;
+        }
+
+        public bool GetItemByBarcode(string barcode)
+        {
+            bool result = false;
+            ItemModel item = new ItemModel();
+            ItemRepository itemRepository = new ItemRepository();
+            item = itemRepository.GetItemByBarcode(barcode);
+            if (item.Id != -1 &&  Invoice.InvoiceOrderRecords.Where(i => i.ItemId == item.Id).FirstOrDefault() == null)
+            {
+                Invoice.InvoiceOrderRecords.Add(new OrderModel()
+                {
+                    Id = 1,
+                    ItemId = item.Id,
+                    Quantity = 1,
+                    SubtotalPrice = item.Price,
+                    Item = item,
+                });
+                CalculateTotal();
+                result = true;
+            }
             return result;
         }
 

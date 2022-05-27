@@ -52,6 +52,7 @@
                               CanUserResizeColumns="False"
                               CanUserAddRows="False"
                               CanUserResizeRows="False"
+                              Height="500"
                               Padding="0,0">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Product" Binding="{Binding Path=Name}" Width="*"/>

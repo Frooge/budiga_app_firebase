@@ -98,12 +98,12 @@
         </ScrollViewer>
         
 
-        <Button Grid.Row="2" Style="{x:Null}" Background="Transparent" BorderBrush="{x:Null}" Command="{Binding AddItemCommand}">
+        <Button Grid.Row="2" Style="{x:Null}" Background="Transparent" BorderBrush="{x:Null}" Command="{Binding AddItemCommand}" Padding="0">
             <Button.ContentTemplate>
                 <DataTemplate>
-                    <StackPanel>
-                        <Image Source="/Resources/Images/Placeholder.png" Width="80"/>
-                        <TextBlock Foreground="Gray" FontSize="18">Add Items</TextBlock>
+                    <StackPanel Orientation="Vertical">
+                        <Image Source="/Resources/Images/plus-icon.png" Width="80"/>
+                        <Label Foreground="Gray" FontSize="18" Content="Add Items"/>
                     </StackPanel>
                 </DataTemplate>
             </Button.ContentTemplate>
