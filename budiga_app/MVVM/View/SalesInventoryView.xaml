@@ -21,12 +21,12 @@
                               CanUserResizeRows="False"
                               Padding="0,0">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Date" Binding="{Binding Path=Date}" Width="*"/>
-                <DataGridTextColumn Header="Item" Binding="{Binding Path= Item.Name}" Width="*"/>
+                <DataGridTextColumn Header="Date" Binding="{Binding Path=Date}" Width="2*"/>
+                <DataGridTextColumn Header="Item" Binding="{Binding Path= Item.Name}" Width="2*"/>
                 <DataGridTextColumn Header="Brand" Binding="{Binding Path=Item.Brand}" Width="*"/>
                 <DataGridTextColumn Header="Price" Binding="{Binding Path=Item.Price}" Width="*"/>
                 <DataGridTextColumn Header="Units Sold" Binding="{Binding Path=UnitsSold}" Width="*"/>
-                <DataGridTextColumn Header="Total Price" Binding="{Binding Path=TotalSales}" Width="*"/>
+                <DataGridTextColumn Header="Total" Binding="{Binding Path=TotalSales}" Width="*"/>
             </DataGrid.Columns>
             <DataGrid.CellStyle>
                 <Style TargetType="DataGridCell" BasedOn="{StaticResource MaterialDesignDataGridCell}">

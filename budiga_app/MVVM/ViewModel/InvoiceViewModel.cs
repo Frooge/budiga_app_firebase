@@ -96,45 +96,80 @@ namespace budiga_app.MVVM.ViewModel
             }            
         }
 
-        public bool GetItem(ItemModel item)
+        public void GetItem(ItemModel item)
         {
-            bool result = false;
-            if (Invoice.InvoiceOrderRecords.Where(i => i.ItemId == item.Id).FirstOrDefault() == null)
+            OrderModel order = Invoice.InvoiceOrderRecords.Where(i => i.ItemId == item.Id).FirstOrDefault();
+            InvoiceAddQuantityView invoiceAddQuantityView = new InvoiceAddQuantityView();
+            if (invoiceAddQuantityView.ShowDialog() == true)
             {
-                Invoice.InvoiceOrderRecords.Add(new OrderModel()
+                if (order == null && invoiceAddQuantityView.Quantity <= item.Quantity)
                 {
-                    Id = 1,
-                    ItemId = item.Id,
-                    Quantity = 1,
-                    SubtotalPrice = item.Price,
-                    Item = item,
-                });
-                CalculateTotal();
-                result = true;
-            }            
-            return result;
+                    Invoice.InvoiceOrderRecords.Add(new OrderModel()
+                    {
+                        ItemId = item.Id,
+                        Quantity = invoiceAddQuantityView.Quantity,
+                        SubtotalPrice = item.Price * invoiceAddQuantityView.Quantity,
+                        Item = item,
+                    });
+                    CalculateTotal();
+                    MessageBox.Show("Successfully added item to invoice", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+                else if (order != null && order.Quantity + invoiceAddQuantityView.Quantity <= item.Quantity)
+                {
+                    order.Quantity += invoiceAddQuantityView.Quantity;
+                    CalculateSubtotal(order);
+                    CalculateTotal();
+                    MessageBox.Show("Successfully updated item quantity to invoice", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+                else
+                {
+                    MessageBox.Show("Quantity exceeds actual product quantity", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+                    
         }
 
-        public bool GetItemByBarcode(string barcode)
+        public void GetItemByBarcode(string barcode)
         {
-            bool result = false;
             ItemModel item = new ItemModel();
             ItemRepository itemRepository = new ItemRepository();
+            OrderModel order = Invoice.InvoiceOrderRecords.Where(i => i.ItemId == item.Id).FirstOrDefault();
             item = itemRepository.GetItemByBarcode(barcode);
-            if (item.Id != -1 &&  Invoice.InvoiceOrderRecords.Where(i => i.ItemId == item.Id).FirstOrDefault() == null)
+            if (item.Id != -1)
             {
-                Invoice.InvoiceOrderRecords.Add(new OrderModel()
+                InvoiceAddQuantityView invoiceAddQuantityView = new InvoiceAddQuantityView();
+                if (invoiceAddQuantityView.ShowDialog() == true)
                 {
-                    Id = 1,
-                    ItemId = item.Id,
-                    Quantity = 1,
-                    SubtotalPrice = item.Price,
-                    Item = item,
-                });
-                CalculateTotal();
-                result = true;
+                    if (order == null && invoiceAddQuantityView.Quantity <= item.Quantity)
+                    {
+                        Invoice.InvoiceOrderRecords.Add(new OrderModel()
+                        {
+                            ItemId = item.Id,
+                            Quantity = invoiceAddQuantityView.Quantity,
+                            SubtotalPrice = item.Price * invoiceAddQuantityView.Quantity,
+                            Item = item,
+                        });
+                        CalculateTotal();
+                        MessageBox.Show("Successfully added item to invoice", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+                    }
+                    else if(order != null && order.Quantity + invoiceAddQuantityView.Quantity <= item.Quantity)
+                    {
+                        order.Quantity += invoiceAddQuantityView.Quantity;
+                        CalculateSubtotal(order);
+                        CalculateTotal();
+                        MessageBox.Show("Successfully updated item quantity to invoice", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Quantity exceeds actual product quantity", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
+                }                                
             }
-            return result;
+            else
+            {
+                MessageBox.Show("Item does not exist in inventory", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            
         }
 
         private void CalculateSubtotal(OrderModel order)

@@ -40,15 +40,8 @@ namespace budiga_app.MVVM.View
         {
             if (inventoryTable.SelectedItem == null) return;
             ItemModel selectedItem = inventoryTable.SelectedItem as ItemModel;
-            if (_invoiceVM.GetItem(selectedItem))
-            {
-                MessageBox.Show("Successfully added item to invoice", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
-                this.Close();
-            }
-            else
-            {
-                MessageBox.Show("Item already exist in invoice", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
+            _invoiceVM.GetItem(selectedItem);           
+            this.Close();
         }
 
         FilterInfoCollection filterInfoCollection;
@@ -141,14 +134,7 @@ namespace budiga_app.MVVM.View
                 if (result != null)
                 {                    
                     outputBlock.Text = result.Text;
-                    if (_invoiceVM.GetItemByBarcode(result.Text))
-                    {
-                        MessageBox.Show("Successfully added item to invoice", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
-                    }
-                    else
-                    {
-                        MessageBox.Show("Item already exist in invoice or item does not exist", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                    }
+                    _invoiceVM.GetItemByBarcode(result.Text);
                     if (videoCaptureDevice != null)
                     {
                         if (videoCaptureDevice.IsRunning)
