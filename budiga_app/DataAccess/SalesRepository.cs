@@ -155,7 +155,6 @@ namespace budiga_app.DataAccess
                 result = commandDatabase.ExecuteScalar();
                 if (!result.Equals(DBNull.Value))
                 {
-
                     totalSales = float.Parse(Convert.ToString(result));
                 }
             }
@@ -172,14 +171,37 @@ namespace budiga_app.DataAccess
 
         public int GetTotalTransactions(string date)
         {
+            string query;
+            object result;
             int totalTransactions = 0;
-            string query = "SELECT COUNT(id) FROM `invoice`";
+            switch (date)
+            {
+                case "Daily":
+                    query = "SELECT COUNT(id) FROM `invoice` WHERE DAY(CURRENT_DATE) = DAY(created_date);";
+                    break;
+
+                case "Monthly":
+                    query = "SELECT COUNT(id) FROM `invoice` WHERE MONTH(CURRENT_DATE) = MONTH(created_date);";
+                    break;
+
+                case "Yearly":
+                    query = "SELECT COUNT(id) FROM `invoice` WHERE YEAR(CURRENT_DATE) = YEAR(created_date);";
+                    break;
+
+                default:
+                    query = "SELECT COUNT(id) FROM `invoice`;";
+                    break;
+            }
             try
             {
                 database.Connection();
                 MySqlCommand commandDatabase = new MySqlCommand(query, database.conn);
                 commandDatabase.CommandTimeout = 60;
-                totalTransactions = Convert.ToInt32(commandDatabase.ExecuteScalar());
+                result = commandDatabase.ExecuteScalar();
+                if (!result.Equals(DBNull.Value))
+                {
+                    totalTransactions = int.Parse(Convert.ToString(result));
+                }
             }
             catch (Exception ex)
             {
@@ -191,135 +213,5 @@ namespace budiga_app.DataAccess
             }
             return totalTransactions;
         }
-        //public ObservableCollection<SalesModel> GetDailySales()
-        //{
-        //    ObservableCollection<SalesModel> salesRecords = new ObservableCollection<SalesModel>();
-        //    string query = "SELECT * FROM `invoice` WHERE DAY(`created_date`) = DAY(now())";
-        //    //string query = "SELECT * FROM `invoice` WHERE `created_date` >= now() + interval 1 day";
-        //    MySqlDataReader reader;
-
-        //    try
-        //    {
-        //        database.Connection();
-        //        MySqlCommand commandDatabase = new MySqlCommand(query, database.conn);
-        //        commandDatabase.CommandTimeout = 60;
-        //        reader = commandDatabase.ExecuteReader();
-        //        while (reader.Read())
-        //        {
-        //            salesRecords.Add(new SalesModel()
-        //            {
-        //                Id = reader.GetInt32("id"),
-        //                ItemId = reader.GetInt32("item_id"),
-        //                InvoiceId = reader.GetInt32("invoice_id"),
-        //                UnitsSold = reader.GetInt32("quantity"),
-        //                SubtotalPrice = reader.GetFloat("subtotal_price"),
-        //                Item = itemRepository.GetItem(reader.GetInt32("item_id"))
-        //            });
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-        //    }
-
-        //    return salesRecords;
-        //}
-
-        //public ObservableCollection<SalesModel> GetMonthlySales()
-        //{
-        //    ObservableCollection<SalesModel> salesRecords = new ObservableCollection<SalesModel>();
-        //    string query = "SELECT * FROM `invoice` WHERE MONTH(`created_date`) = MONTH(now()) and YEAR(`created_date`) = YEAR(now())";
-        //    //string query = "SELECT * FROM `invoice` WHERE `created_date` >= (LAST_DAY(NOW()) + interval 1 day - interval 1 month) AND `created_date` < (LAST_DAY(NOW()) + interval 1 day)";
-        //    MySqlDataReader reader;
-
-        //    try
-        //    {
-        //        database.Connection();
-        //        MySqlCommand commandDatabase = new MySqlCommand(query, database.conn);
-        //        commandDatabase.CommandTimeout = 60;
-        //        reader = commandDatabase.ExecuteReader();
-        //        while (reader.Read())
-        //        {
-        //            salesRecords.Add(new SalesModel()
-        //            {
-        //                Id = reader.GetInt32("id"),
-        //                ItemId = reader.GetInt32("item_id"),
-        //                InvoiceId = reader.GetInt32("invoice_id"),
-        //                UnitsSold = reader.GetInt32("quantity"),
-        //                SubtotalPrice = reader.GetFloat("subtotal_price"),
-        //                Item = itemRepository.GetItem(reader.GetInt32("item_id"))
-        //            });
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-        //    }
-
-        //    return salesRecords;
-        //}
-
-        //public ObservableCollection<SalesModel> GetYearlySales()
-        //{
-        //    ObservableCollection<SalesModel> salesRecords = new ObservableCollection<SalesModel>();
-        //    string query = "SELECT * FROM `invoice` WHERE YEAR(`created_date`) = YEAR(now())";
-            
-        //    MySqlDataReader reader;
-
-        //    try
-        //    {
-        //        database.Connection();
-        //        MySqlCommand commandDatabase = new MySqlCommand(query, database.conn);
-        //        commandDatabase.CommandTimeout = 60;
-        //        reader = commandDatabase.ExecuteReader();
-        //        while (reader.Read())
-        //        {
-        //            salesRecords.Add(new SalesModel()
-        //            {
-        //                Id = reader.GetInt32("id"),
-        //                ItemId = reader.GetInt32("item_id"),
-        //                InvoiceId = reader.GetInt32("invoice_id"),
-        //                UnitsSold = reader.GetInt32("quantity"),
-        //                SubtotalPrice = reader.GetFloat("subtotal_price"),
-        //                Item = itemRepository.GetItem(reader.GetInt32("item_id"))
-        //            });
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-        //    }
-
-        //    return salesRecords;
-        //}
-
-
-
-
-
-        // Sales Overview Table
-        // SELECT invoice.created_date, SUM(`order`.`subtotal_price`) AS TOTAL, SUM(`order`.quantity) AS UNITS_SOLD FROM `order` INNER JOIN invoice ON `order`.invoice_id = invoice.id GROUP BY DAY(invoice.created_date)
-
-        // Sales Inventory Table
-        // SELECT `invoice.created_date`, `item.name`, `item.brand`, `item.price`, `order.quantity`, `order.subtotal_price` FROM ((`order` INNER JOIN `invoice` ON `invoice.id` = `order.invoice_id`)INNER JOIN `item.id` = `order.item_id`
-        // unsure
-
-        // Total Sales
-        // SELECT SUM(`invoice.total_price`) FROM `invoice`
-
-        // Transactions
-        // SELECT COUNT(*) from `invoice`
-
-        // Accumulated Sales
-        // SELECT SUM(`invoice.total_price`) FROM `invoice`
-
-        // Daily Sales
-        // SELECT SUM(`total_price`) FROM `invoice` WHERE DAY(`created_date`) = DAY(now())
-
-        // Monthly Sales
-        // SELECT SUM(`total_price`) FROM `invoice` WHERE MONTH(`created_date`) = MONTH(now()) and YEAR(`created_date`) = YEAR(now())
-
-        // Yearly Sales
-        // SELECT SUM(`total_price`) FROM `invoice` WHERE YEAR(`created_date`) = YEAR(now())
     }
 }
