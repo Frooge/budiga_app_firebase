@@ -51,7 +51,7 @@ namespace budiga_app.MVVM.View
                     Username = usernameTextBox.Text,
                     Password = passwordTextBox.Text,
                     Contact = contactTextBox.Text,
-                    UserRole = "Employee",
+                    Type = "Employee",
                 };
                 UserRepository userRepository = new UserRepository();
                 if (userRepository.AddEmployeeUser(user))

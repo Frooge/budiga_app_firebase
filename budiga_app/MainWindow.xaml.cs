@@ -16,6 +16,8 @@ using MySql.Data.MySqlClient;
 using budiga_app.Core;
 using budiga_app.DataAccess;
 using budiga_app.MVVM.Model;
+using Google.Cloud.Firestore;
+using budiga_app.MVVM.ViewModel;
 
 namespace budiga_app
 {
@@ -24,94 +26,117 @@ namespace budiga_app
     /// </summary>
     public partial class MainWindow : Window
     {
+        public LoginViewModel ViewModel { get; set; }
         public MainWindow()
         {
+            ViewModel = new LoginViewModel();
             InitializeComponent();
         }
 
-        private void usernameBlock_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            usernameBox.Focus();
-        }
+        //private void usernameBlock_MouseDown(object sender, MouseButtonEventArgs e)
+        //{
+        //    usernameBox.Focus();
+        //}
 
-        private void usernameBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            if (!string.IsNullOrEmpty(usernameBox.Text) && usernameBox.Text.Length > 0)
-            {
-                usernameBlock.Visibility = Visibility.Collapsed;
-            }
-            else
-            {
-                usernameBlock.Visibility = Visibility.Visible;
-            }
-        }
+        //private void usernameBox_TextChanged(object sender, TextChangedEventArgs e)
+        //{
+        //    if (!string.IsNullOrEmpty(usernameBox.Text) && usernameBox.Text.Length > 0)
+        //    {
+        //        usernameBlock.Visibility = Visibility.Collapsed;
+        //    }
+        //    else
+        //    {
+        //        usernameBlock.Visibility = Visibility.Visible;
+        //    }
+        //}
 
-        private void passwordBlock_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            passwordBox.Focus();
-        }
+        //private void passwordBlock_MouseDown(object sender, MouseButtonEventArgs e)
+        //{
+        //    passwordBox.Focus();
+        //}
 
-        private void passwordBox_PasswordChanged(object sender, RoutedEventArgs e)
-        {
-            if (!string.IsNullOrEmpty(passwordBox.Password) && passwordBox.Password.Length > 0)
-            {
-                passwordBlock.Visibility = Visibility.Collapsed;
-            }
-            else
-            {
-                passwordBlock.Visibility = Visibility.Visible;
-            }
-        }
+        //private void passwordBox_PasswordChanged(object sender, RoutedEventArgs e)
+        //{
+        //    if (!string.IsNullOrEmpty(passwordBox.Password) && passwordBox.Password.Length > 0)
+        //    {
+        //        passwordBlock.Visibility = Visibility.Collapsed;
+        //    }
+        //    else
+        //    {
+        //        passwordBlock.Visibility = Visibility.Visible;
+        //    }
+        //}
 
-        private void loginBtn_Click(object sender, RoutedEventArgs e)
-        {
-            runQueryLogin();
-        }
+        //private void loginBtn_Click(object sender, RoutedEventArgs e)
+        //{
+        //    runQueryLogin();
+        //}
 
-        private void runQueryLogin()
-        {
-            UserRepository userRepository = new UserRepository();
-            UserModel user = userRepository.GetUser(usernameBox.Text.Trim(), passwordBox.Password.Trim().ToString());
+        //private async void runQueryLogin()
+        //{            
+        //    try
+        //    {
+        //        ViewModel.System.IsLoading = true;
+        //        FirestoreConn conn = FirestoreConn.GetInstance;
+        //        DataClass dataClass = DataClass.GetInstance;
+        //        Query query = conn.FirestoreDb.Collection("users").WhereEqualTo("Username", usernameBox.Text.Trim()).WhereEqualTo("Password", passwordBox.Password.Trim().ToString());
+        //        QuerySnapshot querySnapshot = await query.GetSnapshotAsync();                
+        //        if (querySnapshot.Documents != null)
+        //        {
+        //            Dictionary<string, object> dict = querySnapshot.Documents[0].ToDictionary();
+        //            dataClass.LoggedInUser = new UserModel
+        //            {
+        //                Id = dict["Id"].ToString(),
+        //                FName = dict["FName"].ToString(),
+        //                LName = dict["LName"].ToString(),
+        //                Username = dict["Username"].ToString(),
+        //                Password = dict["Password"].ToString(),
+        //                Contact = dict["Contact"].ToString(),
+        //                Type = dict["Type"].ToString(),
+        //            };
 
-            if (user is object && user.UserRole != null)
-            {
-                //Redirect
-                #region
-                if (user.UserRole == "Admin")
-                {
-                    Sessions.session = user;
-                    this.Hide();
-                    AdminDashboard home = new AdminDashboard();
-                    home.WindowStartupLocation = WindowStartupLocation.CenterScreen;
-                    home.Show();
-                    this.Close();
-                }
-                else if (user.UserRole == "Employee")
-                {
-                    Sessions.session = user;
-                    this.Hide();
-                    EmployeeDashboard employeeDashboard = new EmployeeDashboard();
-                    employeeDashboard.WindowStartupLocation = WindowStartupLocation.CenterScreen;
-                    employeeDashboard.Show();
-                    this.Close();
-                }
-                #endregion
-            }
-            else
-            {
-                //Validation
-                #region
-                if (usernameBox.Text.Trim() == "" || passwordBox.Password.Trim().ToString() == "")
-                {
-                    MessageBox.Show("Incomplete Credentials", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
-                else
-                {
-                    MessageBox.Show("Incorrect Credentials", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
-                #endregion
-
-            }
-        }
+        //            #region
+        //            if (dataClass.LoggedInUser.Type == "admin")
+        //            {
+        //                this.Hide();
+        //                AdminDashboard home = new AdminDashboard();
+        //                home.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+        //                home.Show();
+        //                this.Close();
+        //            }
+        //            else if (dataClass.LoggedInUser.Type == "employee")
+        //            {
+        //                this.Hide();
+        //                EmployeeDashboard employeeDashboard = new EmployeeDashboard();
+        //                employeeDashboard.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+        //                employeeDashboard.Show();
+        //                this.Close();
+        //            }
+        //            #endregion
+        //        }
+        //        else
+        //        {
+        //            //Validation
+        //            #region
+        //            if (usernameBox.Text.Trim() == "" || passwordBox.Password.Trim().ToString() == "")
+        //            {
+        //                MessageBox.Show("Incomplete Credentials", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+        //            }
+        //            else
+        //            {
+        //                MessageBox.Show("Incorrect Credentials", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+        //            }
+        //            #endregion
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+        //    }
+        //    finally
+        //    {
+        //        ViewModel.System.IsLoading = false;
+        //    }
+        //}
     }
 }

@@ -29,7 +29,7 @@ namespace budiga_app.MVVM.View
         {
             InitializeComponent();
             _vm = vm;
-            userId = user.Id;
+            //userId = user.Id;
             fNameTextBox.Text = user.FName;
             lNameTextBox.Text = user.LName;
             usernameTextBox.Text = user.Username;
@@ -53,7 +53,7 @@ namespace budiga_app.MVVM.View
             {
                 UserModel user = new UserModel()
                 {
-                    Id = userId,
+                    //Id = userId,
                     FName = fNameTextBox.Text,
                     LName = lNameTextBox.Text,
                     Username = usernameTextBox.Text,

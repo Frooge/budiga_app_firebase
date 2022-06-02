@@ -5,23 +5,25 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
-using budiga_app.Core;
 using budiga_app.MVVM.Model;
-using MySql.Data.MySqlClient;
+using Google.Cloud.Firestore;
 
 namespace budiga_app.DataAccess
 {
     class UserRepository
     {
+        private FirestoreConn conn = FirestoreConn.GetInstance;
+
 
         public UserRepository()
         {
-
+            
         }
 
         public UserModel GetUser(string username, string password)
         {
             UserModel user = new UserModel();
+
             
 
             return user;

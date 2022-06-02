@@ -28,10 +28,10 @@ namespace budiga_app
             InitializeComponent();
             attendance = new AttendanceModel()
             {
-                UserId = Sessions.session.Id,
+                //UserId = Sessions.session.Id,
                 TimeIn = DateTime.Now,
             };
-            userName.Text =  Sessions.session.FName +" "+ Sessions.session.LName + " | " +Sessions.session.UserRole;
+            userName.Text =  Sessions.session.FName +" "+ Sessions.session.LName + " | " +Sessions.session.Type;
         }
 
         private void LogoutBtn_Click(object sender, RoutedEventArgs e)

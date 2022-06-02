@@ -44,7 +44,7 @@ namespace budiga_app.MVVM.View
             _invoice.CustomerChange = _invoice.CustomerPay - _invoice.TotalPrice;
             if (_invoice.CustomerChange >= 0)
             {
-                _invoice.UserId = Sessions.session.Id;
+                //_invoice.UserId = Sessions.session.Id;
                 _invoiceRepository.AddInvoice(_invoice);
                 _invoice = _invoiceRepository.GetLastInvoice();
                 foreach(OrderModel order in _invoice.InvoiceOrderRecords)

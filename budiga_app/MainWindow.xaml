@@ -3,10 +3,10 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:custom="clr-namespace:budiga_app.Resources.CustomViews"
         xmlns:local="clr-namespace:budiga_app"
         mc:Ignorable="d"
-        Icon="/Resources/Images/logo.png"
-        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        Icon="/Resources/Images/logo.png"        
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         TextElement.FontWeight="Regular"
         TextElement.FontSize="13"
@@ -16,7 +16,8 @@
         FontFamily="{DynamicResource MaterialDesignFont}"
         SizeToContent="WidthAndHeight"
         ResizeMode="CanMinimize"
-        Title="Budiga" WindowStartupLocation="CenterScreen">
+        WindowStartupLocation="CenterScreen"
+        Title="Budiga">
     <Grid Background="#FF2148C0" Height="720" Width="1280">
         <Image />
         <Grid>
@@ -32,7 +33,6 @@
                     <RowDefinition Height="auto"/>
                     <RowDefinition />
                 </Grid.RowDefinitions>
-
                 <Border Grid.Row="0" BorderThickness="1" BorderBrush="White" CornerRadius="4,4,4,4" Margin="450,36,450,64" Grid.RowSpan="2">
                     <Grid Margin="7 9">
                         <Grid.ColumnDefinitions>
@@ -44,7 +44,6 @@
 
                     </Grid>
                 </Border>
-
                 <Border Grid.Row="1" BorderThickness="1" BorderBrush="White" CornerRadius="4,4,4,4" Margin="450,36,450,164" Grid.RowSpan="3">
                     <Grid Margin="7 9">
                         <Grid.ColumnDefinitions>
@@ -56,7 +55,6 @@
 
                     </Grid>
                 </Border>
-
                 <Button x:Name="loginBtn" Grid.Row="2" Content="LOGIN" HorizontalAlignment="Center" Margin="0,36,0,0" VerticalAlignment="Top" Width="350" Height="50" FontSize="16" Foreground="#FF2148C0" Click="loginBtn_Click" FontFamily="Bahnschrift SemiLight" FontStyle="Normal" FontStretch="ExtraCondensed" Background="White" BorderBrush="#00000000" BorderThickness="0.5,0.5,0.5,0.5" ClipToBounds="True" Grid.RowSpan="2">
                     <Button.Resources>
                         <Style TargetType="{x:Type Border}">
@@ -71,8 +69,6 @@
             <Image Margin="515,54,515,322" Source="/Resources/Images/darklogo 1.png" Stretch="Fill" Grid.RowSpan="2"/>
             <Image Margin="466,66,0,0" Source="/Resources/Images/user.png" Stretch="Fill" Grid.Row="1" VerticalAlignment="Top" Width="40" Height="40" HorizontalAlignment="Left"/>
             <Image Margin="466,146,0,0" Grid.Row="1" Source="/Resources/Images/lock.png" Stretch="Fill" Width="40" Height="40" VerticalAlignment="Top" HorizontalAlignment="Left"/>
-
-
         </Grid>
     </Grid>
 </Window>

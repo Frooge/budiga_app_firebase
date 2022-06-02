@@ -24,15 +24,17 @@ namespace budiga_app
     {
         private AttendanceModel attendance;
         private AttendanceRepository attendanceRepository;
+        private DataClass dataClass;
         public AdminDashboard()
         {
             InitializeComponent();
+            dataClass = DataClass.GetInstance;
             attendance = new AttendanceModel()
             {
-                UserId = Sessions.session.Id,
+                //UserId = Sessions.session.Id,
                 TimeIn = DateTime.Now,
-            };            
-            userName.Text = Sessions.session.FName +" "+ Sessions.session.LName + " | " +Sessions.session.UserRole;
+            };
+            userName.Text = string.Format("{0} {1} | {2}", dataClass.LoggedInUser.FName, dataClass.LoggedInUser.LName, dataClass.LoggedInUser.Type);
         }
 
         private void LogoutBtn_Click(object sender, RoutedEventArgs e)

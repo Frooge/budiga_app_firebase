@@ -15,6 +15,7 @@ namespace budiga_app.DataAccess
 
         public InvoiceRepository()
         {
+
         }
 
         public ObservableCollection<InvoiceModel> GetAllInvoice()
