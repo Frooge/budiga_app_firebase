@@ -179,6 +179,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Core\DataClass.cs" />
+    <Compile Include="Core\GenerateId.cs" />
     <Compile Include="Core\ObservableObject.cs" />
     <Compile Include="Core\RelayCommand.cs" />
     <Compile Include="Core\Sessions.cs" />
@@ -282,13 +283,11 @@
     <Compile Include="MVVM\Model\InvoiceModel.cs" />
     <Compile Include="MVVM\Model\OverviewSalesModel.cs" />
     <Compile Include="MVVM\Model\UserModel.cs" />
-    <Compile Include="MVVM\Model\SystemModel.cs" />
+    <Compile Include="MVVM\Model\PageModel.cs" />
     <Compile Include="MVVM\ViewModel\AdminMainViewModel.cs" />
     <Compile Include="MVVM\ViewModel\EmployeeAddViewModel.cs" />
     <Compile Include="MVVM\ViewModel\EmployeeEditViewModel.cs" />
     <Compile Include="MVVM\ViewModel\EmployeeViewModel.cs" />
-    <Compile Include="MVVM\ViewModel\InventoryAddViewModel.cs" />
-    <Compile Include="MVVM\ViewModel\InventoryEditViewModel.cs" />
     <Compile Include="MVVM\ViewModel\InventoryHistoryViewModel.cs" />
     <Compile Include="MVVM\ViewModel\InventoryViewModel.cs" />
     <Compile Include="MVVM\ViewModel\InvoiceAddQuantityViewModel.cs" />

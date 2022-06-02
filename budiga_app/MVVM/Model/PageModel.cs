@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace budiga_app.MVVM
 {
-    public class SystemModel : ObservableObject
+    public class PageModel : ObservableObject
     {
         private bool _isLoading;
         public bool IsLoading { get { return _isLoading; } set { _isLoading = value; OnPropertyChanged("IsLoading"); } }

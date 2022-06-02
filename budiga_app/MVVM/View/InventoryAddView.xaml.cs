@@ -1,4 +1,5 @@
-﻿using budiga_app.DataAccess;
+﻿using budiga_app.Core;
+using budiga_app.DataAccess;
 using budiga_app.MVVM.Model;
 using budiga_app.MVVM.ViewModel;
 using System;
@@ -23,11 +24,11 @@ namespace budiga_app.MVVM.View
     /// </summary>
     public partial class InventoryAddView : Window
     {
-        private InventoryViewModel _vm;
-        public InventoryAddView(InventoryViewModel vm)
+        private InventoryViewModel viewModel;
+        public InventoryAddView()
         {
+            viewModel = InventoryViewModel.GetInstance;
             InitializeComponent();
-            _vm = vm;
         }
 
         private void NumberValidationTextBox(object sender, TextCompositionEventArgs e)
@@ -46,20 +47,15 @@ namespace budiga_app.MVVM.View
             {
                 ItemModel item = new ItemModel()
                 {
+                    Id = GenerateId.Generate(),
                     Name = productTextBox.Text,
                     Barcode = (string.IsNullOrEmpty(barcodeTextBox.Text)) ? "N/A" : barcodeTextBox.Text,
                     Brand = brandTextBox.Text,
-                    Price = float.Parse(priceTextBox.Text),
+                    Price = decimal.Parse(priceTextBox.Text),
                     Quantity = int.Parse(qtyTextBox.Text)
                 };
-                ItemRepository itemRepository = new ItemRepository();
-                if (itemRepository.AddItem(item))
-                {
-                    ItemHistoryRepository itemHistoryRepository = new ItemHistoryRepository();
-                    itemHistoryRepository.AddItemHistory(item, "ADDED");
-                    _vm.GetAll();
-                    this.Close();
-                }
+                viewModel.AddItem(item);
+                this.Close();
             }            
         }
 

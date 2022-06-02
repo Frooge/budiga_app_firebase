@@ -23,13 +23,13 @@ namespace budiga_app.MVVM.View
     /// </summary>
     public partial class InventoryEditView : Window
     {
-        private InventoryViewModel _vm;
+        private InventoryViewModel viewModel;
         private ItemModel _item;
 
-        public InventoryEditView(InventoryViewModel vm, ItemModel item)
+        public InventoryEditView(ItemModel item)
         {
             InitializeComponent();
-            _vm = vm;
+            viewModel = InventoryViewModel.GetInstance;
             _item = item;
             productTextBox.Text = item.Name;
             barcodeTextBox.Text = (item.Barcode != null) ? item.Barcode.ToString() : "N/A";
@@ -59,20 +59,22 @@ namespace budiga_app.MVVM.View
                 ItemModel item = new ItemModel()
                 {
                     Id = _item.Id,
-                    Barcode = (string.IsNullOrEmpty(barcodeTextBox.Text)) ? "N/A" : barcodeTextBox.Text,
                     Name = productTextBox.Text,
+                    Barcode = (string.IsNullOrEmpty(barcodeTextBox.Text)) ? "N/A" : barcodeTextBox.Text,
                     Brand = brandTextBox.Text,
-                    Price = float.Parse(priceTextBox.Text),
-                    Quantity = int.Parse(qtyTextBlock.Text)
+                    Price = decimal.Parse(priceTextBox.Text),
+                    Quantity = int.Parse(qtyTextBox.Text)
                 };
-                ItemRepository itemRepository = new ItemRepository();
-                if (itemRepository.UpdateItem(item))
-                {
-                    ItemHistoryRepository itemHistoryRepository = new ItemHistoryRepository();
-                    itemHistoryRepository.AddItemHistory(_item, "UPDATED");
-                    _vm.GetAll();
-                    this.Close();
-                }
+                viewModel.UpdateItem(item);
+                this.Close();
+                //ItemRepository itemRepository = new ItemRepository();
+                //if (itemRepository.UpdateItem(item))
+                //{
+                //    ItemHistoryRepository itemHistoryRepository = new ItemHistoryRepository();
+                //    itemHistoryRepository.AddItemHistory(_item, "UPDATED");
+                //    _vm.GetAll();
+                //    this.Close();
+                //}
             }
             
         }
@@ -81,14 +83,16 @@ namespace budiga_app.MVVM.View
         {
             if (MessageBox.Show("Continue Action?", "Warning", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
             {
-                ItemRepository itemRepository = new ItemRepository();
-                if (itemRepository.DeleteItem(_item.Id))
-                {
-                    ItemHistoryRepository itemHistoryRepository = new ItemHistoryRepository();
-                    itemHistoryRepository.AddItemHistory(_item, "DELETED");
-                    _vm.GetAll();
-                    this.Close();
-                }
+                viewModel.DeleteItem(_item.Id);
+                this.Close();
+                //ItemRepository itemRepository = new ItemRepository();
+                //if (itemRepository.DeleteItem(_item.Id))
+                //{
+                //    ItemHistoryRepository itemHistoryRepository = new ItemHistoryRepository();
+                //    itemHistoryRepository.AddItemHistory(_item, "DELETED");
+                //    _vm.GetAll();
+                //    this.Close();
+                //}
             }
             
         }

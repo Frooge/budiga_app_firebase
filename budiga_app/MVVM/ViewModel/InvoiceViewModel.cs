@@ -98,83 +98,83 @@ namespace budiga_app.MVVM.ViewModel
 
         public void GetItem(ItemModel item)
         {
-            OrderModel order = Invoice.InvoiceOrderRecords.Where(i => i.ItemId == item.Id).FirstOrDefault();
-            InvoiceAddQuantityView invoiceAddQuantityView = new InvoiceAddQuantityView();
-            if (invoiceAddQuantityView.ShowDialog() == true)
-            {
-                if (order == null && invoiceAddQuantityView.Quantity <= item.Quantity)
-                {
-                    Invoice.InvoiceOrderRecords.Add(new OrderModel()
-                    {
-                        ItemId = item.Id,
-                        Quantity = invoiceAddQuantityView.Quantity,
-                        SubtotalPrice = item.Price * invoiceAddQuantityView.Quantity,
-                        Item = item,
-                    });
-                    CalculateTotal();
-                    MessageBox.Show("Successfully added item to invoice", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
-                }
-                else if (order != null && order.Quantity + invoiceAddQuantityView.Quantity <= item.Quantity)
-                {
-                    order.Quantity += invoiceAddQuantityView.Quantity;
-                    CalculateSubtotal(order);
-                    CalculateTotal();
-                    MessageBox.Show("Successfully updated item quantity to invoice", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
-                }
-                else
-                {
-                    MessageBox.Show("Quantity exceeds actual product quantity", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
-            }
+            //OrderModel order = Invoice.InvoiceOrderRecords.Where(i => i.ItemId == item.Id).FirstOrDefault();
+            //InvoiceAddQuantityView invoiceAddQuantityView = new InvoiceAddQuantityView();
+            //if (invoiceAddQuantityView.ShowDialog() == true)
+            //{
+            //    if (order == null && invoiceAddQuantityView.Quantity <= item.Quantity)
+            //    {
+            //        Invoice.InvoiceOrderRecords.Add(new OrderModel()
+            //        {
+            //            ItemId = item.Id,
+            //            Quantity = invoiceAddQuantityView.Quantity,
+            //            SubtotalPrice = item.Price * invoiceAddQuantityView.Quantity,
+            //            Item = item,
+            //        });
+            //        CalculateTotal();
+            //        MessageBox.Show("Successfully added item to invoice", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+            //    }
+            //    else if (order != null && order.Quantity + invoiceAddQuantityView.Quantity <= item.Quantity)
+            //    {
+            //        order.Quantity += invoiceAddQuantityView.Quantity;
+            //        CalculateSubtotal(order);
+            //        CalculateTotal();
+            //        MessageBox.Show("Successfully updated item quantity to invoice", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+            //    }
+            //    else
+            //    {
+            //        MessageBox.Show("Quantity exceeds actual product quantity", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            //    }
+            //}
                     
         }
 
         public void GetItemByBarcode(string barcode)
         {
-            ItemModel item = new ItemModel();
-            ItemRepository itemRepository = new ItemRepository();
-            OrderModel order = Invoice.InvoiceOrderRecords.Where(i => i.ItemId == item.Id).FirstOrDefault();
-            item = itemRepository.GetItemByBarcode(barcode);
-            if (item.Id != -1)
-            {
-                InvoiceAddQuantityView invoiceAddQuantityView = new InvoiceAddQuantityView();
-                if (invoiceAddQuantityView.ShowDialog() == true)
-                {
-                    if (order == null && invoiceAddQuantityView.Quantity <= item.Quantity)
-                    {
-                        Invoice.InvoiceOrderRecords.Add(new OrderModel()
-                        {
-                            ItemId = item.Id,
-                            Quantity = invoiceAddQuantityView.Quantity,
-                            SubtotalPrice = item.Price * invoiceAddQuantityView.Quantity,
-                            Item = item,
-                        });
-                        CalculateTotal();
-                        MessageBox.Show("Successfully added item to invoice", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
-                    }
-                    else if(order != null && order.Quantity + invoiceAddQuantityView.Quantity <= item.Quantity)
-                    {
-                        order.Quantity += invoiceAddQuantityView.Quantity;
-                        CalculateSubtotal(order);
-                        CalculateTotal();
-                        MessageBox.Show("Successfully updated item quantity to invoice", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
-                    }
-                    else
-                    {
-                        MessageBox.Show("Quantity exceeds actual product quantity", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                    }
-                }                                
-            }
-            else
-            {
-                MessageBox.Show("Item does not exist in inventory", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
+            //ItemModel item = new ItemModel();
+            //ItemRepository itemRepository = new ItemRepository();
+            //OrderModel order = Invoice.InvoiceOrderRecords.Where(i => i.ItemId == item.Id).FirstOrDefault();
+            //item = itemRepository.GetItemByBarcode(barcode);
+            //if (item.Id != -1)
+            //{
+            //    InvoiceAddQuantityView invoiceAddQuantityView = new InvoiceAddQuantityView();
+            //    if (invoiceAddQuantityView.ShowDialog() == true)
+            //    {
+            //        if (order == null && invoiceAddQuantityView.Quantity <= item.Quantity)
+            //        {
+            //            Invoice.InvoiceOrderRecords.Add(new OrderModel()
+            //            {
+            //                ItemId = item.Id,
+            //                Quantity = invoiceAddQuantityView.Quantity,
+            //                SubtotalPrice = item.Price * invoiceAddQuantityView.Quantity,
+            //                Item = item,
+            //            });
+            //            CalculateTotal();
+            //            MessageBox.Show("Successfully added item to invoice", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+            //        }
+            //        else if(order != null && order.Quantity + invoiceAddQuantityView.Quantity <= item.Quantity)
+            //        {
+            //            order.Quantity += invoiceAddQuantityView.Quantity;
+            //            CalculateSubtotal(order);
+            //            CalculateTotal();
+            //            MessageBox.Show("Successfully updated item quantity to invoice", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+            //        }
+            //        else
+            //        {
+            //            MessageBox.Show("Quantity exceeds actual product quantity", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            //        }
+            //    }                                
+            //}
+            //else
+            //{
+            //    MessageBox.Show("Item does not exist in inventory", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            //}
             
         }
 
         private void CalculateSubtotal(OrderModel order)
         {
-            order.SubtotalPrice = order.Quantity * order.Item.Price;
+            //order.SubtotalPrice = order.Quantity * order.Item.Price;
         }
 
         private void CalculateTotal()

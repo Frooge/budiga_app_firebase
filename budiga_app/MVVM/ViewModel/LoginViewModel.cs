@@ -8,11 +8,11 @@ namespace budiga_app.MVVM.ViewModel
 {
     public class LoginViewModel
     {
-        public SystemModel System { get; set; }
+        public PageModel Page { get; set; }
 
         public LoginViewModel()
         {
-            System = new SystemModel();
+            Page = new PageModel();
         }
     }
 }

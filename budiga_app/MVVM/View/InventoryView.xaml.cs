@@ -16,19 +16,14 @@ using System.Windows.Shapes;
 
 namespace budiga_app.MVVM.View
 {
-    /// <summary>
-    /// Interaction logic for InventoryView.xaml
-    /// </summary>
+    
     public partial class InventoryView : UserControl
     {
+        public InventoryViewModel ViewModel { get; set; }
         public InventoryView()
         {
+            ViewModel = InventoryViewModel.GetInstance;
             InitializeComponent();
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-
         }
     }
 }

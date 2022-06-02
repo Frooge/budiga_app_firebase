@@ -8,14 +8,12 @@
              xmlns:viewModel="clr-namespace:budiga_app.MVVM.ViewModel"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"                          
              mc:Ignorable="d"
+             x:Name="inventoryView"
              d:DesignHeight="720" d:DesignWidth="1000">
-    <UserControl.DataContext>
-        <viewModel:InventoryViewModel/>
-    </UserControl.DataContext>
     <Grid>
         <StackPanel>
             <StackPanel Orientation="Horizontal" Margin="10">
-                <Button Command="{Binding AddItemCommand}" Grid.Row="3" Content="Add" HorizontalAlignment="Left" VerticalAlignment="Top" Width="120" BorderBrush="{x:Null}" Background="#FF355ACC" FontStretch="Normal" FontStyle="Normal" Click="Button_Click">
+                <Button Command="{Binding ElementName=inventoryView, Path=ViewModel.AddItemModalCommand}" Grid.Row="3" Content="Add" HorizontalAlignment="Left" VerticalAlignment="Top" Width="120" BorderBrush="{x:Null}" Background="#FF355ACC" FontStretch="Normal" FontStyle="Normal">
                     <Button.Foreground>
                         <SolidColorBrush Color="White" Opacity="0.87"/>
                     </Button.Foreground>
@@ -25,7 +23,7 @@
                         <TextBox Width="190" x:Name="searchField" Margin="5">
                             <b:Interaction.Triggers>
                                 <b:EventTrigger EventName="TextChanged">
-                                    <b:InvokeCommandAction Command="{Binding SearchItemCommand}"
+                                    <b:InvokeCommandAction Command="{Binding ElementName=inventoryView, Path=ViewModel.SearchItemCommand}"
                                                        CommandParameter="{Binding ElementName=searchField,Path=Text}"/>
                                 </b:EventTrigger>
                             </b:Interaction.Triggers>
@@ -33,7 +31,7 @@
                         <Image Source="/Resources/Images/SearchIcon.png" Width="20" />
                     </StackPanel>
                 </Border>
-                <Button Command="{Binding ItemHistoryCommand}" Grid.Row="3" Content="Item History" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" BorderBrush="{x:Null}" Background="#FF355ACC" FontStretch="Normal" FontStyle="Normal" Click="Button_Click">
+                <Button Command="{Binding ElementName=inventoryView, Path=ViewModel.ItemHistoryModalCommand}" Grid.Row="3" Content="Item History" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" BorderBrush="{x:Null}" Background="#FF355ACC" FontStretch="Normal" FontStyle="Normal">
                     <Button.Foreground>
                         <SolidColorBrush Color="White" Opacity="0.87"/>
                     </Button.Foreground>
@@ -41,8 +39,9 @@
             </StackPanel>
             <StackPanel Margin="10">
                 <materialDesign:Card HorizontalContentAlignment="Stretch">
-                    <DataGrid x:Name="inventoryTable"                              
-                              ItemsSource="{Binding Item.ItemRecords}"
+                    <Grid>
+                        <DataGrid x:Name="inventoryTable"                              
+                              ItemsSource="{Binding ElementName=inventoryView, Path=ViewModel.Item.ItemRecords}"
                               IsReadOnly="True"
                               AutoGenerateColumns="False"
                               CanUserResizeColumns="False"
@@ -50,26 +49,36 @@
                               CanUserResizeRows="False"
                               Height="500"
                               Padding="0,0">
-                        <DataGrid.Columns>
-                            <DataGridTextColumn Header="Product" Binding="{Binding Path=Name}" Width="*"/>
-                            <DataGridTextColumn Header="Barcode" Binding="{Binding Path=Barcode}" Width="*"/>
-                            <DataGridTextColumn Header="Brand" Binding="{Binding Path=Brand}" Width="*"/>
-                            <DataGridTextColumn Header="Price" Binding="{Binding Path=Price}" Width="*"/>
-                            <DataGridTextColumn Header="Quantity" Binding="{Binding Path=Quantity}" Width="*"/>
-                        </DataGrid.Columns>
-                        <DataGrid.CellStyle>
-                            <Style TargetType="DataGridCell" BasedOn="{StaticResource MaterialDesignDataGridCell}">
-                                <Setter Property="BorderThickness" Value="0"/>
-                                <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
-                            </Style>
-                        </DataGrid.CellStyle>
-                        <b:Interaction.Triggers>
-                            <b:EventTrigger EventName="MouseDoubleClick">
-                                <b:InvokeCommandAction Command="{Binding EditItemCommand}"
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Product" Binding="{Binding Path=Name}" Width="*"/>
+                                <DataGridTextColumn Header="Barcode" Binding="{Binding Path=Barcode}" Width="*"/>
+                                <DataGridTextColumn Header="Brand" Binding="{Binding Path=Brand}" Width="*"/>
+                                <DataGridTextColumn Header="Price" Binding="{Binding Path=Price}" Width="*"/>
+                                <DataGridTextColumn Header="Quantity" Binding="{Binding Path=Quantity}" Width="*"/>
+                            </DataGrid.Columns>
+                            <DataGrid.CellStyle>
+                                <Style TargetType="DataGridCell" BasedOn="{StaticResource MaterialDesignDataGridCell}">
+                                    <Setter Property="BorderThickness" Value="0"/>
+                                    <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+                                </Style>
+                            </DataGrid.CellStyle>
+                            <b:Interaction.Triggers>
+                                <b:EventTrigger EventName="MouseDoubleClick">
+                                    <b:InvokeCommandAction Command="{Binding ElementName=inventoryView, Path=ViewModel.EditItemModalCommand}"
                                                        CommandParameter="{Binding Path=SelectedItem, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=DataGrid}}"/>
-                            </b:EventTrigger>
-                        </b:Interaction.Triggers>
-                    </DataGrid>
+                                </b:EventTrigger>
+                            </b:Interaction.Triggers>
+                        </DataGrid>
+                        <Grid Background="Black" Opacity="0.5" Visibility="{Binding ElementName=inventoryView, Path=ViewModel.Page.IsLoading, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+                        <ProgressBar Value="0" IsIndeterminate="True" Width="100" Visibility="{Binding Page.IsLoading,  Converter={StaticResource BooleanToVisibilityConverter}}">
+                            <ProgressBar.Style>
+                                <Style TargetType="{x:Type ProgressBar}" BasedOn="{StaticResource MaterialDesignCircularProgressBar}">
+                                    <Setter Property="Foreground" Value="White"/>
+                                </Style>
+                            </ProgressBar.Style>
+                        </ProgressBar>
+                    </Grid>
+                    
                 </materialDesign:Card>
             </StackPanel>
         </StackPanel>        

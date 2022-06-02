@@ -19,7 +19,7 @@ namespace budiga_app.MVVM.Model
         private float _price;
         private int _quantity;
         private string _action;
-        private DateTime _comittedDate;
+        private DateTime _committedDate;
         private ObservableCollection<ItemHistoryModel> _itemHistoryRecords;
 
 
@@ -31,7 +31,7 @@ namespace budiga_app.MVVM.Model
         public float Price { get { return _price; } set { _price = value; OnPropertyChanged("Price"); } }
         public int Quantity { get { return _quantity; } set { _quantity = value; OnPropertyChanged("Quantity"); } }
         public string Action { get { return _action; } set { _action = value; OnPropertyChanged("Action"); } }
-        public DateTime ComittedDate { get { return _comittedDate; } set { _comittedDate = value; OnPropertyChanged("ComittedDate"); } }
+        public DateTime CommittedDate { get { return _committedDate; } set { _committedDate = value; OnPropertyChanged("ComittedDate"); } }
         public ObservableCollection<ItemHistoryModel> ItemHistoryRecords { get { return _itemHistoryRecords; } set { _itemHistoryRecords = value; OnPropertyChanged("ItemHistoryRecords"); } }
         private void ItemHistoryRecords_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
