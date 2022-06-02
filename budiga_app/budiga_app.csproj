@@ -104,7 +104,6 @@
     </Compile>
     <Compile Include="Core\ObservableObject.cs" />
     <Compile Include="Core\RelayCommand.cs" />
-    <Compile Include="Core\dbConn.cs" />
     <Compile Include="DataAccess\AttendanceRepository.cs" />
     <Compile Include="DataAccess\InvoiceRepository.cs" />
     <Compile Include="DataAccess\ItemHistoryRepository.cs" />
@@ -376,7 +375,6 @@
     <Resource Include="Resources\Images\RadioButtonCheckedAlt.png" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="budiga_app.sql" />
     <Resource Include="Resources\Images\plus-icon.png" />
     <Resource Include="Resources\Images\SearchIcon.png" />
     <SplashScreen Include="Resources\Images\splashscreen.png">
