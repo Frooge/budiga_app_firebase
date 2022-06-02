@@ -13,7 +13,7 @@ namespace budiga_app
         private string connectionString = "datasource=127.0.0.1;port=3306;username=root;password=;database=budiga_app;max pool size=5;";
         public MySqlConnection conn { get; set; }
 
-        public void Connection() //try fork 2
+        public void Connection()
         {
             conn = new MySqlConnection(connectionString);            
             try
