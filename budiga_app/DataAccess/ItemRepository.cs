@@ -49,7 +49,7 @@ namespace budiga_app.DataAccess
                     { "Barcode", item.Barcode },
                     { "Name", item.Name },
                     { "Brand", item.Brand },
-                    { "Price", (double)item.Price },
+                    { "Price", Convert.ToDouble(item.Price) },
                     { "Quantity", item.Quantity },
                     { "IsDeleted", item.IsDeleted },
                 };

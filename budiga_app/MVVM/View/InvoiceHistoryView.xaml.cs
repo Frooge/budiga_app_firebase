@@ -1,4 +1,5 @@
-﻿using System;
+﻿using budiga_app.MVVM.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,8 +20,10 @@ namespace budiga_app.MVVM.View
     /// </summary>
     public partial class InvoiceHistoryView : Window
     {
+        public InvoiceViewModel ViewModel { get; set; }
         public InvoiceHistoryView()
         {
+            ViewModel = InvoiceViewModel.GetInstance;
             InitializeComponent();
         }
     }

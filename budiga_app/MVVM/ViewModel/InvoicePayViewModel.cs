@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace budiga_app.MVVM.ViewModel
-{
-    public class InvoicePayViewModel
-    {
+//namespace budiga_app.MVVM.ViewModel
+//{
+//    public class InvoicePayViewModel
+//    {
 
-    }
-}
+//    }
+//}

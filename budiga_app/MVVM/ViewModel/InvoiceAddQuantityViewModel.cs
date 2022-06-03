@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace budiga_app.MVVM.ViewModel
-{
-    internal class InvoiceAddQuantityViewModel
-    {
-    }
-}
+//namespace budiga_app.MVVM.ViewModel
+//{
+//    internal class InvoiceAddQuantityViewModel
+//    {
+//    }
+//}

@@ -11,18 +11,26 @@ namespace budiga_app.MVVM.Model
 {
     public class OrderModel : ObservableObject
     {
-        private int _id;
-        private int _itemId;
-        private int _invoiceId;
+        private string _id;
+        private string _itemId;
+        private string _invoiceId;
         private int _quantity;
-        private float _subtotalPrice;
+        private decimal _actualItemPrice;
+        private decimal _subtotalPrice;
         private ItemModel _item;
+        private ObservableCollection<OrderModel> _orderRecords;
         
-        public int Id { get { return _id; } set { _id = value; OnPropertyChanged("Id"); } }
-        public int ItemId { get { return _itemId; } set { _itemId = value; OnPropertyChanged("ItemId"); } }
-        public int InvoiceId { get { return _invoiceId; } set { _invoiceId = value; OnPropertyChanged("InvoiceId"); } }
+        public string Id { get { return _id; } set { _id = value; OnPropertyChanged("Id"); } }
+        public string ItemId { get { return _itemId; } set { _itemId = value; OnPropertyChanged("ItemId"); } }
+        public string InvoiceId { get { return _invoiceId; } set { _invoiceId = value; OnPropertyChanged("InvoiceId"); } }
         public int Quantity { get { return _quantity; } set { _quantity = value; OnPropertyChanged("Quantity"); } }
-        public float SubtotalPrice { get { return _subtotalPrice; } set { _subtotalPrice = value; OnPropertyChanged("SubtotalPrice"); } }
-        public ItemModel Item { get { return _item; } set { _item = value; OnPropertyChanged("Item"); } }                
+        public decimal ActualItemPrice { get { return _actualItemPrice; } set { _actualItemPrice = value; OnPropertyChanged("ActualItemPrice"); } }
+        public decimal SubtotalPrice { get { return _subtotalPrice; } set { _subtotalPrice = value; OnPropertyChanged("SubtotalPrice"); } }
+        public ItemModel Item { get { return _item; } set { _item = value; OnPropertyChanged("Item"); } }     
+        public ObservableCollection<OrderModel> OrderRecords { get { return _orderRecords; } set { _orderRecords = value; OnPropertyChanged("OrderRecords"); } }
+        private void OrderRecords_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            OnPropertyChanged("OrderRecords");
+        }
     }
 }

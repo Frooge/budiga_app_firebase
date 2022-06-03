@@ -37,7 +37,7 @@ namespace budiga_app.MVVM.ViewModel
             try
             {
                 InventoryVM = InventoryViewModel.GetInstance;
-                InvoiceVM = new InvoiceViewModel();
+                InvoiceVM = InvoiceViewModel.GetInstance;
                 SalesVM = new SalesViewModel();                                
                 EmployeeVM = new EmployeeViewModel();
 

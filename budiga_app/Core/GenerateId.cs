@@ -26,6 +26,13 @@ namespace budiga_app.Core
             return id;
         }
 
+        public static string GenerateInvoice(DateTime date)
+        {
+            string id = string.Format("{0}{1}{2}{3}", date.Day, date.Month, date.Year, (date.Hour * date.Minute * date.Second).ToString().Substring(0,3));
+
+            return id;
+        }
+
         public static string GenerateString(int length = 20)
         {
             const string characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
@@ -39,5 +46,6 @@ namespace budiga_app.Core
             return new string(Enumerable.Repeat(characters, length)
               .Select(s => s[random.Next(s.Length)]).ToArray());
         }
+
     }
 }

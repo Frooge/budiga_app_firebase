@@ -29,11 +29,13 @@ namespace budiga_app.MVVM.View
     /// </summary>
     public partial class InvoiceAddView : Window
     {
+        public InventoryViewModel ViewModel { get; set; }
         private InvoiceViewModel _invoiceVM;
-        public InvoiceAddView(InvoiceViewModel invoiceVM)
+        public InvoiceAddView()
         {
+            ViewModel = InventoryViewModel.GetInstance;
+            _invoiceVM = InvoiceViewModel.GetInstance;
             InitializeComponent();
-            _invoiceVM = invoiceVM;
         }
 
         private void InventoryTable_DoubleClick(object sender, MouseButtonEventArgs e)
@@ -133,8 +135,8 @@ namespace budiga_app.MVVM.View
             {
                 if (result != null)
                 {                    
-                    outputBlock.Text = result.Text;
-                    _invoiceVM.GetItemByBarcode(result.Text);
+                    outputBlock.Text = result.Text;                    
+                    _invoiceVM.GetItem(ViewModel.Item.ItemRecords.Where(i => i.Barcode == result.Text).FirstOrDefault());
                     if (videoCaptureDevice != null)
                     {
                         if (videoCaptureDevice.IsRunning)

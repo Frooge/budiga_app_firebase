@@ -2,6 +2,7 @@
 using budiga_app.DataAccess;
 using budiga_app.MVVM.Model;
 using budiga_app.MVVM.View;
+using Google.Cloud.Firestore;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -14,6 +15,8 @@ namespace budiga_app.MVVM.ViewModel
 {
     public class InvoiceViewModel
     {
+        private static InvoiceViewModel _instance;
+        public Action ClosePayView { get; set; }
         public RelayCommand AddQuantityCommand { get; set; }
         public RelayCommand ReduceQuantityCommand { get; set; }
         public RelayCommand RemoveItemCommand { get; set; }
@@ -21,21 +24,173 @@ namespace budiga_app.MVVM.ViewModel
         public RelayCommand TransactionHistoryCommand { get; set; }
         public RelayCommand CancelOrderCommand { get; set; }
         public RelayCommand CheckoutCommand { get; set; }
+        public RelayCommand ConfirmPayCommand { get; set; }
+        public RelayCommand GetReceiptCommand { get; set; }
+        public RelayCommand SearchItemCommand { get; set; }
+
+        private InvoiceModel _invoice { get; set; }
         public InvoiceModel Invoice { get; set; }
+        public OrderModel Order { get; set; }
+
+        public static InvoiceViewModel GetInstance
+        {
+            get
+            {
+                if (_instance == null)
+                {
+                    _instance = new InvoiceViewModel();
+                }
+                return _instance;
+            }
+        }
 
         public InvoiceViewModel()
         {
+            Initialize();
+            GetAllInvoice();
+        }
+
+        private void Initialize()
+        {
+            _invoice = new InvoiceModel();
             Invoice = new InvoiceModel();
+            Order = new OrderModel();            
             Invoice.InvoiceOrderRecords = new ObservableCollection<OrderModel>();
-            AddQuantityCommand = new RelayCommand(param => AddQuantity((int)param));
-            ReduceQuantityCommand = new RelayCommand(param => ReduceQuantity((int)param));
-            RemoveItemCommand = new RelayCommand(param => RemoveItem((int)param));
+            AddQuantityCommand = new RelayCommand(param => AddQuantity((string)param));
+            ReduceQuantityCommand = new RelayCommand(param => ReduceQuantity((string)param));
+            RemoveItemCommand = new RelayCommand(param => RemoveItem((string)param));
             AddItemCommand = new RelayCommand(param => AddItem());
             TransactionHistoryCommand = new RelayCommand(param => TransactionHistory());
             CancelOrderCommand = new RelayCommand(param => CancelOrder());
-            CheckoutCommand = new RelayCommand(param => Checkout());            
+            CheckoutCommand = new RelayCommand(param => Checkout());
+            ConfirmPayCommand = new RelayCommand(param => ConfirmPay(Convert.ToDecimal(param)));
+            GetReceiptCommand = new RelayCommand(param => GetReceipt((InvoiceModel)param));
+            SearchItemCommand = new RelayCommand(param => SearchItem((string)param));
         }
-        private void AddQuantity(int id)
+
+        //private void GetAllOrder()
+        //{
+        //    try
+        //    {
+        //        DataClass dataClass = DataClass.GetInstance;
+        //        FirestoreConn conn = FirestoreConn.GetInstance;
+        //        Query query = conn.FirestoreDb.Collection("orders");
+
+        //        FirestoreChangeListener listener = query.Listen(async snapshot =>
+        //        {
+        //            Order.OrderRecords = new ObservableCollection<OrderModel>();
+        //            foreach (DocumentSnapshot documentSnapshot in snapshot.Documents)
+        //            {
+        //                Dictionary<string, object> dict = documentSnapshot.ToDictionary();
+        //                DocumentReference itemRef = conn.FirestoreDb.Collection("items").Document(dict["ItemId"].ToString());
+        //                DocumentSnapshot snapshotItem = await itemRef.GetSnapshotAsync();
+        //                Dictionary<string, object> itemDict = snapshotItem.ToDictionary();
+        //                App.Current.Dispatcher.Invoke((System.Action)delegate
+        //                {                            
+        //                    Order.OrderRecords.Add(new OrderModel()
+        //                    {
+        //                        Id = dict["Id"].ToString(),
+        //                        ItemId = dict["ItemId"].ToString(),
+        //                        InvoiceId = dict["InvoiceId"].ToString(),
+        //                        Quantity = Convert.ToInt32(dict["Quantity"]),
+        //                        ActualItemPrice = Convert.ToDecimal(dict["ActualItemPrice"]),
+        //                        SubtotalPrice = Convert.ToDecimal(dict["SubtotalPrice"]),
+        //                        Item = new ItemModel
+        //                        {
+        //                            Id = itemDict["Id"].ToString(),
+        //                            StoreId = itemDict["StoreId"].ToString(),
+        //                            Barcode = itemDict["Barcode"].ToString(),
+        //                            Name = itemDict["Name"].ToString(),
+        //                            Brand = itemDict["Brand"].ToString(),
+        //                            Price = Convert.ToDecimal(itemDict["Price"]),
+        //                            Quantity = Convert.ToInt32(itemDict["Quantity"])
+        //                        }
+        //                    });
+        //                });
+        //            }
+        //        });
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+        //    }
+        //}
+
+        private void GetAllInvoice()
+        {
+            try
+            {
+                DataClass dataClass = DataClass.GetInstance;
+                FirestoreConn conn = FirestoreConn.GetInstance;
+                Query query;
+
+                if (dataClass.LoggedInUser.Type.Equals("admin"))
+                    query = conn.FirestoreDb.Collection("invoice");
+                else
+                    query = conn.FirestoreDb.Collection("invoice").WhereEqualTo("StoreId", dataClass.Store.Id);
+
+                FirestoreChangeListener listener = query.Listen(async snapshot =>
+                {
+                    _invoice.InvoiceRecords = new ObservableCollection<InvoiceModel>();
+                    Order.OrderRecords = new ObservableCollection<OrderModel>();
+                    foreach (DocumentSnapshot documentSnapshot in snapshot.Documents)
+                    {
+                        Query ordersQuery = conn.FirestoreDb.Collection("orders");
+                        QuerySnapshot ordersQuerySnapshot = await ordersQuery.GetSnapshotAsync();                        
+                        
+                        App.Current.Dispatcher.Invoke((System.Action)async delegate
+                        {
+                            foreach (DocumentSnapshot orderDocumentSnapshot in ordersQuerySnapshot.Documents)
+                            {
+                                Dictionary<string, object> orderDict = orderDocumentSnapshot.ToDictionary();
+                                DocumentReference itemRef = conn.FirestoreDb.Collection("items").Document(orderDict["ItemId"].ToString());
+                                DocumentSnapshot snapshotItem = await itemRef.GetSnapshotAsync();
+                                Dictionary<string, object> itemDict = snapshotItem.ToDictionary();
+                                Order.OrderRecords.Add(new OrderModel
+                                {
+                                    Id = orderDict["Id"].ToString(),
+                                    ItemId = orderDict["ItemId"].ToString(),
+                                    InvoiceId = orderDict["InvoiceId"].ToString(),
+                                    Quantity = Convert.ToInt32(orderDict["Quantity"]),
+                                    ActualItemPrice = Convert.ToDecimal(orderDict["ActualItemPrice"]),
+                                    SubtotalPrice = Convert.ToDecimal(orderDict["SubtotalPrice"]),
+                                    Item = new ItemModel
+                                    {
+                                        Id = itemDict["Id"].ToString(),
+                                        StoreId = itemDict["StoreId"].ToString(),
+                                        Barcode = itemDict["Barcode"].ToString(),
+                                        Name = itemDict["Name"].ToString(),
+                                        Brand = itemDict["Brand"].ToString(),
+                                        Price = Convert.ToDecimal(itemDict["Price"]),
+                                        Quantity = Convert.ToInt32(itemDict["Quantity"])
+                                    }
+                                });
+                            }
+
+                            Dictionary<string, object> dict = documentSnapshot.ToDictionary();
+
+                            _invoice.InvoiceRecords.Add(new InvoiceModel()
+                            {
+                                Id = dict["Id"].ToString(),
+                                UserFullName = dict["UserFullName"].ToString(),
+                                StoreId = dict["StoreId"].ToString(),
+                                TotalPrice = Convert.ToDecimal(dict["TotalPrice"]),
+                                CustomerPay = Convert.ToDecimal(dict["CustomerPay"]),
+                                CreatedDate = ((Timestamp)dict["CreatedDate"]).ToDateTime(),
+                                InvoiceOrderRecords = Order.OrderRecords
+                            });
+                        });
+                    }
+                    Invoice.InvoiceRecords = _invoice.InvoiceRecords;
+                });
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void AddQuantity(string id)
         {
             OrderModel order = Invoice.InvoiceOrderRecords.Where(i => i.ItemId == id).FirstOrDefault();
             if (order.Quantity < order.Item.Quantity)
@@ -46,7 +201,7 @@ namespace budiga_app.MVVM.ViewModel
             }
         }
 
-        private void ReduceQuantity(int id)
+        private void ReduceQuantity(string id)
         {
             OrderModel order = Invoice.InvoiceOrderRecords.Where(i => i.ItemId == id).FirstOrDefault();
             if (order.Quantity > 1)
@@ -57,7 +212,7 @@ namespace budiga_app.MVVM.ViewModel
             }
         }
 
-        private void RemoveItem(int id)
+        private void RemoveItem(string id)
         {
             OrderModel order = Invoice.InvoiceOrderRecords.Where(i => i.ItemId == id).FirstOrDefault();
             Invoice.InvoiceOrderRecords.Remove(order);
@@ -66,7 +221,7 @@ namespace budiga_app.MVVM.ViewModel
 
         private void AddItem()
         {
-            InvoiceAddView invoiceAddView = new InvoiceAddView(this);
+            InvoiceAddView invoiceAddView = new InvoiceAddView();
             invoiceAddView.ShowDialog();            
         }
 
@@ -87,7 +242,7 @@ namespace budiga_app.MVVM.ViewModel
             if (Invoice.InvoiceOrderRecords.Count > 0)
             {
                 CalculateTotal();
-                InvoicePayView invoicePayView = new InvoicePayView(this, Invoice);
+                InvoicePayView invoicePayView = new InvoicePayView();
                 invoicePayView.ShowDialog();
             }
             else
@@ -96,85 +251,85 @@ namespace budiga_app.MVVM.ViewModel
             }            
         }
 
-        public void GetItem(ItemModel item)
+        private async void ConfirmPay(decimal payment)
         {
-            //OrderModel order = Invoice.InvoiceOrderRecords.Where(i => i.ItemId == item.Id).FirstOrDefault();
-            //InvoiceAddQuantityView invoiceAddQuantityView = new InvoiceAddQuantityView();
-            //if (invoiceAddQuantityView.ShowDialog() == true)
-            //{
-            //    if (order == null && invoiceAddQuantityView.Quantity <= item.Quantity)
-            //    {
-            //        Invoice.InvoiceOrderRecords.Add(new OrderModel()
-            //        {
-            //            ItemId = item.Id,
-            //            Quantity = invoiceAddQuantityView.Quantity,
-            //            SubtotalPrice = item.Price * invoiceAddQuantityView.Quantity,
-            //            Item = item,
-            //        });
-            //        CalculateTotal();
-            //        MessageBox.Show("Successfully added item to invoice", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
-            //    }
-            //    else if (order != null && order.Quantity + invoiceAddQuantityView.Quantity <= item.Quantity)
-            //    {
-            //        order.Quantity += invoiceAddQuantityView.Quantity;
-            //        CalculateSubtotal(order);
-            //        CalculateTotal();
-            //        MessageBox.Show("Successfully updated item quantity to invoice", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
-            //    }
-            //    else
-            //    {
-            //        MessageBox.Show("Quantity exceeds actual product quantity", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-            //    }
-            //}
-                    
+            InvoiceRepository invoiceRepository = new InvoiceRepository();
+            DataClass dataClass = DataClass.GetInstance;
+            if (payment - Invoice.TotalPrice >= 0)
+            {
+                Invoice.Id = GenerateId.GenerateInvoice(DateTime.Now);
+                Invoice.CustomerPay = payment;
+                Invoice.StoreId = dataClass.Store.Id;
+                Invoice.UserFullName = String.Format("{0} {1}", dataClass.LoggedInUser.FName, dataClass.LoggedInUser.LName);
+                if (await invoiceRepository.AddInvoice(Invoice))
+                {
+                    GetReceipt(Invoice.InvoiceRecords.Where(i => i.Id == Invoice.Id).FirstOrDefault());
+                }
+            }
+            else
+            {
+                MessageBox.Show("Not enough payment!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            ClosePayView();
         }
 
-        public void GetItemByBarcode(string barcode)
+        private void GetReceipt(InvoiceModel invoice)
         {
-            //ItemModel item = new ItemModel();
-            //ItemRepository itemRepository = new ItemRepository();
-            //OrderModel order = Invoice.InvoiceOrderRecords.Where(i => i.ItemId == item.Id).FirstOrDefault();
-            //item = itemRepository.GetItemByBarcode(barcode);
-            //if (item.Id != -1)
-            //{
-            //    InvoiceAddQuantityView invoiceAddQuantityView = new InvoiceAddQuantityView();
-            //    if (invoiceAddQuantityView.ShowDialog() == true)
-            //    {
-            //        if (order == null && invoiceAddQuantityView.Quantity <= item.Quantity)
-            //        {
-            //            Invoice.InvoiceOrderRecords.Add(new OrderModel()
-            //            {
-            //                ItemId = item.Id,
-            //                Quantity = invoiceAddQuantityView.Quantity,
-            //                SubtotalPrice = item.Price * invoiceAddQuantityView.Quantity,
-            //                Item = item,
-            //            });
-            //            CalculateTotal();
-            //            MessageBox.Show("Successfully added item to invoice", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
-            //        }
-            //        else if(order != null && order.Quantity + invoiceAddQuantityView.Quantity <= item.Quantity)
-            //        {
-            //            order.Quantity += invoiceAddQuantityView.Quantity;
-            //            CalculateSubtotal(order);
-            //            CalculateTotal();
-            //            MessageBox.Show("Successfully updated item quantity to invoice", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
-            //        }
-            //        else
-            //        {
-            //            MessageBox.Show("Quantity exceeds actual product quantity", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-            //        }
-            //    }                                
-            //}
-            //else
-            //{
-            //    MessageBox.Show("Item does not exist in inventory", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-            //}
-            
+            invoice.CustomerChange = invoice.TotalPrice - invoice.CustomerPay;
+            InvoiceReceiptView invoiceReceiptView = new InvoiceReceiptView(invoice);
+            invoiceReceiptView.ShowDialog();
         }
+
+        private void SearchItem(string searchTxt = "")
+        {
+            Invoice.InvoiceRecords = new ObservableCollection<InvoiceModel>(
+                _invoice.InvoiceRecords.Where(i => i.InvoiceOrderRecords.Where(o => o.InvoiceId.ToString().Equals(searchTxt.ToLower())
+                || o.Item.Name.ToLower().Contains(searchTxt.ToLower())
+                || o.Item.Brand.ToLower().Contains(searchTxt.ToLower())).Any() == true).ToList());
+        }
+
+        public void GetItem(ItemModel item)
+        {
+            if (item == null)
+            {
+                MessageBox.Show("Item does not exist!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            OrderModel order = Invoice.InvoiceOrderRecords.Where(i => i.ItemId == item.Id).FirstOrDefault();
+            InvoiceAddQuantityView invoiceAddQuantityView = new InvoiceAddQuantityView();
+            if (invoiceAddQuantityView.ShowDialog() == true)
+            {
+                if (order == null && invoiceAddQuantityView.Quantity <= item.Quantity)
+                {
+                    Invoice.InvoiceOrderRecords.Add(new OrderModel()
+                    {
+                        ItemId = item.Id,
+                        Quantity = invoiceAddQuantityView.Quantity,
+                        ActualItemPrice = item.Price,
+                        SubtotalPrice = item.Price * invoiceAddQuantityView.Quantity,
+                        Item = item,
+                    });
+                    CalculateTotal();
+                    MessageBox.Show("Successfully added item to invoice", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+                else if (order != null && order.Quantity + invoiceAddQuantityView.Quantity <= item.Quantity)
+                {
+                    order.Quantity += invoiceAddQuantityView.Quantity;
+                    CalculateSubtotal(order);
+                    CalculateTotal();
+                    MessageBox.Show("Successfully updated item quantity to invoice", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+                else
+                {
+                    MessageBox.Show("Quantity exceeds actual product quantity", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+        }        
 
         private void CalculateSubtotal(OrderModel order)
         {
-            //order.SubtotalPrice = order.Quantity * order.Item.Price;
+            order.SubtotalPrice = order.Quantity * order.ActualItemPrice;
         }
 
         private void CalculateTotal()

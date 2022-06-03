@@ -23,46 +23,12 @@ namespace budiga_app.MVVM.View
     /// </summary>
     public partial class InvoicePayView : Window
     {
-        private InvoiceViewModel _vm;
-        private InvoiceModel _invoice;
-        private InvoiceRepository _invoiceRepository;
-        private ItemHistoryRepository _itemHistory;
-        private ItemRepository _itemRepository;
-        public InvoicePayView(InvoiceViewModel vm, InvoiceModel invoice)
+        public InvoiceViewModel ViewModel { get; set; }
+        public InvoicePayView()
         {
-            InitializeComponent();
-            _vm = vm;
-            _invoice = invoice;
-            _invoiceRepository = new InvoiceRepository();
-            _itemHistory = new ItemHistoryRepository();
-            _itemRepository = new ItemRepository();
-        }
-
-        private void Confirm_Click(object sender, RoutedEventArgs e)
-        {           
-            _invoice.CustomerPay = int.Parse(payTextBox.Text);
-            _invoice.CustomerChange = _invoice.CustomerPay - _invoice.TotalPrice;
-            if (_invoice.CustomerChange >= 0)
-            {
-                //_invoice.UserId = Sessions.session.Id;
-                _invoiceRepository.AddInvoice(_invoice);
-                _invoice = _invoiceRepository.GetLastInvoice();
-                foreach(OrderModel order in _invoice.InvoiceOrderRecords)
-                {
-                    //_itemHistory.AddItemHistory(order.Item, "UPDATED");
-                    order.Item.Quantity -= order.Quantity;
-                    //_itemRepository.UpdateItem(order.Item);
-                }
-                _vm.CancelOrder();
-                InvoiceReceiptView invoiceReceiptView = new InvoiceReceiptView(_invoice);
-                invoiceReceiptView.Show();
-                this.Close();
-            }
-            else
-            {
-                MessageBox.Show("Payment is not enough!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-
+            ViewModel = InvoiceViewModel.GetInstance;
+            ViewModel.ClosePayView = new Action(this.Close);
+            InitializeComponent();            
         }
 
         private void Cancel_Click(object sender, RoutedEventArgs e)

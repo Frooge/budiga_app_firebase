@@ -290,7 +290,6 @@
     <Compile Include="MVVM\ViewModel\EmployeeAddViewModel.cs" />
     <Compile Include="MVVM\ViewModel\EmployeeEditViewModel.cs" />
     <Compile Include="MVVM\ViewModel\EmployeeViewModel.cs" />
-    <Compile Include="MVVM\ViewModel\InventoryHistoryViewModel.cs" />
     <Compile Include="MVVM\ViewModel\InventoryViewModel.cs" />
     <Compile Include="MVVM\ViewModel\InvoiceAddQuantityViewModel.cs" />
     <Compile Include="MVVM\ViewModel\InvoiceAddViewModel.cs" />

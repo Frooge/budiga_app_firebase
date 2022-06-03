@@ -10,6 +10,7 @@
         SizeToContent="WidthAndHeight"
         ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen"
+        x:Name="invoicePayView"
         Title="InvoicePayView" Background="#FFF0F1F5">
     <Grid Margin="10">
         <Grid.RowDefinitions>
@@ -24,7 +25,7 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Button Content="Confirm" Click="Confirm_Click" HorizontalAlignment="Left" Background="White" BorderBrush="#FF264ECA" Foreground="#FF264ECA"/>
+            <Button Content="Confirm" Command="{Binding ElementName=invoicePayView, Path=ViewModel.ConfirmPayCommand}" CommandParameter="{Binding ElementName=payTextBox, Path=Text}" HorizontalAlignment="Left" Background="White" BorderBrush="#FF264ECA" Foreground="#FF264ECA"/>
             <Button Content="Cancel" Click="Cancel_Click" HorizontalAlignment="Right" Grid.Column="1" BorderBrush="#FF264ECA" Background="White" Foreground="#FF264ECA"/>
         </Grid>
     </Grid>
