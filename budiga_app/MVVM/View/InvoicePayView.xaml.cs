@@ -49,9 +49,9 @@ namespace budiga_app.MVVM.View
                 _invoice = _invoiceRepository.GetLastInvoice();
                 foreach(OrderModel order in _invoice.InvoiceOrderRecords)
                 {
-                    _itemHistory.AddItemHistory(order.Item, "UPDATED");
+                    //_itemHistory.AddItemHistory(order.Item, "UPDATED");
                     order.Item.Quantity -= order.Quantity;
-                    _itemRepository.UpdateItem(order.Item);
+                    //_itemRepository.UpdateItem(order.Item);
                 }
                 _vm.CancelOrder();
                 InvoiceReceiptView invoiceReceiptView = new InvoiceReceiptView(_invoice);

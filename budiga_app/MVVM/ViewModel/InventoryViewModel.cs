@@ -16,11 +16,13 @@ namespace budiga_app.MVVM.ViewModel
     public class InventoryViewModel : ObservableObject
     {
         private static InventoryViewModel _instance;
-
+        private ItemRepository _itemRepository;
+        private ItemHistoryRepository _itemHistoryRepository;
         private ItemModel _item;
         public ItemModel Item { get; set; }
         public ItemHistoryModel ItemHistory { get; set; }
         
+        public Action CloseHistoryAction { get; set; }
         public RelayCommand AddItemModalCommand { get; set; }
         public RelayCommand EditItemModalCommand { get; set; }
         public RelayCommand SearchItemCommand { get; set; }
@@ -43,12 +45,16 @@ namespace budiga_app.MVVM.ViewModel
         {            
             Initialize();
             GetAllItem();
+            GetAllHistory();
         }
 
         private void Initialize()
         {
             _item = new ItemModel();
+            _itemRepository = new ItemRepository();
+            _itemHistoryRepository = new ItemHistoryRepository();
             Item = new ItemModel();
+            ItemHistory = new ItemHistoryModel();
             AddItemModalCommand = new RelayCommand(param => AddItemModal());
             EditItemModalCommand = new RelayCommand(param => EditItemModal((ItemModel)param));
             SearchItemCommand = new RelayCommand(param => SearchItem((string)param));
@@ -78,7 +84,7 @@ namespace budiga_app.MVVM.ViewModel
 
         private void ItemHistoryModal()
         {
-            InventoryHistoryView inventoryHistoryView = new InventoryHistoryView(this);
+            InventoryHistoryView inventoryHistoryView = new InventoryHistoryView();
             inventoryHistoryView.ShowDialog();
         }
 
@@ -86,26 +92,59 @@ namespace budiga_app.MVVM.ViewModel
         {
             try
             {
+                DataClass dataClass = DataClass.GetInstance;
                 FirestoreConn conn = FirestoreConn.GetInstance;
-                Query query = conn.FirestoreDb.Collection("items").WhereEqualTo("IsDeleted", false);
-                FirestoreChangeListener listener = query.Listen(snapshot =>
+                if (dataClass.LoggedInUser.Type.Equals("admin"))
                 {
-                    _item.ItemRecords = new ObservableCollection<ItemModel>();
-                    foreach (DocumentSnapshot documentSnapshot in snapshot.Documents)
+                    Query query = conn.FirestoreDb.Collection("items").WhereEqualTo("IsDeleted", false);
+                    FirestoreChangeListener listener = query.Listen(snapshot =>
                     {
-                        Dictionary<string, object> dict = documentSnapshot.ToDictionary();
-                        _item.ItemRecords.Add(new ItemModel()
+                        _item.ItemRecords = new ObservableCollection<ItemModel>();
+                        foreach (DocumentSnapshot documentSnapshot in snapshot.Documents)
                         {
-                            Id = dict["Id"].ToString(),
-                            Barcode = dict["Barcode"].ToString(),
-                            Name = dict["Name"].ToString(),
-                            Brand = dict["Brand"].ToString(),
-                            Price = Convert.ToDecimal(dict["Price"]),
-                            Quantity = Convert.ToInt32(dict["Quantity"])
-                        });
-                    }
-                    Item.ItemRecords = _item.ItemRecords;
-                });
+                            Dictionary<string, object> dict = documentSnapshot.ToDictionary();
+                            App.Current.Dispatcher.Invoke((System.Action)delegate
+                            {
+                                _item.ItemRecords.Add(new ItemModel()
+                                {
+                                    Id = dict["Id"].ToString(),
+                                    StoreId = dict["StoreId"].ToString(),
+                                    Barcode = dict["Barcode"].ToString(),
+                                    Name = dict["Name"].ToString(),
+                                    Brand = dict["Brand"].ToString(),
+                                    Price = Convert.ToDecimal(dict["Price"]),
+                                    Quantity = Convert.ToInt32(dict["Quantity"])
+                                });
+                            });
+                        }
+                        Item.ItemRecords = _item.ItemRecords;
+                    });
+                }
+                else
+                {
+                    Query query = conn.FirestoreDb.Collection("items").WhereEqualTo("IsDeleted", false).WhereEqualTo("StoreId", dataClass.Store.Id);
+                    FirestoreChangeListener listener = query.Listen(snapshot =>
+                    {
+                        _item.ItemRecords = new ObservableCollection<ItemModel>();
+                        foreach (DocumentSnapshot documentSnapshot in snapshot.Documents)
+                        {
+                            Dictionary<string, object> dict = documentSnapshot.ToDictionary();
+                            App.Current.Dispatcher.Invoke((System.Action)delegate
+                            {
+                                _item.ItemRecords.Add(new ItemModel()
+                                {
+                                    Id = dict["Id"].ToString(),
+                                    Barcode = dict["Barcode"].ToString(),
+                                    Name = dict["Name"].ToString(),
+                                    Brand = dict["Brand"].ToString(),
+                                    Price = Convert.ToDecimal(dict["Price"]),
+                                    Quantity = Convert.ToInt32(dict["Quantity"])
+                                });
+                            });
+                        }
+                        Item.ItemRecords = _item.ItemRecords;
+                    });
+                }            
             }
             catch (Exception ex)
             {
@@ -117,25 +156,67 @@ namespace budiga_app.MVVM.ViewModel
         {
             try
             {
+                DataClass dataClass = DataClass.GetInstance;
                 FirestoreConn conn = FirestoreConn.GetInstance;
-                Query query = conn.FirestoreDb.Collection("item_history");
-                FirestoreChangeListener listener = query.Listen(snapshot =>
-                {
-                    ItemHistory.ItemHistoryRecords = new ObservableCollection<ItemHistoryModel>();
-                    foreach (DocumentSnapshot documentSnapshot in snapshot.Documents)
+                if (dataClass.LoggedInUser.Type.Equals("admin"))
+                {                    
+                    Query query = conn.FirestoreDb.Collection("item_history");
+                    FirestoreChangeListener listener = query.Listen(snapshot =>
                     {
-                        Dictionary<string, object> dict = documentSnapshot.ToDictionary();
-                        ItemHistory.ItemHistoryRecords.Add(new ItemHistoryModel()
+                        ItemHistory.ItemHistoryRecords = new ObservableCollection<ItemHistoryModel>();
+                        foreach (DocumentSnapshot documentSnapshot in snapshot.Documents)
                         {
-                            Id = dict["Id"].ToString(),
-                            Barcode = dict["Barcode"].ToString(),
-                            Name = dict["Name"].ToString(),
-                            Brand = dict["Brand"].ToString(),
-                            Price = Convert.ToDecimal(dict["Price"]),
-                            Quantity = Convert.ToInt32(dict["Quantity"])
-                        });
-                    }
-                });
+                            Dictionary<string, object> dict = documentSnapshot.ToDictionary();
+                            App.Current.Dispatcher.Invoke((System.Action)delegate
+                            {
+                                ItemHistory.ItemHistoryRecords.Add(new ItemHistoryModel()
+                                {
+                                    Id = dict["Id"].ToString(),
+                                    ItemId = dict["ItemId"].ToString(),
+                                    StoreId = dict["StoreId"].ToString(),
+                                    UserFullName = dict["UserFullName"].ToString(),
+                                    Barcode = dict["Barcode"].ToString(),
+                                    Name = dict["Name"].ToString(),
+                                    Brand = dict["Brand"].ToString(),
+                                    Price = Convert.ToDecimal(dict["Price"]),
+                                    Quantity = Convert.ToInt32(dict["Quantity"]),
+                                    Action = dict["Action"].ToString(),
+                                    CommittedDate = ((Timestamp)dict["CommittedDate"]).ToDateTime()
+                                });
+                            });                                                        
+                        }
+                    });
+                }
+                else
+                {
+                    Query query = conn.FirestoreDb.Collection("item_history").WhereEqualTo("StoreId", dataClass.Store.Id);
+                    FirestoreChangeListener listener = query.Listen(snapshot =>
+                    {
+                        ItemHistory.ItemHistoryRecords = new ObservableCollection<ItemHistoryModel>();
+                        foreach (DocumentSnapshot documentSnapshot in snapshot.Documents)
+                        {
+                            Dictionary<string, object> dict = documentSnapshot.ToDictionary();
+                            App.Current.Dispatcher.Invoke((System.Action)delegate
+                            {
+                                ItemHistory.ItemHistoryRecords.Add(new ItemHistoryModel()
+                                {
+                                    Id = dict["Id"].ToString(),
+                                    ItemId = dict["ItemId"].ToString(),
+                                    StoreId = dict["StoreId"].ToString(),
+                                    UserFullName = dict["UserFullName"].ToString(),
+                                    Barcode = dict["Barcode"].ToString(),
+                                    Name = dict["Name"].ToString(),
+                                    Brand = dict["Brand"].ToString(),
+                                    Price = Convert.ToDecimal(dict["Price"]),
+                                    Quantity = Convert.ToInt32(dict["Quantity"]),
+                                    Action = dict["Action"].ToString(),
+                                    CommittedDate = ((Timestamp)dict["CommittedDate"]).ToDateTime()
+                                });
+                            });
+                        }
+                    });
+                }
+                
             }
             catch (Exception ex)
             {
@@ -143,78 +224,40 @@ namespace budiga_app.MVVM.ViewModel
             }
         }
 
-        public async void AddItem(ItemModel item)
+        public async Task<bool> AddItem(ItemModel item)
         {
-            try
-            {
-                FirestoreConn conn = FirestoreConn.GetInstance;
-                DocumentReference docRef = conn.FirestoreDb.Collection("items").Document(item.Id);
-                Dictionary<string, object> dict = new Dictionary<string, object>
-                {
-                    { "Id", item.Id },
-                    { "Barcode", item.Barcode },
-                    { "Name", item.Name },
-                    { "Brand", item.Brand },
-                    { "Price", (double)item.Price },
-                    { "Quantity", item.Quantity },
-                    { "IsDeleted", item.IsDeleted },
-                };
-                await docRef.SetAsync(dict);
-                MessageBox.Show("Successfully added item!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
+            bool result = true;          
+            if(!await _itemRepository.AddItem(item)){ result = false; }
+            if(result && !await _itemHistoryRepository.AddHistory(item, "ADDED")) { result = false; }
+            return result;
         }
 
-        public async void UpdateItem(ItemModel item)
+        public async Task<bool> UpdateItem(ItemModel item, ItemModel oldItem)
         {
-            try
-            {
-                FirestoreConn conn = FirestoreConn.GetInstance;
-                DocumentReference docRef = conn.FirestoreDb.Collection("items").Document(item.Id);
-                Dictionary<string, object> dict = new Dictionary<string, object>
-                {
-                    { "Id", item.Id },
-                    { "Barcode", item.Barcode },
-                    { "Name", item.Name },
-                    { "Brand", item.Brand },
-                    { "Price", (double)item.Price },
-                    { "Quantity", item.Quantity },
-                    { "IsDeleted", item.IsDeleted },
-                };
-                await docRef.SetAsync(dict);
-                MessageBox.Show("Successfully updated item!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
+            bool result = true;           
+            if (!await _itemRepository.UpdateItem(item)) { result = false; }
+            if (result && !await _itemHistoryRepository.AddHistory(oldItem, "UPDATED")) { result = false; }
+            return result;
         }
 
-        public async void DeleteItem(string id)
+        public async Task<bool> DeleteItem(ItemModel item)
         {
-            try
-            {
-                FirestoreConn conn = FirestoreConn.GetInstance;
-                DocumentReference docRef = conn.FirestoreDb.Collection("items").Document(id);
-                Dictionary<string, object> dict = new Dictionary<string, object>
-                {
-                    { "IsDeleted", true }
-                };
-                await docRef.SetAsync(dict, SetOptions.MergeAll);
-                MessageBox.Show("Successfully deleted item!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-        }
+            bool result = true;           
+            if (!await _itemRepository.DeleteItem(item.Id)) { result = false; }
+            if (result && !await _itemHistoryRepository.AddHistory(item, "DELETED")) { result = false; }
+            return result;
+        }       
 
         private async void UndoAction(ItemHistoryModel item)
         {
-
+            if (MessageBox.Show("Continue Action?", "Warning", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
+            {
+                if (!await _itemHistoryRepository.UndoAction(item)) 
+                {
+                    CloseHistoryAction();
+                }
+            }
+            
         }
     }
 }

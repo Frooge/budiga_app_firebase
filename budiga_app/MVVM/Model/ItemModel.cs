@@ -12,6 +12,7 @@ namespace budiga_app.MVVM.Model
     public class ItemModel : ObservableObject
     {
         private string _id;
+        private string _storeId;
         private string _barcode;
         private string _name;
         private string _brand;
@@ -22,6 +23,7 @@ namespace budiga_app.MVVM.Model
 
 
         public string Id { get { return _id; } set { _id = value; OnPropertyChanged("Id"); } }
+        public string StoreId { get { return _storeId; } set { _storeId = value; OnPropertyChanged("StoreId"); } }
         public string Barcode { get { return _barcode; } set { _barcode = value; OnPropertyChanged("Barcode"); } }
         public string Name { get { return _name; } set { _name = value; OnPropertyChanged("Name");} }
         public string Brand { get { return _brand; } set { _brand = value; OnPropertyChanged("Brand"); } }

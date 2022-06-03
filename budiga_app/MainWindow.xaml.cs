@@ -87,6 +87,7 @@ namespace budiga_app
                     dataClass.LoggedInUser = new UserModel
                     {
                         Id = dict["Id"].ToString(),
+                        StoreId = dict["StoreId"].ToString(),
                         FName = dict["FName"].ToString(),
                         LName = dict["LName"].ToString(),
                         Username = dict["Username"].ToString(),
@@ -94,9 +95,9 @@ namespace budiga_app
                         Contact = dict["Contact"].ToString(),
                         Type = dict["Type"].ToString(),
                     };
-
+                    bool set = await dataClass.SetStore();
                     #region
-                    if (dataClass.LoggedInUser.Type == "admin")
+                    if (dataClass.LoggedInUser.Type == "admin" && set)
                     {
                         this.Hide();
                         AdminDashboard home = new AdminDashboard();
@@ -104,7 +105,7 @@ namespace budiga_app
                         home.Show();
                         this.Close();
                     }
-                    else if (dataClass.LoggedInUser.Type == "employee")
+                    else if (dataClass.LoggedInUser.Type == "employee" && set)
                     {
                         this.Hide();
                         EmployeeDashboard employeeDashboard = new EmployeeDashboard();

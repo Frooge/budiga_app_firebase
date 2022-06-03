@@ -48,7 +48,7 @@ namespace budiga_app.MVVM.View
         {
             qtyTextBlock.Text = (int.Parse(qtyTextBlock.Text)+int.Parse(qtyTextBox.Text)).ToString();
         }
-        private void UpdateBtn_Click(object sender, RoutedEventArgs e)
+        private async void UpdateBtn_Click(object sender, RoutedEventArgs e)
         {
             if (string.IsNullOrEmpty(productTextBox.Text) || string.IsNullOrEmpty(brandTextBox.Text) || string.IsNullOrEmpty(priceTextBox.Text) || string.IsNullOrEmpty(qtyTextBox.Text))
             {             
@@ -63,36 +63,24 @@ namespace budiga_app.MVVM.View
                     Barcode = (string.IsNullOrEmpty(barcodeTextBox.Text)) ? "N/A" : barcodeTextBox.Text,
                     Brand = brandTextBox.Text,
                     Price = decimal.Parse(priceTextBox.Text),
-                    Quantity = int.Parse(qtyTextBox.Text)
+                    Quantity = int.Parse(qtyTextBlock.Text) + int.Parse(qtyTextBox.Text)
                 };
-                viewModel.UpdateItem(item);
-                this.Close();
-                //ItemRepository itemRepository = new ItemRepository();
-                //if (itemRepository.UpdateItem(item))
-                //{
-                //    ItemHistoryRepository itemHistoryRepository = new ItemHistoryRepository();
-                //    itemHistoryRepository.AddItemHistory(_item, "UPDATED");
-                //    _vm.GetAll();
-                //    this.Close();
-                //}
+                if(await viewModel.UpdateItem(item, _item))
+                {
+                    this.Close();
+                }                
             }
             
         }
 
-        private void DeleteBtn_Click(object sender, RoutedEventArgs e)
+        private async void DeleteBtn_Click(object sender, RoutedEventArgs e)
         {
             if (MessageBox.Show("Continue Action?", "Warning", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
             {
-                viewModel.DeleteItem(_item.Id);
-                this.Close();
-                //ItemRepository itemRepository = new ItemRepository();
-                //if (itemRepository.DeleteItem(_item.Id))
-                //{
-                //    ItemHistoryRepository itemHistoryRepository = new ItemHistoryRepository();
-                //    itemHistoryRepository.AddItemHistory(_item, "DELETED");
-                //    _vm.GetAll();
-                //    this.Close();
-                //}
+                if(await viewModel.DeleteItem(_item))
+                {
+                    this.Close();
+                }
             }
             
         }

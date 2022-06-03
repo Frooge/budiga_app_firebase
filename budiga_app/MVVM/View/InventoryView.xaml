@@ -69,14 +69,6 @@
                                 </b:EventTrigger>
                             </b:Interaction.Triggers>
                         </DataGrid>
-                        <Grid Background="Black" Opacity="0.5" Visibility="{Binding ElementName=inventoryView, Path=ViewModel.Page.IsLoading, Converter={StaticResource BooleanToVisibilityConverter}}"/>
-                        <ProgressBar Value="0" IsIndeterminate="True" Width="100" Visibility="{Binding Page.IsLoading,  Converter={StaticResource BooleanToVisibilityConverter}}">
-                            <ProgressBar.Style>
-                                <Style TargetType="{x:Type ProgressBar}" BasedOn="{StaticResource MaterialDesignCircularProgressBar}">
-                                    <Setter Property="Foreground" Value="White"/>
-                                </Style>
-                            </ProgressBar.Style>
-                        </ProgressBar>
                     </Grid>
                     
                 </materialDesign:Card>

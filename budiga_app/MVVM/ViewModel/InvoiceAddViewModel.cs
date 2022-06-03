@@ -28,7 +28,7 @@ namespace budiga_app.MVVM.ViewModel
 
         public void GetAll()
         {
-            _item.ItemRecords = itemRepository.GetAllItems();
+            //_item.ItemRecords = itemRepository.GetAllItems();
             Item.ItemRecords = _item.ItemRecords;
         }
 

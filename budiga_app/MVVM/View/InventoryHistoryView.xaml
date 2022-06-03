@@ -12,14 +12,11 @@
         SizeToContent="WidthAndHeight"
         ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen"
-        Closing="Window_Closing"
+        x:Name="inventoryHistoryView"
         Title="InventoryHistory">
-    <Window.DataContext>
-        <viewModel:InventoryHistoryViewModel/>
-    </Window.DataContext>
     <StackPanel Margin="10">
         <DataGrid x:Name="inventoryTable"                              
-                  ItemsSource="{Binding ItemHistory.ItemHistoryRecords}"
+                  ItemsSource="{Binding ElementName=inventoryHistoryView, Path=ViewModel.ItemHistory.ItemHistoryRecords}"
                   IsReadOnly="True"
                   AutoGenerateColumns="False"
                   CanUserResizeColumns="False"
@@ -35,7 +32,7 @@
                 <DataGridTextColumn Header="Price" Binding="{Binding Path=Price}" Width="*"/>
                 <DataGridTextColumn Header="Quantity" Binding="{Binding Path=Quantity}" Width="*"/>
                 <DataGridTextColumn Header="Action" Binding="{Binding Path=Action}" Width="*"/>
-                <DataGridTextColumn Header="Date" Binding="{Binding Path=ComittedDate}" Width="2*"/>
+                <DataGridTextColumn Header="Date" Binding="{Binding Path=CommittedDate}" Width="2*"/>
             </DataGrid.Columns>
             <DataGrid.CellStyle>
                 <Style TargetType="DataGridCell" BasedOn="{StaticResource MaterialDesignDataGridCell}">
@@ -45,7 +42,7 @@
             </DataGrid.CellStyle>
             <b:Interaction.Triggers>
                 <b:EventTrigger EventName="MouseDoubleClick">
-                    <b:InvokeCommandAction Command="{Binding UndoActionCommand}"
+                    <b:InvokeCommandAction Command="{Binding ElementName=inventoryHistoryView, Path=ViewModel.UndoActionCommand}"
                                            CommandParameter="{Binding Path=SelectedItem, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=DataGrid}}"/>
                 </b:EventTrigger>
             </b:Interaction.Triggers>

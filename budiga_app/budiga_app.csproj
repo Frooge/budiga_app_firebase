@@ -178,6 +178,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Core\ConvertTime.cs" />
     <Compile Include="Core\DataClass.cs" />
     <Compile Include="Core\GenerateId.cs" />
     <Compile Include="Core\ObservableObject.cs" />
@@ -282,6 +283,7 @@
     <Compile Include="MVVM\Model\OrderModel.cs" />
     <Compile Include="MVVM\Model\InvoiceModel.cs" />
     <Compile Include="MVVM\Model\OverviewSalesModel.cs" />
+    <Compile Include="MVVM\Model\StoreModel.cs" />
     <Compile Include="MVVM\Model\UserModel.cs" />
     <Compile Include="MVVM\Model\PageModel.cs" />
     <Compile Include="MVVM\ViewModel\AdminMainViewModel.cs" />

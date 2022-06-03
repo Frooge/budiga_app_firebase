@@ -37,7 +37,7 @@ namespace budiga_app.MVVM.View
             e.Handled = regex.IsMatch(e.Text);
         }
 
-        private void AddBtn_Click(object sender, RoutedEventArgs e)
+        private async void AddBtn_Click(object sender, RoutedEventArgs e)
         {
             if(string.IsNullOrEmpty(productTextBox.Text) || string.IsNullOrEmpty(brandTextBox.Text) || string.IsNullOrEmpty(priceTextBox.Text) || string.IsNullOrEmpty(qtyTextBox.Text))
             {
@@ -47,15 +47,17 @@ namespace budiga_app.MVVM.View
             {
                 ItemModel item = new ItemModel()
                 {
-                    Id = GenerateId.Generate(),
+                    Id = GenerateId.GenerateCommon(),
                     Name = productTextBox.Text,
                     Barcode = (string.IsNullOrEmpty(barcodeTextBox.Text)) ? "N/A" : barcodeTextBox.Text,
                     Brand = brandTextBox.Text,
                     Price = decimal.Parse(priceTextBox.Text),
                     Quantity = int.Parse(qtyTextBox.Text)
                 };
-                viewModel.AddItem(item);
-                this.Close();
+                if(await viewModel.AddItem(item))
+                {
+                    this.Close();
+                }                
             }            
         }
 

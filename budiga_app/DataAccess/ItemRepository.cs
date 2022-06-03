@@ -1,4 +1,6 @@
-﻿using budiga_app.MVVM.Model;
+﻿using budiga_app.Core;
+using budiga_app.MVVM.Model;
+using Google.Cloud.Firestore;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
@@ -12,10 +14,12 @@ namespace budiga_app.DataAccess
 {
     class ItemRepository
     {
-
+        private FirestoreConn conn ;
+        private DataClass dataClass;
         public ItemRepository()
         {
-            
+            conn = FirestoreConn.GetInstance;
+            dataClass = DataClass.GetInstance;
         }
 
         public ItemModel GetItem(int id)
@@ -32,31 +36,80 @@ namespace budiga_app.DataAccess
             return item;
         }
 
-        public ObservableCollection<ItemModel> GetAllItems()
-        {
-            ObservableCollection<ItemModel> items = new ObservableCollection<ItemModel>();
-            
-            return items;
-        }
-
-        public bool AddItem(ItemModel item)
+        public async Task<bool> AddItem(ItemModel item)
         {
             bool result = false;
-            
+            try
+            {                
+                DocumentReference docRef = conn.FirestoreDb.Collection("items").Document(item.Id);
+                Dictionary<string, object> dict = new Dictionary<string, object>
+                {
+                    { "Id", item.Id },
+                    { "StoreId", dataClass.Store.Id },
+                    { "Barcode", item.Barcode },
+                    { "Name", item.Name },
+                    { "Brand", item.Brand },
+                    { "Price", (double)item.Price },
+                    { "Quantity", item.Quantity },
+                    { "IsDeleted", item.IsDeleted },
+                };
+                await docRef.SetAsync(dict);
+                result = true;
+                MessageBox.Show("Successfully added item!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
             return result;
         }
 
-        public bool UpdateItem(ItemModel item)
+        public async Task<bool> UpdateItem(ItemModel item)
         {
             bool result = false;
-            
+            try
+            {
+                DocumentReference docRef = conn.FirestoreDb.Collection("items").Document(item.Id);
+                Dictionary<string, object> dict = new Dictionary<string, object>
+                {
+                    { "Id", item.Id },
+                    { "StoreId", dataClass.Store.Id },
+                    { "Barcode", item.Barcode },
+                    { "Name", item.Name },
+                    { "Brand", item.Brand },
+                    { "Price", (double)item.Price },
+                    { "Quantity", item.Quantity },
+                    { "IsDeleted", item.IsDeleted },
+                };
+                await docRef.UpdateAsync(dict);
+                result = true;
+                MessageBox.Show("Successfully updated item!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
             return result;
         }
 
-        public bool DeleteItem(int id)
+        public async Task<bool> DeleteItem(string id)
         {
             bool result = false;
-            
+            try
+            {
+                DocumentReference docRef = conn.FirestoreDb.Collection("items").Document(id);
+                Dictionary<string, object> dict = new Dictionary<string, object>
+                {
+                    { "IsDeleted", true }
+                };
+                await docRef.SetAsync(dict, SetOptions.MergeAll);
+                result = true;
+                MessageBox.Show("Successfully deleted item!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
             return result;
         }
     }

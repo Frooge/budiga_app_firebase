@@ -12,6 +12,7 @@ namespace budiga_app.MVVM.Model
     public class UserModel : ObservableObject
     {
         private string _id;
+        private string _storeId;
         private string _fname;
         private string _lname;
         private string _username;
@@ -22,6 +23,7 @@ namespace budiga_app.MVVM.Model
         private ObservableCollection<UserModel> _userRecords;
 
         public string Id { get { return _id; } set { _id = value; OnPropertyChanged("Id"); } }
+        public string StoreId { get { return _storeId; } set { _storeId = value; OnPropertyChanged("StoreId"); } }
         public string FName { get { return _fname; } set { _fname = value; OnPropertyChanged("FName"); } }
         public string LName { get {  return _lname; } set { _lname = value; OnPropertyChanged("LName"); } }
         public string Username { get { return _username; } set { _username = value; OnPropertyChanged("Username"); } }

@@ -20,16 +20,13 @@ namespace budiga_app.MVVM.View
     /// </summary>
     public partial class InventoryHistoryView : Window
     {
-        private InventoryViewModel _vm;
-        public InventoryHistoryView(InventoryViewModel vm)
+        public InventoryViewModel ViewModel { get; set; }
+        public InventoryHistoryView()
         {
-            InitializeComponent();
-            _vm = vm;
-        }
-
-        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-            _vm.Initialize();
+            ViewModel = InventoryViewModel.GetInstance;
+            if (ViewModel.CloseHistoryAction == null)
+                ViewModel.CloseHistoryAction = new Action(this.Close);
+            InitializeComponent();            
         }
     }
 }
