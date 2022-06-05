@@ -80,7 +80,7 @@ namespace budiga_app.DataAccess
                 Dictionary<string, object> dict;
                 switch (itemHistory.Action)
                 {
-                    case "UPDATED":
+                    case "UPDATED": case "MODIFIED": case "TRANSACTION" :
                         dict = new Dictionary<string, object>
                         {
                             { "Id", itemHistory.ItemId },
@@ -91,7 +91,7 @@ namespace budiga_app.DataAccess
                             { "Price", (double)itemHistory.Price },
                             { "Quantity", itemHistory.Quantity },
                         };
-                        newAction = "UPDATED";
+                        newAction = "MODIFIED";
                         break;
                     case "ADDED":
                         dict = new Dictionary<string, object>

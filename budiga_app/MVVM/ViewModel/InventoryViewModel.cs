@@ -41,12 +41,18 @@ namespace budiga_app.MVVM.ViewModel
             }
         }
 
+        public static void ReleaseInstance()
+        {
+            _instance = null;
+        }
+
         public InventoryViewModel()
         {            
             Initialize();
             GetAllItem();
             GetAllHistory();
         }
+        
 
         private void Initialize()
         {

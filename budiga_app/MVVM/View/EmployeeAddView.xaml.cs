@@ -23,11 +23,11 @@ namespace budiga_app.MVVM.View
     /// </summary>
     public partial class EmployeeAddView : Window
     {
-        EmployeeViewModel _vm;
-        public EmployeeAddView(EmployeeViewModel vm)
+        public EmployeeViewModel ViewModel { get; set; }
+        public EmployeeAddView()
         {
+            ViewModel = EmployeeViewModel.GetInstance;
             InitializeComponent();
-            _vm = vm;
         }
 
         private void NumberValidationTextBox(object sender, TextCompositionEventArgs e)
@@ -36,9 +36,9 @@ namespace budiga_app.MVVM.View
             e.Handled = regex.IsMatch(e.Text);
         }
 
-        private void AddBtn_Click(object sender, RoutedEventArgs e)
+        private async void AddBtn_Click(object sender, RoutedEventArgs e)
         {
-            if (string.IsNullOrEmpty(fNameTextBox.Text) || string.IsNullOrEmpty(lNameTextBox.Text) || string.IsNullOrEmpty(usernameTextBox.Text) || string.IsNullOrEmpty(contactTextBox.Text) || string.IsNullOrEmpty(passwordTextBox.Text))
+            if (string.IsNullOrEmpty(storeTextBox.Text) || string.IsNullOrEmpty(fNameTextBox.Text) || string.IsNullOrEmpty(lNameTextBox.Text) || string.IsNullOrEmpty(usernameTextBox.Text) || string.IsNullOrEmpty(contactTextBox.Text) || string.IsNullOrEmpty(passwordTextBox.Text))
             {
                 MessageBox.Show("Fill all empty fields!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
@@ -48,15 +48,16 @@ namespace budiga_app.MVVM.View
                 {
                     FName = fNameTextBox.Text,
                     LName = lNameTextBox.Text,
+                    StoreId = ViewModel.Data.Store.StoreRecords.Where(s => s.Name == storeTextBox.SelectedValue).First().Id,
                     Username = usernameTextBox.Text,
                     Password = passwordTextBox.Text,
                     Contact = contactTextBox.Text,
-                    Type = "Employee",
+                    Type = "employee",
+                    Online = false,
                 };
                 UserRepository userRepository = new UserRepository();
-                if (userRepository.AddEmployeeUser(user))
+                if (await userRepository.AddEmployeeUser(user))
                 {
-                    _vm.GetAllEmployee();
                     this.Close();
                 }
             }

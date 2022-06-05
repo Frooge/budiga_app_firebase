@@ -43,7 +43,10 @@ namespace budiga_app.MVVM.ViewModel
                 return _instance;
             }
         }
-
+        public static void ReleaseInstance()
+        {
+            _instance = null;
+        }
         public InvoiceViewModel()
         {
             Initialize();
@@ -68,54 +71,6 @@ namespace budiga_app.MVVM.ViewModel
             SearchItemCommand = new RelayCommand(param => SearchItem((string)param));
         }
 
-        //private void GetAllOrder()
-        //{
-        //    try
-        //    {
-        //        DataClass dataClass = DataClass.GetInstance;
-        //        FirestoreConn conn = FirestoreConn.GetInstance;
-        //        Query query = conn.FirestoreDb.Collection("orders");
-
-        //        FirestoreChangeListener listener = query.Listen(async snapshot =>
-        //        {
-        //            Order.OrderRecords = new ObservableCollection<OrderModel>();
-        //            foreach (DocumentSnapshot documentSnapshot in snapshot.Documents)
-        //            {
-        //                Dictionary<string, object> dict = documentSnapshot.ToDictionary();
-        //                DocumentReference itemRef = conn.FirestoreDb.Collection("items").Document(dict["ItemId"].ToString());
-        //                DocumentSnapshot snapshotItem = await itemRef.GetSnapshotAsync();
-        //                Dictionary<string, object> itemDict = snapshotItem.ToDictionary();
-        //                App.Current.Dispatcher.Invoke((System.Action)delegate
-        //                {                            
-        //                    Order.OrderRecords.Add(new OrderModel()
-        //                    {
-        //                        Id = dict["Id"].ToString(),
-        //                        ItemId = dict["ItemId"].ToString(),
-        //                        InvoiceId = dict["InvoiceId"].ToString(),
-        //                        Quantity = Convert.ToInt32(dict["Quantity"]),
-        //                        ActualItemPrice = Convert.ToDecimal(dict["ActualItemPrice"]),
-        //                        SubtotalPrice = Convert.ToDecimal(dict["SubtotalPrice"]),
-        //                        Item = new ItemModel
-        //                        {
-        //                            Id = itemDict["Id"].ToString(),
-        //                            StoreId = itemDict["StoreId"].ToString(),
-        //                            Barcode = itemDict["Barcode"].ToString(),
-        //                            Name = itemDict["Name"].ToString(),
-        //                            Brand = itemDict["Brand"].ToString(),
-        //                            Price = Convert.ToDecimal(itemDict["Price"]),
-        //                            Quantity = Convert.ToInt32(itemDict["Quantity"])
-        //                        }
-        //                    });
-        //                });
-        //            }
-        //        });
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-        //    }
-        //}
-
         private void GetAllInvoice()
         {
             try
@@ -135,7 +90,8 @@ namespace budiga_app.MVVM.ViewModel
                     Order.OrderRecords = new ObservableCollection<OrderModel>();
                     foreach (DocumentSnapshot documentSnapshot in snapshot.Documents)
                     {
-                        Query ordersQuery = conn.FirestoreDb.Collection("orders");
+                        Dictionary<string, object> dict = documentSnapshot.ToDictionary();
+                        Query ordersQuery = conn.FirestoreDb.Collection("orders").WhereEqualTo("InvoiceId", dict["Id"]);
                         QuerySnapshot ordersQuerySnapshot = await ordersQuery.GetSnapshotAsync();                        
                         
                         App.Current.Dispatcher.Invoke((System.Action)async delegate
@@ -167,7 +123,7 @@ namespace budiga_app.MVVM.ViewModel
                                 });
                             }
 
-                            Dictionary<string, object> dict = documentSnapshot.ToDictionary();
+                            
 
                             _invoice.InvoiceRecords.Add(new InvoiceModel()
                             {
@@ -254,7 +210,10 @@ namespace budiga_app.MVVM.ViewModel
         private async void ConfirmPay(decimal payment)
         {
             InvoiceRepository invoiceRepository = new InvoiceRepository();
+            ItemHistoryRepository itemHistoryRepository = new ItemHistoryRepository();
+            ItemRepository itemRepository = new ItemRepository();
             DataClass dataClass = DataClass.GetInstance;
+
             if (payment - Invoice.TotalPrice >= 0)
             {
                 Invoice.Id = GenerateId.GenerateInvoice(DateTime.Now);
@@ -263,7 +222,13 @@ namespace budiga_app.MVVM.ViewModel
                 Invoice.UserFullName = String.Format("{0} {1}", dataClass.LoggedInUser.FName, dataClass.LoggedInUser.LName);
                 if (await invoiceRepository.AddInvoice(Invoice))
                 {
-                    GetReceipt(Invoice.InvoiceRecords.Where(i => i.Id == Invoice.Id).FirstOrDefault());
+                    foreach (var order in Invoice.InvoiceOrderRecords)
+                    {
+                        await itemHistoryRepository.AddHistory(order.Item, "TRANSACTION");
+                        order.Item.Quantity -= order.Quantity;
+                        await itemRepository.AddItem(order.Item);                        
+                    }
+                    GetReceipt(Invoice.InvoiceRecords.Where(i => i.Id == Invoice.Id).FirstOrDefault());                    
                 }
             }
             else

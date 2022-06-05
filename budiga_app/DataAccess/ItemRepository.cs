@@ -72,14 +72,12 @@ namespace budiga_app.DataAccess
                 DocumentReference docRef = conn.FirestoreDb.Collection("items").Document(item.Id);
                 Dictionary<string, object> dict = new Dictionary<string, object>
                 {
-                    { "Id", item.Id },
                     { "StoreId", dataClass.Store.Id },
                     { "Barcode", item.Barcode },
                     { "Name", item.Name },
                     { "Brand", item.Brand },
                     { "Price", (double)item.Price },
                     { "Quantity", item.Quantity },
-                    { "IsDeleted", item.IsDeleted },
                 };
                 await docRef.UpdateAsync(dict);
                 result = true;

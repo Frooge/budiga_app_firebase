@@ -287,15 +287,8 @@
     <Compile Include="MVVM\Model\UserModel.cs" />
     <Compile Include="MVVM\Model\PageModel.cs" />
     <Compile Include="MVVM\ViewModel\AdminMainViewModel.cs" />
-    <Compile Include="MVVM\ViewModel\EmployeeAddViewModel.cs" />
-    <Compile Include="MVVM\ViewModel\EmployeeEditViewModel.cs" />
     <Compile Include="MVVM\ViewModel\EmployeeViewModel.cs" />
     <Compile Include="MVVM\ViewModel\InventoryViewModel.cs" />
-    <Compile Include="MVVM\ViewModel\InvoiceAddQuantityViewModel.cs" />
-    <Compile Include="MVVM\ViewModel\InvoiceAddViewModel.cs" />
-    <Compile Include="MVVM\ViewModel\InvoiceHistoryViewModel.cs" />
-    <Compile Include="MVVM\ViewModel\InvoicePayViewModel.cs" />
-    <Compile Include="MVVM\ViewModel\InvoiceReceiptViewModel.cs" />
     <Compile Include="MVVM\ViewModel\LoginViewModel.cs" />
     <Compile Include="MVVM\ViewModel\SalesOverviewViewModel.cs" />
     <Compile Include="MVVM\ViewModel\SalesInventoryViewModel.cs" />

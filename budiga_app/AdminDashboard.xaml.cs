@@ -14,6 +14,7 @@ using System.Windows.Shapes;
 using budiga_app.Core;
 using budiga_app.DataAccess;
 using budiga_app.MVVM.Model;
+using budiga_app.MVVM.ViewModel;
 
 namespace budiga_app
 {
@@ -29,28 +30,37 @@ namespace budiga_app
         {
             InitializeComponent();
             dataClass = DataClass.GetInstance;
-            attendance = new AttendanceModel()
-            {
-                //UserId = Sessions.session.Id,
-                TimeIn = DateTime.Now,
-            };
             userName.Text = string.Format("{0} {1} | {2}", dataClass.LoggedInUser.FName, dataClass.LoggedInUser.LName, dataClass.LoggedInUser.Type);
         }
 
         private void LogoutBtn_Click(object sender, RoutedEventArgs e)
         {
-            Sessions.Dispose();
             this.Hide();
             MainWindow main = new MainWindow();
             main.WindowStartupLocation = WindowStartupLocation.CenterScreen;
             main.Show();
+            
+            
             this.Close();
         }
 
-        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        private async void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            attendanceRepository = new AttendanceRepository();
-            attendanceRepository.AddAttendance(attendance);
+            await Logout();
+        }
+
+        private async Task<bool> Logout()
+        {
+            bool result = false;
+            if(await dataClass.Checkout())
+            {
+                DataClass.ReleaseInstance();
+                InventoryViewModel.ReleaseInstance();
+                InvoiceViewModel.ReleaseInstance();
+                EmployeeViewModel.ReleaseInstance();
+                result = true;
+            }
+            return result;
         }
     }
 }

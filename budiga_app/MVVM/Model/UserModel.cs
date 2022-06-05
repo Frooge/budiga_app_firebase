@@ -19,6 +19,7 @@ namespace budiga_app.MVVM.Model
         private string _password;
         private string _contact;
         private string _type;
+        private bool _online;
         private DateTime _createdDate;
         private ObservableCollection<UserModel> _userRecords;
 
@@ -30,6 +31,7 @@ namespace budiga_app.MVVM.Model
         public string Password { get { return _password; } set { _password = value; OnPropertyChanged("Password"); } }
         public string Contact { get { return _contact; } set { _contact = value; OnPropertyChanged("Contact"); } }
         public string Type { get { return _type; } set {_type = value; OnPropertyChanged("Type"); } }
+        public bool Online { get { return _online; } set { _online = value; OnPropertyChanged("Online"); } }
         public DateTime CreatedDate { get { return _createdDate; } set { _createdDate = value; OnPropertyChanged("CreatedDate"); } }
         public ObservableCollection<UserModel> UserRecords { get { return _userRecords; } set { _userRecords = value; OnPropertyChanged("UserRecords"); } }
         private void UserRecords_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)

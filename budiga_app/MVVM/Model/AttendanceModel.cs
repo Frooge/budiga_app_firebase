@@ -11,18 +11,16 @@ namespace budiga_app.MVVM.Model
 {
     public class AttendanceModel : ObservableObject
     {
-        private int _id;
-        private int _userId;
+        private string _id;
+        private string _userFullName;
         private DateTime _timeIn;
-        private DateTime _timeOut;
-        private UserModel _user;
+        private DateTime? _timeOut;
         private ObservableCollection<AttendanceModel> attendanceRecords;
 
-        public int Id { get { return _id; } set { _id = value; OnPropertyChanged("Id"); } }
-        public int UserId { get { return _userId; } set { _userId = value; OnPropertyChanged("UserId"); } }
+        public string Id { get { return _id; } set { _id = value; OnPropertyChanged("Id"); } }
+        public string UserFullName { get { return _userFullName; } set { _userFullName = value; OnPropertyChanged("UserFullName"); } }
         public DateTime TimeIn { get { return _timeIn; } set { _timeIn = value; OnPropertyChanged("TimeIn"); } }
-        public DateTime TimeOut { get { return _timeOut; } set { _timeOut = value; OnPropertyChanged("TimeOut"); } }
-        public UserModel User { get { return _user; } set { _user = value; OnPropertyChanged("User"); } }
+        public DateTime? TimeOut { get { return _timeOut; } set { _timeOut = value; OnPropertyChanged("TimeOut"); } }
         public ObservableCollection<AttendanceModel> AttendanceRecords { get { return attendanceRecords; } set { attendanceRecords = value; OnPropertyChanged("AttendanceRecords"); } }
         private void AttendanceRecords_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {

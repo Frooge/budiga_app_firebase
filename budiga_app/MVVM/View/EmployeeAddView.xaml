@@ -9,10 +9,12 @@
         MinWidth="300"
         SizeToContent="WidthAndHeight"
         ResizeMode="NoResize"
-        WindowStartupLocation="CenterScreen"        
+        WindowStartupLocation="CenterScreen" 
+        x:Name="employeeAddView"
         Title="EmployeeAddView">
     <StackPanel Margin="10">
         <Label Content="Employee Add" HorizontalAlignment="Center" FontSize="18"/>
+        
         <Grid Width="360">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
@@ -24,17 +26,20 @@
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
             </Grid.RowDefinitions>
-            <Label Content="First Name:" FontSize="14" Grid.Column="0" Grid.Row="0"/>
-            <TextBox x:Name="fNameTextBox" FontSize="14" Grid.Column="1" Grid.Row="0" CaretBrush="#FF264ECA" SelectionBrush="#FF264ECA"/>
-            <Label Content="Last Name:" FontSize="14" Grid.Column="0" Grid.Row="1"/>
-            <TextBox x:Name="lNameTextBox" FontSize="14" Grid.Column="1" Grid.Row="1" SelectionBrush="#FF264ECA" CaretBrush="#FF264ECA"/>
-            <Label Content="Username:" FontSize="14" Grid.Column="0" Grid.Row="2"/>
-            <TextBox x:Name="usernameTextBox" FontSize="14" Grid.Column="1" Grid.Row="2" CaretBrush="#FF264ECA" SelectionBrush="#FF264ECA"/>
-            <Label Content="Contact:" FontSize="14" Grid.Column="0" Grid.Row="3"/>
-            <TextBox x:Name="contactTextBox" PreviewTextInput="NumberValidationTextBox" FontSize="14" Grid.Column="1" Grid.Row="3" CaretBrush="#FF264ECA" SelectionBrush="#FF264ECA"/>
-            <Label Content="Password:" FontSize="14" Grid.Column="0" Grid.Row="4"/>
-            <TextBox x:Name="passwordTextBox" FontSize="14" Grid.Column="1" Grid.Row="4" SelectionBrush="#FF264ECA" CaretBrush="#FF264ECA"/>
+            <Label Content="Store:" FontSize="14" Grid.Column="0" Grid.Row="0"/>
+            <ComboBox x:Name="storeTextBox" Grid.Column="1" Grid.Row="0" ItemsSource="{Binding ElementName=employeeAddView, Path=ViewModel.Data.Store.StoreRecords}" DisplayMemberPath="Name" SelectedValuePath="Id" SelectedValue="{Binding Path=Id}" SelectedIndex="0"/>
+            <Label Content="First Name:" FontSize="14" Grid.Column="0" Grid.Row="1"/>
+            <TextBox x:Name="fNameTextBox" FontSize="14" Grid.Column="1" Grid.Row="1" CaretBrush="#FF264ECA" SelectionBrush="#FF264ECA"/>
+            <Label Content="Last Name:" FontSize="14" Grid.Column="0" Grid.Row="2"/>
+            <TextBox x:Name="lNameTextBox" FontSize="14" Grid.Column="1" Grid.Row="2" SelectionBrush="#FF264ECA" CaretBrush="#FF264ECA"/>
+            <Label Content="Username:" FontSize="14" Grid.Column="0" Grid.Row="3"/>
+            <TextBox x:Name="usernameTextBox" FontSize="14" Grid.Column="1" Grid.Row="3" CaretBrush="#FF264ECA" SelectionBrush="#FF264ECA"/>
+            <Label Content="Contact:" FontSize="14" Grid.Column="0" Grid.Row="4"/>
+            <TextBox x:Name="contactTextBox" PreviewTextInput="NumberValidationTextBox" FontSize="14" Grid.Column="1" Grid.Row="4" CaretBrush="#FF264ECA" SelectionBrush="#FF264ECA"/>
+            <Label Content="Password:" FontSize="14" Grid.Column="0" Grid.Row="5"/>
+            <TextBox x:Name="passwordTextBox" FontSize="14" Grid.Column="1" Grid.Row="5" SelectionBrush="#FF264ECA" CaretBrush="#FF264ECA"/>
         </Grid>
         <Grid Margin="0,20,0,0">
             <Grid.ColumnDefinitions>

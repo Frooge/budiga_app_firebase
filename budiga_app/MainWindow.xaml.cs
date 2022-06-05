@@ -95,7 +95,10 @@ namespace budiga_app
                         Contact = dict["Contact"].ToString(),
                         Type = dict["Type"].ToString(),
                     };
-                    bool set = await dataClass.SetStore();
+                    bool set = true;
+                    if(!await dataClass.SetStore()) { set = false; }
+                    if (!await dataClass.CheckIn()) { set = false; }
+
                     #region
                     if (dataClass.LoggedInUser.Type == "admin" && set)
                     {

@@ -92,20 +92,18 @@ namespace budiga_app.MVVM.ViewModel
 
             GetAllCommand = new RelayCommand(param => GetAll((string)param));
             GetAll("Accumulated");
-        }
-
-        
+        }        
 
         private void GetAll(string date)
         {
             Sales.TotalSales = salesRepository.GetTotalSales(date);
             Sales.TotalTransaction = salesRepository.GetTotalTransactions(date);
 
-            _sales.InventorySales = salesRepository.GetAllSales(date);
-            Sales.InventorySales = _sales.InventorySales;            
+            _sales.SalesRecords = salesRepository.GetAllSales(date);
+            Sales.SalesRecords = _sales.SalesRecords;            
 
-            _overviewSales.OverviewSales = salesRepository.GetAllOverviewSales(date);
-            OverviewSales.OverviewSales = _overviewSales.OverviewSales;
+            _overviewSales.OverviewSalesRecords = salesRepository.GetAllOverviewSales(date);
+            OverviewSales.OverviewSalesRecords = _overviewSales.OverviewSalesRecords;
         }
 
     }

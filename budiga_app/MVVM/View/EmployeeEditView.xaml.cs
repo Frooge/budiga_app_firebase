@@ -23,18 +23,21 @@ namespace budiga_app.MVVM.View
     /// </summary>
     public partial class EmployeeEditView : Window
     {
-        private EmployeeViewModel _vm;
-        private int userId;
-        public EmployeeEditView(UserModel user, EmployeeViewModel vm)
+        public EmployeeViewModel ViewModel { get; set; }
+        public  UserModel User { get; set; }
+        public EmployeeEditView(UserModel user)
         {
+            ViewModel = EmployeeViewModel.GetInstance;
+            User = user;
             InitializeComponent();
-            _vm = vm;
-            //userId = user.Id;
+            var store = ViewModel.Data.Store.StoreRecords.Where(s => s.Id == user.StoreId).FirstOrDefault();            
+            storeTextBox.ItemsSource = ViewModel.Data.Store.StoreRecords;
+            storeTextBox.SelectedItem = store;
             fNameTextBox.Text = user.FName;
             lNameTextBox.Text = user.LName;
             usernameTextBox.Text = user.Username;
             passwordTextBox.Text = user.Password;
-            contactTextBox.Text = user.Contact;
+            contactTextBox.Text = user.Contact;   
         }
 
         private void NumberValidationTextBox(object sender, TextCompositionEventArgs e)
@@ -43,9 +46,9 @@ namespace budiga_app.MVVM.View
             e.Handled = regex.IsMatch(e.Text);
         }
 
-        private void UpdateBtn_Click(object sender, RoutedEventArgs e)
+        private async void UpdateBtn_Click(object sender, RoutedEventArgs e)
         {
-            if (string.IsNullOrEmpty(fNameTextBox.Text) || string.IsNullOrEmpty(lNameTextBox.Text) || string.IsNullOrEmpty(usernameTextBox.Text) || string.IsNullOrEmpty(contactTextBox.Text) || string.IsNullOrEmpty(passwordTextBox.Text))
+            if (string.IsNullOrEmpty(storeTextBox.Text) || string.IsNullOrEmpty(fNameTextBox.Text) || string.IsNullOrEmpty(lNameTextBox.Text) || string.IsNullOrEmpty(usernameTextBox.Text) || string.IsNullOrEmpty(contactTextBox.Text) || string.IsNullOrEmpty(passwordTextBox.Text))
             {
                 MessageBox.Show("Fill all empty fields!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
@@ -53,7 +56,8 @@ namespace budiga_app.MVVM.View
             {
                 UserModel user = new UserModel()
                 {
-                    //Id = userId,
+                    Id = User.Id,
+                    StoreId = storeTextBox.SelectedValue.ToString(),
                     FName = fNameTextBox.Text,
                     LName = lNameTextBox.Text,
                     Username = usernameTextBox.Text,
@@ -61,9 +65,8 @@ namespace budiga_app.MVVM.View
                     Contact = contactTextBox.Text,
                 };
                 UserRepository userRepository = new UserRepository();
-                if (userRepository.UpdateUser(user))
+                if (await userRepository.UpdateUser(user))
                 {
-                    _vm.GetAllEmployee();
                     this.Close();
                 }
             }

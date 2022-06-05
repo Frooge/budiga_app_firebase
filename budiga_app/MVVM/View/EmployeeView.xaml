@@ -7,15 +7,13 @@
              xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
              xmlns:local="clr-namespace:budiga_app.MVVM.View"
              xmlns:viewModel="clr-namespace:budiga_app.MVVM.ViewModel"
-             mc:Ignorable="d" 
+             mc:Ignorable="d"
+             x:Name="employeeView"
              d:DesignHeight="720" d:DesignWidth="1000">
-    <UserControl.DataContext>
-        <viewModel:EmployeeViewModel/>
-    </UserControl.DataContext>
     <Grid>
         <StackPanel>
             <StackPanel Orientation="Horizontal" Margin="10,10,10,10">
-                <Button Grid.Row="3" Content="Add" Command="{Binding AddEmployeeCommand}" HorizontalAlignment="Center" VerticalAlignment="Top" Width="120" BorderBrush="{x:Null}" Background="#FF355ACC" FontStretch="Normal" FontStyle="Normal">
+                <Button Grid.Row="3" Content="Add" Command="{Binding ElementName=employeeView, Path=ViewModel.AddEmployeeModalCommand}" HorizontalAlignment="Center" VerticalAlignment="Top" Width="120" BorderBrush="{x:Null}" Background="#FF355ACC" FontStretch="Normal" FontStyle="Normal">
                     <Button.Foreground>
                         <SolidColorBrush Color="White" Opacity="0.87"/>
                     </Button.Foreground>
@@ -28,7 +26,7 @@
             <StackPanel Orientation="Horizontal" Margin="10,10,10,10" Width="967">
                 <materialDesign:Card HorizontalAlignment="Left" Margin="0 0 10 0" VerticalAlignment="Top" Height="500" Width="500">
                     <DataGrid x:Name="teamTable"
-                              ItemsSource="{Binding User.UserRecords}"
+                              ItemsSource="{Binding ElementName=employeeView, Path=ViewModel.Employee.UserRecords}"
                               IsReadOnly="True"
                               AutoGenerateColumns="False"
                               CanUserResizeColumns="False"
@@ -36,6 +34,7 @@
                               CanUserResizeRows="False"
                               AlternatingRowBackground="GhostWhite">
                         <DataGrid.Columns>
+                            <DataGridTextColumn Header="Contact" Binding="{Binding Online}" Width="*"/>
                             <DataGridTextColumn Header="Name" Width="*">
                                 <DataGridTextColumn.Binding>
                                     <MultiBinding StringFormat="{}{0} {1}">
@@ -57,7 +56,7 @@
                         </DataGrid.CellStyle>
                         <b:Interaction.Triggers>
                             <b:EventTrigger EventName="MouseDoubleClick">
-                                <b:InvokeCommandAction Command="{Binding EditEmployeeCommand}"
+                                <b:InvokeCommandAction Command="{Binding ElementName=employeeView, Path=ViewModel.EditEmployeeModalCommand}"
                                                        CommandParameter="{Binding Path=SelectedItem, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=DataGrid}}"/>
                             </b:EventTrigger>
                         </b:Interaction.Triggers>
@@ -65,23 +64,24 @@
                 </materialDesign:Card>
                 <materialDesign:Card HorizontalAlignment="Right" Margin="0 0 10 0" VerticalAlignment="Top" Height="500" Width="500">
                     <DataGrid x:Name="attendanceTable"
-                              ItemsSource="{Binding Attendance.AttendanceRecords}"
+                              ItemsSource="{Binding ElementName=employeeView, Path=ViewModel.Attendance.AttendanceRecords}"
                               IsReadOnly="True"
                               AutoGenerateColumns="False"
                               CanUserResizeColumns="False"
                               CanUserAddRows="False"
                               CanUserResizeRows="False">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="Name" Width="*">
-                                <DataGridTextColumn.Binding>
-                                    <MultiBinding StringFormat="{}{0} {1}">
-                                        <Binding Path="User.FName"/>
-                                        <Binding Path="User.LName"/>
-                                    </MultiBinding>
-                                </DataGridTextColumn.Binding>
-                            </DataGridTextColumn>
-                            <DataGridTextColumn Header="Time In" Binding="{Binding TimeIn}" Width="2*"/>
-                            <DataGridTextColumn Header="Time Out" Binding="{Binding TimeOut}" Width="2*"/>
+                            <DataGridTextColumn Header="Name" Binding="{Binding UserFullName}" Width="*"/>
+                            <DataGridTemplateColumn Header="Time" Width="*">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <StackPanel>
+                                            <Label Content="{Binding TimeIn}"/>
+                                            <Label Content="{Binding TimeOut}"/>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
                         </DataGrid.Columns>
                         <DataGrid.CellStyle>
                             <Style TargetType="DataGridCell" BasedOn="{StaticResource MaterialDesignDataGridCell}">
