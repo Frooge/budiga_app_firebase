@@ -7,34 +7,37 @@
              xmlns:viewModel="clr-namespace:budiga_app.MVVM.ViewModel" 
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
              mc:Ignorable="d" 
-             d:DesignHeight="720" Width="1000" x:Name="salesInventoryView">
+             x:Name="salesInventoryView">
 
-    
 
-    <materialDesign:Card Height="305" Margin="10" Width="600" HorizontalAlignment="Left" VerticalAlignment="Top">
-        <DataGrid x:Name="SalesInventoryTable"                              
-                              ItemsSource="{Binding ElementName=salesInventoryView, Path=ViewModel.Sales.InventorySales}"
+    <StackPanel>
+        <materialDesign:Card Margin="10" Height="400">
+            <DataGrid x:Name="SalesInventoryTable"                              
+                              ItemsSource="{Binding ElementName=salesInventoryView, Path=ViewModel.InventorySales.InventorySalesRecords}"
                               IsReadOnly="True"
                               AutoGenerateColumns="False"
                               CanUserResizeColumns="False"
                               CanUserAddRows="False"
                               CanUserResizeRows="False"
                               Padding="0,0">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="Date" Binding="{Binding Path=Date}" Width="2*"/>
-                <DataGridTextColumn Header="Item" Binding="{Binding Path= Item.Name}" Width="2*"/>
-                <DataGridTextColumn Header="Brand" Binding="{Binding Path=Item.Brand}" Width="*"/>
-                <DataGridTextColumn Header="Price" Binding="{Binding Path=Item.Price}" Width="*"/>
-                <DataGridTextColumn Header="Units Sold" Binding="{Binding Path=UnitsSold}" Width="*"/>
-                <DataGridTextColumn Header="Total" Binding="{Binding Path=TotalSales}" Width="*"/>
-            </DataGrid.Columns>
-            <DataGrid.CellStyle>
-                <Style TargetType="DataGridCell" BasedOn="{StaticResource MaterialDesignDataGridCell}">
-                    <Setter Property="BorderThickness" Value="0"/>
-                    <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
-                </Style>
-            </DataGrid.CellStyle>
-        </DataGrid>
-    </materialDesign:Card>
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Date" Binding="{Binding Path=Date}" Width="2*"/>
+                    <DataGridTextColumn Header="Store" Binding="{Binding Path=StoreName}" Width="*"/>
+                    <DataGridTextColumn Header="Item" Binding="{Binding Path= Item.Name}" Width="*"/>
+                    <DataGridTextColumn Header="Brand" Binding="{Binding Path=Item.Brand}" Width="*"/>
+                    <DataGridTextColumn Header="Price" Binding="{Binding Path=Item.Price}" Width="*"/>
+                    <DataGridTextColumn Header="Units Sold" Binding="{Binding Path=UnitsSold}" Width="*"/>
+                    <DataGridTextColumn Header="Total" Binding="{Binding Path=TotalSales}" Width="*"/>
+                </DataGrid.Columns>
+                <DataGrid.CellStyle>
+                    <Style TargetType="DataGridCell" BasedOn="{StaticResource MaterialDesignDataGridCell}">
+                        <Setter Property="BorderThickness" Value="0"/>
+                        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+                    </Style>
+                </DataGrid.CellStyle>
+            </DataGrid>
+        </materialDesign:Card>
+    </StackPanel>
+    
 
 </UserControl>

@@ -8,28 +8,31 @@
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
              mc:Ignorable="d" 
-             d:DesignHeight="720" Width="1000" x:Name="salesOverviewView">
-
-    <materialDesign:Card Height="305" Margin="10,10,0,0" Width="601" HorizontalAlignment="Left" VerticalAlignment="Top" >
-        <DataGrid x:Name="SalesOverviewTable"                              
-                              ItemsSource="{Binding ElementName=salesOverviewView, Path=ViewModel.OverviewSales.OverviewSales}" 
+             x:Name="salesOverviewView">
+    <StackPanel>
+        <materialDesign:Card Margin="10" Height="400">
+            <DataGrid x:Name="SalesOverviewTable"                              
+                              ItemsSource="{Binding ElementName=salesOverviewView, Path=ViewModel.OverviewSales.OverviewSalesRecords}" 
                               IsReadOnly="True"
                               AutoGenerateColumns="False"
                               CanUserResizeColumns="False"
                               CanUserAddRows="False"
                               CanUserResizeRows="False"
                               Padding="0,0">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="Date" Binding="{Binding Path=Date}" Width="*"/>
-                <DataGridTextColumn Header="Units Sold" Binding="{Binding Path=UnitsSold}" Width="*"/>
-                <DataGridTextColumn Header="Total" Binding="{Binding Path=Total}" Width="*"/>
-            </DataGrid.Columns>
-            <DataGrid.CellStyle>
-                <Style TargetType="DataGridCell" BasedOn="{StaticResource MaterialDesignDataGridCell}">
-                    <Setter Property="BorderThickness" Value="0"/>
-                    <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
-                </Style>
-            </DataGrid.CellStyle>
-        </DataGrid>
-    </materialDesign:Card>
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Store" Binding="{Binding Path=StoreName}" Width="*"/>
+                    <DataGridTextColumn Header="Date" Binding="{Binding Path=Date}" Width="*"/>
+                    <DataGridTextColumn Header="Units Sold" Binding="{Binding Path=UnitsSold}" Width="*"/>
+                    <DataGridTextColumn Header="Total" Binding="{Binding Path=Total}" Width="*"/>
+                </DataGrid.Columns>
+                <DataGrid.CellStyle>
+                    <Style TargetType="DataGridCell" BasedOn="{StaticResource MaterialDesignDataGridCell}">
+                        <Setter Property="BorderThickness" Value="0"/>
+                        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+                    </Style>
+                </DataGrid.CellStyle>
+            </DataGrid>
+        </materialDesign:Card>
+    </StackPanel>
+    
 </UserControl>

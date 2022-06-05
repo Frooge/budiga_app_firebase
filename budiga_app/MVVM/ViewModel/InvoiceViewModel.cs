@@ -57,7 +57,7 @@ namespace budiga_app.MVVM.ViewModel
         {
             _invoice = new InvoiceModel();
             Invoice = new InvoiceModel();
-            Order = new OrderModel();            
+            Order = new OrderModel();
             Invoice.InvoiceOrderRecords = new ObservableCollection<OrderModel>();
             AddQuantityCommand = new RelayCommand(param => AddQuantity((string)param));
             ReduceQuantityCommand = new RelayCommand(param => ReduceQuantity((string)param));
@@ -122,9 +122,7 @@ namespace budiga_app.MVVM.ViewModel
                                     }
                                 });
                             }
-
-                            
-
+ 
                             _invoice.InvoiceRecords.Add(new InvoiceModel()
                             {
                                 Id = dict["Id"].ToString(),

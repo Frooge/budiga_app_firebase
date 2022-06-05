@@ -3,30 +3,46 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Diagnostics;
 using budiga_app.MVVM.Model;
 using budiga_app.DataAccess;
+using System.Windows;
+using Google.Cloud.Firestore;
+using System.Collections.ObjectModel;
+using System.Threading.Tasks;
 
 namespace budiga_app.MVVM.ViewModel
 {
     public class SalesViewModel : ObservableObject
     {
-        private SalesRepository salesRepository;
-        
-
-        
+        private static SalesViewModel _instance;           
         private OverviewSalesModel _overviewSales;
-        public OverviewSalesModel OverviewSales { get; set; }
+        private InventorySalesModel _inventorySales;
+        private InvoiceViewModel invoiceVM;
 
-        private InventorySalesModel _sales;
-        public InventorySalesModel Sales { get; set; }
-
-        public RelayCommand GetAllCommand { get; set; }
-        public RelayCommand OverviewViewCommand { get; set; }
-        public RelayCommand InventoryViewCommand { get; set; }
+        public int TotalTransaction { get; set; }
+        public decimal TotalSales { get; set; }
+        
         public SalesOverviewViewModel SalesOverviewVM { get; set; }
         public SalesInventoryViewModel SalesInventoryVM { get; set; }
+        public OverviewSalesModel OverviewSales { get; set; }      
+        public InventorySalesModel InventorySales { get; set; }
+        public RelayCommand ChangePeriodCommand { get; set; }
+        public RelayCommand OverviewViewCommand { get; set; }
+        public RelayCommand InventoryViewCommand { get; set; }
+        
+
+        public static SalesViewModel GetInstance
+        {
+            get
+            {
+                if (_instance == null)
+                {
+                    _instance = new SalesViewModel();
+                }
+                return _instance;
+            }
+        }
 
         private object _currentView;
 
@@ -41,32 +57,11 @@ namespace budiga_app.MVVM.ViewModel
             
         }
 
-        private static SalesViewModel salesVM;
-
-        public static SalesViewModel GetInstance
-        {
-            get
-            {
-                if (salesVM == null)
-                {
-                    salesVM = new SalesViewModel();
-                }
-                return salesVM;
-            }
-        }
-
 
         public SalesViewModel()
         {
-            salesRepository = new SalesRepository();
+            Initialize();
 
-            //Overview Sales Instantiate
-            _overviewSales = new OverviewSalesModel();
-            OverviewSales = new OverviewSalesModel();
-
-            //Inventory Sales Instantiate
-            _sales = new InventorySalesModel();
-            Sales = new InventorySalesModel();
             try
             {
                 SalesOverviewVM = new SalesOverviewViewModel();
@@ -90,21 +85,157 @@ namespace budiga_app.MVVM.ViewModel
                 Debug.WriteLine(ex.StackTrace);
             }
 
-            GetAllCommand = new RelayCommand(param => GetAll((string)param));
-            GetAll("Accumulated");
-        }        
-
-        private void GetAll(string date)
+            ChangePeriodCommand = new RelayCommand(param => ChangePeriod((string)param));
+        }
+        
+        private void Initialize()
         {
-            Sales.TotalSales = salesRepository.GetTotalSales(date);
-            Sales.TotalTransaction = salesRepository.GetTotalTransactions(date);
+            _overviewSales = new OverviewSalesModel();
+            OverviewSales = new OverviewSalesModel();
+            _inventorySales = new InventorySalesModel();
+            InventorySales = new InventorySalesModel();
+            invoiceVM = InvoiceViewModel.GetInstance;
+            GetAll();
+        }
 
-            _sales.SalesRecords = salesRepository.GetAllSales(date);
-            Sales.SalesRecords = _sales.SalesRecords;            
+        private void GetAll() // not used yet
+        {            
+            try
+            {
+                FirestoreConn conn = FirestoreConn.GetInstance;
+                Query query = conn.FirestoreDb.Collection("invoice");
+                FirestoreChangeListener listener = query.Listen(snapshot =>
+                {
+                    if(invoiceVM.Invoice.InvoiceRecords != null)
+                    {
+                        ResetValues();
+                    }                    
+                });
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
 
-            _overviewSales.OverviewSalesRecords = salesRepository.GetAllOverviewSales(date);
+        public void ResetValues()
+        {
+            ChangePeriod("accumulated");
+            OverviewViewCommand.Execute(null);
+        }
+
+        private void ChangePeriod(string date)
+        {
+            switch (date)
+            {
+                case "accumulated":
+                    GetPeriod(date, (invoice) =>
+                    {
+                        TotalTransaction++;
+                        TotalSales += invoice.TotalPrice;
+                    });
+                    break;
+                case "daily":
+                    GetPeriod(date, (invoice) =>
+                    {
+                        if (invoice.CreatedDate.Date == DateTime.Now.Date)
+                        {
+                            TotalTransaction++;
+                            TotalSales += invoice.TotalPrice;
+                        }
+                    });
+                    break;
+                case "monthly":
+                    GetPeriod(date, (invoice) =>
+                    {
+                        if (invoice.CreatedDate.Year.ToString() + invoice.CreatedDate.Month.ToString() == DateTime.Now.Year.ToString() + DateTime.Now.Month.ToString())
+                        {
+                            TotalTransaction++;
+                            TotalSales += invoice.TotalPrice;
+                        }
+                    });
+                    break;
+                case "annually":
+                    GetPeriod(date, (invoice) =>
+                    {
+                        if (invoice.CreatedDate.Year == DateTime.Now.Year)
+                        {
+                            TotalTransaction++;
+                            TotalSales += invoice.TotalPrice;
+                        }
+                    });
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        private void GetPeriod(string period, Action<InvoiceModel> GetTotal)
+        {
+            DataClass dataClass = DataClass.GetInstance;
+            _overviewSales.OverviewSalesRecords = new ObservableCollection<OverviewSalesModel>();
+            _inventorySales.InventorySalesRecords = new ObservableCollection<InventorySalesModel>();
+            foreach (var invoice in invoiceVM.Invoice.InvoiceRecords)
+            {
+                foreach (var order in invoice.InvoiceOrderRecords)
+                {
+                    var inventorySales = _inventorySales.InventorySalesRecords.Where(i => i.Item == order.Item && i.Date == GetDate(invoice.CreatedDate, period)).FirstOrDefault();
+                    if (inventorySales == null)
+                    {
+                        _inventorySales.InventorySalesRecords.Add(new InventorySalesModel
+                        {
+                            UnitsSold = order.Quantity,
+                            TotalSales = order.SubtotalPrice,
+                            StoreName = dataClass.Store.StoreRecords.Where(s => s.Id == order.Item.StoreId).FirstOrDefault().Name,
+                            Item = order.Item,
+                            Date = GetDate(invoice.CreatedDate, period)
+                        });
+                    }
+                    else
+                    {
+                        inventorySales.UnitsSold += order.Quantity;
+                        inventorySales.TotalSales += order.SubtotalPrice;
+                    }
+
+                    var overviewSales = _overviewSales.OverviewSalesRecords.Where(o => o.StoreId == order.Item.StoreId && o.Date == GetDate(invoice.CreatedDate, period)).FirstOrDefault();
+                    if (overviewSales == null)
+                    {
+                        _overviewSales.OverviewSalesRecords.Add(new OverviewSalesModel
+                        {
+                            UnitsSold = order.Quantity,
+                            Total = order.SubtotalPrice,
+                            StoreId = order.Item.StoreId,
+                            StoreName = dataClass.Store.StoreRecords.Where(s => s.Id == order.Item.StoreId).FirstOrDefault().Name,
+                            Date = GetDate(invoice.CreatedDate, period)
+                        });
+                    }
+                    else
+                    {
+                        overviewSales.UnitsSold += order.Quantity;
+                        overviewSales.Total += order.SubtotalPrice;
+                    }
+                }
+                GetTotal(invoice);                
+            }
+            InventorySales.InventorySalesRecords = _inventorySales.InventorySalesRecords;
             OverviewSales.OverviewSalesRecords = _overviewSales.OverviewSalesRecords;
         }
 
+        private string GetDate(DateTime date, string period)
+        {
+            switch (period)
+            {
+                case "accumulated":
+                    return "N/A";
+                case "daily":
+                    return string.Format("{0}/{1}/{2}", date.Month, date.Day, date.Year);
+                case "monthly":
+                    return string.Format("{0}/{1}", date.Month, date.Year);
+                case "annually":
+                    return date.Year.ToString();
+                default:
+                    return string.Empty;
+            }
+        }
     }
 }

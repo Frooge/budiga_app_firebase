@@ -48,14 +48,15 @@ namespace budiga_app.MVVM.ViewModel
                     CurrentView = InventoryVM;
                 });
 
-                SalesViewCommand = new RelayCommand(o =>
-                {
-                    CurrentView = SalesVM;
-                });
-
                 InvoiceViewCommand = new RelayCommand(o =>
                 {
                     CurrentView = InvoiceVM;
+                });
+
+                SalesViewCommand = new RelayCommand(o =>
+                {
+                    SalesViewModel.GetInstance.ResetValues();
+                    CurrentView = SalesVM;
                 });
 
                 EmployeeViewCommand = new RelayCommand(o =>

@@ -14,12 +14,6 @@ namespace budiga_app.MVVM.ViewModel
 
     public class SalesOverviewViewModel : ObservableObject
     {
-
-        public SalesOverviewViewModel()
-        {
-
-        }
-
     }
 
 }

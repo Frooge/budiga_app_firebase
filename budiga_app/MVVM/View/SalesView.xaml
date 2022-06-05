@@ -9,16 +9,17 @@
              mc:Ignorable="d" 
              d:DesignHeight="720" Width="1000" x:Name="salesView">
 
-    <Grid>
+    <Grid Margin="10">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="543*"/>
-            <ColumnDefinition Width="80*"/>
-            <ColumnDefinition Width="377*"/>
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="3*"/>
         </Grid.ColumnDefinitions>
-        <StackPanel Grid.ColumnSpan="3">
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Width="632"/>
-            <StackPanel Orientation="Horizontal" Width="632" HorizontalAlignment="Left">
-                <materialDesign:Card VerticalAlignment="Top" Height="120" Width="288" Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="3*"/>
+        </Grid.RowDefinitions>
+        <materialDesign:Card Margin="10" Grid.Column="0">
                     <Grid Margin="10">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="20*" />
@@ -34,69 +35,53 @@
                                 <RowDefinition Height="2*"/>
                                 <RowDefinition Height="*"/>
                             </Grid.RowDefinitions>
-                            <Label Grid.Row="0" Content="{Binding ElementName=salesView, Path=ViewModel.Sales.TotalSales}" HorizontalAlignment="Center" VerticalAlignment="Top" FontWeight="Bold" FontSize="28" Foreground="#264ECA"/>
+                            <Label Grid.Row="0" Content="{Binding ElementName=salesView, Path=ViewModel.TotalSales}" HorizontalAlignment="Center" VerticalAlignment="Top" FontWeight="Bold" FontSize="28" Foreground="#264ECA"/>
                             <Label Grid.Row="1" Content="Php" HorizontalAlignment="Center" VerticalAlignment="Top" FontWeight="Bold"/>
                         </Grid>
                     </Grid>
                 </materialDesign:Card>
-                <materialDesign:Card VerticalAlignment="Top" Height="120" Width="292" Margin="10">
-                    <Grid Margin="10">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="20*" />
-                            <ColumnDefinition Width="*" />
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="*" />
-                            <RowDefinition Height="3*" />
-                        </Grid.RowDefinitions>
-                       
-                        <TextBlock Text="Total Transactions" HorizontalAlignment="Left" Margin="10 0 0 0" VerticalAlignment="Top" FontSize="16" FontWeight="Bold"/>
-                        <Grid Grid.Row="1">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="2*"/>
-                                <RowDefinition Height="*"/>
-                            </Grid.RowDefinitions>
-                            <Label Grid.Row="0" Content="{Binding ElementName=salesView, Path=ViewModel.Sales.TotalTransaction}" HorizontalAlignment="Center" VerticalAlignment="Top" FontWeight="Bold" FontSize="28" Foreground="#264ECA"/>
-                            <Label Grid.Row="1" Content="Overall Transactions" HorizontalAlignment="Center" VerticalAlignment="Top" FontWeight="Bold"/>
-                        </Grid>
-                    </Grid>
-                </materialDesign:Card>
-            </StackPanel>
-            <ContentControl Content="{Binding ElementName=salesView, Path=ViewModel.CurrentView}" RenderTransformOrigin="0.602,0.506" Width="1000" Height="386"/>
-        </StackPanel>
-
-        <materialDesign:Card Margin="0,10,19,0" VerticalAlignment="Top" MinHeight="220" Height="260" BorderThickness="2" HorizontalAlignment="Right" Width="345" Grid.Column="2">
-            <Grid HorizontalAlignment="Left" Width="295">
+        <materialDesign:Card Margin="10"  Grid.Column="1">
+            <Grid Margin="10">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="20*" />
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="13*" />
-                    <RowDefinition Height="67*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="3*" />
                 </Grid.RowDefinitions>
-                <Label Content="Total Sales" HorizontalAlignment="Left" Margin="10,0,0,0" FontSize="16" FontWeight="Bold" Width="87" Height="30" VerticalAlignment="Center"/>
-                <StackPanel Margin="10,36,118,0" VerticalAlignment="Top" Height="47" Grid.RowSpan="2">
-                    <Label Content="Calculated in last 7 days" />
-                    <TextBlock Text=" PHP value" FontSize="16" FontWeight="Bold"/>
+
+                <TextBlock Text="Total Transactions" HorizontalAlignment="Left" Margin="10 0 0 0" VerticalAlignment="Top" FontSize="16" FontWeight="Bold"/>
+                <Grid Grid.Row="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="2*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Label Grid.Row="0" Content="{Binding ElementName=salesView, Path=ViewModel.TotalTransaction}" HorizontalAlignment="Center" VerticalAlignment="Top" FontWeight="Bold" FontSize="28" Foreground="#264ECA"/>
+                    <Label Grid.Row="1" Content="Overall Transactions" HorizontalAlignment="Center" VerticalAlignment="Top" FontWeight="Bold"/>
+                </Grid>
+            </Grid>
+        </materialDesign:Card>
+        <materialDesign:Card Margin="10" VerticalAlignment="Top" BorderThickness="2" Grid.Column="2" Grid.RowSpan="2">
+            <StackPanel HorizontalAlignment="Left" Margin="10">
+                <Label Content="Sales Table" HorizontalAlignment="Left" FontSize="18" FontWeight="Bold" VerticalAlignment="Center"/>
+                <StackPanel HorizontalAlignment="Left" Grid.Row="1" Margin="0,5,0,5">
+                    <RadioButton Content="Accumulated" IsChecked="True" FontSize="14" Background="#FF264ECA" BorderBrush="#FF264ECA" Command="{Binding ElementName=salesView, Path=ViewModel.ChangePeriodCommand}" CommandParameter="accumulated"/>
+                    <RadioButton Content="Daily" FontSize="14" BorderBrush="#FF264ECA" Background="#FF264ECA"  Command="{Binding ElementName=salesView, Path=ViewModel.ChangePeriodCommand}" CommandParameter="daily"/>
+                    <RadioButton Content="Monthly" FontSize="14" Background="#FF264ECA" BorderBrush="#FF264ECA"  Command="{Binding ElementName=salesView, Path=ViewModel.ChangePeriodCommand}" CommandParameter="monthly"/>
+                    <RadioButton Content="Annually" FontSize="14" BorderBrush="#FF264ECA" Background="#FF264ECA"  Command="{Binding ElementName=salesView, Path=ViewModel.ChangePeriodCommand}" CommandParameter="annually"/>
                 </StackPanel>
-                <StackPanel HorizontalAlignment="Left" Orientation="Vertical" Grid.Row="1" VerticalAlignment="Top" Height="84" Margin="10,48,0,0" Width="170">
-                    <RadioButton Content="Accumulated" IsChecked="True" FontSize="14" Background="#FF264ECA" BorderBrush="#FF264ECA" Command="{Binding ElementName=salesView, Path=ViewModel.GetAllCommand}" CommandParameter="Accumulated"/>
-                    <RadioButton Content="Daily" FontSize="14" BorderBrush="#FF264ECA" Background="#FF264ECA"  Command="{Binding ElementName=salesView, Path=ViewModel.GetAllCommand}" CommandParameter="Daily"/>
-                    <RadioButton Content="Monthly" FontSize="14" Background="#FF264ECA" BorderBrush="#FF264ECA"  Command="{Binding ElementName=salesView, Path=ViewModel.GetAllCommand}" CommandParameter="Monthly"/>
-                    <RadioButton Content="Yearly" FontSize="14" BorderBrush="#FF264ECA" Background="#FF264ECA"  Command="{Binding ElementName=salesView, Path=ViewModel.GetAllCommand}" CommandParameter="Yearly"/>
-                </StackPanel>
-                <Grid HorizontalAlignment="Left" Height="31" Grid.Row="1" VerticalAlignment="Top" Width="170" Margin="10,177,0,0">
+                <Grid HorizontalAlignment="Left"  Grid.Row="1" VerticalAlignment="Top" Margin="0,5,0,5">
                     <RadioButton Content="Overview" IsChecked="True" Command="{Binding ElementName=salesView, Path=ViewModel.OverviewViewCommand}" FontSize="14" HorizontalAlignment="Left" VerticalAlignment="Center" Background="#FF264ECA" BorderBrush="#FF264ECA"/>
                     <RadioButton Content="Inventory" Command="{Binding ElementName=salesView, Path=ViewModel.InventoryViewCommand}" FontSize="14" HorizontalAlignment="Left" Margin="84,0,0,0" VerticalAlignment="Center" BorderBrush="#FF264ECA" Background="#FF264ECA"/>
                 </Grid>
-                <Button Grid.Row="1" Content="Print Summary" HorizontalAlignment="Left" VerticalAlignment="Top" Width="130" BorderBrush="{x:Null}" Background="White" FontStretch="Normal" FontStyle="Normal" Margin="10,140,0,0">
+                <Button Grid.Row="1" Content="Print Summary" HorizontalAlignment="Left" Margin="0,5,0,5" BorderBrush="{x:Null}" Background="White" FontStretch="Normal" FontStyle="Normal">
                     <Button.Foreground>
                         <SolidColorBrush Color="Black" Opacity="0.87"/>
                     </Button.Foreground>
                 </Button>
-
-            </Grid>
+            </StackPanel>
         </materialDesign:Card>
+        <ContentControl Content="{Binding ElementName=salesView, Path=ViewModel.CurrentView}" Grid.Row="2" Grid.ColumnSpan="2"/>
     </Grid>
 </UserControl>
