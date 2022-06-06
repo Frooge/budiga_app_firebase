@@ -53,7 +53,7 @@
                                 <DataGridTextColumn Header="Product" Binding="{Binding Path=Name}" Width="*"/>
                                 <DataGridTextColumn Header="Barcode" Binding="{Binding Path=Barcode}" Width="*"/>
                                 <DataGridTextColumn Header="Brand" Binding="{Binding Path=Brand}" Width="*"/>
-                                <DataGridTextColumn Header="Price" Binding="{Binding Path=Price}" Width="*"/>
+                                <DataGridTextColumn Header="Price" Binding="{Binding Path=Price, StringFormat={}PHP {0:0.00}}" Width="*"/>
                                 <DataGridTextColumn Header="Quantity" Binding="{Binding Path=Quantity}" Width="*"/>
                             </DataGrid.Columns>
                             <DataGrid.CellStyle>

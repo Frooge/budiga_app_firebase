@@ -62,8 +62,8 @@
                                 </Grid.ColumnDefinitions>
                                 <Label Content="{Binding Path=Item.Name}"/>
                                 <Label Content="{Binding Path=Quantity}" Grid.Column="1" HorizontalAlignment="Center"/>
-                                <Label Content="{Binding Path=Item.Price}" Grid.Column="2" HorizontalAlignment="Center"/>
-                                <Label Content="{Binding Path=SubtotalPrice}" Grid.Column="3" HorizontalAlignment="Center"/>
+                                <Label Content="{Binding Path=Item.Price, StringFormat={}PHP {0:0.00}}" Grid.Column="2" HorizontalAlignment="Center"/>
+                                <Label Content="{Binding Path=SubtotalPrice, StringFormat={}PHP {0:0.00}}" Grid.Column="3" HorizontalAlignment="Center"/>
                             </Grid>
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
@@ -86,13 +86,13 @@
             </StackPanel>
             <StackPanel Orientation="Horizontal" Grid.Column="1">
                 <Label Content="Customer Pay:"/>
-                <Label Content="{Binding ElementName=invoiceReceiptView, Path=Invoice.CustomerPay}"/>
+                <Label Content="{Binding ElementName=invoiceReceiptView, Path=Invoice.CustomerPay, StringFormat={}PHP {0:0.00}}"/>
                 <Label Content="Customer Change:" Margin="10,0,0,0"/>
-                <Label Content="{Binding ElementName=invoiceReceiptView, Path=Invoice.CustomerChange}"/>
+                <Label Content="{Binding ElementName=invoiceReceiptView, Path=Invoice.CustomerChange, StringFormat={}PHP {0:0.00}}"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal" Grid.Column="2" Grid.RowSpan="2">
                 <Label Content="Total:"/>
-                <TextBlock Text="{Binding ElementName=invoiceReceiptView, Path=Invoice.TotalPrice}" FontSize="28" FontWeight="Bold"/>
+                <TextBlock Text="{Binding ElementName=invoiceReceiptView, Path=Invoice.TotalPrice, StringFormat={}PHP {0:0.00}}" FontSize="28" FontWeight="Bold"/>
             </StackPanel>
         </Grid>
         <Grid>

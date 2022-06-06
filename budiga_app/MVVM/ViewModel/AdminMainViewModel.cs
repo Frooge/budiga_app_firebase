@@ -10,7 +10,9 @@ namespace budiga_app.MVVM.ViewModel
 {
     public class AdminMainViewModel : ObservableObject
     {
-        
+        public DataClass Data { get; set; }
+        public string Username { get; set; }
+
         public RelayCommand InventoryViewCommand { get; set; }        
         public RelayCommand InvoiceViewCommand { get; set; }
         public RelayCommand SalesViewCommand { get; set; }
@@ -34,6 +36,8 @@ namespace budiga_app.MVVM.ViewModel
 
         public AdminMainViewModel()
         {
+            Initialize();
+
             try
             {
                 InventoryVM = InventoryViewModel.GetInstance;
@@ -69,6 +73,12 @@ namespace budiga_app.MVVM.ViewModel
                 Debug.WriteLine(ex.StackTrace);
             }
 
+        }
+
+        private void Initialize()
+        {
+            Data = DataClass.GetInstance;
+            Username = string.Format("{0} {1} | {2}", Data.LoggedInUser.FName, Data.LoggedInUser.LName, Data.LoggedInUser.Type);
         }
     }
 }

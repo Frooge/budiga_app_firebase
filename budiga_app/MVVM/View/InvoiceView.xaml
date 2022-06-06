@@ -79,8 +79,8 @@
                                             </Button.Foreground>
                                         </Button>
                                     </Grid>
-                                    <TextBlock Text="{Binding Path=Item.Price}" Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                                    <TextBlock Text="{Binding Path=SubtotalPrice}" Grid.Column="4" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                    <TextBlock Text="{Binding Path=Item.Price, StringFormat={}PHP {0:0.00}}" Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                    <TextBlock Text="{Binding Path=SubtotalPrice, StringFormat={}PHP {0:0.00}}" Grid.Column="4" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                                     <Button Grid.Column="5" Content="X" Width="50" VerticalAlignment="Center" HorizontalAlignment="Right" BorderBrush="{x:Null}" Background="Transparent"
                                             Command="{Binding Path=DataContext.RemoveItemCommand, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}}" CommandParameter="{Binding ItemId}">
                                         <Button.Foreground>
@@ -124,7 +124,7 @@
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" Grid.Column="2" Grid.RowSpan="2">
                     <Label Content="Total"/>
-                    <TextBlock Text="{Binding ElementName=invoiceView, Path=ViewModel.Invoice.TotalPrice}" FontSize="28" FontWeight="Bold"/>
+                    <TextBlock Text="{Binding ElementName=invoiceView, Path=ViewModel.Invoice.TotalPrice, StringFormat={}PHP {0:0.00}}" FontSize="28" FontWeight="Bold"/>
                 </StackPanel>
             </Grid>
         </materialDesign:Card>

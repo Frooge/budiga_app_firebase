@@ -23,14 +23,11 @@ namespace budiga_app
     /// </summary>
     public partial class AdminDashboard : Window
     {
-        private AttendanceModel attendance;
-        private AttendanceRepository attendanceRepository;
         private DataClass dataClass;
         public AdminDashboard()
         {
             InitializeComponent();
             dataClass = DataClass.GetInstance;
-            userName.Text = string.Format("{0} {1} | {2}", dataClass.LoggedInUser.FName, dataClass.LoggedInUser.LName, dataClass.LoggedInUser.Type);
         }
 
         private void LogoutBtn_Click(object sender, RoutedEventArgs e)
