@@ -77,12 +77,7 @@ namespace budiga_app.MVVM.ViewModel
             {
                 DataClass dataClass = DataClass.GetInstance;
                 FirestoreConn conn = FirestoreConn.GetInstance;
-                Query query;
-
-                if (dataClass.LoggedInUser.Type.Equals("admin"))
-                    query = conn.FirestoreDb.Collection("invoice");
-                else
-                    query = conn.FirestoreDb.Collection("invoice").WhereEqualTo("StoreId", dataClass.Store.Id);
+                Query query = conn.FirestoreDb.Collection("invoice").WhereEqualTo("BranchId", dataClass.Store.Branch.Id);
 
                 FirestoreChangeListener listener = query.Listen(async snapshot =>
                 {

@@ -186,7 +186,7 @@ namespace budiga_app.MVVM.ViewModel
                         {
                             UnitsSold = order.Quantity,
                             TotalSales = order.SubtotalPrice,
-                            StoreName = dataClass.Store.StoreRecords.Where(s => s.Id == order.Item.StoreId).FirstOrDefault().Name,
+                            StoreName = dataClass.Store.BranchRecords.Where(b => b.Id == order.Item.BranchId).FirstOrDefault().Name,
                             Item = order.Item,
                             Date = GetDate(invoice.CreatedDate, period)
                         });
@@ -197,7 +197,7 @@ namespace budiga_app.MVVM.ViewModel
                         inventorySales.TotalSales += order.SubtotalPrice;
                     }
 
-                    var overviewSales = _overviewSales.OverviewSalesRecords.Where(o => o.StoreId == order.Item.StoreId && o.Date == GetDate(invoice.CreatedDate, period)).FirstOrDefault();
+                    var overviewSales = _overviewSales.OverviewSalesRecords.Where(o => o.Date == GetDate(invoice.CreatedDate, period)).FirstOrDefault();
                     if (overviewSales == null)
                     {
                         _overviewSales.OverviewSalesRecords.Add(new OverviewSalesModel
@@ -205,7 +205,7 @@ namespace budiga_app.MVVM.ViewModel
                             UnitsSold = order.Quantity,
                             Total = order.SubtotalPrice,
                             StoreId = order.Item.StoreId,
-                            StoreName = dataClass.Store.StoreRecords.Where(s => s.Id == order.Item.StoreId).FirstOrDefault().Name,
+                            StoreName = dataClass.Store.BranchRecords.Where(b => b.Id == order.Item.BranchId).FirstOrDefault().Name,
                             Date = GetDate(invoice.CreatedDate, period)
                         });
                     }

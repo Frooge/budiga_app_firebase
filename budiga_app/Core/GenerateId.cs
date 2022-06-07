@@ -28,7 +28,7 @@ namespace budiga_app.Core
 
         public static string GenerateInvoice(DateTime date)
         {
-            string id = string.Format("{0}{1}{2}{3}", date.Day, date.Month, date.Year, (date.Hour * date.Minute * date.Second).ToString().Substring(0,3));
+            string id = string.Format("{0}{1}{2}{3}", date.Month, date.Day, date.Year, (date.Hour * date.Minute * date.Second).ToString().Substring(0,3));
 
             return id;
         }

@@ -14,6 +14,7 @@ namespace budiga_app.MVVM.Model
         private string _id;
         private string _userFullName;
         private string _storeId;
+        private string _branchId;
         private decimal _totalPrice;
         private decimal _customerPay;
         private decimal _customerChange;
@@ -24,6 +25,7 @@ namespace budiga_app.MVVM.Model
         public string Id { get { return _id; } set { _id = value; OnPropertyChanged("Id"); } }
         public string UserFullName { get { return _userFullName; } set { _userFullName = value; OnPropertyChanged("UserFullName"); } }
         public string StoreId { get { return _storeId; } set { _storeId = value; OnPropertyChanged("StoreId"); } }
+        public string BranchId { get { return _branchId; } set { _branchId = value; OnPropertyChanged("BranchId"); } }
         public decimal TotalPrice { get { return _totalPrice; } set { _totalPrice = value; OnPropertyChanged("TotalPrice"); } }
         public decimal CustomerPay { get { return _customerPay; } set { _customerPay = value; OnPropertyChanged("CustomerPay"); } }
         public decimal CustomerChange { get { return _customerChange; } set { _customerChange = value; OnPropertyChanged("CustomerChange"); } }

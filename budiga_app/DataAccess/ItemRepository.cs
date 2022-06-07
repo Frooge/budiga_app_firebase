@@ -46,6 +46,7 @@ namespace budiga_app.DataAccess
                 {
                     { "Id", item.Id },
                     { "StoreId", dataClass.Store.Id },
+                    { "BranchId", dataClass.Store.Branch.Id },
                     { "Barcode", item.Barcode },
                     { "Name", item.Name },
                     { "Brand", item.Brand },
@@ -72,7 +73,6 @@ namespace budiga_app.DataAccess
                 DocumentReference docRef = conn.FirestoreDb.Collection("items").Document(item.Id);
                 Dictionary<string, object> dict = new Dictionary<string, object>
                 {
-                    { "StoreId", dataClass.Store.Id },
                     { "Barcode", item.Barcode },
                     { "Name", item.Name },
                     { "Brand", item.Brand },

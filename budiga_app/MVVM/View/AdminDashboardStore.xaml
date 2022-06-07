@@ -1,0 +1,28 @@
+﻿<Window x:Class="budiga_app.MVVM.View.AdminDashboardStore"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:budiga_app.MVVM.View"
+        mc:Ignorable="d"
+        MinHeight="100"
+        MinWidth="300"
+        SizeToContent="WidthAndHeight"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen" 
+        Title="AdminDashboardStore">
+    <StackPanel Margin="10">
+        <Label Content="Choose Store" HorizontalAlignment="Center" FontSize="18"/>
+
+        <Grid Width="360">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="3*"/>
+            </Grid.ColumnDefinitions>
+
+            <Label Content="Store:" FontSize="14" Grid.Column="0" Grid.Row="0"/>
+            <ComboBox x:Name="storeComboBox" Grid.Column="1" Grid.Row="0" DisplayMemberPath="Name" SelectedValuePath="Id" SelectedValue="{Binding Path=Id}" SelectedIndex="0"/>
+        </Grid>
+        <Button Content="Continue" BorderBrush="#FF264ECA" Click="Continue_Click" Background="#FF264ECA" Margin="0,20,0,0" HorizontalAlignment="Center"/>
+    </StackPanel>
+</Window>

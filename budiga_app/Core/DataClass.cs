@@ -43,40 +43,46 @@ namespace budiga_app.Core
                     FirestoreConn conn = FirestoreConn.GetInstance;
                     if (LoggedInUser.Type.Equals("employee"))
                     {
-                        DocumentReference docRef = conn.FirestoreDb.Collection("stores").Document(LoggedInUser.StoreId);
+                        DocumentReference docRef = conn.FirestoreDb.Collection("stores").Document(LoggedInUser.StoreId).Collection("branch").Document(LoggedInUser.BranchId);
                         DocumentSnapshot snapshot = await docRef.GetSnapshotAsync();
                         if (snapshot.Exists)
                         {
                             Dictionary<string, object> dict = snapshot.ToDictionary();
                             Store = new StoreModel
                             {
-                                Id = dict["Id"].ToString(),
-                                Name = dict["Name"].ToString(),
-                                Location = dict["Location"].ToString()
+                                Id = LoggedInUser.StoreId,
+                                Branch = new StoreModel.BranchModel
+                                {
+                                    Id = dict["Id"].ToString(),
+                                    Name = dict["Name"].ToString(),
+                                    Location = dict["Location"].ToString()
+                                }                                
                             };
                         }
                     }
                     else if (LoggedInUser.Type.Equals("admin"))
                     {
-                        Query query = conn.FirestoreDb.Collection("stores");
+                        Query query = conn.FirestoreDb.Collection("stores").Document(LoggedInUser.StoreId).Collection("branch");
                         QuerySnapshot querySnapshot = await query.GetSnapshotAsync();
                         Store = new StoreModel
                         {
-                            StoreRecords = new ObservableCollection<StoreModel>()
+                            Id = LoggedInUser.StoreId,
+                            Branch = new StoreModel.BranchModel(),
+                            BranchRecords = new ObservableCollection<StoreModel.BranchModel>()
                         };
                         foreach (DocumentSnapshot documentSnapshot in querySnapshot.Documents)
                         {
                             Dictionary<string, object> dict = documentSnapshot.ToDictionary();
-                            Store.StoreRecords.Add(new StoreModel
+                            Store.BranchRecords.Add(new StoreModel.BranchModel
                             {
                                 Id = dict["Id"].ToString(),
                                 Name = dict["Name"].ToString(),
                                 Location = dict["Location"].ToString()
                             });
                         }
-                        Store.Id = Store.StoreRecords[0].Id;
-                        Store.Name = Store.StoreRecords[0].Name;
-                        Store.Location = Store.StoreRecords[0].Location;
+                        //Store.Branch.Id = Store.BranchRecords[0].Id;
+                        //Store.Branch.Name = Store.BranchRecords[0].Name;
+                        //Store.Branch.Location = Store.BranchRecords[0].Location;
                     }
                     else
                     {

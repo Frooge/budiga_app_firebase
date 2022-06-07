@@ -33,6 +33,7 @@ namespace budiga_app.DataAccess
                 {
                     { "Id", newId },
                     { "StoreId", dataClass.Store.Id },
+                    { "BranchId", dataClass.Store.Branch.Id },
                     { "ItemId", item.Id},
                     { "UserFullName", string.Format("{0} {1}", dataClass.LoggedInUser.FName, dataClass.LoggedInUser.LName) },
                     { "Barcode", item.Barcode },
@@ -84,7 +85,6 @@ namespace budiga_app.DataAccess
                         dict = new Dictionary<string, object>
                         {
                             { "Id", itemHistory.ItemId },
-                            { "StoreId", dataClass.Store.Id },
                             { "Barcode", itemHistory.Barcode },
                             { "Name", itemHistory.Name },
                             { "Brand", itemHistory.Brand },

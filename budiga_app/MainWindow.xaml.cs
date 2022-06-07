@@ -18,6 +18,7 @@ using budiga_app.DataAccess;
 using budiga_app.MVVM.Model;
 using Google.Cloud.Firestore;
 using budiga_app.MVVM.ViewModel;
+using budiga_app.MVVM.View;
 
 namespace budiga_app
 {
@@ -88,6 +89,7 @@ namespace budiga_app
                     {
                         Id = dict["Id"].ToString(),
                         StoreId = dict["StoreId"].ToString(),
+                        BranchId = dict["BranchId"].ToString(),
                         FName = dict["FName"].ToString(),
                         LName = dict["LName"].ToString(),
                         Username = dict["Username"].ToString(),
@@ -103,9 +105,9 @@ namespace budiga_app
                     if (dataClass.LoggedInUser.Type == "admin" && set)
                     {
                         this.Hide();
-                        AdminDashboard home = new AdminDashboard();
-                        home.WindowStartupLocation = WindowStartupLocation.CenterScreen;
-                        home.Show();
+                        AdminDashboardStore store = new AdminDashboardStore();                        
+                        store.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+                        store.Show();
                         this.Close();
                     }
                     else if (dataClass.LoggedInUser.Type == "employee" && set)

@@ -30,9 +30,9 @@ namespace budiga_app.MVVM.View
             ViewModel = EmployeeViewModel.GetInstance;
             User = user;
             InitializeComponent();
-            var store = ViewModel.Data.Store.StoreRecords.Where(s => s.Id == user.StoreId).FirstOrDefault();            
-            storeTextBox.ItemsSource = ViewModel.Data.Store.StoreRecords;
-            storeTextBox.SelectedItem = store;
+            var branch = ViewModel.Data.Store.BranchRecords.Where(s => s.Id == user.StoreId).FirstOrDefault();
+            branchComboBox.ItemsSource = ViewModel.Data.Store.BranchRecords;
+            branchComboBox.SelectedItem = branch;
             fNameTextBox.Text = user.FName;
             lNameTextBox.Text = user.LName;
             usernameTextBox.Text = user.Username;
@@ -48,7 +48,7 @@ namespace budiga_app.MVVM.View
 
         private async void UpdateBtn_Click(object sender, RoutedEventArgs e)
         {
-            if (string.IsNullOrEmpty(storeTextBox.Text) || string.IsNullOrEmpty(fNameTextBox.Text) || string.IsNullOrEmpty(lNameTextBox.Text) || string.IsNullOrEmpty(usernameTextBox.Text) || string.IsNullOrEmpty(contactTextBox.Text) || string.IsNullOrEmpty(passwordTextBox.Text))
+            if (string.IsNullOrEmpty(branchComboBox.Text) || string.IsNullOrEmpty(fNameTextBox.Text) || string.IsNullOrEmpty(lNameTextBox.Text) || string.IsNullOrEmpty(usernameTextBox.Text) || string.IsNullOrEmpty(contactTextBox.Text) || string.IsNullOrEmpty(passwordTextBox.Text))
             {
                 MessageBox.Show("Fill all empty fields!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
@@ -57,7 +57,7 @@ namespace budiga_app.MVVM.View
                 UserModel user = new UserModel()
                 {
                     Id = User.Id,
-                    StoreId = storeTextBox.SelectedValue.ToString(),
+                    BranchId = ((StoreModel.BranchModel)branchComboBox.SelectedItem).Id,
                     FName = fNameTextBox.Text,
                     LName = lNameTextBox.Text,
                     Username = usernameTextBox.Text,

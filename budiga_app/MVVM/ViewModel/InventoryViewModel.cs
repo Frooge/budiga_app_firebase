@@ -75,12 +75,7 @@ namespace budiga_app.MVVM.ViewModel
             {
                 DataClass dataClass = DataClass.GetInstance;
                 FirestoreConn conn = FirestoreConn.GetInstance;
-                Query query;
-
-                if (dataClass.LoggedInUser.Type.Equals("admin"))
-                    query = conn.FirestoreDb.Collection("items").WhereEqualTo("IsDeleted", false);
-                else
-                    query = conn.FirestoreDb.Collection("items").WhereEqualTo("IsDeleted", false).WhereEqualTo("StoreId", dataClass.Store.Id);
+                Query query = conn.FirestoreDb.Collection("items").WhereEqualTo("IsDeleted", false).WhereEqualTo("BranchId", dataClass.Store.Branch.Id);
 
                 FirestoreChangeListener listener = query.Listen(snapshot =>
                 {
@@ -94,6 +89,7 @@ namespace budiga_app.MVVM.ViewModel
                             {
                                 Id = dict["Id"].ToString(),
                                 StoreId = dict["StoreId"].ToString(),
+                                BranchId = dict["BranchId"].ToString(),
                                 Barcode = dict["Barcode"].ToString(),
                                 Name = dict["Name"].ToString(),
                                 Brand = dict["Brand"].ToString(),
@@ -117,12 +113,7 @@ namespace budiga_app.MVVM.ViewModel
             {
                 DataClass dataClass = DataClass.GetInstance;
                 FirestoreConn conn = FirestoreConn.GetInstance;
-                Query query;
-
-                if (dataClass.LoggedInUser.Type.Equals("admin"))
-                    query = conn.FirestoreDb.Collection("item_history").Limit(50);
-                else
-                    query = conn.FirestoreDb.Collection("item_history").WhereEqualTo("StoreId", dataClass.Store.Id).Limit(50);
+                Query query = conn.FirestoreDb.Collection("item_history").WhereEqualTo("BranchId", dataClass.Store.Branch.Id).Limit(50);
 
                 FirestoreChangeListener listener = query.Listen(snapshot =>
                 {
@@ -137,6 +128,7 @@ namespace budiga_app.MVVM.ViewModel
                                 Id = dict["Id"].ToString(),
                                 ItemId = dict["ItemId"].ToString(),
                                 StoreId = dict["StoreId"].ToString(),
+                                BranchId = dict["BranchId"].ToString(),
                                 UserFullName = dict["UserFullName"].ToString(),
                                 Barcode = dict["Barcode"].ToString(),
                                 Name = dict["Name"].ToString(),

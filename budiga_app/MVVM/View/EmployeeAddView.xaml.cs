@@ -38,7 +38,7 @@ namespace budiga_app.MVVM.View
 
         private async void AddBtn_Click(object sender, RoutedEventArgs e)
         {
-            if (string.IsNullOrEmpty(storeTextBox.Text) || string.IsNullOrEmpty(fNameTextBox.Text) || string.IsNullOrEmpty(lNameTextBox.Text) || string.IsNullOrEmpty(usernameTextBox.Text) || string.IsNullOrEmpty(contactTextBox.Text) || string.IsNullOrEmpty(passwordTextBox.Text))
+            if (string.IsNullOrEmpty(branchComboBox.Text) || string.IsNullOrEmpty(fNameTextBox.Text) || string.IsNullOrEmpty(lNameTextBox.Text) || string.IsNullOrEmpty(usernameTextBox.Text) || string.IsNullOrEmpty(contactTextBox.Text) || string.IsNullOrEmpty(passwordTextBox.Text))
             {
                 MessageBox.Show("Fill all empty fields!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
@@ -48,7 +48,8 @@ namespace budiga_app.MVVM.View
                 {
                     FName = fNameTextBox.Text,
                     LName = lNameTextBox.Text,
-                    StoreId = ViewModel.Data.Store.StoreRecords.Where(s => s.Name == storeTextBox.SelectedValue).First().Id,
+                    StoreId = ViewModel.Data.Store.Id,
+                    BranchId = ((StoreModel.BranchModel)branchComboBox.SelectedItem).Id,
                     Username = usernameTextBox.Text,
                     Password = passwordTextBox.Text,
                     Contact = contactTextBox.Text,
