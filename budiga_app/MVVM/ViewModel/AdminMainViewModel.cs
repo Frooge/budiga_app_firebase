@@ -12,6 +12,7 @@ namespace budiga_app.MVVM.ViewModel
     {
         public DataClass Data { get; set; }
         public string Username { get; set; }
+        public string Store { get; set; }
 
         public RelayCommand InventoryViewCommand { get; set; }        
         public RelayCommand InvoiceViewCommand { get; set; }
@@ -79,6 +80,7 @@ namespace budiga_app.MVVM.ViewModel
         {
             Data = DataClass.GetInstance;
             Username = string.Format("{0} {1} | {2}", Data.LoggedInUser.FName, Data.LoggedInUser.LName, Data.LoggedInUser.Type);
+            Store = string.Format("{0} | {1}", Data.Store.Branch.Location, Data.LoggedInUser.StoreId);
         }
     }
 }

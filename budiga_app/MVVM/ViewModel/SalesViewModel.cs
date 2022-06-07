@@ -44,6 +44,11 @@ namespace budiga_app.MVVM.ViewModel
             }
         }
 
+        public static void ReleaseInstance()
+        {
+            _instance = null;
+        }
+
         private object _currentView;
 
         public object CurrentView

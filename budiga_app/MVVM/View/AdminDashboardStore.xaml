@@ -23,6 +23,6 @@
             <Label Content="Store:" FontSize="14" Grid.Column="0" Grid.Row="0"/>
             <ComboBox x:Name="storeComboBox" Grid.Column="1" Grid.Row="0" DisplayMemberPath="Name" SelectedValuePath="Id" SelectedValue="{Binding Path=Id}" SelectedIndex="0"/>
         </Grid>
-        <Button Content="Continue" BorderBrush="#FF264ECA" Click="Continue_Click" Background="#FF264ECA" Margin="0,20,0,0" HorizontalAlignment="Center"/>
+        <Button Content="Continue" Click="Continue_Click" BorderBrush="#FF264ECA" Background="#FF264ECA" Margin="0,20,0,0" HorizontalAlignment="Center"/>
     </StackPanel>
 </Window>

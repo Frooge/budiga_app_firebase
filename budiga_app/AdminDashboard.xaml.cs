@@ -14,6 +14,7 @@ using System.Windows.Shapes;
 using budiga_app.Core;
 using budiga_app.DataAccess;
 using budiga_app.MVVM.Model;
+using budiga_app.MVVM.View;
 using budiga_app.MVVM.ViewModel;
 
 namespace budiga_app
@@ -36,9 +37,7 @@ namespace budiga_app
             MainWindow main = new MainWindow();
             main.WindowStartupLocation = WindowStartupLocation.CenterScreen;
             main.Show();
-            
-            
-            this.Close();
+            this.Close();           
         }
 
         private async void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
@@ -54,10 +53,27 @@ namespace budiga_app
                 DataClass.ReleaseInstance();
                 InventoryViewModel.ReleaseInstance();
                 InvoiceViewModel.ReleaseInstance();
+                SalesViewModel.ReleaseInstance();
                 EmployeeViewModel.ReleaseInstance();
                 result = true;
             }
             return result;
+        }
+
+        private void Change_Click(object sender, RoutedEventArgs e)
+        {
+            InventoryViewModel.ReleaseInstance();
+            InvoiceViewModel.ReleaseInstance();
+            SalesViewModel.ReleaseInstance();
+            EmployeeViewModel.ReleaseInstance();
+
+            this.Hide();
+            AdminDashboardStore store = new AdminDashboardStore
+            {
+                WindowStartupLocation = WindowStartupLocation.CenterScreen
+            };
+            store.Show();
+            this.Close();
         }
     }
 }

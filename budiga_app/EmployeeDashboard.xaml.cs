@@ -51,6 +51,7 @@ namespace budiga_app
                 DataClass.ReleaseInstance();
                 InventoryViewModel.ReleaseInstance();
                 InvoiceViewModel.ReleaseInstance();
+                SalesViewModel.ReleaseInstance();
                 EmployeeViewModel.ReleaseInstance();
                 result = true;
             }

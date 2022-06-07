@@ -25,7 +25,8 @@
     <Grid Width="1280" Height="720" Background="#FFF4F5FA" MaxWidth="1920" MaxHeight="1080" MinWidth="1280" MinHeight="720" >
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="4*" />
+            <ColumnDefinition Width="2*" />
+            <ColumnDefinition Width="2*" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
@@ -45,7 +46,7 @@
                 </Grid.RowDefinitions>
 
                 <StackPanel Orientation="Horizontal">
-                    <Image Source="/Resource/Images/logo.png" Width="70" Margin="10 0"/>
+                    <Image Source="/Resources/Images/logo.png" Width="70" Margin="10 0"/>
                     <Image Source="/Resources/Images/logo text.png" Width="140" />
                     <Image Source="/Resources/Images/RadioButtonChecked.png" Width="30" HorizontalAlignment="Right" Margin="50 0 0 0"/>
                 </StackPanel>
@@ -60,12 +61,16 @@
                 <Button x:Name="LogoutBtn" Grid.Row="6" Content="Logout" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0 20" Width="200" Background="#FFB73A3A" BorderBrush="#FF6D0F0F" Click="LogoutBtn_Click"/>
             </Grid>
         </StackPanel>
-        <StackPanel Orientation="Horizontal" Grid.Column="1" HorizontalAlignment="Right">
+        <StackPanel Orientation="Horizontal" Grid.Column="1" HorizontalAlignment="Left" Margin="20,0">
+            <Button Content="Change Store" Click="Change_Click" Margin="10,0" BorderBrush="#FF264ECA" Background="#FF264ECA"/>
+            <TextBlock Text="{Binding Store}" VerticalAlignment="Center" Margin="10,0" FontWeight="Bold" FontSize="18"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Grid.Column="2" HorizontalAlignment="Right">
             <TextBlock Text="{Binding Username}" VerticalAlignment="Center" FontWeight="Bold" FontSize="18"/>
             <Border CornerRadius="100" Background="Gray" Margin="20 10">
                 <Image Source="/Resources/Images/User.png"/>
             </Border>
         </StackPanel>
-        <ContentControl Grid.Column="1" Grid.Row="1" Content="{Binding CurrentView}" Margin="20,0,20,0"/>
+        <ContentControl Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" Content="{Binding CurrentView}" Margin="20,0,20,0"/>
     </Grid>
 </Window>

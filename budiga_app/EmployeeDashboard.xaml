@@ -18,13 +18,14 @@
         Title="Home" Closing="Window_Closing">
     
     <Window.DataContext>
-        <viewModel:EmployeeMainViewModel />
+        <viewModel:EmployeeMainViewModel/>
     </Window.DataContext>
 
     <Grid Width="1280" Height="720" >
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="4*" />
+            <ColumnDefinition Width="2*" />
+            <ColumnDefinition Width="2*" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
@@ -44,7 +45,7 @@
                 </Grid.RowDefinitions>
 
                 <StackPanel Orientation="Horizontal">
-                    <Image Source="/Resource/Images/logo.png" Width="70" Margin="10 0"/>
+                    <Image Source="/Resources/Images/logo.png" Width="70" Margin="10 0"/>
                     <Image Source="/Resources/Images/logo text.png" Width="140" />
                     <Image Source="/Resources/Images/RadioButtonChecked.png" Width="30" HorizontalAlignment="Right" Margin="50 0 0 0"/>
                 </StackPanel>
@@ -57,13 +58,16 @@
                 <Button x:Name="LogoutBtn" Grid.Row="6" Content="Logout" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0 20" Width="200" Background="#FFB73A3A" BorderBrush="#FF6D0F0F" Click="LogoutBtn_Click"/>
             </Grid>
         </StackPanel>
-        <StackPanel Orientation="Horizontal" Grid.Column="1" HorizontalAlignment="Right">
+        <StackPanel Orientation="Horizontal" Grid.Column="1" HorizontalAlignment="Left">
+            <TextBlock Text="{Binding Store}" VerticalAlignment="Center" FontWeight="Bold" FontSize="18"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Grid.Column="2" HorizontalAlignment="Right">
             <TextBlock Text="{Binding Username}" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold" FontSize="18"/>
             <Border CornerRadius="100" Background="Gray" Margin="20 10">
                 <Image Source="/Resources/Images/User.png"/>
             </Border>
         </StackPanel>
 
-        <ContentControl Grid.Column="1" Grid.Row="1" Content="{Binding CurrentView}" Margin="20 0"/>
+        <ContentControl Grid.Column="1" Grid.Row="1"  Grid.ColumnSpan="2" Content="{Binding CurrentView}" Margin="20 0"/>
     </Grid>
 </Window>

@@ -80,9 +80,6 @@ namespace budiga_app.Core
                                 Location = dict["Location"].ToString()
                             });
                         }
-                        //Store.Branch.Id = Store.BranchRecords[0].Id;
-                        //Store.Branch.Name = Store.BranchRecords[0].Name;
-                        //Store.Branch.Location = Store.BranchRecords[0].Location;
                     }
                     else
                     {
@@ -101,7 +98,7 @@ namespace budiga_app.Core
         public async Task<bool> CheckIn()
         {
             bool result = false;
-            if (LoggedInUser != null && Attendance == null)
+            if (LoggedInUser != null && Store != null && Attendance == null)
             {
                 try
                 {
@@ -123,7 +120,7 @@ namespace budiga_app.Core
                         TimeIn = DateTime.UtcNow,
                         TimeOut = null
                     };
-                    DocumentReference attRef = conn.FirestoreDb.Collection("attendance").Document(Attendance.Id);
+                    DocumentReference attRef = conn.FirestoreDb.Collection("stores").Document(Store.Id).Collection("attendance").Document(Attendance.Id);
                     Dictionary<string, object> attDict = new Dictionary<string, object>
                     {
                         { "Id", Attendance.Id },
@@ -148,7 +145,7 @@ namespace budiga_app.Core
         public async Task<bool> Checkout()
         {
             bool result = false;
-            if (LoggedInUser != null && Attendance != null)
+            if (LoggedInUser != null && Store != null && Attendance != null)
             {
                 try
                 {
@@ -162,7 +159,7 @@ namespace budiga_app.Core
                     };
                     batch.Update(userRef, userDict);
 
-                    DocumentReference attRef = conn.FirestoreDb.Collection("attendance").Document(Attendance.Id);
+                    DocumentReference attRef = conn.FirestoreDb.Collection("stores").Document(Store.Id).Collection("attendance").Document(Attendance.Id);
                     Dictionary<string, object> attDict = new Dictionary<string, object>
                     {
                         { "TimeOut", DateTime.UtcNow }

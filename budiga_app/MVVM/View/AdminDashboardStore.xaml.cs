@@ -32,8 +32,10 @@ namespace budiga_app.MVVM.View
         private void Continue_Click(object sender, RoutedEventArgs e)
         {
             dataClass.Store.Branch = (StoreModel.BranchModel)storeComboBox.SelectedItem;
-            AdminDashboard adminDashboard = new AdminDashboard();
-            adminDashboard.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+            AdminDashboard adminDashboard = new AdminDashboard
+            {
+                WindowStartupLocation = WindowStartupLocation.CenterScreen
+            };
             adminDashboard.Show();
             this.Close();
         }

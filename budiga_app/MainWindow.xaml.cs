@@ -105,16 +105,20 @@ namespace budiga_app
                     if (dataClass.LoggedInUser.Type == "admin" && set)
                     {
                         this.Hide();
-                        AdminDashboardStore store = new AdminDashboardStore();                        
-                        store.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+                        AdminDashboardStore store = new AdminDashboardStore
+                        {
+                            WindowStartupLocation = WindowStartupLocation.CenterScreen
+                        };
                         store.Show();
                         this.Close();
                     }
                     else if (dataClass.LoggedInUser.Type == "employee" && set)
                     {
                         this.Hide();
-                        EmployeeDashboard employeeDashboard = new EmployeeDashboard();
-                        employeeDashboard.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+                        EmployeeDashboard employeeDashboard = new EmployeeDashboard
+                        {
+                            WindowStartupLocation = WindowStartupLocation.CenterScreen
+                        };
                         employeeDashboard.Show();
                         this.Close();
                     }
