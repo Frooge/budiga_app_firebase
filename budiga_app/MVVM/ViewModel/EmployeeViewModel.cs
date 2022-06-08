@@ -117,7 +117,7 @@ namespace budiga_app.MVVM.ViewModel
                             {
                                 Id = dict["Id"].ToString(),
                                 UserFullName = dict["UserFullName"].ToString(),
-                                TimeIn = ((Timestamp)dict["TimeIn"]).ToDateTime(),
+                                TimeIn = ((Timestamp)dict["TimeIn"]).ToDateTime().ToLocalTime()
                             });
                             if (dict["TimeOut"] == null)
                                 Attendance.AttendanceRecords.Last().TimeOut = null;

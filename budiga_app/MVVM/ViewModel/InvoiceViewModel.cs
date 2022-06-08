@@ -125,7 +125,7 @@ namespace budiga_app.MVVM.ViewModel
                                 StoreId = dict["StoreId"].ToString(),
                                 TotalPrice = Convert.ToDecimal(dict["TotalPrice"]),
                                 CustomerPay = Convert.ToDecimal(dict["CustomerPay"]),
-                                CreatedDate = ((Timestamp)dict["CreatedDate"]).ToDateTime(),
+                                CreatedDate = ((Timestamp)dict["CreatedDate"]).ToDateTime().ToLocalTime(),
                                 InvoiceOrderRecords = Order.OrderRecords
                             });
                         });

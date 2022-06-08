@@ -136,7 +136,7 @@ namespace budiga_app.MVVM.ViewModel
                                 Price = Convert.ToDecimal(dict["Price"]),
                                 Quantity = Convert.ToInt32(dict["Quantity"]),
                                 Action = dict["Action"].ToString(),
-                                CommittedDate = ((Timestamp)dict["CommittedDate"]).ToDateTime()
+                                CommittedDate = ((Timestamp)dict["CommittedDate"]).ToDateTime().ToLocalTime()
                             });
                         });
                     }

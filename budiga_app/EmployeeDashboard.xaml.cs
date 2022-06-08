@@ -40,7 +40,13 @@ namespace budiga_app
 
         private async void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            await Logout();
+            if (await Logout())
+            {
+                GC.Collect(); // find finalizable objects
+                GC.WaitForPendingFinalizers(); // wait until finalizers executed
+                GC.Collect(); // collect finalized objects
+            }
+            
         }
 
         private async Task<bool> Logout()

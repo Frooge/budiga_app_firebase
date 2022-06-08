@@ -31,18 +31,24 @@ namespace budiga_app
             dataClass = DataClass.GetInstance;
         }
 
-        private void LogoutBtn_Click(object sender, RoutedEventArgs e)
+        private async void LogoutBtn_Click(object sender, RoutedEventArgs e)
         {
             this.Hide();
             MainWindow main = new MainWindow();
             main.WindowStartupLocation = WindowStartupLocation.CenterScreen;
             main.Show();
-            this.Close();           
+            if(await Logout())
+            {
+                this.Close();
+                GC.Collect(); // find finalizable objects
+                GC.WaitForPendingFinalizers(); // wait until finalizers executed
+                GC.Collect(); // collect finalized objects
+            }            
         }
 
-        private async void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            await Logout();
+            
         }
 
         private async Task<bool> Logout()
