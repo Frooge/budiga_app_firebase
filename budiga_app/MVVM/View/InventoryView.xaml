@@ -50,9 +50,21 @@
                               Height="500"
                               Padding="0,0">
                             <DataGrid.Columns>
-                                <DataGridTextColumn Header="Product" Binding="{Binding Path=Name}" Width="*"/>
                                 <DataGridTextColumn Header="Barcode" Binding="{Binding Path=Barcode}" Width="*"/>
-                                <DataGridTextColumn Header="Brand" Binding="{Binding Path=Brand}" Width="*"/>
+                                <DataGridTextColumn Header="Product" Binding="{Binding Path=Name}" Width="*">
+                                    <DataGridTextColumn.ElementStyle>
+                                        <Style>
+                                            <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
+                                        </Style>
+                                    </DataGridTextColumn.ElementStyle>
+                                </DataGridTextColumn>
+                                <DataGridTextColumn Header="Brand" Binding="{Binding Path=Brand}" Width="*">
+                                    <DataGridTextColumn.ElementStyle>
+                                        <Style>
+                                            <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
+                                        </Style>
+                                    </DataGridTextColumn.ElementStyle>
+                                </DataGridTextColumn>
                                 <DataGridTextColumn Header="Price" Binding="{Binding Path=Price, StringFormat={}PHP {0:0.00}}" Width="*"/>
                                 <DataGridTextColumn Header="Quantity" Binding="{Binding Path=Quantity}" Width="*"/>
                             </DataGrid.Columns>

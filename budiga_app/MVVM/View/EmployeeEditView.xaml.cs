@@ -73,6 +73,15 @@ namespace budiga_app.MVVM.View
 
         }
 
+        private async void DeleteBtn_Click(object sender, RoutedEventArgs e)
+        {
+            UserRepository userRepository = new UserRepository();
+            if (await userRepository.DeleteUser(User.Id))
+            {
+                this.Close();
+            }
+        }
+
         private void CancelBtn_Click(object sender, RoutedEventArgs e)
         {
             this.Close();

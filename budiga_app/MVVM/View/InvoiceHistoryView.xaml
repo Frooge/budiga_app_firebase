@@ -110,6 +110,7 @@
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
                 <DataGridTextColumn Header="Total" Binding="{Binding TotalPrice, StringFormat={}PHP {0:0.00}}" Width="*"/>
+                <DataGridTextColumn Header="Created By" Binding="{Binding UserFullName}" Width="*"/>
             </DataGrid.Columns>
             <DataGrid.CellStyle>
                 <Style TargetType="{x:Type DataGridCell}" BasedOn="{StaticResource MaterialDesignDataGridCell}">

@@ -143,6 +143,6 @@ namespace budiga_app.MVVM.ViewModel
         {
             EmployeeEditView employeeEditView = new EmployeeEditView(user);
             employeeEditView.ShowDialog();
-        }        
+        }       
     }
 }
