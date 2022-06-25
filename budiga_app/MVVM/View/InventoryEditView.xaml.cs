@@ -63,7 +63,7 @@ namespace budiga_app.MVVM.View
                     Barcode = (string.IsNullOrEmpty(barcodeTextBox.Text)) ? "N/A" : barcodeTextBox.Text,
                     Brand = brandTextBox.Text,
                     Price = decimal.Parse(priceTextBox.Text),
-                    Quantity = int.Parse(qtyTextBlock.Text) + int.Parse(qtyTextBox.Text)
+                    Quantity = int.Parse(qtyTextBlock.Text)
                 };
                 if(await viewModel.UpdateItem(item, _item))
                 {

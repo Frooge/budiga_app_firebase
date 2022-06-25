@@ -1,7 +1,6 @@
 ﻿using budiga_app.Core;
 using budiga_app.MVVM.Model;
 using Google.Cloud.Firestore;
-using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -33,9 +32,10 @@ namespace budiga_app.DataAccess
                     { "Id", invoice.Id },
                     { "UserFullName", invoice.UserFullName },
                     { "StoreId", invoice.StoreId },
+                    { "BranchId", invoice.BranchId },
                     { "TotalPrice", Convert.ToDouble(invoice.TotalPrice) },
                     { "CustomerPay", Convert.ToDouble(invoice.CustomerPay) },
-                    { "CreatedDate", DateTime.UtcNow },
+                    { "CreatedDate", invoice.CreatedDate },
                 };
                 DocumentReference invoiceRef = conn.FirestoreDb.Collection("invoice").Document(invoice.Id);
                 batch.Set(invoiceRef, invoiceDict);

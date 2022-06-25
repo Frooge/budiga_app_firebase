@@ -109,6 +109,7 @@ namespace budiga_app.MVVM.ViewModel
                                     {
                                         Id = itemDict["Id"].ToString(),
                                         StoreId = itemDict["StoreId"].ToString(),
+                                        BranchId = itemDict["BranchId"].ToString(),
                                         Barcode = itemDict["Barcode"].ToString(),
                                         Name = itemDict["Name"].ToString(),
                                         Brand = itemDict["Brand"].ToString(),
@@ -123,6 +124,9 @@ namespace budiga_app.MVVM.ViewModel
                                 Id = dict["Id"].ToString(),
                                 UserFullName = dict["UserFullName"].ToString(),
                                 StoreId = dict["StoreId"].ToString(),
+                                BranchId = dict["BranchId"].ToString(),
+                                BranchName = dataClass.Store.Branch.Name,
+                                Address = dataClass.Store.Branch.Location,
                                 TotalPrice = Convert.ToDecimal(dict["TotalPrice"]),
                                 CustomerPay = Convert.ToDecimal(dict["CustomerPay"]),
                                 CreatedDate = ((Timestamp)dict["CreatedDate"]).ToDateTime().ToLocalTime(),
@@ -212,9 +216,12 @@ namespace budiga_app.MVVM.ViewModel
                 Invoice.Id = GenerateId.GenerateInvoice(DateTime.Now);
                 Invoice.CustomerPay = payment;
                 Invoice.StoreId = dataClass.Store.Id;
+                Invoice.BranchId = dataClass.Store.Branch.Id;
                 Invoice.UserFullName = String.Format("{0} {1}", dataClass.LoggedInUser.FName, dataClass.LoggedInUser.LName);
+                Invoice.CreatedDate = DateTime.UtcNow;
                 if (await invoiceRepository.AddInvoice(Invoice))
                 {
+                    Invoice.InvoiceRecords.Add(Invoice);
                     foreach (var order in Invoice.InvoiceOrderRecords)
                     {
                         await itemHistoryRepository.AddHistory(order.Item, "TRANSACTION");
@@ -233,7 +240,7 @@ namespace budiga_app.MVVM.ViewModel
 
         private void GetReceipt(InvoiceModel invoice)
         {
-            invoice.CustomerChange = invoice.TotalPrice - invoice.CustomerPay;
+            invoice.CustomerChange = invoice.CustomerPay - invoice.TotalPrice;
             InvoiceReceiptView invoiceReceiptView = new InvoiceReceiptView(invoice);
             invoiceReceiptView.ShowDialog();
         }

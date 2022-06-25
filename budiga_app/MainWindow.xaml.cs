@@ -12,7 +12,6 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using MySql.Data.MySqlClient;
 using budiga_app.Core;
 using budiga_app.DataAccess;
 using budiga_app.MVVM.Model;

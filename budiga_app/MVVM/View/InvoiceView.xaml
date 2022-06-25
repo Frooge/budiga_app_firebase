@@ -112,7 +112,6 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="4*" />
-                    <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*" />
@@ -122,7 +121,7 @@
                     <Label Content="Total Quantity:"/>
                     <Label Content="{Binding ElementName=invoiceView, Path=ViewModel.Invoice.InvoiceOrderRecords.Count}"/>
                 </StackPanel>
-                <StackPanel Orientation="Horizontal" Grid.Column="2" Grid.RowSpan="2">
+                <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.RowSpan="2" HorizontalAlignment="Right">
                     <Label Content="Total"/>
                     <TextBlock Text="{Binding ElementName=invoiceView, Path=ViewModel.Invoice.TotalPrice, StringFormat={}PHP {0:0.00}}" FontSize="28" FontWeight="Bold"/>
                 </StackPanel>

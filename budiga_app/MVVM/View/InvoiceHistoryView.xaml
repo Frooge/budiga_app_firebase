@@ -76,7 +76,7 @@
                             <ItemsControl ItemsSource="{Binding InvoiceOrderRecords}">
                                 <ItemsControl.ItemTemplate>
                                     <DataTemplate>
-                                        <Label Content="{Binding Item.Price, StringFormat={}PHP {0:0.00}}"/>
+                                        <Label Content="{Binding Item.Price}" ContentStringFormat="PHP {0:0.00}"/>
                                     </DataTemplate>
                                 </ItemsControl.ItemTemplate>
                             </ItemsControl>
@@ -102,7 +102,7 @@
                             <ItemsControl ItemsSource="{Binding InvoiceOrderRecords}">
                                 <ItemsControl.ItemTemplate>
                                     <DataTemplate>
-                                        <Label Content="{Binding SubtotalPrice, StringFormat={}PHP {0:0.00}}"/>
+                                        <Label Content="{Binding SubtotalPrice}" ContentStringFormat="PHP {0:0.00}"/>
                                     </DataTemplate>
                                 </ItemsControl.ItemTemplate>
                             </ItemsControl>

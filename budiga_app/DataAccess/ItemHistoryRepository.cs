@@ -1,7 +1,6 @@
 ﻿using budiga_app.Core;
 using budiga_app.MVVM.Model;
 using Google.Cloud.Firestore;
-using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;

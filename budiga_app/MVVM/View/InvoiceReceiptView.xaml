@@ -12,97 +12,96 @@
         WindowStartupLocation="CenterScreen"
         Title="InvoiceReceiptView"
         x:Name="invoiceReceiptView">
-    <StackPanel Margin="10" Width="500">
-        <Grid>
+    <StackPanel Margin="10" Width="420">
+        <StackPanel x:Name="print">
+            <Line Stroke="Black" HorizontalAlignment="Stretch"
+                  X2="{Binding ActualWidth, RelativeSource={RelativeSource Self}}"
+                  Style="{x:Null}"
+                  StrokeDashArray="5 2" StrokeThickness="1" Margin="0,5"/>
+            <Label Content="SHOP RECEIPT" FontSize="28" FontWeight="Bold" HorizontalAlignment="Center" Padding="0" Margin="0"/>
+            <Label Content="{Binding ElementName=invoiceReceiptView, Path=Invoice.Id, StringFormat={}No.: {0}}" FontSize="14" HorizontalAlignment="Center"/>
+            <Line Stroke="Black" HorizontalAlignment="Stretch"
+                  X2="{Binding ActualWidth, RelativeSource={RelativeSource Self}}"
+                  Style="{x:Null}"
+                  StrokeDashArray="5 2" StrokeThickness="1" Margin="0,5"/>
+            <Grid Margin="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Label Content="{Binding ElementName=invoiceReceiptView, Path=Invoice.BranchName}" ContentStringFormat="Store: {0}" Grid.Column="0" Grid.Row="0"/>
+                <Label Content="{Binding ElementName=invoiceReceiptView, Path=Invoice.Address}" ContentStringFormat="Address: {0}" Grid.Column="0" Grid.Row="1"/>
+                <Label Content="{Binding ElementName=invoiceReceiptView, Path=Invoice.CreatedDate.Date}" ContentStringFormat="Date: {0}" Grid.Column="1" Grid.Row="0"/>
+                <Label Content="{Binding ElementName=invoiceReceiptView, Path=Invoice.CreatedDate}" ContentStringFormat="Time: {0:H:mm:ss}" Grid.Column="1" Grid.Row="1"/>
+            </Grid>
+            <StackPanel Margin="0, 20">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="3*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Content="Product Information" HorizontalAlignment="Center"/>
+                    <Label Content="Quantity" Grid.Column="1" HorizontalAlignment="Center"/>
+                    <Label Content="Price" Grid.Column="2" HorizontalAlignment="Center"/>
+                    <Label Content="Subtotal" Grid.Column="3" HorizontalAlignment="Center"/>
+                </Grid>
+                <StackPanel>
+                    <ItemsControl ItemsSource="{Binding ElementName=invoiceReceiptView, Path=Invoice.InvoiceOrderRecords}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Grid Margin="0,0,0,10">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="3*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Label Content="{Binding Path=Item.Name}"/>
+                                    <Label Content="{Binding Path=Quantity}" Grid.Column="1" HorizontalAlignment="Center"/>
+                                    <Label Content="{Binding Path=Item.Price}"  ContentStringFormat="PHP {0:0.00}" Grid.Column="2" HorizontalAlignment="Center"/>
+                                    <Label Content="{Binding Path=SubtotalPrice}"  ContentStringFormat="PHP {0:0.00}" Grid.Column="3" HorizontalAlignment="Center"/>
+                                </Grid>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </StackPanel>
+            </StackPanel>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                    <Label Content="Customer Pay:"/>
+                    <Label Content="{Binding ElementName=invoiceReceiptView, Path=Invoice.CustomerPay}" ContentStringFormat="PHP {0:0.00}"/>
+                    <Label Content="Customer Change:" Margin="10,0,0,0"/>
+                    <Label Content="{Binding ElementName=invoiceReceiptView, Path=Invoice.CustomerChange}" ContentStringFormat="PHP {0:0.00}"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.RowSpan="2"  HorizontalAlignment="Right">
+                    <Label Content="Total:"/>
+                    <Label Content="{Binding ElementName=invoiceReceiptView, Path=Invoice.TotalPrice}" ContentStringFormat="PHP {0:0.00}" FontSize="18" FontWeight="Bold"/>
+                </StackPanel>
+            </Grid>
+            <Line Stroke="Black" HorizontalAlignment="Stretch"
+                  X2="{Binding ActualWidth, RelativeSource={RelativeSource Self}}"
+                  Style="{x:Null}"
+                  StrokeDashArray="5 2" StrokeThickness="1" Margin="0,5"/>
+        </StackPanel>
+        <Grid Margin="0,10,0,0">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
-            <Label Content="AJK3 Variety Store" Grid.Row="0" Grid.Column="1"/>
-            <Label Content="SALES INVOICE" Grid.Row="1" Grid.Column="0"/>
-            <Label Content="Ponce Capitol, Cebu City" Grid.Row="1" Grid.Column="1"/>
-            <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="2">
-                <Label Content="Invoice No.: "/>
-                <Label Content="{Binding ElementName=invoiceReceiptView, Path=Invoice.Id}"/>
-            </StackPanel>
-            <StackPanel Orientation="Horizontal" Grid.Row="2" Grid.Column="2">
-                <Label Content="Date: "/>
-                <Label Content="{Binding ElementName=invoiceReceiptView, Path=Invoice.CreatedDate}"/>
-            </StackPanel>
-        </Grid>
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <Label Content="Product Information"/>
-            <Label Content="Quantity" Grid.Column="1" HorizontalAlignment="Center"/>
-            <Label Content="Price" Grid.Column="2" HorizontalAlignment="Center"/>
-            <Label Content="Subtotal" Grid.Column="3" HorizontalAlignment="Center"/>
-        </Grid>
-        <ScrollViewer Grid.Row="1" Height="320">
-            <StackPanel>
-                <ItemsControl ItemsSource="{Binding ElementName=invoiceReceiptView, Path=Invoice.InvoiceOrderRecords}">
-                    <ItemsControl.ItemTemplate>
-                        <DataTemplate>
-                            <Grid Margin="0,0,0,10">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="*"/>
-                                </Grid.ColumnDefinitions>
-                                <Label Content="{Binding Path=Item.Name}"/>
-                                <Label Content="{Binding Path=Quantity}" Grid.Column="1" HorizontalAlignment="Center"/>
-                                <Label Content="{Binding Path=Item.Price, StringFormat={}PHP {0:0.00}}" Grid.Column="2" HorizontalAlignment="Center"/>
-                                <Label Content="{Binding Path=SubtotalPrice, StringFormat={}PHP {0:0.00}}" Grid.Column="3" HorizontalAlignment="Center"/>
-                            </Grid>
-                        </DataTemplate>
-                    </ItemsControl.ItemTemplate>
-                </ItemsControl>
-            </StackPanel>
-        </ScrollViewer>
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="2*" />
-                <ColumnDefinition Width="5*" />
-                <ColumnDefinition Width="2*" />
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*" />
-                <RowDefinition Height="*" />
-            </Grid.RowDefinitions>
-            <StackPanel Orientation="Horizontal" Grid.Column="0">
-                <Label Content="Total Quantity:"/>
-                <Label Content="{Binding ElementName=invoiceReceiptView, Path=Invoice.InvoiceOrderRecords.Count}"/>
-            </StackPanel>
-            <StackPanel Orientation="Horizontal" Grid.Column="1">
-                <Label Content="Customer Pay:"/>
-                <Label Content="{Binding ElementName=invoiceReceiptView, Path=Invoice.CustomerPay, StringFormat={}PHP {0:0.00}}"/>
-                <Label Content="Customer Change:" Margin="10,0,0,0"/>
-                <Label Content="{Binding ElementName=invoiceReceiptView, Path=Invoice.CustomerChange, StringFormat={}PHP {0:0.00}}"/>
-            </StackPanel>
-            <StackPanel Orientation="Horizontal" Grid.Column="2" Grid.RowSpan="2">
-                <Label Content="Total:"/>
-                <TextBlock Text="{Binding ElementName=invoiceReceiptView, Path=Invoice.TotalPrice, StringFormat={}PHP {0:0.00}}" FontSize="28" FontWeight="Bold"/>
-            </StackPanel>
-        </Grid>
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="4*"/>
+                <ColumnDefinition Width="3*"/>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <Button Content="Cancel" Click="Cancel_Click" Grid.Column="1" HorizontalAlignment="Center" Background="#FF264ECA" BorderBrush="#FF264ECA"/>
-            <Button Content="Print" Grid.Column="2" HorizontalAlignment="Center" BorderBrush="#FF264ECA" Background="#FF264ECA"/>
+            <Button Content="Print" Click="Print_Click" Grid.Column="2" HorizontalAlignment="Center" BorderBrush="#FF264ECA" Background="#FF264ECA"/>
         </Grid>
     </StackPanel>
 </Window>

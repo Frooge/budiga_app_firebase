@@ -18,13 +18,13 @@
                         <SolidColorBrush Color="White" Opacity="0.87"/>
                     </Button.Foreground>
                 </Button>
-                <Label Content="Start:" FontSize="16" Margin="500,0,0,0"></Label>
-                <DatePicker x:Name="StartDate" Width="120" HorizontalAlignment="Right" Text="Start" HorizontalContentAlignment="Center" Style="{StaticResource MaterialDesignDatePicker}"/>
-                <Label Content="End:" FontSize="16" Margin="10,0,0,0"></Label>
-                <DatePicker x:Name="EndDate" Width="120" HorizontalAlignment="Right" Text="End" HorizontalContentAlignment="Center" Style="{StaticResource MaterialDesignDatePicker}"/>
             </StackPanel>
-            <StackPanel Orientation="Horizontal" Margin="10,10,10,10" Width="967">
-                <materialDesign:Card HorizontalAlignment="Left" Margin="0 0 10 0" VerticalAlignment="Top" Height="500" Width="500">
+            <Grid Margin="10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="2*"/>
+                </Grid.ColumnDefinitions>
+                <materialDesign:Card HorizontalAlignment="Left" Grid.Column="0" Margin="0,0,10,0" VerticalAlignment="Top" Height="500">
                     <DataGrid x:Name="teamTable"
                               ItemsSource="{Binding ElementName=employeeView, Path=ViewModel.Employee.UserRecords}"
                               IsReadOnly="True"
@@ -62,7 +62,7 @@
                         </b:Interaction.Triggers>
                     </DataGrid>
                 </materialDesign:Card>
-                <materialDesign:Card HorizontalAlignment="Right" Margin="0 0 10 0" VerticalAlignment="Top" Height="500" Width="500">
+                <materialDesign:Card HorizontalAlignment="Right" Margin="0" Grid.Column="1" VerticalAlignment="Top" Height="500">
                     <DataGrid x:Name="attendanceTable"
                               ItemsSource="{Binding ElementName=employeeView, Path=ViewModel.Attendance.AttendanceRecords}"
                               IsReadOnly="True"
@@ -91,7 +91,7 @@
                         </DataGrid.CellStyle>
                     </DataGrid>
                 </materialDesign:Card>
-            </StackPanel>
+            </Grid>
         </StackPanel>
     </Grid>
 </UserControl>

@@ -31,5 +31,25 @@ namespace budiga_app.MVVM.View
         {
             this.Close();
         }
+
+        private void Print_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                PrintDialog printDialog = new PrintDialog();
+                if(printDialog.ShowDialog() == true)
+                {
+                    printDialog.PrintVisual(print, "Invoice");
+                }
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                this.Close();
+            }
+        }
     }
 }
