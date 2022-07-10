@@ -6,102 +6,68 @@
         xmlns:local="clr-namespace:budiga_app.MVVM.View"
         mc:Ignorable="d"
         MinHeight="200"
-        MinWidth="300"
+        MinWidth="200"
         SizeToContent="WidthAndHeight"
         ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen"
         Title="InvoiceReceiptView"
         x:Name="invoiceReceiptView">
-    <StackPanel Margin="10" Width="420">
+    <StackPanel Margin="10" Width="200">
         <StackPanel x:Name="print">
             <Line Stroke="Black" HorizontalAlignment="Stretch"
                   X2="{Binding ActualWidth, RelativeSource={RelativeSource Self}}"
                   Style="{x:Null}"
                   StrokeDashArray="5 2" StrokeThickness="1" Margin="0,5"/>
-            <Label Content="SHOP RECEIPT" FontSize="28" FontWeight="Bold" HorizontalAlignment="Center" Padding="0" Margin="0"/>
+            <Label Content="SHOP RECEIPT" FontSize="14" FontWeight="Bold" HorizontalAlignment="Center" Padding="0" Margin="0"/>
             <Label Content="{Binding ElementName=invoiceReceiptView, Path=Invoice.Id, StringFormat={}No.: {0}}" FontSize="14" HorizontalAlignment="Center"/>
             <Line Stroke="Black" HorizontalAlignment="Stretch"
                   X2="{Binding ActualWidth, RelativeSource={RelativeSource Self}}"
                   Style="{x:Null}"
                   StrokeDashArray="5 2" StrokeThickness="1" Margin="0,5"/>
-            <Grid Margin="0">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
-                <Label Content="{Binding ElementName=invoiceReceiptView, Path=Invoice.BranchName}" ContentStringFormat="Store: {0}" Grid.Column="0" Grid.Row="0"/>
-                <Label Content="{Binding ElementName=invoiceReceiptView, Path=Invoice.Address}" ContentStringFormat="Address: {0}" Grid.Column="0" Grid.Row="1"/>
-                <Label Content="{Binding ElementName=invoiceReceiptView, Path=Invoice.CreatedDate.Date}" ContentStringFormat="Date: {0}" Grid.Column="1" Grid.Row="0"/>
-                <Label Content="{Binding ElementName=invoiceReceiptView, Path=Invoice.CreatedDate}" ContentStringFormat="Time: {0:H:mm:ss}" Grid.Column="1" Grid.Row="1"/>
-            </Grid>
+            <Label FontSize="12" Content="{Binding ElementName=invoiceReceiptView, Path=Invoice.BranchName}" ContentStringFormat="Store: {0}"/>
+            <Label FontSize="12" Content="{Binding ElementName=invoiceReceiptView, Path=Invoice.Address}" ContentStringFormat="Address: {0}"/>
+            <Label FontSize="12" Content="{Binding ElementName=invoiceReceiptView, Path=Invoice.CreatedDate.Date}" ContentStringFormat="Date: {0:MM/dd/yyyy}"/>
+            <Label FontSize="12" Content="{Binding ElementName=invoiceReceiptView, Path=Invoice.CreatedDate}" ContentStringFormat="Time: {0:H:mm:ss}"/>
             <StackPanel Margin="0, 20">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="3*"/>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-                    <Label Content="Product Information" HorizontalAlignment="Center"/>
-                    <Label Content="Quantity" Grid.Column="1" HorizontalAlignment="Center"/>
-                    <Label Content="Price" Grid.Column="2" HorizontalAlignment="Center"/>
-                    <Label Content="Subtotal" Grid.Column="3" HorizontalAlignment="Center"/>
-                </Grid>
+                <Label FontSize="12" Content="Item/s Desc:" HorizontalAlignment="Left"/>
                 <StackPanel>
                     <ItemsControl ItemsSource="{Binding ElementName=invoiceReceiptView, Path=Invoice.InvoiceOrderRecords}">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
-                                <Grid Margin="0,0,0,10">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="3*"/>
-                                        <ColumnDefinition Width="*"/>
-                                        <ColumnDefinition Width="*"/>
-                                        <ColumnDefinition Width="*"/>
-                                    </Grid.ColumnDefinitions>
-                                    <Label Content="{Binding Path=Item.Name}"/>
-                                    <Label Content="{Binding Path=Quantity}" Grid.Column="1" HorizontalAlignment="Center"/>
-                                    <Label Content="{Binding Path=Item.Price}"  ContentStringFormat="PHP {0:0.00}" Grid.Column="2" HorizontalAlignment="Center"/>
-                                    <Label Content="{Binding Path=SubtotalPrice}"  ContentStringFormat="PHP {0:0.00}" Grid.Column="3" HorizontalAlignment="Center"/>
-                                </Grid>
+                                <Label>
+                                    <Label.Content>
+                                        <TextBlock>
+                                            <TextBlock.Text>
+                                                <MultiBinding StringFormat="{}{0} {1}*₱{2:0.00} = ₱{3:0.00}">
+                                                    <Binding Path="Item.Name" />
+                                                    <Binding Path="Quantity" />
+                                                    <Binding Path="Item.Price" />
+                                                    <Binding Path="SubtotalPrice" />
+                                                </MultiBinding>
+                                            </TextBlock.Text>
+                                        </TextBlock>
+                                    </Label.Content>
+                                </Label>
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>
                     </ItemsControl>
                 </StackPanel>
             </StackPanel>
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                    <Label Content="Customer Pay:"/>
-                    <Label Content="{Binding ElementName=invoiceReceiptView, Path=Invoice.CustomerPay}" ContentStringFormat="PHP {0:0.00}"/>
-                    <Label Content="Customer Change:" Margin="10,0,0,0"/>
-                    <Label Content="{Binding ElementName=invoiceReceiptView, Path=Invoice.CustomerChange}" ContentStringFormat="PHP {0:0.00}"/>
-                </StackPanel>
-                <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.RowSpan="2"  HorizontalAlignment="Right">
-                    <Label Content="Total:"/>
-                    <Label Content="{Binding ElementName=invoiceReceiptView, Path=Invoice.TotalPrice}" ContentStringFormat="PHP {0:0.00}" FontSize="18" FontWeight="Bold"/>
-                </StackPanel>
-            </Grid>
+            <Label FontSize="12" Content="{Binding ElementName=invoiceReceiptView, Path=Invoice.CustomerPay}" ContentStringFormat="Payment: ₱{0:0.00}"/>
+            <Label FontSize="12" Content="{Binding ElementName=invoiceReceiptView, Path=Invoice.CustomerChange}" ContentStringFormat="Change: ₱{0:0.00}"/>
+            <Label Content="{Binding ElementName=invoiceReceiptView, Path=Invoice.TotalPrice}" ContentStringFormat="Total: ₱{0:0.00}" FontSize="12" FontWeight="Bold"/>
             <Line Stroke="Black" HorizontalAlignment="Stretch"
-                  X2="{Binding ActualWidth, RelativeSource={RelativeSource Self}}"
-                  Style="{x:Null}"
-                  StrokeDashArray="5 2" StrokeThickness="1" Margin="0,5"/>
+                X2="{Binding ActualWidth, RelativeSource={RelativeSource Self}}"
+                Style="{x:Null}"
+                StrokeDashArray="5 2" StrokeThickness="1" Margin="0,5"/>
         </StackPanel>
         <Grid Margin="0,10,0,0">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="3*"/>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Button Content="Cancel" Click="Cancel_Click" Grid.Column="1" HorizontalAlignment="Center" Background="#FF264ECA" BorderBrush="#FF264ECA"/>
-            <Button Content="Print" Click="Print_Click" Grid.Column="2" HorizontalAlignment="Center" BorderBrush="#FF264ECA" Background="#FF264ECA"/>
+            <Button Content="Cancel" Click="Cancel_Click" Grid.Column="0" HorizontalAlignment="Center" Background="#FF264ECA" BorderBrush="#FF264ECA"/>
+            <Button Content="Print" Click="Print_Click" Grid.Column="1" HorizontalAlignment="Center" BorderBrush="#FF264ECA" Background="#FF264ECA"/>
         </Grid>
     </StackPanel>
 </Window>

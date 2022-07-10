@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Printing;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -37,7 +38,14 @@ namespace budiga_app.MVVM.View
             try
             {
                 PrintDialog printDialog = new PrintDialog();
-                if(printDialog.ShowDialog() == true)
+                PrintTicket pt = printDialog.PrintTicket;
+                Double printableWidth = pt.PageMediaSize.Width.Value;
+                Double printableHeight = pt.PageMediaSize.Height.Value;
+                Double xScale = (printableWidth - 0 * 2) / printableWidth;
+                Double yScale = (printableHeight - 0 * 2) / printableHeight;
+
+                print.LayoutTransform = new MatrixTransform(xScale, 0, 0, yScale, 0, 0);
+                if (printDialog.ShowDialog() == true)
                 {
                     printDialog.PrintVisual(print, "Invoice");
                 }
