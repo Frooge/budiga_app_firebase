@@ -130,8 +130,10 @@ namespace budiga_app.MVVM.ViewModel
                                 TotalPrice = Convert.ToDecimal(dict["TotalPrice"]),
                                 CustomerPay = Convert.ToDecimal(dict["CustomerPay"]),
                                 CreatedDate = ((Timestamp)dict["CreatedDate"]).ToDateTime().ToLocalTime(),
-                                InvoiceOrderRecords = Order.OrderRecords
+                                InvoiceOrderRecords = new ObservableCollection<OrderModel>(Order.OrderRecords.ToList())
                             });
+
+                            Order.OrderRecords.Clear();
                         });
                     }
                     Invoice.InvoiceRecords = _invoice.InvoiceRecords;

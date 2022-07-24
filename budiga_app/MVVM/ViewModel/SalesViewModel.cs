@@ -20,11 +20,10 @@ namespace budiga_app.MVVM.ViewModel
         private InventorySalesModel _inventorySales;
         private InvoiceViewModel invoiceVM;
 
-        public int TotalTransaction { get; set; }
-        public decimal TotalSales { get; set; }
-        
+
         public SalesOverviewViewModel SalesOverviewVM { get; set; }
         public SalesInventoryViewModel SalesInventoryVM { get; set; }
+        public TotalSalesModel Total { get; set; }
         public OverviewSalesModel OverviewSales { get; set; }      
         public InventorySalesModel InventorySales { get; set; }
         public RelayCommand ChangePeriodCommand { get; set; }
@@ -95,6 +94,7 @@ namespace budiga_app.MVVM.ViewModel
         
         private void Initialize()
         {
+            Total = new TotalSalesModel();
             _overviewSales = new OverviewSalesModel();
             OverviewSales = new OverviewSalesModel();
             _inventorySales = new InventorySalesModel();
@@ -131,13 +131,15 @@ namespace budiga_app.MVVM.ViewModel
 
         private void ChangePeriod(string date)
         {
+            Total.Sales = 0;
+            Total.Transactions = 0;
             switch (date)
             {
                 case "accumulated":
                     GetPeriod(date, (invoice) =>
                     {
-                        TotalTransaction++;
-                        TotalSales += invoice.TotalPrice;
+                        Total.Transactions++;
+                        Total.Sales += invoice.TotalPrice;
                     });
                     break;
                 case "daily":
@@ -145,8 +147,8 @@ namespace budiga_app.MVVM.ViewModel
                     {
                         if (invoice.CreatedDate.Date == DateTime.Now.Date)
                         {
-                            TotalTransaction++;
-                            TotalSales += invoice.TotalPrice;
+                            Total.Transactions++;
+                            Total.Sales += invoice.TotalPrice;
                         }
                     });
                     break;
@@ -155,8 +157,8 @@ namespace budiga_app.MVVM.ViewModel
                     {
                         if (invoice.CreatedDate.Year.ToString() + invoice.CreatedDate.Month.ToString() == DateTime.Now.Year.ToString() + DateTime.Now.Month.ToString())
                         {
-                            TotalTransaction++;
-                            TotalSales += invoice.TotalPrice;
+                            Total.Transactions++;
+                            Total.Sales += invoice.TotalPrice;
                         }
                     });
                     break;
@@ -165,8 +167,8 @@ namespace budiga_app.MVVM.ViewModel
                     {
                         if (invoice.CreatedDate.Year == DateTime.Now.Year)
                         {
-                            TotalTransaction++;
-                            TotalSales += invoice.TotalPrice;
+                            Total.Transactions++;
+                            Total.Sales += invoice.TotalPrice;
                         }
                     });
                     break;
@@ -184,7 +186,7 @@ namespace budiga_app.MVVM.ViewModel
             {
                 foreach (var order in invoice.InvoiceOrderRecords)
                 {
-                    var inventorySales = _inventorySales.InventorySalesRecords.Where(i => i.Item == order.Item && i.Date == GetDate(invoice.CreatedDate, period)).FirstOrDefault();
+                    var inventorySales = _inventorySales.InventorySalesRecords.Where(i => i.Item.Id == order.Item.Id && i.Date == GetDate(invoice.CreatedDate, period)).FirstOrDefault();
                     if (inventorySales == null)
                     {
                         _inventorySales.InventorySalesRecords.Add(new InventorySalesModel

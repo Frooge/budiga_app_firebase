@@ -35,7 +35,7 @@
                                 <RowDefinition Height="2*"/>
                                 <RowDefinition Height="*"/>
                             </Grid.RowDefinitions>
-                    <Label Grid.Row="0" Content="{Binding ElementName=salesView, Path=ViewModel.TotalSales, StringFormat={}PHP {0:0.00}}" HorizontalAlignment="Center" VerticalAlignment="Top" FontWeight="Bold" FontSize="28" Foreground="#264ECA"/>
+                            <Label Grid.Row="0" Content="{Binding ElementName=salesView, Path=ViewModel.Total.Sales}" HorizontalAlignment="Center" VerticalAlignment="Top" FontWeight="Bold" FontSize="28" Foreground="#264ECA"/>
                             <Label Grid.Row="1" Content="Php" HorizontalAlignment="Center" VerticalAlignment="Top" FontWeight="Bold"/>
                         </Grid>
                     </Grid>
@@ -57,7 +57,7 @@
                         <RowDefinition Height="2*"/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
-                    <Label Grid.Row="0" Content="{Binding ElementName=salesView, Path=ViewModel.TotalTransaction}" HorizontalAlignment="Center" VerticalAlignment="Top" FontWeight="Bold" FontSize="28" Foreground="#264ECA"/>
+                    <Label Grid.Row="0" Content="{Binding ElementName=salesView, Path=ViewModel.Total.Transactions}" HorizontalAlignment="Center" VerticalAlignment="Top" FontWeight="Bold" FontSize="28" Foreground="#264ECA"/>
                     <Label Grid.Row="1" Content="Overall Transactions" HorizontalAlignment="Center" VerticalAlignment="Top" FontWeight="Bold"/>
                 </Grid>
             </Grid>

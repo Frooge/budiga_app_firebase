@@ -307,6 +307,7 @@
     <Compile Include="MVVM\Model\InvoiceModel.cs" />
     <Compile Include="MVVM\Model\OverviewSalesModel.cs" />
     <Compile Include="MVVM\Model\StoreModel.cs" />
+    <Compile Include="MVVM\Model\TotalSalesModel.cs" />
     <Compile Include="MVVM\Model\UserModel.cs" />
     <Compile Include="MVVM\Model\PageModel.cs" />
     <Compile Include="MVVM\ViewModel\AdminMainViewModel.cs" />
