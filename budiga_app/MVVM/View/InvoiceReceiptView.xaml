@@ -66,8 +66,8 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Button Content="Cancel" Click="Cancel_Click" Grid.Column="0" HorizontalAlignment="Center" Background="#FF264ECA" BorderBrush="#FF264ECA"/>
-            <Button Content="Print" Click="Print_Click" Grid.Column="1" HorizontalAlignment="Center" BorderBrush="#FF264ECA" Background="#FF264ECA"/>
+            <Button Content="Print" Click="Print_Click" Grid.Column="0" HorizontalAlignment="Center" BorderBrush="#32A852" Background="#32A852"/>
+            <Button Content="Cancel" Click="Cancel_Click" Grid.Column="1" HorizontalAlignment="Center" Background="#FFB73A3A" BorderBrush="#FFB73A3A"/>
         </Grid>
     </StackPanel>
 </Window>

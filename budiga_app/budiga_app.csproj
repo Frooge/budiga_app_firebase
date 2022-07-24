@@ -200,7 +200,6 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Core\ConvertTime.cs" />
     <Compile Include="Core\DataClass.cs" />
     <Compile Include="Core\GenerateId.cs" />
     <Compile Include="Core\InternetAvailability.cs" />
@@ -222,7 +221,7 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="MVVM\View\AdminDashboardStore.xaml">
+    <Page Include="MVVM\View\AdminDashboardBranch.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -320,8 +319,8 @@
     <Compile Include="MVVM\ViewModel\SalesViewModel.cs" />
     <Compile Include="MVVM\ViewModel\EmployeeMainViewModel.cs" />
     <Compile Include="MVVM\ViewModel\InvoiceViewModel.cs" />
-    <Compile Include="MVVM\View\AdminDashboardStore.xaml.cs">
-      <DependentUpon>AdminDashboardStore.xaml</DependentUpon>
+    <Compile Include="MVVM\View\AdminDashboardBranch.xaml.cs">
+      <DependentUpon>AdminDashboardBranch.xaml</DependentUpon>
     </Compile>
     <Compile Include="MVVM\View\EmployeeAddView.xaml.cs">
       <DependentUpon>EmployeeAddView.xaml</DependentUpon>

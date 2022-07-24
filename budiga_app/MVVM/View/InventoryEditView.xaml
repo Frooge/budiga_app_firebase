@@ -55,9 +55,9 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Button Content="Update" Click="UpdateBtn_Click" HorizontalAlignment="Left" Background="#FF264ECA" BorderBrush="#FF264ECA"/>
+            <Button Content="Update" Click="UpdateBtn_Click" HorizontalAlignment="Left" Background="#32A852" BorderBrush="#32A852"/>
             <Button Content="Delete" Click="DeleteBtn_Click" HorizontalAlignment="Left" Grid.Column="1" Background="#eb5e5e" BorderBrush="#eb5e5e"/>
-            <Button Content="Cancel" Click="CancelBtn_Click" HorizontalAlignment="Right" Grid.Column="2" BorderBrush="#FF264ECA" Background="#FF264ECA"/>
+            <Button Content="Cancel" Click="CancelBtn_Click" HorizontalAlignment="Right" Grid.Column="2" BorderBrush="#F0AD4E" Background="#F0AD4E"/>
         </Grid>
     </StackPanel>
 </Window>

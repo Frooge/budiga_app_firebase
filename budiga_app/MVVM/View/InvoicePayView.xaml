@@ -15,18 +15,25 @@
     <Grid Margin="10">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Label Content="Customer Pay" FontSize="24" HorizontalAlignment="Center"/>
-        <TextBox x:Name="payTextBox" FontSize="14" CaretBrush="#FF264ECA" SelectionBrush="#FF264ECA" Margin="10,68,10,68" Grid.RowSpan="3" />
+        <Grid Grid.Row="1" Margin="0,15,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="4*"/>
+            </Grid.ColumnDefinitions>
+            <Label FontSize="14" Content="PHP" VerticalAlignment="Bottom"/>
+            <TextBox x:Name="payTextBox" FontSize="14" CaretBrush="#FF264ECA" SelectionBrush="#FF264ECA" Grid.Column="1"/>
+        </Grid>
         <Grid Grid.Row="2" Margin="0,15,0,0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Button Content="Confirm" Command="{Binding ElementName=invoicePayView, Path=ViewModel.ConfirmPayCommand}" CommandParameter="{Binding ElementName=payTextBox, Path=Text}" HorizontalAlignment="Left" Background="White" BorderBrush="#FF264ECA" Foreground="#FF264ECA"/>
-            <Button Content="Cancel" Click="Cancel_Click" HorizontalAlignment="Right" Grid.Column="1" BorderBrush="#FF264ECA" Background="White" Foreground="#FF264ECA"/>
+            <Button Content="Confirm" Command="{Binding ElementName=invoicePayView, Path=ViewModel.ConfirmPayCommand}" CommandParameter="{Binding ElementName=payTextBox, Path=Text}" HorizontalAlignment="Left" BorderBrush="#32A852" Background="#32A852" Foreground="White"/>
+            <Button Content="Cancel" Click="Cancel_Click" HorizontalAlignment="Right" Grid.Column="1"  BorderBrush="#FFB73A3A" Background="#FFB73A3A" Foreground="White"/>
         </Grid>
     </Grid>
 </Window>

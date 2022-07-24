@@ -13,7 +13,7 @@
     <Grid>
         <StackPanel>
             <StackPanel Orientation="Horizontal" Margin="10">
-                <Button Command="{Binding ElementName=inventoryView, Path=ViewModel.AddItemModalCommand}" Grid.Row="3" Content="Add" HorizontalAlignment="Left" VerticalAlignment="Top" Width="120" BorderBrush="{x:Null}" Background="#FF355ACC" FontStretch="Normal" FontStyle="Normal">
+                <Button Command="{Binding ElementName=inventoryView, Path=ViewModel.AddItemModalCommand}" Grid.Row="3" Content="Add" HorizontalAlignment="Left" VerticalAlignment="Top" Width="120" BorderBrush="{x:Null}" Background="#32A852" FontStretch="Normal" FontStyle="Normal">
                     <Button.Foreground>
                         <SolidColorBrush Color="White" Opacity="0.87"/>
                     </Button.Foreground>

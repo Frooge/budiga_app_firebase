@@ -75,9 +75,9 @@
                     <RadioButton Content="Overview" IsChecked="True" Command="{Binding ElementName=salesView, Path=ViewModel.OverviewViewCommand}" FontSize="14" HorizontalAlignment="Left" VerticalAlignment="Center" Background="#FF264ECA" BorderBrush="#FF264ECA"/>
                     <RadioButton Content="Inventory" Command="{Binding ElementName=salesView, Path=ViewModel.InventoryViewCommand}" FontSize="14" HorizontalAlignment="Left" Margin="84,0,0,0" VerticalAlignment="Center" BorderBrush="#FF264ECA" Background="#FF264ECA"/>
                 </Grid>
-                <Button Grid.Row="1" Content="Print Summary" HorizontalAlignment="Left" Margin="0,5,0,5" BorderBrush="{x:Null}" Background="White" FontStretch="Normal" FontStyle="Normal">
+                <Button Grid.Row="1" Content="Print Summary" HorizontalAlignment="Left" Margin="0,5,0,5" BorderBrush="{x:Null}" Background="#32A852" FontStretch="Normal" FontStyle="Normal">
                     <Button.Foreground>
-                        <SolidColorBrush Color="Black" Opacity="0.87"/>
+                        <SolidColorBrush Color="White" Opacity="0.87"/>
                     </Button.Foreground>
                 </Button>
             </StackPanel>

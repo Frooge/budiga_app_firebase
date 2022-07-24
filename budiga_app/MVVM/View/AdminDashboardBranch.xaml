@@ -1,4 +1,4 @@
-﻿<Window x:Class="budiga_app.MVVM.View.AdminDashboardStore"
+﻿<Window x:Class="budiga_app.MVVM.View.AdminDashboardBranch"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -12,7 +12,7 @@
         WindowStartupLocation="CenterScreen" 
         Title="AdminDashboardStore">
     <StackPanel Margin="10">
-        <Label Content="Choose Store" HorizontalAlignment="Center" FontSize="18"/>
+        <Label Content="Choose Branch" HorizontalAlignment="Center" FontSize="18"/>
 
         <Grid Width="360">
             <Grid.ColumnDefinitions>
@@ -20,8 +20,8 @@
                 <ColumnDefinition Width="3*"/>
             </Grid.ColumnDefinitions>
 
-            <Label Content="Store:" FontSize="14" Grid.Column="0" Grid.Row="0"/>
-            <ComboBox x:Name="storeComboBox" Grid.Column="1" Grid.Row="0" DisplayMemberPath="Name" SelectedValuePath="Id" SelectedValue="{Binding Path=Id}" SelectedIndex="0"/>
+            <Label Content="Branch:" FontSize="14" Grid.Column="0" Grid.Row="0"/>
+            <ComboBox x:Name="branchComboBox" Grid.Column="1" Grid.Row="0" DisplayMemberPath="Name" SelectedValuePath="Id" SelectedValue="{Binding Path=Id}" SelectedIndex="0"/>
         </Grid>
         <Button Content="Continue" Click="Continue_Click" BorderBrush="#FF264ECA" Background="#FF264ECA" Margin="0,20,0,0" HorizontalAlignment="Center"/>
     </StackPanel>

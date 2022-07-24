@@ -62,7 +62,8 @@
             </Grid>
         </StackPanel>
         <StackPanel Orientation="Horizontal" Grid.Column="1" HorizontalAlignment="Left" Margin="20,0">
-            <Button Content="Change Store" Click="Change_Click" Margin="10,0" BorderBrush="#FF264ECA" Background="#FF264ECA"/>
+            <Button Content="Add New Branch" Click="Change_Click" Margin="10,0" BorderBrush="#FF264ECA" Background="#FF264ECA"/>
+            <Button Content="Change Branch" Click="Change_Click" Margin="10,0" BorderBrush="#FF264ECA" Background="#FF264ECA"/>
             <TextBlock Text="{Binding Store}" VerticalAlignment="Center" Margin="10,0" FontWeight="Bold" FontSize="18"/>
         </StackPanel>
         <StackPanel Orientation="Horizontal" Grid.Column="2" HorizontalAlignment="Right">

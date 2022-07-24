@@ -132,18 +132,18 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Button x:Name="transactionBtn" Command="{Binding ElementName=invoiceView, Path=ViewModel.TransactionHistoryCommand}" HorizontalAlignment="Left" Margin="10 0" Content="Transaction History" Grid.Row="1" BorderBrush="{x:Null}" Background="#FFF4F5FA">
+            <Button x:Name="transactionBtn" Command="{Binding ElementName=invoiceView, Path=ViewModel.TransactionHistoryCommand}" HorizontalAlignment="Left" Margin="10 0" Content="Transaction History" Grid.Row="1" BorderBrush="{x:Null}" Background="#244BC5">
                 <Button.Foreground>
-                    <SolidColorBrush Color="#FF3A3541" Opacity="0.87"/>
+                    <SolidColorBrush Color="White" Opacity="0.87"/>
                 </Button.Foreground>
             </Button>
             <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
-                <Button x:Name="cancelBtn" Command="{Binding ElementName=invoiceView, Path=ViewModel.CancelOrderCommand}" Content="Cancel Order" Grid.Row="1" BorderBrush="{x:Null}" Background="#FFF4F5FA">
+                <Button x:Name="cancelBtn" Command="{Binding ElementName=invoiceView, Path=ViewModel.CancelOrderCommand}" Content="Cancel Order" Grid.Row="1" BorderBrush="{x:Null}" Background="#FFB73A3A">
                     <Button.Foreground>
-                        <SolidColorBrush Color="#FF3A3541" Opacity="0.87"/>
+                        <SolidColorBrush Color="White" Opacity="0.87"/>
                     </Button.Foreground>
                 </Button>
-                <Button x:Name="checkoutBtn" Command="{Binding ElementName=invoiceView, Path=ViewModel.CheckoutCommand}" Content="Checkout" Grid.Row="1" BorderBrush="{x:Null}" Background="#244BC5" Margin="10">
+                <Button x:Name="checkoutBtn" Command="{Binding ElementName=invoiceView, Path=ViewModel.CheckoutCommand}" Content="Checkout" Grid.Row="1" BorderBrush="{x:Null}" Background="#32A852" Margin="10">
                     <Button.Foreground>
                         <SolidColorBrush Color="White" Opacity="0.87"/>
                     </Button.Foreground>

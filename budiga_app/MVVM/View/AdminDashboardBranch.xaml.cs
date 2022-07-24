@@ -19,19 +19,19 @@ namespace budiga_app.MVVM.View
     /// <summary>
     /// Interaction logic for AdminDashboardStore.xaml
     /// </summary>
-    public partial class AdminDashboardStore : Window
+    public partial class AdminDashboardBranch : Window
     {
         DataClass dataClass;
-        public AdminDashboardStore()
+        public AdminDashboardBranch()
         {
             dataClass = DataClass.GetInstance;            
             InitializeComponent();
-            storeComboBox.ItemsSource = dataClass.Store.BranchRecords;
+            branchComboBox.ItemsSource = dataClass.Store.BranchRecords;
         }
 
         private void Continue_Click(object sender, RoutedEventArgs e)
         {
-            dataClass.Store.Branch = (StoreModel.BranchModel)storeComboBox.SelectedItem;
+            dataClass.Store.Branch = (StoreModel.BranchModel)branchComboBox.SelectedItem;
             AdminDashboard adminDashboard = new AdminDashboard
             {
                 WindowStartupLocation = WindowStartupLocation.CenterScreen

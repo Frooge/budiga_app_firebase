@@ -113,7 +113,7 @@ namespace budiga_app
                     if (dataClass.LoggedInUser.Type == "admin" && set)
                     {
                         this.Hide();
-                        AdminDashboardStore store = new AdminDashboardStore
+                        AdminDashboardBranch store = new AdminDashboardBranch
                         {
                             WindowStartupLocation = WindowStartupLocation.CenterScreen
                         };
