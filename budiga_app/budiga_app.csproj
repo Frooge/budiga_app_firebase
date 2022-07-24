@@ -203,6 +203,7 @@
     <Compile Include="Core\ConvertTime.cs" />
     <Compile Include="Core\DataClass.cs" />
     <Compile Include="Core\GenerateId.cs" />
+    <Compile Include="Core\InternetAvailability.cs" />
     <Compile Include="Core\ObservableObject.cs" />
     <Compile Include="Core\RelayCommand.cs" />
     <Compile Include="Core\Sessions.cs" />

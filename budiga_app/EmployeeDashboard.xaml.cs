@@ -9,6 +9,7 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 using budiga_app.Core;
 using budiga_app.DataAccess;
 using budiga_app.MVVM.Model;
@@ -27,6 +28,20 @@ namespace budiga_app
         {
             InitializeComponent();
             dataClass = DataClass.GetInstance;
+
+            var timer = new DispatcherTimer();
+            timer.Interval = TimeSpan.FromSeconds(10);
+            timer.Tick += CheckInternetAvailability;
+            timer.Start();
+        }
+
+        private void CheckInternetAvailability(object sender, EventArgs e)
+        {
+            if (!InternetAvailability.IsInternetAvailable())
+            {
+                MessageBox.Show("Device is not connected to the internet", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                this.Close();
+            }
         }
 
         private void LogoutBtn_Click(object sender, RoutedEventArgs e)

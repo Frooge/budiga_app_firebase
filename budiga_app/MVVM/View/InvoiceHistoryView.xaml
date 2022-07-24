@@ -40,11 +40,11 @@
               CanUserResizeColumns="False"
               CanUserAddRows="False"
               CanUserResizeRows="False"
-              Height="720" Width="1080">
+              Height="720" Width="1200">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Invoice No." Binding="{Binding Id}" Width="*"/>
-                <DataGridTextColumn Header="Date" Binding="{Binding CreatedDate}" Width="2*"/>
-                <DataGridTemplateColumn Header="Item/s" Width="2*">
+                <DataGridTextColumn Header="Date" Binding="{Binding CreatedDate}" Width="1.5*"/>
+                <DataGridTemplateColumn Header="Item/s" Width="*">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <ItemsControl ItemsSource="{Binding InvoiceOrderRecords}">
@@ -83,7 +83,7 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTemplateColumn Header="Quantity" Width="*">
+                <DataGridTemplateColumn Header="Quantity" Width=".75*">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <ItemsControl ItemsSource="{Binding InvoiceOrderRecords}">

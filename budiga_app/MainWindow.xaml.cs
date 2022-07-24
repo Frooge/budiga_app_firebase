@@ -69,7 +69,16 @@ namespace budiga_app
 
         private void loginBtn_Click(object sender, RoutedEventArgs e)
         {
-            RunQueryLogin();
+            var check = InternetAvailability.IsInternetAvailable();
+
+            if (InternetAvailability.IsInternetAvailable())
+            {
+                RunQueryLogin();
+            }
+            else
+            {
+                MessageBox.Show("Device is not connected to the internet", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         private async void RunQueryLogin()
@@ -81,7 +90,7 @@ namespace budiga_app
                 DataClass dataClass = DataClass.GetInstance;
                 Query query = conn.FirestoreDb.Collection("users").WhereEqualTo("Username", usernameBox.Text.Trim()).WhereEqualTo("Password", passwordBox.Password.Trim().ToString());
                 QuerySnapshot querySnapshot = await query.GetSnapshotAsync();
-                if (querySnapshot.Documents != null)
+                if (querySnapshot.Documents.Count > 0)
                 {
                     Dictionary<string, object> dict = querySnapshot.Documents[0].ToDictionary();
                     dataClass.LoggedInUser = new UserModel

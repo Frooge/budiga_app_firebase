@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 using budiga_app.Core;
 using budiga_app.DataAccess;
 using budiga_app.MVVM.Model;
@@ -25,10 +26,25 @@ namespace budiga_app
     public partial class AdminDashboard : Window
     {
         private DataClass dataClass;
+
         public AdminDashboard()
         {
             InitializeComponent();
             dataClass = DataClass.GetInstance;
+
+            var timer = new DispatcherTimer();
+            timer.Interval = TimeSpan.FromSeconds(10);
+            timer.Tick += CheckInternetAvailability;
+            timer.Start();
+        }
+
+        private void CheckInternetAvailability(object sender, EventArgs e)
+        {
+            if (!InternetAvailability.IsInternetAvailable())
+            {
+                MessageBox.Show("Device is not connected to the internet", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                this.Close();
+            }
         }
 
         private async void LogoutBtn_Click(object sender, RoutedEventArgs e)
