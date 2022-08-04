@@ -36,9 +36,9 @@
                             <DataTemplate>
                                 <Label>
                                     <Label.Content>
-                                        <TextBlock>
+                                        <TextBlock TextWrapping="Wrap">
                                             <TextBlock.Text>
-                                                <MultiBinding StringFormat="{}{0} {1}*₱{2:0.00} = ₱{3:0.00}">
+                                                <MultiBinding StringFormat="{}{0}&#x0a;{1} * ₱{2:0.00} = ₱{3:0.00}">
                                                     <Binding Path="Item.Name" />
                                                     <Binding Path="Quantity" />
                                                     <Binding Path="Item.Price" />

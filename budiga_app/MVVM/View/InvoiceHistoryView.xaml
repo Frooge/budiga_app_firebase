@@ -40,10 +40,12 @@
               CanUserResizeColumns="False"
               CanUserAddRows="False"
               CanUserResizeRows="False"
-              Height="720" Width="1200">
+              IsSynchronizedWithCurrentItem="True"
+              Height="720"
+              Width="1200">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Invoice No." Binding="{Binding Id}" Width="*"/>
-                <DataGridTextColumn Header="Date" Binding="{Binding CreatedDate}" Width="1.5*"/>
+                <DataGridTextColumn Header="Date" Binding="{Binding CreatedDate, StringFormat={}{0:MM/dd/yy H:mm:ss}}" Width="1.5*" SortDirection="Ascending"/>
                 <DataGridTemplateColumn Header="Item/s" Width="*">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
@@ -110,7 +112,7 @@
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
                 <DataGridTextColumn Header="Total" Binding="{Binding TotalPrice, StringFormat={}PHP {0:0.00}}" Width="*"/>
-                <DataGridTextColumn Header="Created By" Binding="{Binding UserFullName}" Width="*"/>
+                <DataGridTextColumn Header="Issued By" Binding="{Binding UserFullName}" Width="*"/>
             </DataGrid.Columns>
             <DataGrid.CellStyle>
                 <Style TargetType="{x:Type DataGridCell}" BasedOn="{StaticResource MaterialDesignDataGridCell}">
@@ -118,12 +120,12 @@
                     <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
                 </Style>
             </DataGrid.CellStyle>
-            <b:Interaction.Triggers>
-                <b:EventTrigger EventName="MouseDoubleClick">
-                    <b:InvokeCommandAction Command="{Binding ElementName=invoiceHistoryView, Path=ViewModel.GetReceiptCommand}"
-                                           CommandParameter="{Binding Path=SelectedItem, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=DataGrid}}"/>
-                </b:EventTrigger>
-            </b:Interaction.Triggers>
+            <DataGrid.InputBindings>
+                <MouseBinding
+                    MouseAction="LeftDoubleClick"
+                    Command="{Binding ElementName=invoiceHistoryView, Path=ViewModel.GetReceiptCommand}"
+                    CommandParameter="{Binding Path=SelectedItem, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=DataGrid}}"/>
+            </DataGrid.InputBindings>
         </DataGrid>
     </StackPanel>
 

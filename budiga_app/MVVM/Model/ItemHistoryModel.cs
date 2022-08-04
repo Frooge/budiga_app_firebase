@@ -13,8 +13,8 @@ namespace budiga_app.MVVM.Model
     {
         private string _id;        
         private string _itemId;
-        private string _storeId;
-        private string _branchId;
+        //private string _storeId;
+        //private string _branchId;
         private string _userFullName;
         private string _barcode;
         private string _name;
@@ -28,8 +28,8 @@ namespace budiga_app.MVVM.Model
 
         public string Id { get { return _id; } set { _id = value; OnPropertyChanged("Id"); } }
         public string ItemId { get { return _itemId; } set { _itemId = value; OnPropertyChanged("ItemId"); } }
-        public string StoreId { get { return _storeId; } set { _storeId = value; OnPropertyChanged("StoreId"); } }
-        public string BranchId { get { return _branchId; } set { _branchId = value; OnPropertyChanged("BranchId"); } }
+        //public string StoreId { get { return _storeId; } set { _storeId = value; OnPropertyChanged("StoreId"); } }
+        //public string BranchId { get { return _branchId; } set { _branchId = value; OnPropertyChanged("BranchId"); } }
         public string UserFullName { get { return _userFullName; } set { _userFullName = value; OnPropertyChanged("UserFullName"); } }
         public string Barcode { get { return _barcode; } set { _barcode = value; OnPropertyChanged("Barcode"); } }
         public string Name { get { return _name; } set { _name = value; OnPropertyChanged("Name"); } }

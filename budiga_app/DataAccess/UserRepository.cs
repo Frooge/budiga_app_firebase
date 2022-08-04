@@ -27,11 +27,12 @@ namespace budiga_app.DataAccess
             try
             {
                 string newId = GenerateId.GenerateCommon();
-                DocumentReference docRef = conn.FirestoreDb.Collection("users").Document(newId);
+                DocumentReference docRef = conn.FirestoreDb.Collection("Users").Document(newId);
                 Dictionary<string, object> dict = new Dictionary<string, object>
                 {
                     { "Id", newId },
                     { "StoreId", user.StoreId },
+                    { "BranchId", user.BranchId },
                     { "FName", user.FName },
                     { "LName", user.LName },
                     { "Username", user.Username },
@@ -58,7 +59,7 @@ namespace budiga_app.DataAccess
             bool result = false;
             try
             {
-                DocumentReference docRef = conn.FirestoreDb.Collection("users").Document(user.Id);
+                DocumentReference docRef = conn.FirestoreDb.Collection("Users").Document(user.Id);
                 Dictionary<string, object> dict = new Dictionary<string, object>
                 {
                     { "StoreId", user.StoreId },
@@ -85,7 +86,7 @@ namespace budiga_app.DataAccess
             bool result = false;
             try
             {
-                DocumentReference docRef = conn.FirestoreDb.Collection("users").Document(id);
+                DocumentReference docRef = conn.FirestoreDb.Collection("Users").Document(id);
                 Dictionary<string, object> dict = new Dictionary<string, object>
                 {
                     { "IsDeleted", true },

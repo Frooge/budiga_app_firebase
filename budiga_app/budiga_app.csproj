@@ -314,8 +314,8 @@
     <Compile Include="MVVM\ViewModel\EmployeeViewModel.cs" />
     <Compile Include="MVVM\ViewModel\InventoryViewModel.cs" />
     <Compile Include="MVVM\ViewModel\LoginViewModel.cs" />
-    <Compile Include="MVVM\ViewModel\SalesOverviewViewModel.cs" />
     <Compile Include="MVVM\ViewModel\SalesInventoryViewModel.cs" />
+    <Compile Include="MVVM\ViewModel\SalesOverviewViewModel.cs" />
     <Compile Include="MVVM\ViewModel\SalesViewModel.cs" />
     <Compile Include="MVVM\ViewModel\EmployeeMainViewModel.cs" />
     <Compile Include="MVVM\ViewModel\InvoiceViewModel.cs" />
@@ -387,9 +387,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <Content Include="FirebaseAdminSDK\budiga-app-firebase-adminsdk-bgoge-e0a2df823f.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    <None Include="FirebaseAdminSDK\budiga-4d848-firebase-adminsdk-6muh6-a589eff696.json" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

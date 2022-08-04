@@ -40,12 +40,10 @@ namespace budiga_app.DataAccess
             bool result = false;
             try
             {                
-                DocumentReference docRef = conn.FirestoreDb.Collection("items").Document(item.Id);
+                DocumentReference docRef = conn.FirestoreDb.Collection("Stores").Document(dataClass.Store.Id).Collection("Branch").Document(dataClass.Store.Branch.Id).Collection("Items").Document(item.Id);
                 Dictionary<string, object> dict = new Dictionary<string, object>
                 {
                     { "Id", item.Id },
-                    { "StoreId", dataClass.Store.Id },
-                    { "BranchId", dataClass.Store.Branch.Id },
                     { "Barcode", item.Barcode },
                     { "Name", item.Name },
                     { "Brand", item.Brand },
@@ -55,7 +53,6 @@ namespace budiga_app.DataAccess
                 };
                 await docRef.SetAsync(dict);
                 result = true;
-                MessageBox.Show("Successfully added item!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
             }
             catch (Exception ex)
             {
@@ -69,7 +66,7 @@ namespace budiga_app.DataAccess
             bool result = false;
             try
             {
-                DocumentReference docRef = conn.FirestoreDb.Collection("items").Document(item.Id);
+                DocumentReference docRef = conn.FirestoreDb.Collection("Stores").Document(dataClass.Store.Id).Collection("Branch").Document(dataClass.Store.Branch.Id).Collection("Items").Document(item.Id);
                 Dictionary<string, object> dict = new Dictionary<string, object>
                 {
                     { "Barcode", item.Barcode },
@@ -80,7 +77,6 @@ namespace budiga_app.DataAccess
                 };
                 await docRef.UpdateAsync(dict);
                 result = true;
-                MessageBox.Show("Successfully updated item!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
             }
             catch (Exception ex)
             {
@@ -94,14 +90,13 @@ namespace budiga_app.DataAccess
             bool result = false;
             try
             {
-                DocumentReference docRef = conn.FirestoreDb.Collection("items").Document(id);
+                DocumentReference docRef = conn.FirestoreDb.Collection("Stores").Document(dataClass.Store.Id).Collection("Branch").Document(dataClass.Store.Branch.Id).Collection("Items").Document(id);
                 Dictionary<string, object> dict = new Dictionary<string, object>
                 {
                     { "IsDeleted", true }
                 };
                 await docRef.SetAsync(dict, SetOptions.MergeAll);
                 result = true;
-                MessageBox.Show("Successfully deleted item!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
             }
             catch (Exception ex)
             {

@@ -12,7 +12,7 @@ namespace budiga_app
 {
     public class FirestoreConn
     {
-        private readonly string path = "..\\..\\FirebaseAdminSDK\\" + @"budiga-app-firebase-adminsdk-bgoge-e0a2df823f.json";
+        private readonly string path = "..\\..\\FirebaseAdminSDK\\" + @"budiga-4d848-firebase-adminsdk-6muh6-a589eff696.json";
         private static FirestoreConn _instance;
         public FirestoreDb FirestoreDb { get; set; }
 
@@ -27,7 +27,7 @@ namespace budiga_app
             {
                 var jsonString = File.ReadAllText(path);
                 var builder = new FirestoreClientBuilder { JsonCredentials = jsonString };
-                FirestoreDb = FirestoreDb.Create("budiga-app", builder.Build());
+                FirestoreDb = FirestoreDb.Create("budiga-4d848", builder.Build()); // Database name
             }
             catch (Exception ex)
             {

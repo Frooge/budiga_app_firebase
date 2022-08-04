@@ -39,24 +39,19 @@
         </StackPanel>
         
         <StackPanel Grid.Column="1" Margin="10">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="8*"/>
-                    <ColumnDefinition Width="2*"/>
-                </Grid.ColumnDefinitions>
-                <StackPanel Orientation="Horizontal" Grid.Column="1">
-                    <Image Source="/Resources/Images/SearchIcon.png" Width="20" />
-                    <TextBox Width="190" x:Name="searchField" Margin="5">
-                        <b:Interaction.Triggers>
-                            <b:EventTrigger EventName="TextChanged">
-                                <b:InvokeCommandAction Command="{Binding ElementName=invoiceAddView, Path=ViewModel.SearchItemCommand}"
+
+            <StackPanel Orientation="Horizontal" Grid.Column="0">
+                <TextBox Width="190" x:Name="searchField" Margin="5">
+                    <b:Interaction.Triggers>
+                        <b:EventTrigger EventName="TextChanged">
+                            <b:InvokeCommandAction Command="{Binding ElementName=invoiceAddView, Path=ViewModel.SearchItemCommand}"
                                                     CommandParameter="{Binding Text, ElementName=searchField}"/>
-                            </b:EventTrigger>
-                        </b:Interaction.Triggers>
-                    </TextBox>
-                </StackPanel>
-            </Grid>
-                
+                        </b:EventTrigger>
+                    </b:Interaction.Triggers>
+                </TextBox>
+                <Image Source="/Resources/Images/SearchIcon.png" Width="20" />
+            </StackPanel>
+
             <DataGrid x:Name="inventoryTable"                              
                             ItemsSource="{Binding ElementName=invoiceAddView, Path=ViewModel.Item.ItemRecords}" 
                             MouseDoubleClick="InventoryTable_DoubleClick"
@@ -64,16 +59,34 @@
                             CanUserResizeColumns="False"
                             CanUserAddRows="False"
                             CanUserResizeRows="False" 
-                            Width="480" 
+                            Width="580" 
                             Height="450"
                             Padding="0,0"
                             BorderThickness="1"
                             AlternatingRowBackground="White">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Product" Binding="{Binding Path=Name}" Width="1.5*"/>
-                    <DataGridTextColumn Header="Barcode" Binding="{Binding Path=Barcode}" Width="*"/>
-                    <DataGridTextColumn Header="Brand" Binding="{Binding Path=Brand}" Width="*"/>
-                    <DataGridTextColumn Header="Price" Binding="{Binding Path=Price, StringFormat={}PHP {0:0.00}}" Width="1.5*"/>
+                    <DataGridTextColumn Header="Barcode" Binding="{Binding Path=Barcode}" Width="*">
+                        <DataGridTextColumn.ElementStyle>
+                            <Style>
+                                <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+                    <DataGridTextColumn Header="Product" Binding="{Binding Path=Name}" Width="*">
+                        <DataGridTextColumn.ElementStyle>
+                            <Style>
+                                <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+                    <DataGridTextColumn Header="Brand" Binding="{Binding Path=Brand}" Width="*">
+                        <DataGridTextColumn.ElementStyle>
+                            <Style>
+                                <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+                    <DataGridTextColumn Header="Price" Binding="{Binding Path=Price, StringFormat={}PHP {0:0.00}}" Width="*"/>
                     <DataGridTextColumn Header="Qty" Binding="{Binding Path=Quantity}" Width="*"/>
                 </DataGrid.Columns>
                 <DataGrid.CellStyle>

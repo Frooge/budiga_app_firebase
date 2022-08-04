@@ -6,6 +6,7 @@ using Google.Cloud.Firestore;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -77,7 +78,7 @@ namespace budiga_app.MVVM.ViewModel
             {
                 DataClass dataClass = DataClass.GetInstance;
                 FirestoreConn conn = FirestoreConn.GetInstance;
-                Query query = conn.FirestoreDb.Collection("invoice").WhereEqualTo("BranchId", dataClass.Store.Branch.Id);
+                Query query = conn.FirestoreDb.Collection("Stores").Document(dataClass.Store.Id).Collection("Branch").Document(dataClass.Store.Branch.Id).Collection("Invoice");
 
                 FirestoreChangeListener listener = query.Listen(async snapshot =>
                 {
@@ -86,56 +87,48 @@ namespace budiga_app.MVVM.ViewModel
                     foreach (DocumentSnapshot documentSnapshot in snapshot.Documents)
                     {
                         Dictionary<string, object> dict = documentSnapshot.ToDictionary();
-                        Query ordersQuery = conn.FirestoreDb.Collection("orders").WhereEqualTo("InvoiceId", dict["Id"]);
-                        QuerySnapshot ordersQuerySnapshot = await ordersQuery.GetSnapshotAsync();                        
-                        
-                        App.Current.Dispatcher.Invoke((System.Action)async delegate
+                        Query ordersQuery = conn.FirestoreDb.Collection("Stores").Document(dataClass.Store.Id).Collection("Branch").Document(dataClass.Store.Branch.Id).Collection("Orders").WhereEqualTo("InvoiceId", dict["Id"]);
+                        QuerySnapshot ordersQuerySnapshot = await ordersQuery.GetSnapshotAsync();
+                        foreach (DocumentSnapshot orderDocumentSnapshot in ordersQuerySnapshot.Documents)
                         {
-                            foreach (DocumentSnapshot orderDocumentSnapshot in ordersQuerySnapshot.Documents)
+                            Dictionary<string, object> orderDict = orderDocumentSnapshot.ToDictionary();
+                            DocumentReference itemRef = conn.FirestoreDb.Collection("Stores").Document(dataClass.Store.Id).Collection("Branch").Document(dataClass.Store.Branch.Id).Collection("Items").Document(orderDict["ItemId"].ToString());
+                            DocumentSnapshot snapshotItem = await itemRef.GetSnapshotAsync();
+                            Dictionary<string, object> itemDict = snapshotItem.ToDictionary();
+                            Order.OrderRecords.Add(new OrderModel
                             {
-                                Dictionary<string, object> orderDict = orderDocumentSnapshot.ToDictionary();
-                                DocumentReference itemRef = conn.FirestoreDb.Collection("items").Document(orderDict["ItemId"].ToString());
-                                DocumentSnapshot snapshotItem = await itemRef.GetSnapshotAsync();
-                                Dictionary<string, object> itemDict = snapshotItem.ToDictionary();
-                                Order.OrderRecords.Add(new OrderModel
+                                Id = orderDict["Id"].ToString(),
+                                ItemId = orderDict["ItemId"].ToString(),
+                                InvoiceId = orderDict["InvoiceId"].ToString(),
+                                Quantity = Convert.ToInt32(orderDict["Quantity"]),
+                                ActualItemPrice = Convert.ToDecimal(orderDict["ActualItemPrice"]),
+                                SubtotalPrice = Convert.ToDecimal(orderDict["SubtotalPrice"]),
+                                Item = new ItemModel
                                 {
-                                    Id = orderDict["Id"].ToString(),
-                                    ItemId = orderDict["ItemId"].ToString(),
-                                    InvoiceId = orderDict["InvoiceId"].ToString(),
-                                    Quantity = Convert.ToInt32(orderDict["Quantity"]),
-                                    ActualItemPrice = Convert.ToDecimal(orderDict["ActualItemPrice"]),
-                                    SubtotalPrice = Convert.ToDecimal(orderDict["SubtotalPrice"]),
-                                    Item = new ItemModel
-                                    {
-                                        Id = itemDict["Id"].ToString(),
-                                        StoreId = itemDict["StoreId"].ToString(),
-                                        BranchId = itemDict["BranchId"].ToString(),
-                                        Barcode = itemDict["Barcode"].ToString(),
-                                        Name = itemDict["Name"].ToString(),
-                                        Brand = itemDict["Brand"].ToString(),
-                                        Price = Convert.ToDecimal(itemDict["Price"]),
-                                        Quantity = Convert.ToInt32(itemDict["Quantity"])
-                                    }
-                                });
-                            }
- 
-                            _invoice.InvoiceRecords.Add(new InvoiceModel()
-                            {
-                                Id = dict["Id"].ToString(),
-                                UserFullName = dict["UserFullName"].ToString(),
-                                StoreId = dict["StoreId"].ToString(),
-                                BranchId = dict["BranchId"].ToString(),
-                                BranchName = dataClass.Store.Branch.Name,
-                                Address = dataClass.Store.Branch.Location,
-                                TotalPrice = Convert.ToDecimal(dict["TotalPrice"]),
-                                CustomerPay = Convert.ToDecimal(dict["CustomerPay"]),
-                                CreatedDate = ((Timestamp)dict["CreatedDate"]).ToDateTime().ToLocalTime(),
-                                InvoiceOrderRecords = new ObservableCollection<OrderModel>(Order.OrderRecords.ToList())
+                                    Id = itemDict["Id"].ToString(),
+                                    Barcode = itemDict["Barcode"].ToString(),
+                                    Name = itemDict["Name"].ToString(),
+                                    Brand = itemDict["Brand"].ToString(),
+                                    Price = Convert.ToDecimal(itemDict["Price"]),
+                                    Quantity = Convert.ToInt32(itemDict["Quantity"])
+                                }
                             });
+                        }
 
-                            Order.OrderRecords.Clear();
+                        _invoice.InvoiceRecords.Add(new InvoiceModel()
+                        {
+                            Id = dict["Id"].ToString(),
+                            UserFullName = dict["UserFullName"].ToString(),
+                            BranchName = dataClass.Store.Branch.Name,
+                            Address = dataClass.Store.Branch.Location,
+                            TotalPrice = Convert.ToDecimal(dict["TotalPrice"]),
+                            CustomerPay = Convert.ToDecimal(dict["CustomerPay"]),
+                            CreatedDate = ((Timestamp)dict["CreatedDate"]).ToDateTime().ToLocalTime(),
+                            InvoiceOrderRecords = new ObservableCollection<OrderModel>(Order.OrderRecords.ToList())
                         });
-                    }
+
+                        Order.OrderRecords.Clear();
+                    }    
                     Invoice.InvoiceRecords = _invoice.InvoiceRecords;
                 });
             }
@@ -217,10 +210,9 @@ namespace budiga_app.MVVM.ViewModel
             {
                 Invoice.Id = GenerateId.GenerateInvoice(DateTime.Now);
                 Invoice.CustomerPay = payment;
-                Invoice.StoreId = dataClass.Store.Id;
-                Invoice.BranchId = dataClass.Store.Branch.Id;
                 Invoice.UserFullName = String.Format("{0} {1}", dataClass.LoggedInUser.FName, dataClass.LoggedInUser.LName);
                 Invoice.CreatedDate = DateTime.UtcNow;
+                MessageBox.Show("Processing payment...", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
                 if (await invoiceRepository.AddInvoice(Invoice))
                 {
                     Invoice.InvoiceRecords.Add(Invoice);
@@ -228,7 +220,7 @@ namespace budiga_app.MVVM.ViewModel
                     {
                         await itemHistoryRepository.AddHistory(order.Item, "TRANSACTION");
                         order.Item.Quantity -= order.Quantity;
-                        await itemRepository.AddItem(order.Item);                        
+                        await itemRepository.UpdateItem(order.Item);                        
                     }
                     GetReceipt(Invoice.InvoiceRecords.Where(i => i.Id == Invoice.Id).FirstOrDefault());                    
                 }

@@ -26,8 +26,8 @@ namespace budiga_app.DataAccess
             bool result = false;
             try
             {
-                string newId = GenerateId.GenerateCommon();
-                DocumentReference docRef = conn.FirestoreDb.Collection("item_history").Document(newId);
+                string newId = GenerateId.GenerateItemHistory(DateTime.Now);
+                DocumentReference docRef = conn.FirestoreDb.Collection("Stores").Document(dataClass.Store.Id).Collection("Branch").Document(dataClass.Store.Branch.Id).Collection("ItemHistory").Document(newId);
                 Dictionary<string, object> dict = new Dictionary<string, object>
                 {
                     { "Id", newId },
@@ -58,7 +58,7 @@ namespace budiga_app.DataAccess
             bool result = false;
             try
             {
-                DocumentReference docRef = conn.FirestoreDb.Collection("item_history").Document(id);
+                DocumentReference docRef = conn.FirestoreDb.Collection("Stores").Document(dataClass.Store.Id).Collection("Branch").Document(dataClass.Store.Branch.Id).Collection("ItemHistory").Document(id);
                 await docRef.DeleteAsync();
                 result = true;
             }
@@ -76,7 +76,7 @@ namespace budiga_app.DataAccess
             {
                 string newAction;
                 WriteBatch batch = conn.FirestoreDb.StartBatch();
-                DocumentReference itemRef = conn.FirestoreDb.Collection("items").Document(itemHistory.ItemId);
+                DocumentReference itemRef = conn.FirestoreDb.Collection("Stores").Document(dataClass.Store.Id).Collection("Branch").Document(dataClass.Store.Branch.Id).Collection("Items").Document(itemHistory.ItemId);
                 Dictionary<string, object> dict;
                 switch (itemHistory.Action)
                 {
@@ -113,12 +113,12 @@ namespace budiga_app.DataAccess
                 }
                 batch.Update(itemRef, dict);
 
-                DocumentReference historyRef = conn.FirestoreDb.Collection("item_history").Document(itemHistory.Id);
+                DocumentReference historyRef = conn.FirestoreDb.Collection("Stores").Document(dataClass.Store.Id).Collection("Branch").Document(dataClass.Store.Branch.Id).Collection("ItemHistory").Document(itemHistory.Id);
                 batch.Delete(historyRef);
 
                 string newId = GenerateId.GenerateCommon();
-                DocumentReference newHistoryRef = conn.FirestoreDb.Collection("item_history").Document(newId);
-                DocumentReference oldItemRef = conn.FirestoreDb.Collection("items").Document(itemHistory.ItemId);
+                DocumentReference newHistoryRef = conn.FirestoreDb.Collection("Stores").Document(dataClass.Store.Id).Collection("Branch").Document(dataClass.Store.Branch.Id).Collection("ItemHistory").Document(newId);
+                DocumentReference oldItemRef = conn.FirestoreDb.Collection("Stores").Document(dataClass.Store.Id).Collection("Branch").Document(dataClass.Store.Branch.Id).Collection("Items").Document(itemHistory.ItemId);
                 await conn.FirestoreDb.RunTransactionAsync(async transaction =>
                 {
                     DocumentSnapshot snapshot = await transaction.GetSnapshotAsync(oldItemRef);

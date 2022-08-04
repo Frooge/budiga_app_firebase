@@ -22,12 +22,13 @@
                   CanUserResizeColumns="False"
                   CanUserAddRows="False"
                   CanUserResizeRows="False"
+                  IsSynchronizedWithCurrentItem="True"
                   Width="1000"
                   Height="640"
                   Padding="0,0">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Barcode" Binding="{Binding Path=Barcode}" Width="*"/>
-                <DataGridTextColumn Header="Product" Binding="{Binding Path=Name}" Width="*">
+                <DataGridTextColumn Header="Product" Binding="{Binding Path=Name}" Width="1.5*">
                     <DataGridTextColumn.ElementStyle>
                         <Style>
                             <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
@@ -42,10 +43,16 @@
                     </DataGridTextColumn.ElementStyle>
                 </DataGridTextColumn>
                 <DataGridTextColumn Header="Price" Binding="{Binding Path=Price, StringFormat={}PHP {0:0.00}}" Width="*"/>
-                <DataGridTextColumn Header="Quantity" Binding="{Binding Path=Quantity}" Width="*"/>
+                <DataGridTextColumn Header="Qty" Binding="{Binding Path=Quantity}" Width=".5*"/>
                 <DataGridTextColumn Header="Action" Binding="{Binding Path=Action}" Width="*"/>
-                <DataGridTextColumn Header="Created By" Binding="{Binding UserFullName}" Width="*"/>
-                <DataGridTextColumn Header="Date" Binding="{Binding Path=CommittedDate}" Width="2*"/>
+                <DataGridTextColumn Header="Date" Binding="{Binding Path=CommittedDate, StringFormat={}{0:MM/dd/yy}&#x0a;{0:H:mm:ss}}" Width="*"  SortDirection="Ascending"/>
+                <DataGridTextColumn Header="Issued By" Binding="{Binding UserFullName}" Width="*">
+                <DataGridTextColumn.ElementStyle>
+                    <Style>
+                        <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
+                    </Style>
+                </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
             </DataGrid.Columns>
             <DataGrid.CellStyle>
                 <Style TargetType="DataGridCell" BasedOn="{StaticResource MaterialDesignDataGridCell}">
@@ -53,12 +60,12 @@
                     <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
                 </Style>
             </DataGrid.CellStyle>
-            <b:Interaction.Triggers>
-                <b:EventTrigger EventName="MouseDoubleClick">
-                    <b:InvokeCommandAction Command="{Binding ElementName=inventoryHistoryView, Path=ViewModel.UndoActionCommand}"
-                                           CommandParameter="{Binding Path=SelectedItem, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=DataGrid}}"/>
-                </b:EventTrigger>
-            </b:Interaction.Triggers>
+            <DataGrid.InputBindings>
+                <MouseBinding
+                    MouseAction="LeftDoubleClick"
+                    Command="{Binding ElementName=inventoryHistoryView, Path=ViewModel.UndoActionCommand}"
+                    CommandParameter="{Binding Path=SelectedItem, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=DataGrid}}"/>
+            </DataGrid.InputBindings>
         </DataGrid>
     </StackPanel>
 </Window>

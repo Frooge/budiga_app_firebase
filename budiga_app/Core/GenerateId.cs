@@ -18,7 +18,7 @@ namespace budiga_app.Core
             return id;
         }
 
-        public static string GenerateStore(string name)
+        public static string GenerateBranch(string name)
         {
             string code = name.Substring(0, 3).ToUpper();
             string id = code + "-" + GenerateNum();
@@ -26,9 +26,23 @@ namespace budiga_app.Core
             return id;
         }
 
+        public static string GenerateItemHistory(DateTime date)
+        {
+            string id = string.Format("{0:00}{1:00}{2}{3}-{4}", date.Month, date.Day, date.Year, (date.Hour * date.Minute * date.Second).ToString().Substring(0,3), GenerateString());
+
+            return id;
+        }
+
         public static string GenerateInvoice(DateTime date)
         {
-            string id = string.Format("{0}{1}{2}{3}", date.Month, date.Day, date.Year, (date.Hour * date.Minute * date.Second).ToString().Substring(0,3));
+            string id = string.Format("{0:00}{1:00}{2}{3}", date.Month, date.Day, date.Year, (date.Hour * date.Minute * date.Second).ToString().Substring(0,3));
+
+            return id;
+        }
+
+        public static string GenerateOrder(DateTime date)
+        {
+            string id = string.Format("{0:00}{1:00}{2}{3}-{4}", date.Month, date.Day, date.Year, (date.Hour * date.Minute * date.Second).ToString().Substring(0, 3), GenerateString().Substring(0, 8));
 
             return id;
         }

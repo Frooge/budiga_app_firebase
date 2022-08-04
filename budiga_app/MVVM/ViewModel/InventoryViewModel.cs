@@ -75,7 +75,7 @@ namespace budiga_app.MVVM.ViewModel
             {
                 DataClass dataClass = DataClass.GetInstance;
                 FirestoreConn conn = FirestoreConn.GetInstance;
-                Query query = conn.FirestoreDb.Collection("items").WhereEqualTo("IsDeleted", false).WhereEqualTo("BranchId", dataClass.Store.Branch.Id);
+                Query query = conn.FirestoreDb.Collection("Stores").Document(dataClass.Store.Id).Collection("Branch").Document(dataClass.Store.Branch.Id).Collection("Items").WhereEqualTo("IsDeleted", false);
 
                 FirestoreChangeListener listener = query.Listen(snapshot =>
                 {
@@ -88,8 +88,6 @@ namespace budiga_app.MVVM.ViewModel
                             _item.ItemRecords.Add(new ItemModel()
                             {
                                 Id = dict["Id"].ToString(),
-                                StoreId = dict["StoreId"].ToString(),
-                                BranchId = dict["BranchId"].ToString(),
                                 Barcode = dict["Barcode"].ToString(),
                                 Name = dict["Name"].ToString(),
                                 Brand = dict["Brand"].ToString(),
@@ -113,7 +111,7 @@ namespace budiga_app.MVVM.ViewModel
             {
                 DataClass dataClass = DataClass.GetInstance;
                 FirestoreConn conn = FirestoreConn.GetInstance;
-                Query query = conn.FirestoreDb.Collection("item_history").WhereEqualTo("BranchId", dataClass.Store.Branch.Id).Limit(50);
+                Query query = conn.FirestoreDb.Collection("Stores").Document(dataClass.Store.Id).Collection("Branch").Document(dataClass.Store.Branch.Id).Collection("ItemHistory").Limit(25);
 
                 FirestoreChangeListener listener = query.Listen(snapshot =>
                 {
@@ -127,8 +125,6 @@ namespace budiga_app.MVVM.ViewModel
                             {
                                 Id = dict["Id"].ToString(),
                                 ItemId = dict["ItemId"].ToString(),
-                                StoreId = dict["StoreId"].ToString(),
-                                BranchId = dict["BranchId"].ToString(),
                                 UserFullName = dict["UserFullName"].ToString(),
                                 Barcode = dict["Barcode"].ToString(),
                                 Name = dict["Name"].ToString(),
@@ -179,6 +175,7 @@ namespace budiga_app.MVVM.ViewModel
             bool result = true;          
             if(!await _itemRepository.AddItem(item)){ result = false; }
             if(result && !await _itemHistoryRepository.AddHistory(item, "ADDED")) { result = false; }
+            MessageBox.Show("Successfully added item!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
             return result;
         }
 
@@ -187,6 +184,7 @@ namespace budiga_app.MVVM.ViewModel
             bool result = true;           
             if (!await _itemRepository.UpdateItem(item)) { result = false; }
             if (result && !await _itemHistoryRepository.AddHistory(oldItem, "UPDATED")) { result = false; }
+            MessageBox.Show("Successfully updated item!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
             return result;
         }
 
@@ -195,6 +193,7 @@ namespace budiga_app.MVVM.ViewModel
             bool result = true;           
             if (!await _itemRepository.DeleteItem(item.Id)) { result = false; }
             if (result && !await _itemHistoryRepository.AddHistory(item, "DELETED")) { result = false; }
+            MessageBox.Show("Successfully deleted item!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
             return result;
         }       
 

@@ -43,7 +43,7 @@ namespace budiga_app.Core
                     FirestoreConn conn = FirestoreConn.GetInstance;
                     if (LoggedInUser.Type.Equals("employee"))
                     {
-                        DocumentReference docRef = conn.FirestoreDb.Collection("stores").Document(LoggedInUser.StoreId).Collection("branch").Document(LoggedInUser.BranchId);
+                        DocumentReference docRef = conn.FirestoreDb.Collection("Stores").Document(LoggedInUser.StoreId).Collection("Branch").Document(LoggedInUser.BranchId);
                         DocumentSnapshot snapshot = await docRef.GetSnapshotAsync();
                         if (snapshot.Exists)
                         {
@@ -62,7 +62,7 @@ namespace budiga_app.Core
                     }
                     else if (LoggedInUser.Type.Equals("admin"))
                     {
-                        Query query = conn.FirestoreDb.Collection("stores").Document(LoggedInUser.StoreId).Collection("branch");
+                        Query query = conn.FirestoreDb.Collection("Stores").Document(LoggedInUser.StoreId).Collection("Branch");
                         QuerySnapshot querySnapshot = await query.GetSnapshotAsync();
                         Store = new StoreModel
                         {
@@ -105,7 +105,7 @@ namespace budiga_app.Core
                     FirestoreConn conn = FirestoreConn.GetInstance;
                     WriteBatch batch = conn.FirestoreDb.StartBatch();
 
-                    DocumentReference userRef = conn.FirestoreDb.Collection("users").Document(LoggedInUser.Id);
+                    DocumentReference userRef = conn.FirestoreDb.Collection("Users").Document(LoggedInUser.Id);
                     Dictionary<string, object> userDict = new Dictionary<string, object>
                     {
                         { "Online", true }
@@ -120,7 +120,7 @@ namespace budiga_app.Core
                         TimeIn = DateTime.UtcNow,
                         TimeOut = null
                     };
-                    DocumentReference attRef = conn.FirestoreDb.Collection("stores").Document(Store.Id).Collection("attendance").Document(Attendance.Id);
+                    DocumentReference attRef = conn.FirestoreDb.Collection("Stores").Document(Store.Id).Collection("Attendance").Document(Attendance.Id);
                     Dictionary<string, object> attDict = new Dictionary<string, object>
                     {
                         { "Id", Attendance.Id },
@@ -152,14 +152,14 @@ namespace budiga_app.Core
                     FirestoreConn conn = FirestoreConn.GetInstance;
                     WriteBatch batch = conn.FirestoreDb.StartBatch();
 
-                    DocumentReference userRef = conn.FirestoreDb.Collection("users").Document(LoggedInUser.Id);
+                    DocumentReference userRef = conn.FirestoreDb.Collection("Users").Document(LoggedInUser.Id);
                     Dictionary<string, object> userDict = new Dictionary<string, object>
                     {
                         { "Online", false }
                     };
                     batch.Update(userRef, userDict);
 
-                    DocumentReference attRef = conn.FirestoreDb.Collection("stores").Document(Store.Id).Collection("attendance").Document(Attendance.Id);
+                    DocumentReference attRef = conn.FirestoreDb.Collection("Stores").Document(Store.Id).Collection("Attendance").Document(Attendance.Id);
                     Dictionary<string, object> attDict = new Dictionary<string, object>
                     {
                         { "TimeOut", DateTime.UtcNow }

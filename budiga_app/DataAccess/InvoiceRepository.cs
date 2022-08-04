@@ -31,18 +31,16 @@ namespace budiga_app.DataAccess
                 {
                     { "Id", invoice.Id },
                     { "UserFullName", invoice.UserFullName },
-                    { "StoreId", invoice.StoreId },
-                    { "BranchId", invoice.BranchId },
                     { "TotalPrice", Convert.ToDouble(invoice.TotalPrice) },
                     { "CustomerPay", Convert.ToDouble(invoice.CustomerPay) },
                     { "CreatedDate", invoice.CreatedDate },
                 };
-                DocumentReference invoiceRef = conn.FirestoreDb.Collection("invoice").Document(invoice.Id);
+                DocumentReference invoiceRef = conn.FirestoreDb.Collection("Stores").Document(dataClass.Store.Id).Collection("Branch").Document(dataClass.Store.Branch.Id).Collection("Invoice").Document(invoice.Id);
                 batch.Set(invoiceRef, invoiceDict);
                 
                 foreach(var order in invoice.InvoiceOrderRecords)
                 {
-                    string newOrderId = GenerateId.GenerateCommon();
+                    string newOrderId = GenerateId.GenerateOrder(DateTime.Now);
                     Dictionary<string, object> orderDict = new Dictionary<string, object>
                     {
                         { "Id", newOrderId },
@@ -52,7 +50,7 @@ namespace budiga_app.DataAccess
                         { "ActualItemPrice", Convert.ToDouble(order.ActualItemPrice) },
                         { "SubtotalPrice", Convert.ToDouble(order.SubtotalPrice) }
                     };
-                    DocumentReference orderRef = conn.FirestoreDb.Collection("orders").Document(newOrderId);
+                    DocumentReference orderRef = conn.FirestoreDb.Collection("Stores").Document(dataClass.Store.Id).Collection("Branch").Document(dataClass.Store.Branch.Id).Collection("Orders").Document(newOrderId);
 
                     batch.Set(orderRef, orderDict);
                 }

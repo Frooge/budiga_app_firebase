@@ -193,7 +193,6 @@ namespace budiga_app.MVVM.ViewModel
                         {
                             UnitsSold = order.Quantity,
                             TotalSales = order.SubtotalPrice,
-                            StoreName = dataClass.Store.BranchRecords.Where(b => b.Id == order.Item.BranchId).FirstOrDefault().Name,
                             Item = order.Item,
                             Date = GetDate(invoice.CreatedDate, period)
                         });
@@ -211,8 +210,6 @@ namespace budiga_app.MVVM.ViewModel
                         {
                             UnitsSold = order.Quantity,
                             Total = order.SubtotalPrice,
-                            StoreId = order.Item.StoreId,
-                            StoreName = dataClass.Store.BranchRecords.Where(b => b.Id == order.Item.BranchId).FirstOrDefault().Name,
                             Date = GetDate(invoice.CreatedDate, period)
                         });
                     }

@@ -88,7 +88,7 @@ namespace budiga_app
                 ViewModel.Page.IsLoading = true;
                 FirestoreConn conn = FirestoreConn.GetInstance;
                 DataClass dataClass = DataClass.GetInstance;
-                Query query = conn.FirestoreDb.Collection("users").WhereEqualTo("Username", usernameBox.Text.Trim()).WhereEqualTo("Password", passwordBox.Password.Trim().ToString());
+                Query query = conn.FirestoreDb.Collection("Users").WhereEqualTo("Username", usernameBox.Text.Trim()).WhereEqualTo("Password", passwordBox.Password.Trim().ToString());
                 QuerySnapshot querySnapshot = await query.GetSnapshotAsync();
                 if (querySnapshot.Documents.Count > 0)
                 {
