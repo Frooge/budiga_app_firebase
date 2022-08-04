@@ -18,10 +18,16 @@ namespace budiga_app.Core
             return id;
         }
 
+        public static string GenerateAttendance(DateTime date)
+        {
+            string id = string.Format("{0:MMddyyHmmss}-{1}", date, GenerateNum());
+
+            return id;
+        }
+
         public static string GenerateBranch(string name)
         {
-            string code = name.Substring(0, 3).ToUpper();
-            string id = code + "-" + GenerateNum();
+            string id = string.Format("{0}-{1}", name.Substring(0, 3).ToUpper(), GenerateNum());
 
             return id;
         }

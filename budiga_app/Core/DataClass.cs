@@ -112,7 +112,7 @@ namespace budiga_app.Core
                     };
                     batch.Update(userRef, userDict);
                    
-                    string newAttId = GenerateId.GenerateCommon();
+                    string newAttId = GenerateId.GenerateAttendance(DateTime.Now);
                     Attendance = new AttendanceModel
                     {
                         Id = newAttId,

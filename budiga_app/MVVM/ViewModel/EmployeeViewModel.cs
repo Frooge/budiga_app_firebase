@@ -103,7 +103,7 @@ namespace budiga_app.MVVM.ViewModel
             {
                 DataClass dataClass = DataClass.GetInstance;
                 FirestoreConn conn = FirestoreConn.GetInstance;
-                Query query = conn.FirestoreDb.Collection("Stores").Document(dataClass.Store.Id).Collection("Attendance").Limit(10);
+                Query query = conn.FirestoreDb.Collection("Stores").Document(dataClass.Store.Id).Collection("Attendance").OrderBy("TimeIn").Limit(10);
 
                 FirestoreChangeListener listener = query.Listen(snapshot =>
                 {
@@ -122,7 +122,7 @@ namespace budiga_app.MVVM.ViewModel
                             if (dict["TimeOut"] == null)
                                 Attendance.AttendanceRecords.Last().TimeOut = null;
                             else
-                                Attendance.AttendanceRecords.Last().TimeOut = ((Timestamp)dict["TimeOut"]).ToDateTime();
+                                Attendance.AttendanceRecords.Last().TimeOut = ((Timestamp)dict["TimeOut"]).ToDateTime().ToLocalTime();
                         });
                     }
                 });
