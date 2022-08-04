@@ -82,10 +82,16 @@
                                     CommandParameter="{Binding Path=SelectedItem, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=DataGrid}}"/>
                             </DataGrid.InputBindings>
                         </DataGrid>
+                        <ProgressBar Value="0" IsIndeterminate="True" Width="100" Visibility="{Binding ElementName=inventoryView, Path=ViewModel.PageInventory.IsLoading,  Converter={StaticResource BooleanToVisibilityConverter}}">
+                            <ProgressBar.Style>
+                                <Style TargetType="{x:Type ProgressBar}" BasedOn="{StaticResource MaterialDesignCircularProgressBar}">
+                                    <Setter Property="Foreground" Value="#FF264ECA"/>
+                                </Style>
+                            </ProgressBar.Style>
+                        </ProgressBar>
                     </Grid>
-                    
                 </materialDesign:Card>
             </StackPanel>
-        </StackPanel>        
+        </StackPanel>
     </Grid>
 </UserControl>

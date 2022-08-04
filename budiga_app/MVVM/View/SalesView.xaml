@@ -8,7 +8,6 @@
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"             
              mc:Ignorable="d" 
              d:DesignHeight="720" Width="1000" x:Name="salesView">
-
     <Grid Margin="10">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="5*"/>
@@ -20,26 +19,26 @@
             <RowDefinition Height="3*"/>
         </Grid.RowDefinitions>
         <materialDesign:Card Margin="10" Grid.Column="0">
-                    <Grid Margin="10">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="20*" />
-                            <ColumnDefinition Width="*" />
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="*" />
-                            <RowDefinition Height="3*" />
-                        </Grid.RowDefinitions>
-                        <TextBlock Text="Total Sales" HorizontalAlignment="Left" Margin="10 0 0 0" VerticalAlignment="Top" FontSize="16" FontWeight="Bold"/>
-                        <Grid Grid.Row="1">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="2*"/>
-                                <RowDefinition Height="*"/>
-                            </Grid.RowDefinitions>
-                            <Label Grid.Row="0" Content="{Binding ElementName=salesView, Path=ViewModel.Total.Sales}" HorizontalAlignment="Center" VerticalAlignment="Top" FontWeight="Bold" FontSize="28" Foreground="#264ECA"/>
-                            <Label Grid.Row="1" Content="Php" HorizontalAlignment="Center" VerticalAlignment="Top" FontWeight="Bold"/>
-                        </Grid>
-                    </Grid>
-                </materialDesign:Card>
+            <Grid Margin="10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="20*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="3*" />
+                </Grid.RowDefinitions>
+                <TextBlock Text="Total Sales" HorizontalAlignment="Left" Margin="10 0 0 0" VerticalAlignment="Top" FontSize="16" FontWeight="Bold"/>
+                <Grid Grid.Row="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="2*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Label Grid.Row="0" Content="{Binding ElementName=salesView, Path=ViewModel.Total.Sales}" HorizontalAlignment="Center" VerticalAlignment="Top" FontWeight="Bold" FontSize="28" Foreground="#264ECA"/>
+                    <Label Grid.Row="1" Content="Php" HorizontalAlignment="Center" VerticalAlignment="Top" FontWeight="Bold"/>
+                </Grid>
+            </Grid>
+        </materialDesign:Card>
         <materialDesign:Card Margin="10"  Grid.Column="1">
             <Grid Margin="10">
                 <Grid.ColumnDefinitions>
@@ -83,5 +82,12 @@
             </StackPanel>
         </materialDesign:Card>
         <ContentControl Content="{Binding ElementName=salesView, Path=ViewModel.CurrentView}" Grid.Row="2" Grid.ColumnSpan="2"/>
+        <ProgressBar Grid.Row="2" Grid.ColumnSpan="2" Margin="0,0,0,130" Value="0" IsIndeterminate="True" Width="100" Visibility="{Binding ElementName=salesView, Path=ViewModel.Page.IsLoading,  Converter={StaticResource BooleanToVisibilityConverter}}">
+            <ProgressBar.Style>
+                <Style TargetType="{x:Type ProgressBar}" BasedOn="{StaticResource MaterialDesignCircularProgressBar}">
+                    <Setter Property="Foreground" Value="#FF264ECA"/>
+                </Style>
+            </ProgressBar.Style>
+        </ProgressBar>
     </Grid>
 </UserControl>

@@ -21,6 +21,8 @@ namespace budiga_app.MVVM.ViewModel
         private ItemModel _item;
         public ItemModel Item { get; set; }
         public ItemHistoryModel ItemHistory { get; set; }
+        public PageModel PageInventory { get; set; }
+        public PageModel PageHistory { get; set; }
         
         public Action CloseHistoryAction { get; set; }
         public RelayCommand AddItemModalCommand { get; set; }
@@ -59,6 +61,8 @@ namespace budiga_app.MVVM.ViewModel
             
             _item = new ItemModel();            
             Item = new ItemModel();
+            PageInventory = new PageModel();
+            PageHistory = new PageModel();
             ItemHistory = new ItemHistoryModel();
             _itemRepository = new ItemRepository();
             _itemHistoryRepository = new ItemHistoryRepository();
@@ -79,6 +83,7 @@ namespace budiga_app.MVVM.ViewModel
 
                 FirestoreChangeListener listener = query.Listen(snapshot =>
                 {
+                    PageInventory.IsLoading = true;
                     _item.ItemRecords = new ObservableCollection<ItemModel>();
                     foreach (DocumentSnapshot documentSnapshot in snapshot.Documents)
                     {
@@ -97,6 +102,7 @@ namespace budiga_app.MVVM.ViewModel
                         });
                     }
                     Item.ItemRecords = _item.ItemRecords;
+                    PageInventory.IsLoading = false;
                 });
             }
             catch (Exception ex)
@@ -115,6 +121,7 @@ namespace budiga_app.MVVM.ViewModel
 
                 FirestoreChangeListener listener = query.Listen(snapshot =>
                 {
+                    PageHistory.IsLoading = true;
                     ItemHistory.ItemHistoryRecords = new ObservableCollection<ItemHistoryModel>();
                     foreach (DocumentSnapshot documentSnapshot in snapshot.Documents)
                     {
@@ -136,6 +143,7 @@ namespace budiga_app.MVVM.ViewModel
                             });
                         });
                     }
+                    PageHistory.IsLoading = false;
                 });
             }
             catch (Exception ex)

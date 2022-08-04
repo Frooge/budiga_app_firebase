@@ -26,6 +26,7 @@ namespace budiga_app.MVVM.ViewModel
         public TotalSalesModel Total { get; set; }
         public OverviewSalesModel OverviewSales { get; set; }      
         public InventorySalesModel InventorySales { get; set; }
+        public PageModel Page { get; set; }
         public RelayCommand ChangePeriodCommand { get; set; }
         public RelayCommand OverviewViewCommand { get; set; }
         public RelayCommand InventoryViewCommand { get; set; }
@@ -100,7 +101,8 @@ namespace budiga_app.MVVM.ViewModel
             _inventorySales = new InventorySalesModel();
             InventorySales = new InventorySalesModel();
             invoiceVM = InvoiceViewModel.GetInstance;
-            GetAll();
+            Page = new PageModel();
+            // GetAll();
         }
 
         private void GetAll() // not used yet
@@ -182,47 +184,55 @@ namespace budiga_app.MVVM.ViewModel
             DataClass dataClass = DataClass.GetInstance;
             _overviewSales.OverviewSalesRecords = new ObservableCollection<OverviewSalesModel>();
             _inventorySales.InventorySalesRecords = new ObservableCollection<InventorySalesModel>();
-            foreach (var invoice in invoiceVM.Invoice.InvoiceRecords)
+            if(invoiceVM.Invoice.InvoiceRecords != null)
             {
-                foreach (var order in invoice.InvoiceOrderRecords)
+                foreach (var invoice in invoiceVM.Invoice.InvoiceRecords)
                 {
-                    var inventorySales = _inventorySales.InventorySalesRecords.Where(i => i.Item.Id == order.Item.Id && i.Date == GetDate(invoice.CreatedDate, period)).FirstOrDefault();
-                    if (inventorySales == null)
+                    foreach (var order in invoice.InvoiceOrderRecords)
                     {
-                        _inventorySales.InventorySalesRecords.Add(new InventorySalesModel
+                        var inventorySales = _inventorySales.InventorySalesRecords.Where(i => i.Item.Id == order.Item.Id && i.Date == GetDate(invoice.CreatedDate, period)).FirstOrDefault();
+                        if (inventorySales == null)
                         {
-                            UnitsSold = order.Quantity,
-                            TotalSales = order.SubtotalPrice,
-                            Item = order.Item,
-                            Date = GetDate(invoice.CreatedDate, period)
-                        });
-                    }
-                    else
-                    {
-                        inventorySales.UnitsSold += order.Quantity;
-                        inventorySales.TotalSales += order.SubtotalPrice;
-                    }
+                            _inventorySales.InventorySalesRecords.Add(new InventorySalesModel
+                            {
+                                UnitsSold = order.Quantity,
+                                TotalSales = order.SubtotalPrice,
+                                Item = order.Item,
+                                Date = GetDate(invoice.CreatedDate, period)
+                            });
+                        }
+                        else
+                        {
+                            inventorySales.UnitsSold += order.Quantity;
+                            inventorySales.TotalSales += order.SubtotalPrice;
+                        }
 
-                    var overviewSales = _overviewSales.OverviewSalesRecords.Where(o => o.Date == GetDate(invoice.CreatedDate, period)).FirstOrDefault();
-                    if (overviewSales == null)
-                    {
-                        _overviewSales.OverviewSalesRecords.Add(new OverviewSalesModel
+                        var overviewSales = _overviewSales.OverviewSalesRecords.Where(o => o.Date == GetDate(invoice.CreatedDate, period)).FirstOrDefault();
+                        if (overviewSales == null)
                         {
-                            UnitsSold = order.Quantity,
-                            Total = order.SubtotalPrice,
-                            Date = GetDate(invoice.CreatedDate, period)
-                        });
+                            _overviewSales.OverviewSalesRecords.Add(new OverviewSalesModel
+                            {
+                                UnitsSold = order.Quantity,
+                                Total = order.SubtotalPrice,
+                                Date = GetDate(invoice.CreatedDate, period)
+                            });
+                        }
+                        else
+                        {
+                            overviewSales.UnitsSold += order.Quantity;
+                            overviewSales.Total += order.SubtotalPrice;
+                        }
                     }
-                    else
-                    {
-                        overviewSales.UnitsSold += order.Quantity;
-                        overviewSales.Total += order.SubtotalPrice;
-                    }
+                    GetTotal(invoice);
                 }
-                GetTotal(invoice);                
+                InventorySales.InventorySalesRecords = _inventorySales.InventorySalesRecords;
+                OverviewSales.OverviewSalesRecords = _overviewSales.OverviewSalesRecords;
+                Page.IsLoading = false;
             }
-            InventorySales.InventorySalesRecords = _inventorySales.InventorySalesRecords;
-            OverviewSales.OverviewSalesRecords = _overviewSales.OverviewSalesRecords;
+            else
+            {
+                Page.IsLoading = true;
+            }
         }
 
         private string GetDate(DateTime date, string period)

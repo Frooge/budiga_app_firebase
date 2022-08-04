@@ -32,6 +32,7 @@ namespace budiga_app.MVVM.ViewModel
         private InvoiceModel _invoice { get; set; }
         public InvoiceModel Invoice { get; set; }
         public OrderModel Order { get; set; }
+        public PageModel Page { get; set; }
 
         public static InvoiceViewModel GetInstance
         {
@@ -59,6 +60,7 @@ namespace budiga_app.MVVM.ViewModel
             _invoice = new InvoiceModel();
             Invoice = new InvoiceModel();
             Order = new OrderModel();
+            Page = new PageModel();
             Invoice.InvoiceOrderRecords = new ObservableCollection<OrderModel>();
             AddQuantityCommand = new RelayCommand(param => AddQuantity((string)param));
             ReduceQuantityCommand = new RelayCommand(param => ReduceQuantity((string)param));
@@ -82,6 +84,7 @@ namespace budiga_app.MVVM.ViewModel
 
                 FirestoreChangeListener listener = query.Listen(async snapshot =>
                 {
+                    Page.IsLoading = true;
                     _invoice.InvoiceRecords = new ObservableCollection<InvoiceModel>();
                     Order.OrderRecords = new ObservableCollection<OrderModel>();
                     foreach (DocumentSnapshot documentSnapshot in snapshot.Documents)
@@ -130,6 +133,7 @@ namespace budiga_app.MVVM.ViewModel
                         Order.OrderRecords.Clear();
                     }    
                     Invoice.InvoiceRecords = _invoice.InvoiceRecords;
+                    Page.IsLoading = false;
                 });
             }
             catch (Exception ex)

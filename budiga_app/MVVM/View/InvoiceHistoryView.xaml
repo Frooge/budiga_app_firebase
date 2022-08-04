@@ -14,119 +14,126 @@
         WindowStartupLocation="CenterScreen"
         x:Name="invoiceHistoryView"
         Title="InvoiceHistoryView">
+    <Grid>
+        <StackPanel Orientation="Vertical" Margin="10">
+            <StackPanel Orientation="Horizontal">
+                <Border>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBox Width="190" x:Name="searchField" Margin="15">
+                            <b:Interaction.Triggers>
+                                <b:EventTrigger EventName="TextChanged">
+                                    <b:InvokeCommandAction Command="{Binding ElementName=invoiceHistoryView, Path=ViewModel.SearchItemCommand}"
+                                                        CommandParameter="{Binding Text, ElementName=searchField}"/>
+                                </b:EventTrigger>
+                            </b:Interaction.Triggers>
+                        </TextBox>
+                        <Image Source="/Resources/Images/SearchIcon.png" Width="20" />
+                    </StackPanel>
+                </Border>
+                <StackPanel Orientation="Horizontal" Margin="500,10,0,10" HorizontalAlignment="Right"/>
+            </StackPanel>
 
-    <StackPanel Orientation="Vertical" Margin="10">
-        <StackPanel Orientation="Horizontal">
-            <Border>
-                <StackPanel Orientation="Horizontal">
-                    <TextBox Width="190" x:Name="searchField" Margin="15">
-                        <b:Interaction.Triggers>
-                            <b:EventTrigger EventName="TextChanged">
-                                <b:InvokeCommandAction Command="{Binding ElementName=invoiceHistoryView, Path=ViewModel.SearchItemCommand}"
-                                                       CommandParameter="{Binding Text, ElementName=searchField}"/>
-                            </b:EventTrigger>
-                        </b:Interaction.Triggers>
-                    </TextBox>
-                    <Image Source="/Resources/Images/SearchIcon.png" Width="20" />
-                </StackPanel>
-            </Border>
-            <StackPanel Orientation="Horizontal" Margin="500,10,0,10" HorizontalAlignment="Right"/>
+            <DataGrid x:Name="invoiceTable" 
+            ItemsSource="{Binding ElementName=invoiceHistoryView, Path=ViewModel.Invoice.InvoiceRecords}" 
+            IsReadOnly="True"
+            AutoGenerateColumns="False"
+            CanUserResizeColumns="False"
+            CanUserAddRows="False"
+            CanUserResizeRows="False"
+            IsSynchronizedWithCurrentItem="True"
+            Height="720"
+            Width="1200">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Invoice No." Binding="{Binding Id}" Width="*"/>
+                    <DataGridTextColumn Header="Date" Binding="{Binding CreatedDate, StringFormat={}{0:MM/dd/yy H:mm:ss}}" Width="1.5*" SortDirection="Ascending"/>
+                    <DataGridTemplateColumn Header="Item/s" Width="*">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <ItemsControl ItemsSource="{Binding InvoiceOrderRecords}">
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <Label Content="{Binding Item.Name}"/>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="Brand" Width="*">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <ItemsControl ItemsSource="{Binding InvoiceOrderRecords}">
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <Label Content="{Binding Item.Brand}"/>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="Price" Width="*">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <ItemsControl ItemsSource="{Binding InvoiceOrderRecords}">
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <Label Content="{Binding Item.Price}" ContentStringFormat="PHP {0:0.00}"/>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="Quantity" Width=".75*">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <ItemsControl ItemsSource="{Binding InvoiceOrderRecords}">
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <Label Content="{Binding Quantity}"/>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="Subtotal" Width="*">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <ItemsControl ItemsSource="{Binding InvoiceOrderRecords}">
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <Label Content="{Binding SubtotalPrice}" ContentStringFormat="PHP {0:0.00}"/>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTextColumn Header="Total" Binding="{Binding TotalPrice, StringFormat={}PHP {0:0.00}}" Width="*"/>
+                    <DataGridTextColumn Header="Issued By" Binding="{Binding UserFullName}" Width="*"/>
+                </DataGrid.Columns>
+                <DataGrid.CellStyle>
+                    <Style TargetType="{x:Type DataGridCell}" BasedOn="{StaticResource MaterialDesignDataGridCell}">
+                        <Setter Property="BorderThickness" Value="0"/>
+                        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+                    </Style>
+                </DataGrid.CellStyle>
+                <DataGrid.InputBindings>
+                    <MouseBinding
+                MouseAction="LeftDoubleClick"
+                Command="{Binding ElementName=invoiceHistoryView, Path=ViewModel.GetReceiptCommand}"
+                CommandParameter="{Binding Path=SelectedItem, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=DataGrid}}"/>
+                </DataGrid.InputBindings>
+            </DataGrid>
         </StackPanel>
-        
-        <DataGrid x:Name="invoiceTable" 
-              ItemsSource="{Binding ElementName=invoiceHistoryView, Path=ViewModel.Invoice.InvoiceRecords}" 
-              IsReadOnly="True"
-              AutoGenerateColumns="False"
-              CanUserResizeColumns="False"
-              CanUserAddRows="False"
-              CanUserResizeRows="False"
-              IsSynchronizedWithCurrentItem="True"
-              Height="720"
-              Width="1200">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="Invoice No." Binding="{Binding Id}" Width="*"/>
-                <DataGridTextColumn Header="Date" Binding="{Binding CreatedDate, StringFormat={}{0:MM/dd/yy H:mm:ss}}" Width="1.5*" SortDirection="Ascending"/>
-                <DataGridTemplateColumn Header="Item/s" Width="*">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <ItemsControl ItemsSource="{Binding InvoiceOrderRecords}">
-                                <ItemsControl.ItemTemplate>
-                                    <DataTemplate>
-                                        <Label Content="{Binding Item.Name}"/>
-                                    </DataTemplate>
-                                </ItemsControl.ItemTemplate>
-                            </ItemsControl>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-                <DataGridTemplateColumn Header="Brand" Width="*">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <ItemsControl ItemsSource="{Binding InvoiceOrderRecords}">
-                                <ItemsControl.ItemTemplate>
-                                    <DataTemplate>
-                                        <Label Content="{Binding Item.Brand}"/>
-                                    </DataTemplate>
-                                </ItemsControl.ItemTemplate>
-                            </ItemsControl>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-                <DataGridTemplateColumn Header="Price" Width="*">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <ItemsControl ItemsSource="{Binding InvoiceOrderRecords}">
-                                <ItemsControl.ItemTemplate>
-                                    <DataTemplate>
-                                        <Label Content="{Binding Item.Price}" ContentStringFormat="PHP {0:0.00}"/>
-                                    </DataTemplate>
-                                </ItemsControl.ItemTemplate>
-                            </ItemsControl>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-                <DataGridTemplateColumn Header="Quantity" Width=".75*">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <ItemsControl ItemsSource="{Binding InvoiceOrderRecords}">
-                                <ItemsControl.ItemTemplate>
-                                    <DataTemplate>
-                                        <Label Content="{Binding Quantity}"/>
-                                    </DataTemplate>
-                                </ItemsControl.ItemTemplate>
-                            </ItemsControl>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-                <DataGridTemplateColumn Header="Subtotal" Width="*">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <ItemsControl ItemsSource="{Binding InvoiceOrderRecords}">
-                                <ItemsControl.ItemTemplate>
-                                    <DataTemplate>
-                                        <Label Content="{Binding SubtotalPrice}" ContentStringFormat="PHP {0:0.00}"/>
-                                    </DataTemplate>
-                                </ItemsControl.ItemTemplate>
-                            </ItemsControl>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-                <DataGridTextColumn Header="Total" Binding="{Binding TotalPrice, StringFormat={}PHP {0:0.00}}" Width="*"/>
-                <DataGridTextColumn Header="Issued By" Binding="{Binding UserFullName}" Width="*"/>
-            </DataGrid.Columns>
-            <DataGrid.CellStyle>
-                <Style TargetType="{x:Type DataGridCell}" BasedOn="{StaticResource MaterialDesignDataGridCell}">
-                    <Setter Property="BorderThickness" Value="0"/>
-                    <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+        <ProgressBar Value="0" IsIndeterminate="True" Width="100" Visibility="{Binding ElementName=invoiceHistoryView, Path=ViewModel.Page.IsLoading,  Converter={StaticResource BooleanToVisibilityConverter}}">
+            <ProgressBar.Style>
+                <Style TargetType="{x:Type ProgressBar}" BasedOn="{StaticResource MaterialDesignCircularProgressBar}">
+                    <Setter Property="Foreground" Value="#FF264ECA"/>
                 </Style>
-            </DataGrid.CellStyle>
-            <DataGrid.InputBindings>
-                <MouseBinding
-                    MouseAction="LeftDoubleClick"
-                    Command="{Binding ElementName=invoiceHistoryView, Path=ViewModel.GetReceiptCommand}"
-                    CommandParameter="{Binding Path=SelectedItem, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=DataGrid}}"/>
-            </DataGrid.InputBindings>
-        </DataGrid>
-    </StackPanel>
-
+            </ProgressBar.Style>
+        </ProgressBar>
+    </Grid>
 </Window>
