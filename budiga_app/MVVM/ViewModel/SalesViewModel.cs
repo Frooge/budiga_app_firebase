@@ -102,27 +102,6 @@ namespace budiga_app.MVVM.ViewModel
             InventorySales = new InventorySalesModel();
             invoiceVM = InvoiceViewModel.GetInstance;
             Page = new PageModel();
-            // GetAll();
-        }
-
-        private void GetAll() // not used yet
-        {            
-            try
-            {
-                FirestoreConn conn = FirestoreConn.GetInstance;
-                Query query = conn.FirestoreDb.Collection("invoice");
-                FirestoreChangeListener listener = query.Listen(snapshot =>
-                {
-                    if(invoiceVM.Invoice.InvoiceRecords != null)
-                    {
-                        ResetValues();
-                    }                    
-                });
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
         }
 
         public void ResetValues()

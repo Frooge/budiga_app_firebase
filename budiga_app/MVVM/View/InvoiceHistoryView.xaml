@@ -122,9 +122,9 @@
                 </DataGrid.CellStyle>
                 <DataGrid.InputBindings>
                     <MouseBinding
-                MouseAction="LeftDoubleClick"
-                Command="{Binding ElementName=invoiceHistoryView, Path=ViewModel.GetReceiptCommand}"
-                CommandParameter="{Binding Path=SelectedItem, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=DataGrid}}"/>
+                        MouseAction="LeftDoubleClick"
+                        Command="{Binding ElementName=invoiceHistoryView, Path=ViewModel.GetReceiptCommand}"
+                        CommandParameter="{Binding Path=SelectedItem, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=DataGrid}}"/>
                 </DataGrid.InputBindings>
             </DataGrid>
         </StackPanel>
