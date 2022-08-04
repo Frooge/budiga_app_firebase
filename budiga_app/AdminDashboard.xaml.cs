@@ -62,9 +62,15 @@ namespace budiga_app
             }            
         }
 
-        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        private async void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            
+            if (await dataClass.Checkout())
+            {
+                InventoryViewModel.ReleaseInstance();
+                InvoiceViewModel.ReleaseInstance();
+                SalesViewModel.ReleaseInstance();
+                EmployeeViewModel.ReleaseInstance();
+            }
         }
 
         private async Task<bool> Logout()
@@ -84,11 +90,6 @@ namespace budiga_app
 
         private void Change_Click(object sender, RoutedEventArgs e)
         {
-            InventoryViewModel.ReleaseInstance();
-            InvoiceViewModel.ReleaseInstance();
-            SalesViewModel.ReleaseInstance();
-            EmployeeViewModel.ReleaseInstance();
-
             this.Hide();
             AdminDashboardBranch store = new AdminDashboardBranch
             {
@@ -96,6 +97,12 @@ namespace budiga_app
             };
             store.Show();
             this.Close();
+        }
+
+        private void AddBranch_Click(object sender, RoutedEventArgs e)
+        {
+            BranchAdd branchAdd = new BranchAdd();
+            branchAdd.ShowDialog();
         }
     }
 }

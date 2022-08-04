@@ -25,8 +25,8 @@
     <Grid Width="1280" Height="720" Background="#FFF4F5FA" MaxWidth="1920" MaxHeight="1080" MinWidth="1280" MinHeight="720" >
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="2*" />
-            <ColumnDefinition Width="2*" />
+            <ColumnDefinition Width="2.5*" />
+            <ColumnDefinition Width="1.5*" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
@@ -62,7 +62,7 @@
             </Grid>
         </StackPanel>
         <StackPanel Orientation="Horizontal" Grid.Column="1" HorizontalAlignment="Left" Margin="20,0">
-            <Button Content="Add New Branch" Click="Change_Click" Margin="10,0" BorderBrush="#FF264ECA" Background="#FF264ECA"/>
+            <Button Content="Add New Branch" Click="AddBranch_Click" Margin="10,0" BorderBrush="#FF264ECA" Background="#FF264ECA"/>
             <Button Content="Change Branch" Click="Change_Click" Margin="10,0" BorderBrush="#FF264ECA" Background="#FF264ECA"/>
             <TextBlock Text="{Binding Store}" VerticalAlignment="Center" Margin="10,0" FontWeight="Bold" FontSize="18"/>
         </StackPanel>

@@ -21,7 +21,7 @@
             </Grid.ColumnDefinitions>
 
             <Label Content="Branch:" FontSize="14" Grid.Column="0" Grid.Row="0"/>
-            <ComboBox x:Name="branchComboBox" Grid.Column="1" Grid.Row="0" DisplayMemberPath="Name" SelectedValuePath="Id" SelectedValue="{Binding Path=Id}" SelectedIndex="0"/>
+            <ComboBox x:Name="branchComboBox" Grid.Column="1" Grid.Row="0" DisplayMemberPath="Name" SelectedValuePath="Id" SelectedIndex="0" IsSynchronizedWithCurrentItem="True"/>
         </Grid>
         <Button Content="Continue" Click="Continue_Click" BorderBrush="#FF264ECA" Background="#FF264ECA" Margin="0,20,0,0" HorizontalAlignment="Center"/>
     </StackPanel>

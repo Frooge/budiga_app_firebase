@@ -22,7 +22,7 @@
             <Grid Margin="10">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="2*"/>
-                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="1.5*"/>
                 </Grid.ColumnDefinitions>
                 <materialDesign:Card HorizontalAlignment="Left" Grid.Column="0" Margin="0,0,10,0" VerticalAlignment="Top" Height="500">
                     <DataGrid x:Name="teamTable"
@@ -34,7 +34,7 @@
                               CanUserResizeRows="False"
                               AlternatingRowBackground="GhostWhite">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="Contact" Binding="{Binding Online}" Width="*"/>
+                            <DataGridCheckBoxColumn Header="Online" Binding="{Binding Online}" Width=".75*" IsReadOnly="True"/>
                             <DataGridTextColumn Header="Name" Width="*">
                                 <DataGridTextColumn.Binding>
                                     <MultiBinding StringFormat="{}{0} {1}">
@@ -42,11 +42,15 @@
                                         <Binding Path="LName"/>
                                     </MultiBinding>
                                 </DataGridTextColumn.Binding>
+                                <DataGridTextColumn.ElementStyle>
+                                    <Style>
+                                        <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
+                                    </Style>
+                                </DataGridTextColumn.ElementStyle>
                             </DataGridTextColumn>
                             <DataGridTextColumn Header="Contact" Binding="{Binding Contact}" Width="*"/>
                             <DataGridTextColumn Header="Username" Binding="{Binding Username}" Width="*"/>
                             <DataGridTextColumn Header="Password" Binding="{Binding Password}" Width="*"/>
-                            <DataGridCheckBoxColumn Width="auto"/>
                         </DataGrid.Columns>
                         <DataGrid.CellStyle>
                             <Style TargetType="DataGridCell" BasedOn="{StaticResource MaterialDesignDataGridCell}">

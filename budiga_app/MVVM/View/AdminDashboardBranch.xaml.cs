@@ -27,17 +27,26 @@ namespace budiga_app.MVVM.View
             dataClass = DataClass.GetInstance;            
             InitializeComponent();
             branchComboBox.ItemsSource = dataClass.Store.BranchRecords;
+            branchComboBox.SelectedValue = dataClass.Store.BranchRecords[0].Id;
         }
 
         private void Continue_Click(object sender, RoutedEventArgs e)
         {
-            dataClass.Store.Branch = (StoreModel.BranchModel)branchComboBox.SelectedItem;
-            AdminDashboard adminDashboard = new AdminDashboard
+            if (string.IsNullOrEmpty(branchComboBox.Text))
             {
-                WindowStartupLocation = WindowStartupLocation.CenterScreen
-            };
-            adminDashboard.Show();
-            this.Close();
+                MessageBox.Show("Select a branch!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            else
+            {
+                dataClass.Store.Branch = (StoreModel.BranchModel)branchComboBox.SelectedItem;
+                AdminDashboard adminDashboard = new AdminDashboard
+                {
+                    WindowStartupLocation = WindowStartupLocation.CenterScreen
+                };
+                adminDashboard.Show();
+                this.Close();
+            }
+            
         }
     }
 }

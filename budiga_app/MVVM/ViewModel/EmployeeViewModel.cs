@@ -103,7 +103,7 @@ namespace budiga_app.MVVM.ViewModel
             {
                 DataClass dataClass = DataClass.GetInstance;
                 FirestoreConn conn = FirestoreConn.GetInstance;
-                Query query = conn.FirestoreDb.Collection("Stores").Document(dataClass.Store.Id).Collection("Attendance").Limit(5);
+                Query query = conn.FirestoreDb.Collection("Stores").Document(dataClass.Store.Id).Collection("Attendance").Limit(10);
 
                 FirestoreChangeListener listener = query.Listen(snapshot =>
                 {

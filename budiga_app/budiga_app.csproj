@@ -206,6 +206,7 @@
     <Compile Include="Core\ObservableObject.cs" />
     <Compile Include="Core\RelayCommand.cs" />
     <Compile Include="Core\Sessions.cs" />
+    <Compile Include="DataAccess\BranchRepository.cs" />
     <Compile Include="DataAccess\InvoiceRepository.cs" />
     <Compile Include="DataAccess\ItemHistoryRepository.cs" />
     <Compile Include="DataAccess\ItemRepository.cs" />
@@ -222,6 +223,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="MVVM\View\AdminDashboardBranch.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MVVM\View\BranchAdd.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -321,6 +326,9 @@
     <Compile Include="MVVM\ViewModel\InvoiceViewModel.cs" />
     <Compile Include="MVVM\View\AdminDashboardBranch.xaml.cs">
       <DependentUpon>AdminDashboardBranch.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MVVM\View\BranchAdd.xaml.cs">
+      <DependentUpon>BranchAdd.xaml</DependentUpon>
     </Compile>
     <Compile Include="MVVM\View\EmployeeAddView.xaml.cs">
       <DependentUpon>EmployeeAddView.xaml</DependentUpon>
