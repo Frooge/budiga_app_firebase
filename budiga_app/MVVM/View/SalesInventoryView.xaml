@@ -22,9 +22,21 @@
                               Padding="0,0">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Date" Binding="{Binding Path=Date}" Width="*"/>
-                    <DataGridTextColumn Header="Store" Binding="{Binding Path=StoreName}" Width="*"/>
-                    <DataGridTextColumn Header="Item" Binding="{Binding Path= Item.Name}" Width="*"/>
-                    <DataGridTextColumn Header="Brand" Binding="{Binding Path=Item.Brand}" Width="*"/>
+                    <DataGridTextColumn Header="Store" Binding="{Binding ElementName=salesInventoryView, Path=ViewModel.DataClass.Store.Branch.Name}" Width="*"/>
+                    <DataGridTextColumn Header="Item" Binding="{Binding Path= Item.Name}" Width="*">
+                        <DataGridTextColumn.ElementStyle>
+                            <Style>
+                                <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+                    <DataGridTextColumn Header="Brand" Binding="{Binding Path=Item.Brand}" Width="*">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style>
+                            <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
                     <DataGridTextColumn Header="Units" Binding="{Binding Path=UnitsSold}" Width="*"/>
                     <DataGridTextColumn Header="Price" Binding="{Binding Path=Item.Price, StringFormat={}PHP {0:0.00}}" Width="1.5*"/>
                     <DataGridTextColumn Header="Total" Binding="{Binding Path=TotalSales, StringFormat={}PHP {0:0.00}}" Width="2*"/>

@@ -20,7 +20,7 @@
                               CanUserResizeRows="False"
                               Padding="0,0">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Store" Binding="{Binding Path=StoreName}" Width="*"/>
+                    <DataGridTextColumn Header="Store" Binding="{Binding ElementName=salesOverviewView, Path=ViewModel.DataClass.Store.Branch.Name}" Width="*"/>
                     <DataGridTextColumn Header="Date" Binding="{Binding Path=Date}" Width="*"/>
                     <DataGridTextColumn Header="Units Sold" Binding="{Binding Path=UnitsSold}" Width="*"/>
                     <DataGridTextColumn Header="Total" Binding="{Binding Path=Total, StringFormat={}PHP {0:0.00}}" Width="*"/>

@@ -15,7 +15,7 @@
             <ColumnDefinition Width="3*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="1.23*"/>
             <RowDefinition Height="3*"/>
         </Grid.RowDefinitions>
         <materialDesign:Card Margin="10" Grid.Column="0">
@@ -61,7 +61,7 @@
                 </Grid>
             </Grid>
         </materialDesign:Card>
-        <materialDesign:Card Margin="10" VerticalAlignment="Top" BorderThickness="2" Grid.Column="2" Grid.RowSpan="2">
+        <materialDesign:Card Margin="10" VerticalAlignment="Top" BorderThickness="2" Grid.Column="2">
             <StackPanel HorizontalAlignment="Left" Margin="10">
                 <Label Content="Sales Table" HorizontalAlignment="Left" FontSize="18" FontWeight="Bold" VerticalAlignment="Center"/>
                 <StackPanel HorizontalAlignment="Left" Grid.Row="1" Margin="0,5,0,5">
@@ -81,7 +81,7 @@
                 </Button>-->
             </StackPanel>
         </materialDesign:Card>
-        <ContentControl Content="{Binding ElementName=salesView, Path=ViewModel.CurrentView}" Grid.Row="2" Grid.ColumnSpan="2"/>
+        <ContentControl Content="{Binding ElementName=salesView, Path=ViewModel.CurrentView}" Grid.Row="2" Grid.ColumnSpan="3"/>
         <ProgressBar Grid.Row="2" Grid.ColumnSpan="2" Margin="0,0,0,130" Value="0" IsIndeterminate="True" Width="100" Visibility="{Binding ElementName=salesView, Path=ViewModel.Page.IsLoading,  Converter={StaticResource BooleanToVisibilityConverter}}">
             <ProgressBar.Style>
                 <Style TargetType="{x:Type ProgressBar}" BasedOn="{StaticResource MaterialDesignCircularProgressBar}">

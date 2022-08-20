@@ -27,6 +27,7 @@ namespace budiga_app.MVVM.ViewModel
         public OverviewSalesModel OverviewSales { get; set; }      
         public InventorySalesModel InventorySales { get; set; }
         public PageModel Page { get; set; }
+        public DataClass DataClass { get; set; }
         public RelayCommand ChangePeriodCommand { get; set; }
         public RelayCommand OverviewViewCommand { get; set; }
         public RelayCommand InventoryViewCommand { get; set; }
@@ -102,6 +103,7 @@ namespace budiga_app.MVVM.ViewModel
             InventorySales = new InventorySalesModel();
             invoiceVM = InvoiceViewModel.GetInstance;
             Page = new PageModel();
+            DataClass = DataClass.GetInstance;
         }
 
         public void ResetValues()
