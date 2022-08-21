@@ -98,10 +98,10 @@
       <HintPath>..\packages\Grpc.Core.Api.2.47.0\lib\net462\Grpc.Core.Api.dll</HintPath>
     </Reference>
     <Reference Include="Grpc.Net.Client, Version=2.0.0.0, Culture=neutral, PublicKeyToken=d754f35622e28bad, processorArchitecture=MSIL">
-      <HintPath>..\packages\Grpc.Net.Client.2.46.0\lib\netstandard2.0\Grpc.Net.Client.dll</HintPath>
+      <HintPath>..\packages\Grpc.Net.Client.2.47.0\lib\netstandard2.0\Grpc.Net.Client.dll</HintPath>
     </Reference>
     <Reference Include="Grpc.Net.Common, Version=2.0.0.0, Culture=neutral, PublicKeyToken=d754f35622e28bad, processorArchitecture=MSIL">
-      <HintPath>..\packages\Grpc.Net.Common.2.46.0\lib\netstandard2.0\Grpc.Net.Common.dll</HintPath>
+      <HintPath>..\packages\Grpc.Net.Common.2.47.0\lib\netstandard2.0\Grpc.Net.Common.dll</HintPath>
     </Reference>
     <Reference Include="MaterialDesignColors, Version=2.0.6.0, Culture=neutral, PublicKeyToken=df2a72020bd7962a, processorArchitecture=MSIL">
       <HintPath>..\packages\MaterialDesignColors.2.0.6\lib\net452\MaterialDesignColors.dll</HintPath>

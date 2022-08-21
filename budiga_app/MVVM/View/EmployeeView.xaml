@@ -34,7 +34,7 @@
                               CanUserResizeRows="False"
                               AlternatingRowBackground="GhostWhite">
                         <DataGrid.Columns>
-                            <DataGridCheckBoxColumn Header="Online" Binding="{Binding Online}" Width=".75*" IsReadOnly="True"/>
+                            <DataGridCheckBoxColumn Header="Online" Binding="{Binding Online, UpdateSourceTrigger=PropertyChanged}" Width=".75*" IsReadOnly="True"/>
                             <DataGridTextColumn Header="Name" Width="*">
                                 <DataGridTextColumn.Binding>
                                     <MultiBinding StringFormat="{}{0} {1}">
