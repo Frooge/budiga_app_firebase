@@ -171,6 +171,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_2F25C469F8C146A5BD74F59735BEB903"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_30D859045EF58CE012937787ABAEE1D0"
         "OwnerKey" = "8:_A5D746997AC242CB8F079D50188B1038"
         "MsmSig" = "8:_UNDEFINED"
@@ -215,6 +221,12 @@
         {
         "MsmKey" = "8:_30E257F92C45D0D243300AFA27C39100"
         "OwnerKey" = "8:_CAE36234B374845CC4B82F979D00E303"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_30E4748014A842EC859C55AF3AB6BE45"
+        "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -922,12 +934,6 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_F4DC003449D02C5E7A368A3564ED955E"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_A5D746997AC242CB8F079D50188B1038"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -1177,6 +1183,12 @@
         "OwnerKey" = "8:_C142D3A4B83A8DA66E3F896FB3CEEFBB"
         "MsmSig" = "8:_UNDEFINED"
         }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_F4DC003449D02C5E7A368A3564ED955E"
+        "MsmSig" = "8:_UNDEFINED"
+        }
     }
     "Configurations"
     {
@@ -1195,6 +1207,22 @@
         "PrivateKeyFile" = "8:"
         "TimeStampServer" = "8:"
         "InstallerBootstrapper" = "3:2"
+            "BootstrapperCfg:{63ACBE69-63AA-4F98-B2B6-99F9E24495F2}"
+            {
+            "Enabled" = "11:TRUE"
+            "PromptEnabled" = "11:TRUE"
+            "PrerequisitesLocation" = "2:1"
+            "Url" = "8:"
+            "ComponentsUrl" = "8:"
+                "Items"
+                {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.7.2"
+                    {
+                    "Name" = "8:Microsoft .NET Framework 4.7.2 (x86 and x64)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.7.2"
+                    }
+                }
+            }
         }
         "Release"
         {
@@ -1211,6 +1239,14 @@
         "PrivateKeyFile" = "8:"
         "TimeStampServer" = "8:"
         "InstallerBootstrapper" = "3:2"
+            "BootstrapperCfg:{63ACBE69-63AA-4F98-B2B6-99F9E24495F2}"
+            {
+            "Enabled" = "11:TRUE"
+            "PromptEnabled" = "11:TRUE"
+            "PrerequisitesLocation" = "2:1"
+            "Url" = "8:"
+            "ComponentsUrl" = "8:"
+            }
         }
     }
     "Deployable"
@@ -1612,6 +1648,26 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_2F25C469F8C146A5BD74F59735BEB903"
+            {
+            "SourcePath" = "8:..\\budiga_app\\bin\\Debug\\grpc_csharp_ext.x86.dll"
+            "TargetName" = "8:grpc_csharp_ext.x86.dll"
+            "Tag" = "8:"
+            "Folder" = "8:_74B21DA2F7C84D21B44DC503054DA2DF"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_30D859045EF58CE012937787ABAEE1D0"
             {
             "AssemblyRegister" = "3:1"
@@ -1672,6 +1728,26 @@
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_30E4748014A842EC859C55AF3AB6BE45"
+            {
+            "SourcePath" = "8:..\\budiga_app\\bin\\Debug\\grpc_csharp_ext.x64.dll"
+            "TargetName" = "8:grpc_csharp_ext.x64.dll"
+            "Tag" = "8:"
+            "Folder" = "8:_74B21DA2F7C84D21B44DC503054DA2DF"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_3853F01C2EDD26E5F8704CCD0675E19E"
@@ -2785,7 +2861,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:budiga"
         "ProductCode" = "8:{C913BB4B-DA0F-4210-85E6-2AE5B789CBFD}"
-        "PackageCode" = "8:{5BDC0248-D2C5-4D8F-A10E-FDAD2669A599}"
+        "PackageCode" = "8:{768A2395-991C-45AA-A177-286ADBE0CC3D}"
         "UpgradeCode" = "8:{CD6DCF51-FC03-487D-AACA-5AA2B3902357}"
         "AspNetVersion" = "8:"
         "RestartWWWService" = "11:FALSE"
@@ -3320,7 +3396,7 @@
         {
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_A5D746997AC242CB8F079D50188B1038"
             {
-            "SourcePath" = "8:"
+            "SourcePath" = "8:..\\budiga_app\\obj\\Debug\\budiga_app.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_74B21DA2F7C84D21B44DC503054DA2DF"
