@@ -395,7 +395,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="FirebaseAdminSDK\budiga-4d848-firebase-adminsdk-6muh6-a589eff696.json" />
+    <None Include="FirebaseAdminSDK\budiga-sea-firebase-adminsdk-o7omb-cfda0c0782.json" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
