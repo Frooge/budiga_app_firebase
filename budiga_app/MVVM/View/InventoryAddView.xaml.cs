@@ -1,21 +1,9 @@
 ﻿using budiga_app.Core;
-using budiga_app.DataAccess;
 using budiga_app.MVVM.Model;
 using budiga_app.MVVM.ViewModel;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace budiga_app.MVVM.View
 {
@@ -39,7 +27,7 @@ namespace budiga_app.MVVM.View
 
         private async void AddBtn_Click(object sender, RoutedEventArgs e)
         {
-            if(string.IsNullOrEmpty(productTextBox.Text) || string.IsNullOrEmpty(brandTextBox.Text) || string.IsNullOrEmpty(priceTextBox.Text) || string.IsNullOrEmpty(qtyTextBox.Text))
+            if (string.IsNullOrEmpty(productTextBox.Text) || string.IsNullOrEmpty(brandTextBox.Text) || string.IsNullOrEmpty(priceTextBox.Text) || string.IsNullOrEmpty(qtyTextBox.Text))
             {
                 MessageBox.Show("Fill all empty fields!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
@@ -54,11 +42,11 @@ namespace budiga_app.MVVM.View
                     Price = decimal.Parse(priceTextBox.Text),
                     Quantity = int.Parse(qtyTextBox.Text)
                 };
-                if(await viewModel.AddItem(item))
+                if (await viewModel.AddItem(item))
                 {
                     this.Close();
-                }                
-            }            
+                }
+            }
         }
 
         private void CancelBtn_Click(object sender, RoutedEventArgs e)

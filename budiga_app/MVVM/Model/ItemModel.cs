@@ -1,11 +1,6 @@
 ﻿using budiga_app.Core;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace budiga_app.MVVM.Model
 {
@@ -23,7 +18,7 @@ namespace budiga_app.MVVM.Model
 
         public string Id { get { return _id; } set { _id = value; OnPropertyChanged("Id"); } }
         public string Barcode { get { return _barcode; } set { _barcode = value; OnPropertyChanged("Barcode"); } }
-        public string Name { get { return _name; } set { _name = value; OnPropertyChanged("Name");} }
+        public string Name { get { return _name; } set { _name = value; OnPropertyChanged("Name"); } }
         public string Brand { get { return _brand; } set { _brand = value; OnPropertyChanged("Brand"); } }
         public decimal Price { get { return _price; } set { _price = value; OnPropertyChanged("Price"); } }
         public int Quantity { get { return _quantity; } set { _quantity = value; OnPropertyChanged("Quantity"); } }

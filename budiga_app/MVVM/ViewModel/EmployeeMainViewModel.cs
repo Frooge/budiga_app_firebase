@@ -1,10 +1,6 @@
 ﻿using budiga_app.Core;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace budiga_app.MVVM.ViewModel
 {
@@ -53,11 +49,12 @@ namespace budiga_app.MVVM.ViewModel
                     CurrentView = InvoiceVM;
                 });
 
-            } catch (Exception ex)
+            }
+            catch (Exception ex)
             {
                 Debug.WriteLine(ex.StackTrace);
             }
-            
+
         }
 
         private void Initialize()

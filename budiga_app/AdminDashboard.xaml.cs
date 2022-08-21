@@ -1,22 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using System.Windows.Threading;
-using budiga_app.Core;
-using budiga_app.DataAccess;
-using budiga_app.MVVM.Model;
+﻿using budiga_app.Core;
 using budiga_app.MVVM.View;
 using budiga_app.MVVM.ViewModel;
+using System;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Threading;
 
 namespace budiga_app
 {
@@ -53,13 +41,13 @@ namespace budiga_app
             MainWindow main = new MainWindow();
             main.WindowStartupLocation = WindowStartupLocation.CenterScreen;
             main.Show();
-            if(await Logout())
+            if (await Logout())
             {
                 this.Close();
                 GC.Collect(); // find finalizable objects
                 GC.WaitForPendingFinalizers(); // wait until finalizers executed
                 GC.Collect(); // collect finalized objects
-            }            
+            }
         }
 
         private async void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
@@ -76,7 +64,7 @@ namespace budiga_app
         private async Task<bool> Logout()
         {
             bool result = false;
-            if(await dataClass.Checkout())
+            if (await dataClass.Checkout())
             {
                 DataClass.ReleaseInstance();
                 InventoryViewModel.ReleaseInstance();

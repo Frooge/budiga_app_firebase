@@ -3,9 +3,6 @@ using budiga_app.MVVM.Model;
 using Google.Cloud.Firestore;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 
@@ -13,7 +10,7 @@ namespace budiga_app.DataAccess
 {
     class ItemRepository
     {
-        private FirestoreConn conn ;
+        private FirestoreConn conn;
         private DataClass dataClass;
         public ItemRepository()
         {
@@ -24,14 +21,14 @@ namespace budiga_app.DataAccess
         public ItemModel GetItem(int id)
         {
             ItemModel item = new ItemModel();
-            
+
             return item;
         }
 
         public ItemModel GetItemByBarcode(string barcode)
         {
             ItemModel item = new ItemModel();
-            
+
             return item;
         }
 
@@ -39,7 +36,7 @@ namespace budiga_app.DataAccess
         {
             bool result = false;
             try
-            {                
+            {
                 DocumentReference docRef = conn.FirestoreDb.Collection("Stores").Document(dataClass.Store.Id).Collection("Branch").Document(dataClass.Store.Branch.Id).Collection("Items").Document(item.Id);
                 Dictionary<string, object> dict = new Dictionary<string, object>
                 {

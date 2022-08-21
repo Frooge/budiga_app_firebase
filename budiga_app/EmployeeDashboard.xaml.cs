@@ -1,19 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using budiga_app.Core;
+using budiga_app.MVVM.ViewModel;
+using System;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Shapes;
 using System.Windows.Threading;
-using budiga_app.Core;
-using budiga_app.DataAccess;
-using budiga_app.MVVM.Model;
-using budiga_app.MVVM.ViewModel;
 
 namespace budiga_app
 {
@@ -61,7 +51,7 @@ namespace budiga_app
                 GC.WaitForPendingFinalizers(); // wait until finalizers executed
                 GC.Collect(); // collect finalized objects
             }
-            
+
         }
 
         private async Task<bool> Logout()

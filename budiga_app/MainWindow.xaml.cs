@@ -1,23 +1,13 @@
-﻿using System;
+﻿using budiga_app.Core;
+using budiga_app.MVVM.Model;
+using budiga_app.MVVM.View;
+using budiga_app.MVVM.ViewModel;
+using Google.Cloud.Firestore;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using budiga_app.Core;
-using budiga_app.DataAccess;
-using budiga_app.MVVM.Model;
-using Google.Cloud.Firestore;
-using budiga_app.MVVM.ViewModel;
-using budiga_app.MVVM.View;
 
 namespace budiga_app
 {
@@ -106,7 +96,7 @@ namespace budiga_app
                         Type = dict["Type"].ToString(),
                     };
                     bool set = true;
-                    if(!await dataClass.SetStore()) { set = false; }
+                    if (!await dataClass.SetStore()) { set = false; }
                     if (!await dataClass.CheckIn()) { set = false; }
 
                     #region

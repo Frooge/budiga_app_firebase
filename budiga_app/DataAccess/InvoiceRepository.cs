@@ -3,9 +3,6 @@ using budiga_app.MVVM.Model;
 using Google.Cloud.Firestore;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 
@@ -37,8 +34,8 @@ namespace budiga_app.DataAccess
                 };
                 DocumentReference invoiceRef = conn.FirestoreDb.Collection("Stores").Document(dataClass.Store.Id).Collection("Branch").Document(dataClass.Store.Branch.Id).Collection("Invoice").Document(invoice.Id);
                 batch.Set(invoiceRef, invoiceDict);
-                
-                foreach(var order in invoice.InvoiceOrderRecords)
+
+                foreach (var order in invoice.InvoiceOrderRecords)
                 {
                     string newOrderId = GenerateId.GenerateOrder(DateTime.Now);
                     Dictionary<string, object> orderDict = new Dictionary<string, object>

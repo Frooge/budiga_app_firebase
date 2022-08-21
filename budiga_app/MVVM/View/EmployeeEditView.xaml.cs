@@ -1,20 +1,10 @@
 ﻿using budiga_app.DataAccess;
 using budiga_app.MVVM.Model;
 using budiga_app.MVVM.ViewModel;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace budiga_app.MVVM.View
 {
@@ -24,7 +14,7 @@ namespace budiga_app.MVVM.View
     public partial class EmployeeEditView : Window
     {
         public EmployeeViewModel ViewModel { get; set; }
-        public  UserModel User { get; set; }
+        public UserModel User { get; set; }
         public EmployeeEditView(UserModel user)
         {
             ViewModel = EmployeeViewModel.GetInstance;
@@ -37,7 +27,7 @@ namespace budiga_app.MVVM.View
             lNameTextBox.Text = user.LName;
             usernameTextBox.Text = user.Username;
             passwordTextBox.Text = user.Password;
-            contactTextBox.Text = user.Contact;   
+            contactTextBox.Text = user.Contact;
         }
 
         private void NumberValidationTextBox(object sender, TextCompositionEventArgs e)

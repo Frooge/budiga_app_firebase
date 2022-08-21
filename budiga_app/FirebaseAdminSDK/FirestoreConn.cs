@@ -1,18 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using Google.Cloud.Firestore;
+﻿using Google.Cloud.Firestore;
 using Google.Cloud.Firestore.V1;
+using System;
+using System.IO;
+using System.Reflection;
+using System.Windows;
 
 namespace budiga_app
 {
     public class FirestoreConn
     {
-        private readonly string path = "..\\..\\FirebaseAdminSDK\\" + @"budiga-sea-firebase-adminsdk-o7omb-cfda0c0782.json";
+        private readonly string debugPath = Path.GetFullPath(Path.Combine(Path.GetDirectoryName(
+        Assembly.GetExecutingAssembly().Location), "..", "..", "FirebaseAdminSDK", "budiga-sea-firebase-adminsdk-o7omb-cfda0c0782.json"));
+        private readonly string releasePath = Path.GetFullPath(Path.Combine(Path.GetDirectoryName(
+        Assembly.GetExecutingAssembly().Location), "..", "FirebaseAdminSDK", "budiga-sea-firebase-adminsdk-o7omb-cfda0c0782.json"));
         private static FirestoreConn _instance;
         public FirestoreDb FirestoreDb { get; set; }
 
@@ -25,7 +25,7 @@ namespace budiga_app
         {
             try
             {
-                var jsonString = File.ReadAllText(path);
+                var jsonString = (File.Exists(debugPath)) ? File.ReadAllText(debugPath) : File.ReadAllText(releasePath);
                 var builder = new FirestoreClientBuilder { JsonCredentials = jsonString };
                 FirestoreDb = FirestoreDb.Create("budiga-sea", builder.Build()); // Database name
             }
@@ -37,9 +37,9 @@ namespace budiga_app
 
         public static FirestoreConn GetInstance
         {
-            get 
+            get
             {
-                if(_instance == null)
+                if (_instance == null)
                 {
                     _instance = new FirestoreConn();
                 }
@@ -47,6 +47,6 @@ namespace budiga_app
             }
         }
 
-        
+
     }
 }

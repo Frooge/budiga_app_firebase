@@ -7,8 +7,6 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace budiga_app.MVVM.ViewModel
@@ -16,7 +14,7 @@ namespace budiga_app.MVVM.ViewModel
     public class EmployeeViewModel
     {
         private static EmployeeViewModel _instance;
-        private UserRepository userRepository;        
+        private UserRepository userRepository;
 
         private UserModel _employee;
         public UserModel Employee { get; set; }
@@ -27,13 +25,13 @@ namespace budiga_app.MVVM.ViewModel
 
         public static EmployeeViewModel GetInstance
         {
-            get 
-            { 
-                if(_instance == null)
+            get
+            {
+                if (_instance == null)
                 {
                     _instance = new EmployeeViewModel();
                 }
-                return _instance; 
+                return _instance;
             }
         }
 
@@ -144,6 +142,6 @@ namespace budiga_app.MVVM.ViewModel
         {
             EmployeeEditView employeeEditView = new EmployeeEditView(user);
             employeeEditView.ShowDialog();
-        }       
+        }
     }
 }

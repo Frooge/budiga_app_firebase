@@ -3,9 +3,6 @@ using budiga_app.MVVM.Model;
 using Google.Cloud.Firestore;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 
@@ -80,7 +77,9 @@ namespace budiga_app.DataAccess
                 Dictionary<string, object> dict;
                 switch (itemHistory.Action)
                 {
-                    case "UPDATED": case "MODIFIED": case "TRANSACTION" :
+                    case "UPDATED":
+                    case "MODIFIED":
+                    case "TRANSACTION":
                         dict = new Dictionary<string, object>
                         {
                             { "Id", itemHistory.ItemId },

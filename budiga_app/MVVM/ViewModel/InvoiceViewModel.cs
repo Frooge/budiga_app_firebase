@@ -6,10 +6,7 @@ using Google.Cloud.Firestore;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace budiga_app.MVVM.ViewModel
@@ -131,7 +128,7 @@ namespace budiga_app.MVVM.ViewModel
                         });
 
                         Order.OrderRecords.Clear();
-                    }    
+                    }
                     Invoice.InvoiceRecords = _invoice.InvoiceRecords;
                     Page.IsLoading = false;
                 });
@@ -174,7 +171,7 @@ namespace budiga_app.MVVM.ViewModel
         private void AddItem()
         {
             InvoiceAddView invoiceAddView = new InvoiceAddView();
-            invoiceAddView.ShowDialog();            
+            invoiceAddView.ShowDialog();
         }
 
         private void TransactionHistory()
@@ -200,7 +197,7 @@ namespace budiga_app.MVVM.ViewModel
             else
             {
                 MessageBox.Show("Invoice list is empty!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-            }            
+            }
         }
 
         private async void ConfirmPay(decimal payment)
@@ -224,9 +221,9 @@ namespace budiga_app.MVVM.ViewModel
                     {
                         await itemHistoryRepository.AddHistory(order.Item, "TRANSACTION");
                         order.Item.Quantity -= order.Quantity;
-                        await itemRepository.UpdateItem(order.Item);                        
+                        await itemRepository.UpdateItem(order.Item);
                     }
-                    GetReceipt(Invoice.InvoiceRecords.Where(i => i.Id == Invoice.Id).FirstOrDefault());                    
+                    GetReceipt(Invoice.InvoiceRecords.Where(i => i.Id == Invoice.Id).FirstOrDefault());
                 }
             }
             else
@@ -289,7 +286,7 @@ namespace budiga_app.MVVM.ViewModel
                     MessageBox.Show("Quantity exceeds actual product quantity", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
-        }        
+        }
 
         private void CalculateSubtotal(OrderModel order)
         {
@@ -299,7 +296,7 @@ namespace budiga_app.MVVM.ViewModel
         private void CalculateTotal()
         {
             Invoice.TotalPrice = 0;
-            foreach(OrderModel order in Invoice.InvoiceOrderRecords)
+            foreach (OrderModel order in Invoice.InvoiceOrderRecords)
             {
                 Invoice.TotalPrice += order.SubtotalPrice;
             }

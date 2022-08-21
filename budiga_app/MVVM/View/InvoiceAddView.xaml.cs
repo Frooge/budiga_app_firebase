@@ -4,21 +4,14 @@ using budiga_app.MVVM.Model;
 using budiga_app.MVVM.ViewModel;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using ZXing;
 using ZXing.Common;
 
@@ -42,7 +35,7 @@ namespace budiga_app.MVVM.View
         {
             if (inventoryTable.SelectedItem == null) return;
             ItemModel selectedItem = inventoryTable.SelectedItem as ItemModel;
-            _invoiceVM.GetItem(selectedItem);           
+            _invoiceVM.GetItem(selectedItem);
             this.Close();
         }
 
@@ -134,8 +127,8 @@ namespace budiga_app.MVVM.View
             this.Dispatcher.Invoke(new Action(() =>
             {
                 if (result != null)
-                {                    
-                    outputBlock.Text = result.Text;                    
+                {
+                    outputBlock.Text = result.Text;
                     _invoiceVM.GetItem(ViewModel.Item.ItemRecords.Where(i => i.Barcode == result.Text).FirstOrDefault());
                     if (videoCaptureDevice != null)
                     {

@@ -1,10 +1,6 @@
 ﻿using budiga_app.Core;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace budiga_app.MVVM.ViewModel
 {
@@ -14,13 +10,13 @@ namespace budiga_app.MVVM.ViewModel
         public string Username { get; set; }
         public string Store { get; set; }
 
-        public RelayCommand InventoryViewCommand { get; set; }        
+        public RelayCommand InventoryViewCommand { get; set; }
         public RelayCommand InvoiceViewCommand { get; set; }
         public RelayCommand SalesViewCommand { get; set; }
         public RelayCommand EmployeeViewCommand { get; set; }
         public InventoryViewModel InventoryVM { get; set; }
         public InvoiceViewModel InvoiceVM { get; set; }
-        public SalesViewModel SalesVM { get; set; }     
+        public SalesViewModel SalesVM { get; set; }
         public EmployeeViewModel EmployeeVM { get; set; }
 
         private object _currentView;
@@ -43,7 +39,7 @@ namespace budiga_app.MVVM.ViewModel
             {
                 InventoryVM = InventoryViewModel.GetInstance;
                 InvoiceVM = InvoiceViewModel.GetInstance;
-                SalesVM = new SalesViewModel();                                
+                SalesVM = new SalesViewModel();
                 EmployeeVM = EmployeeViewModel.GetInstance;
 
                 CurrentView = InventoryVM;

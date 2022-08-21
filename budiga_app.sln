@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.32126.315
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32602.215
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "budiga_app", "budiga_app\budiga_app.csproj", "{5341ACB6-3830-417D-9D92-6A4AA2279107}"
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "budiga_setup", "budiga_setup\budiga_setup.vdproj", "{AAB9BAD8-FEC5-43DB-9B84-CE9805A8D1D8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,8 @@ Global
 		{5341ACB6-3830-417D-9D92-6A4AA2279107}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5341ACB6-3830-417D-9D92-6A4AA2279107}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5341ACB6-3830-417D-9D92-6A4AA2279107}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AAB9BAD8-FEC5-43DB-9B84-CE9805A8D1D8}.Debug|Any CPU.ActiveCfg = Debug
+		{AAB9BAD8-FEC5-43DB-9B84-CE9805A8D1D8}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

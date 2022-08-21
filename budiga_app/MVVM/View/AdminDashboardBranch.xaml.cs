@@ -1,18 +1,6 @@
 ﻿using budiga_app.Core;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using budiga_app.MVVM.Model;
+using System.Windows;
 
 namespace budiga_app.MVVM.View
 {
@@ -24,7 +12,7 @@ namespace budiga_app.MVVM.View
         DataClass dataClass;
         public AdminDashboardBranch()
         {
-            dataClass = DataClass.GetInstance;            
+            dataClass = DataClass.GetInstance;
             InitializeComponent();
             branchComboBox.ItemsSource = dataClass.Store.BranchRecords;
             branchComboBox.SelectedValue = dataClass.Store.BranchRecords[0].Id;
@@ -46,7 +34,7 @@ namespace budiga_app.MVVM.View
                 adminDashboard.Show();
                 this.Close();
             }
-            
+
         }
     }
 }

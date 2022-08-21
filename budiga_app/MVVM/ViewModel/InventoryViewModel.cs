@@ -7,7 +7,6 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 
@@ -23,7 +22,7 @@ namespace budiga_app.MVVM.ViewModel
         public ItemHistoryModel ItemHistory { get; set; }
         public PageModel PageInventory { get; set; }
         public PageModel PageHistory { get; set; }
-        
+
         public Action CloseHistoryAction { get; set; }
         public RelayCommand AddItemModalCommand { get; set; }
         public RelayCommand EditItemModalCommand { get; set; }
@@ -49,17 +48,17 @@ namespace budiga_app.MVVM.ViewModel
         }
 
         public InventoryViewModel()
-        {            
+        {
             Initialize();
             GetAllItem();
             GetAllHistory();
         }
-        
+
 
         private void Initialize()
         {
-            
-            _item = new ItemModel();            
+
+            _item = new ItemModel();
             Item = new ItemModel();
             PageInventory = new PageModel();
             PageHistory = new PageModel();
@@ -70,7 +69,7 @@ namespace budiga_app.MVVM.ViewModel
             EditItemModalCommand = new RelayCommand(param => EditItemModal((ItemModel)param));
             SearchItemCommand = new RelayCommand(param => SearchItem((string)param));
             ItemHistoryModalCommand = new RelayCommand(param => ItemHistoryModal());
-            UndoActionCommand = new RelayCommand(param => UndoAction((ItemHistoryModel)param));            
+            UndoActionCommand = new RelayCommand(param => UndoAction((ItemHistoryModel)param));
         }
 
         public void GetAllItem()
@@ -108,7 +107,7 @@ namespace budiga_app.MVVM.ViewModel
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-            }            
+            }
         }
 
         public void GetAllHistory()
@@ -157,7 +156,7 @@ namespace budiga_app.MVVM.ViewModel
             Item.ItemRecords = new ObservableCollection<ItemModel>(
                 _item.ItemRecords.Where(i => i.Name.ToLower().Contains(searchTxt.ToLower())
                 || i.Brand.ToLower().Contains(searchTxt.ToLower())
-                || i.Barcode.ToLower().Contains(searchTxt.ToLower())).ToList());               
+                || i.Barcode.ToLower().Contains(searchTxt.ToLower())).ToList());
         }
 
         private void AddItemModal()
@@ -180,16 +179,16 @@ namespace budiga_app.MVVM.ViewModel
 
         public async Task<bool> AddItem(ItemModel item)
         {
-            bool result = true;          
-            if(!await _itemRepository.AddItem(item)){ result = false; }
-            if(result && !await _itemHistoryRepository.AddHistory(item, "ADDED")) { result = false; }
+            bool result = true;
+            if (!await _itemRepository.AddItem(item)) { result = false; }
+            if (result && !await _itemHistoryRepository.AddHistory(item, "ADDED")) { result = false; }
             MessageBox.Show("Successfully added item!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
             return result;
         }
 
         public async Task<bool> UpdateItem(ItemModel item, ItemModel oldItem)
         {
-            bool result = true;           
+            bool result = true;
             if (!await _itemRepository.UpdateItem(item)) { result = false; }
             if (result && !await _itemHistoryRepository.AddHistory(oldItem, "UPDATED")) { result = false; }
             MessageBox.Show("Successfully updated item!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
@@ -198,23 +197,23 @@ namespace budiga_app.MVVM.ViewModel
 
         public async Task<bool> DeleteItem(ItemModel item)
         {
-            bool result = true;           
+            bool result = true;
             if (!await _itemRepository.DeleteItem(item.Id)) { result = false; }
             if (result && !await _itemHistoryRepository.AddHistory(item, "DELETED")) { result = false; }
             MessageBox.Show("Successfully deleted item!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
             return result;
-        }       
+        }
 
         private async void UndoAction(ItemHistoryModel item)
         {
             if (MessageBox.Show("Continue Action?", "Warning", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
             {
-                if (!await _itemHistoryRepository.UndoAction(item)) 
+                if (!await _itemHistoryRepository.UndoAction(item))
                 {
                     CloseHistoryAction();
                 }
             }
-            
+
         }
     }
 }

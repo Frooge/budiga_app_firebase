@@ -3,8 +3,6 @@ using Google.Cloud.Firestore;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 
@@ -36,7 +34,7 @@ namespace budiga_app.Core
         public async Task<bool> SetStore()
         {
             bool result = false;
-            if(Store == null && LoggedInUser != null)
+            if (Store == null && LoggedInUser != null)
             {
                 try
                 {
@@ -56,7 +54,7 @@ namespace budiga_app.Core
                                     Id = dict["Id"].ToString(),
                                     Name = dict["Name"].ToString(),
                                     Location = dict["Location"].ToString()
-                                }                                
+                                }
                             };
                         }
                     }
@@ -111,7 +109,7 @@ namespace budiga_app.Core
                         { "Online", true }
                     };
                     batch.Update(userRef, userDict);
-                   
+
                     string newAttId = GenerateId.GenerateAttendance(DateTime.Now);
                     Attendance = new AttendanceModel
                     {

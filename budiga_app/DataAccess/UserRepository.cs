@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using budiga_app.Core;
+﻿using budiga_app.Core;
 using budiga_app.MVVM.Model;
 using Google.Cloud.Firestore;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using System.Windows;
 
 namespace budiga_app.DataAccess
 {
@@ -18,7 +15,7 @@ namespace budiga_app.DataAccess
 
         public UserRepository()
         {
-            
+
         }
 
         public async Task<bool> AddEmployeeUser(UserModel user)
@@ -103,5 +100,5 @@ namespace budiga_app.DataAccess
         }
     }
 
-    
+
 }

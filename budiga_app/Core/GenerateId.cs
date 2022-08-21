@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace budiga_app.Core
 {
@@ -10,7 +7,7 @@ namespace budiga_app.Core
     {
         private static Random random = new Random();
         public static string[] ids = { };
-        
+
         public static string GenerateCommon()
         {
             string id = GenerateString();
@@ -34,14 +31,14 @@ namespace budiga_app.Core
 
         public static string GenerateItemHistory(DateTime date)
         {
-            string id = string.Format("{0:00}{1:00}{2}{3}-{4}", date.Month, date.Day, date.Year, (date.Hour * date.Minute * date.Second).ToString().Substring(0,3), GenerateString());
+            string id = string.Format("{0:00}{1:00}{2}{3}-{4}", date.Month, date.Day, date.Year, (date.Hour * date.Minute * date.Second).ToString().Substring(0, 3), GenerateString());
 
             return id;
         }
 
         public static string GenerateInvoice(DateTime date)
         {
-            string id = string.Format("{0:00}{1:00}{2}{3}", date.Month, date.Day, date.Year, (date.Hour * date.Minute * date.Second).ToString().Substring(0,3));
+            string id = string.Format("{0:00}{1:00}{2}{3}", date.Month, date.Day, date.Year, (date.Hour * date.Minute * date.Second).ToString().Substring(0, 3));
 
             return id;
         }

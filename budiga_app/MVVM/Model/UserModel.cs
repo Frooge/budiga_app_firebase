@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using budiga_app.Core;
+using System;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using budiga_app.Core;
 
 namespace budiga_app.MVVM.Model
 {
@@ -28,11 +24,11 @@ namespace budiga_app.MVVM.Model
         public string StoreId { get { return _storeId; } set { _storeId = value; OnPropertyChanged("StoreId"); } }
         public string BranchId { get { return _branchId; } set { _branchId = value; OnPropertyChanged("BranchId"); } }
         public string FName { get { return _fname; } set { _fname = value; OnPropertyChanged("FName"); } }
-        public string LName { get {  return _lname; } set { _lname = value; OnPropertyChanged("LName"); } }
+        public string LName { get { return _lname; } set { _lname = value; OnPropertyChanged("LName"); } }
         public string Username { get { return _username; } set { _username = value; OnPropertyChanged("Username"); } }
         public string Password { get { return _password; } set { _password = value; OnPropertyChanged("Password"); } }
         public string Contact { get { return _contact; } set { _contact = value; OnPropertyChanged("Contact"); } }
-        public string Type { get { return _type; } set {_type = value; OnPropertyChanged("Type"); } }
+        public string Type { get { return _type; } set { _type = value; OnPropertyChanged("Type"); } }
         public bool Online { get { return _online; } set { _online = value; OnPropertyChanged("Online"); } }
         public DateTime CreatedDate { get { return _createdDate; } set { _createdDate = value; OnPropertyChanged("CreatedDate"); } }
         public ObservableCollection<UserModel> UserRecords { get { return _userRecords; } set { _userRecords = value; OnPropertyChanged("UserRecords"); } }

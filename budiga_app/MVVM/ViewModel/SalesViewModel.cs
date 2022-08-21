@@ -1,21 +1,15 @@
 ﻿using budiga_app.Core;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Diagnostics;
 using budiga_app.MVVM.Model;
-using budiga_app.DataAccess;
-using System.Windows;
-using Google.Cloud.Firestore;
+using System;
 using System.Collections.ObjectModel;
-using System.Threading.Tasks;
+using System.Diagnostics;
+using System.Linq;
 
 namespace budiga_app.MVVM.ViewModel
 {
     public class SalesViewModel : ObservableObject
     {
-        private static SalesViewModel _instance;           
+        private static SalesViewModel _instance;
         private OverviewSalesModel _overviewSales;
         private InventorySalesModel _inventorySales;
         private InvoiceViewModel invoiceVM;
@@ -24,14 +18,14 @@ namespace budiga_app.MVVM.ViewModel
         public SalesOverviewViewModel SalesOverviewVM { get; set; }
         public SalesInventoryViewModel SalesInventoryVM { get; set; }
         public TotalSalesModel Total { get; set; }
-        public OverviewSalesModel OverviewSales { get; set; }      
+        public OverviewSalesModel OverviewSales { get; set; }
         public InventorySalesModel InventorySales { get; set; }
         public PageModel Page { get; set; }
         public DataClass DataClass { get; set; }
         public RelayCommand ChangePeriodCommand { get; set; }
         public RelayCommand OverviewViewCommand { get; set; }
         public RelayCommand InventoryViewCommand { get; set; }
-        
+
 
         public static SalesViewModel GetInstance
         {
@@ -60,7 +54,7 @@ namespace budiga_app.MVVM.ViewModel
                 _currentView = value;
                 OnPropertyChanged();
             }
-            
+
         }
 
 
@@ -93,7 +87,7 @@ namespace budiga_app.MVVM.ViewModel
 
             ChangePeriodCommand = new RelayCommand(param => ChangePeriod((string)param));
         }
-        
+
         private void Initialize()
         {
             Total = new TotalSalesModel();
@@ -165,7 +159,7 @@ namespace budiga_app.MVVM.ViewModel
             DataClass dataClass = DataClass.GetInstance;
             _overviewSales.OverviewSalesRecords = new ObservableCollection<OverviewSalesModel>();
             _inventorySales.InventorySalesRecords = new ObservableCollection<InventorySalesModel>();
-            if(invoiceVM.Invoice.InvoiceRecords != null)
+            if (invoiceVM.Invoice.InvoiceRecords != null)
             {
                 foreach (var invoice in invoiceVM.Invoice.InvoiceRecords)
                 {

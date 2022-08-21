@@ -1,18 +1,9 @@
 ﻿using budiga_app.MVVM.Model;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Printing;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace budiga_app.MVVM.View
 {
@@ -25,7 +16,7 @@ namespace budiga_app.MVVM.View
         public InvoiceReceiptView(InvoiceModel invoice)
         {
             Invoice = invoice;
-            InitializeComponent();            
+            InitializeComponent();
         }
 
         private void Cancel_Click(object sender, RoutedEventArgs e)
@@ -50,7 +41,7 @@ namespace budiga_app.MVVM.View
                     printDialog.PrintVisual(print, "Invoice");
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }

@@ -1,20 +1,8 @@
-﻿using budiga_app.DataAccess;
-using budiga_app.MVVM.Model;
+﻿using budiga_app.MVVM.Model;
 using budiga_app.MVVM.ViewModel;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace budiga_app.MVVM.View
 {
@@ -46,12 +34,12 @@ namespace budiga_app.MVVM.View
 
         private void PlusBtn_Click(object sender, RoutedEventArgs e)
         {
-            qtyTextBlock.Text = (int.Parse(qtyTextBlock.Text)+int.Parse(qtyTextBox.Text)).ToString();
+            qtyTextBlock.Text = (int.Parse(qtyTextBlock.Text) + int.Parse(qtyTextBox.Text)).ToString();
         }
         private async void UpdateBtn_Click(object sender, RoutedEventArgs e)
         {
             if (string.IsNullOrEmpty(productTextBox.Text) || string.IsNullOrEmpty(brandTextBox.Text) || string.IsNullOrEmpty(priceTextBox.Text) || string.IsNullOrEmpty(qtyTextBox.Text))
-            {             
+            {
                 MessageBox.Show("Fill all empty fields!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             else
@@ -65,24 +53,24 @@ namespace budiga_app.MVVM.View
                     Price = decimal.Parse(priceTextBox.Text),
                     Quantity = int.Parse(qtyTextBlock.Text)
                 };
-                if(await viewModel.UpdateItem(item, _item))
+                if (await viewModel.UpdateItem(item, _item))
                 {
                     this.Close();
-                }                
+                }
             }
-            
+
         }
 
         private async void DeleteBtn_Click(object sender, RoutedEventArgs e)
         {
             if (MessageBox.Show("Continue Action?", "Warning", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
             {
-                if(await viewModel.DeleteItem(_item))
+                if (await viewModel.DeleteItem(_item))
                 {
                     this.Close();
                 }
             }
-            
+
         }
 
         private void CancelBtn_Click(object sender, RoutedEventArgs e)
