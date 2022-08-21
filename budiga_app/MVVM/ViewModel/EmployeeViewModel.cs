@@ -85,6 +85,7 @@ namespace budiga_app.MVVM.ViewModel
                                 Username = dict["Username"].ToString(),
                                 Password = dict["Password"].ToString(),
                                 Contact = dict["Contact"].ToString(),
+                                Online = Convert.ToBoolean(dict["Online"].ToString())
                             });
                         });
                     }
